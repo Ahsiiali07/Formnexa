@@ -60,7 +60,7 @@
 @section('title', ($fullName ?: $resume->title) . ' — Resume | Formnexa')
 
 @section('content')
-<div class="min-h-screen bg-[#F8FAFC] py-6 sm:py-10 px-3 sm:px-6 print:bg-white print:p-0">
+<div class="min-h-screen bg-[#f8f8f3] py-6 sm:py-10 px-3 sm:px-6 print:bg-white print:p-0">
 
     {{-- Top Viewer Action Strip --}}
     <div class="no-print max-w-[794px] mx-auto mb-5 flex flex-wrap items-center justify-between gap-3 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm">
@@ -83,7 +83,7 @@
                 Print
             </button>
             <a href="{{ route('resume.pdf', $resume->uuid) }}"
-               class="px-4 py-2 rounded-xl bg-[#0066FF] text-white text-xs font-extrabold shadow-sm hover:bg-blue-700 transition">
+               class="px-4 py-2 rounded-xl bg-[#184f3a] text-white text-xs font-extrabold shadow-sm hover:bg-[#123e2d] transition">
                 Download PDF
             </a>
         </div>
@@ -670,7 +670,7 @@
                                         <section class="p-4 rounded-xl border border-slate-200 bg-slate-50">
                                             <h2 class="text-[10.5px] font-black uppercase tracking-[0.18em] mb-2.5" style="color: {{ $accent }}">Core Competencies</h2>
                                             <ul class="space-y-1.5 text-[11px] font-semibold text-slate-800">
-                                                @foreach($skills as $sk)<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-xs shrink-0" style="background-color: {{ $accent }}"></span><span>{{ $sk }}</span></li>@endforeach
+                                                @foreach($skills as $sk)<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-sm shrink-0" style="background-color: {{ $accent }}"></span><span>{{ $sk }}</span></li>@endforeach
                                             </ul>
                                         </section>
                                     @endif

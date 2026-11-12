@@ -6,7 +6,7 @@
 <a href="{{ route('invoice.studio') }}" class="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-lg text-xs font-semibold bg-white hover:bg-black/[0.04] border border-black/[0.09] text-[#111111] transition whitespace-nowrap shrink-0">
     <span class="hidden sm:inline">Open Studio</span>
     <span class="sm:hidden">Studio</span>
-    <svg class="w-3.5 h-3.5 text-[#0066FF] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+    <svg class="w-3.5 h-3.5 text-[#184f3a] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
 </a>
 @endsection
 
@@ -14,25 +14,25 @@
 <div x-data="templateGallery(@js($templates), @js($styles), @js($colors))" class="bg-white min-h-screen">
 
     <!-- Modern Electric Precision Hero Section -->
-    <section class="bg-[#F8FAFC] border-b border-border-subtle overflow-hidden">
+    <section class="bg-[#f8f8f3] border-b border-border-subtle overflow-hidden">
         <div class="max-w-[1280px] mx-auto px-4 sm:px-6 py-10 sm:py-16 lg:py-20">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 <!-- Left Copy -->
                 <div class="lg:col-span-6 space-y-5 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-border-subtle text-[#0050cb] font-mono text-[11px] font-semibold uppercase tracking-wider shadow-sm">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-border-subtle text-[#184f3a] font-mono text-[11px] font-semibold uppercase tracking-wider shadow-sm">
                         100% Free &bull; 6 Visual Layouts &bull; 20+ Industry Templates
                     </div>
-                    <h1 class="font-display text-3xl sm:text-5xl font-extrabold text-[#0b1c30] tracking-[-0.03em] leading-[1.08]">
+                    <h1 class="font-display text-3xl sm:text-5xl font-extrabold text-[#17211b] tracking-[-0.03em] leading-[1.08]">
                         Invoice Templates
                     </h1>
-                    <p class="text-sm sm:text-lg text-[#565e74] leading-relaxed max-w-xl mx-auto lg:mx-0">
+                    <p class="text-sm sm:text-lg text-[#536058] leading-relaxed max-w-xl mx-auto lg:mx-0">
                         Choose from professionally designed templates across industries, formats, and layout styles &mdash; or customize your own inside the live invoice studio.
                     </p>
                     <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center lg:justify-start gap-3 pt-1 max-w-sm sm:max-w-none mx-auto">
-                        <a href="#template-gallery" class="px-5 sm:px-6 py-3 sm:py-3.5 rounded-lg bg-primary-container hover:bg-electric-blue-hover text-white text-xs sm:text-sm font-bold shadow-lg shadow-[#0066FF]/25 transition whitespace-nowrap text-center">
+                        <a href="#template-gallery" class="px-5 sm:px-6 py-3 sm:py-3.5 rounded-lg bg-primary-container hover:bg-electric-blue-hover text-white text-xs sm:text-sm font-bold shadow-lg shadow-[#184f3a]/25 transition whitespace-nowrap text-center">
                             Browse Our Templates
                         </a>
-                        <a href="{{ route('invoice.studio') }}" class="px-5 sm:px-6 py-3 sm:py-3.5 rounded-lg bg-white border border-border-strong hover:border-[#0b1c30] text-[#0b1c30] text-xs sm:text-sm font-bold transition whitespace-nowrap text-center">
+                        <a href="{{ route('invoice.studio') }}" class="px-5 sm:px-6 py-3 sm:py-3.5 rounded-lg bg-white border border-border-strong hover:border-[#17211b] text-[#17211b] text-xs sm:text-sm font-bold transition whitespace-nowrap text-center">
                             Make an Invoice
                         </a>
                     </div>
@@ -83,7 +83,7 @@
                                 <div class="h-14 w-24 bg-slate-100/90 rounded-xl"></div>
                                 <div class="text-right">
                                     <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Total Due</div>
-                                    <div class="text-lg font-black text-[#0066FF]">$250.00</div>
+                                    <div class="text-lg font-black text-[#184f3a]">$250.00</div>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
             @foreach($styles as $styleKey => $style)
                 <button type="button"
                         @click="selectedStyle = (selectedStyle === '{{ $styleKey }}' ? 'all' : '{{ $styleKey }}')"
-                        :class="selectedStyle === '{{ $styleKey }}' ? 'border-[#0066FF] bg-blue-50/70 ring-2 ring-blue-500/20' : 'border-slate-200 bg-white hover:border-slate-300'"
+                        :class="selectedStyle === '{{ $styleKey }}' ? 'border-[#184f3a] bg-[#e8f7ed]/70 ring-2 ring-blue-500/20' : 'border-slate-200 bg-white hover:border-slate-300'"
                         class="text-left p-3.5 rounded-2xl border transition group flex flex-col justify-between">
                     <div>
                         <!-- Mini Style Icon Wireframe -->
@@ -127,7 +127,7 @@
                                     <div class="bg-white"></div><div class="bg-white"></div><div class="bg-white"></div>
                                 </div>
                             @elseif($styleKey === 'bold')
-                                <div class="h-4 w-full bg-[#0066FF] rounded-sm mb-1.5 flex items-center px-1">
+                                <div class="h-4 w-full bg-[#184f3a] rounded-sm mb-1.5 flex items-center px-1">
                                     <div class="h-1 w-5 bg-white/90 rounded-full"></div>
                                 </div>
                                 <div class="h-1.5 w-2/3 bg-slate-200 rounded-full mb-1"></div>
@@ -173,7 +173,7 @@
                 <!-- Search Box -->
                 <div class="relative flex-1 max-w-md">
                     <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-                    <input type="text" x-model="search" placeholder="Search templates (e.g., Freelance, Construction, SaaS, Legal...)" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition">
+                    <input type="text" x-model="search" placeholder="Search templates (e.g., Freelance, Construction, SaaS, Legal...)" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:bg-white focus:border-[#184f3a] focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition">
                 </div>
 
                 <!-- Match count -->
@@ -294,7 +294,7 @@
                         </div>
 
                         <div class="flex items-center gap-2 pt-2 border-t border-slate-100">
-                            <a :href="'{{ route('invoice.studio') }}?template=' + tpl.slug" class="flex-1 text-center px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-[#0066FF] text-white text-xs font-bold transition shadow-sm">
+                            <a :href="'{{ route('invoice.studio') }}?template=' + tpl.slug" class="flex-1 text-center px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-[#184f3a] text-white text-xs font-bold transition shadow-sm">
                                 Use Template
                             </a>
                             <button type="button" @click="openPreview(tpl)" class="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">
@@ -470,7 +470,7 @@
                     Customization tip: You can edit every line, logo, and currency inside the studio.
                 </div>
                 <a :href="'{{ route('invoice.studio') }}?template=' + previewTemplate?.slug + '&style=' + previewStyle + '&color=' + encodeURIComponent(previewColor)"
-                   class="w-full sm:w-auto text-center px-5 py-2.5 rounded-xl bg-[#0066FF] hover:bg-blue-700 text-white text-xs font-bold shadow-md transition whitespace-nowrap">
+                   class="w-full sm:w-auto text-center px-5 py-2.5 rounded-xl bg-[#184f3a] hover:bg-[#123e2d] text-white text-xs font-bold shadow-md transition whitespace-nowrap">
                     Customize This Template &rarr;
                 </a>
             </div>
@@ -486,7 +486,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
                 <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/60">
-                    <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#0066FF] font-extrabold flex items-center justify-center mb-3">1</div>
+                    <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#184f3a] font-extrabold flex items-center justify-center mb-3">1</div>
                     <h4 class="font-bold text-sm text-slate-900 mb-1">Choose Industry or Blank Layout</h4>
                     <p class="text-slate-600 leading-relaxed">Select a blank design style (Modern, Classic, Bold, Minimal, Stripe, or Compact) or start with pre-filled industry line items.</p>
                 </div>
@@ -519,7 +519,7 @@ document.addEventListener('alpine:init', () => {
         selectedStyle: 'all',
         previewTemplate: null,
         previewStyle: 'modern',
-        previewColor: '#0066FF',
+        previewColor: '#184f3a',
 
         filteredTemplates() {
             const q = this.search.trim().toLowerCase();
@@ -537,7 +537,7 @@ document.addEventListener('alpine:init', () => {
         openPreview(tpl) {
             this.previewTemplate = tpl;
             this.previewStyle = tpl.template_style || 'modern';
-            this.previewColor = tpl.accent_color || '#0066FF';
+            this.previewColor = tpl.accent_color || '#184f3a';
         },
 
         calcSubtotal(tpl) {

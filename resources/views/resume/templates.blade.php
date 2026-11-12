@@ -7,18 +7,18 @@
 <div x-data="resumeGalleryPage()" class="min-h-screen bg-white">
 
     {{-- Modern Electric Precision Hero Banner --}}
-    <section class="relative overflow-hidden bg-[#F8FAFC] border-b border-border-subtle pt-10 pb-10 sm:pb-12 px-4 sm:px-6">
+    <section class="relative overflow-hidden bg-[#f8f8f3] border-b border-border-subtle pt-10 pb-10 sm:pb-12 px-4 sm:px-6">
         <div class="max-w-[1280px] mx-auto">
             <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
                 <div class="max-w-3xl">
                     <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-white border border-border-subtle text-emerald-700 font-mono text-[11px] font-semibold uppercase tracking-wider mb-4 shadow-sm">
                         15 Templates &bull; 10 Distinct Layout Engines &bull; No Sign-up Required
                     </div>
-                    <h1 class="font-display text-3xl sm:text-5xl font-extrabold tracking-[-0.03em] text-[#0b1c30] leading-[1.08]">
+                    <h1 class="font-display text-3xl sm:text-5xl font-extrabold tracking-[-0.03em] text-[#17211b] leading-[1.08]">
                         Resume &amp; CV templates crafted like
-                        <span class="text-[#0066FF]">Figma</span>, <span class="text-emerald-600">FlowCV</span> &amp; Editorial Print.
+                        <span class="text-[#184f3a]">Figma</span>, <span class="text-emerald-600">FlowCV</span> &amp; Editorial Print.
                     </h1>
-                    <p class="mt-4 text-sm sm:text-lg text-[#565e74] max-w-2xl leading-relaxed">
+                    <p class="mt-4 text-sm sm:text-lg text-[#536058] max-w-2xl leading-relaxed">
                         Choose from warm editorial serif spreads, FlowCV-style dark portrait sidebars, connected career timelines with skill bars, and 100% ATS-verified Wall Street singles.
                     </p>
                 </div>
@@ -29,7 +29,7 @@
                         <span>Import Existing CV &rarr;</span>
                     </a>
                     <a href="{{ route('resume.builder', ['blank' => 1]) }}"
-                       class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white border border-border-strong text-[#0b1c30] text-sm font-bold hover:border-[#0b1c30] transition">
+                       class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white border border-border-strong text-[#17211b] text-sm font-bold hover:border-[#17211b] transition">
                         <span>+ Start Blank</span>
                     </a>
                 </div>
@@ -42,8 +42,8 @@
                             @click="activeCategory = '{{ $catKey }}'"
                             class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition border cursor-pointer"
                             :class="activeCategory === '{{ $catKey }}'
-                                ? 'bg-[#0B0F19] text-white border-[#0B0F19] shadow-sm'
-                                : 'bg-white text-[#565e74] border-border-subtle hover:border-[#0066FF] hover:text-[#0b1c30]'">
+                                ? 'bg-[#17211b] text-white border-[#17211b] shadow-sm'
+                                : 'bg-white text-[#536058] border-border-subtle hover:border-[#184f3a] hover:text-[#17211b]'">
                         {{ $catLabel }}
                         @if($catKey === 'all')
                             <span class="ml-1 text-[11px] opacity-75">({{ count($templates) }})</span>
@@ -576,7 +576,7 @@
                                     </button>
                                     <a href="{{ route('resume.builder', ['template' => $tpl['slug']]) }}"
                                        @click.stop
-                                       class="px-3.5 py-2 rounded-xl bg-[#0066FF] text-white text-xs font-extrabold shadow-lg hover:bg-blue-700 transition">
+                                       class="px-3.5 py-2 rounded-xl bg-[#184f3a] text-white text-xs font-extrabold shadow-lg hover:bg-[#123e2d] transition">
                                         Use Template
                                     </a>
                                 </div>
@@ -613,7 +613,7 @@
 
                             <div class="flex items-center gap-2 pt-1">
                                 <a href="{{ route('resume.builder', ['template' => $tpl['slug']]) }}"
-                                   class="flex-1 text-center py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-[#0066FF] transition">
+                                   class="flex-1 text-center py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-[#184f3a] transition">
                                     Customize This CV
                                 </a>
                                 <button type="button"
@@ -642,7 +642,7 @@
                 <div class="space-y-5">
                     <div class="flex items-start justify-between gap-2">
                         <div>
-                            <div class="text-[11px] font-extrabold uppercase tracking-wider text-[#0066FF]">Interactive Customizer</div>
+                            <div class="text-[11px] font-extrabold uppercase tracking-wider text-[#184f3a]">Interactive Customizer</div>
                             <h2 class="text-lg font-black text-slate-900 mt-0.5" x-text="currentTemplateMeta().name || 'Resume Preview'"></h2>
                             <p class="text-xs text-slate-500 mt-0.5" x-text="currentTemplateMeta().role || ''"></p>
                         </div>
@@ -661,7 +661,7 @@
                                         @click="template_style = '{{ $sKey }}'"
                                         class="px-2.5 py-2 rounded-lg border text-left text-[11px] font-bold transition truncate"
                                         :class="template_style === '{{ $sKey }}'
-                                            ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]'
+                                            ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]'
                                             : 'border-slate-200 text-slate-700 hover:border-slate-300'">
                                     {{ $sInfo['name'] }}
                                 </button>
@@ -691,20 +691,20 @@
                         <div class="grid grid-cols-3 gap-1.5 text-xs">
                             <button type="button" @click="font_family = 'sans'"
                                     class="py-2 rounded-lg border font-sans font-bold transition"
-                                    :class="font_family === 'sans' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-700'">Sans</button>
+                                    :class="font_family === 'sans' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-700'">Sans</button>
                             <button type="button" @click="font_family = 'serif'"
                                     class="py-2 rounded-lg border font-editorial font-bold transition"
-                                    :class="font_family === 'serif' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-700'">Serif</button>
+                                    :class="font_family === 'serif' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-700'">Serif</button>
                             <button type="button" @click="font_family = 'mono'"
                                     class="py-2 rounded-lg border font-tech-mono font-bold transition"
-                                    :class="font_family === 'mono' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-700'">Mono</button>
+                                    :class="font_family === 'mono' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-700'">Mono</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="space-y-2 pt-3 border-t border-slate-200">
                     <a :href="buildLaunchUrl(false)"
-                       class="block w-full text-center py-3 rounded-xl bg-[#0066FF] text-white text-sm font-extrabold shadow-sm hover:bg-blue-700 transition">
+                       class="block w-full text-center py-3 rounded-xl bg-[#184f3a] text-white text-sm font-extrabold shadow-sm hover:bg-[#123e2d] transition">
                         Use This Design &rarr;
                     </a>
                     <a :href="buildLaunchUrl(true)"

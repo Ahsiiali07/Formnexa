@@ -4,20 +4,20 @@
 @section('meta_description', $meta['tagline'])
 
 @section('content')
-<div x-data="pdfConverterTool(@js($meta))" class="min-h-screen bg-[#F8FAFC] pb-16 sm:pb-20">
+<div x-data="pdfConverterTool(@js($meta))" class="min-h-screen bg-[#f8f8f3] pb-16 sm:pb-20">
 
     {{-- Top Tool Switcher & Breadcrumb Strip --}}
     <section class="bg-white border-b border-border-subtle pt-6 sm:pt-7 pb-5 sm:pb-6 px-4 sm:px-6">
         <div class="max-w-[1280px] mx-auto space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-3">
-                <div class="flex flex-wrap items-center gap-2 text-xs text-[#565e74]">
-                    <a href="{{ route('convert.hub') }}" class="font-bold text-[#0b1c30] hover:text-[#0066FF]">Convert PDF</a>
+                <div class="flex flex-wrap items-center gap-2 text-xs text-[#536058]">
+                    <a href="{{ route('convert.hub') }}" class="font-bold text-[#17211b] hover:text-[#184f3a]">Convert PDF</a>
                     <span>/</span>
                     <span class="font-mono uppercase tracking-wider font-semibold">{{ $meta['group'] === 'to_pdf' ? 'Convert to PDF' : 'Convert from PDF' }}</span>
                     <span>/</span>
-                    <span class="font-bold text-[#0b1c30]">{{ $meta['name'] }}</span>
+                    <span class="font-bold text-[#17211b]">{{ $meta['name'] }}</span>
                 </div>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F8FAFC] border border-border-subtle text-emerald-700 text-[11px] font-bold">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f8f8f3] border border-border-subtle text-emerald-700 text-[11px] font-bold">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                     100% Free &bull; No Sign-up Required
                 </span>
@@ -28,8 +28,8 @@
                     {{ $meta['badge'] }}
                 </span>
                 <div class="min-w-0">
-                    <h1 class="font-display text-2xl sm:text-4xl font-extrabold tracking-[-0.03em] text-[#0b1c30] leading-tight">{{ $meta['title'] }}</h1>
-                    <p class="text-xs sm:text-sm text-[#565e74] mt-1 max-w-2xl">{{ $meta['tagline'] }}</p>
+                    <h1 class="font-display text-2xl sm:text-4xl font-extrabold tracking-[-0.03em] text-[#17211b] leading-tight">{{ $meta['title'] }}</h1>
+                    <p class="text-xs sm:text-sm text-[#536058] mt-1 max-w-2xl">{{ $meta['tagline'] }}</p>
                 </div>
             </div>
 
@@ -37,7 +37,7 @@
             <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-hide pt-1 pb-0.5">
                 @foreach(array_merge($groups['to_pdf'], $groups['from_pdf']) as $navTool)
                     <a href="{{ route('convert.tool', $navTool['slug']) }}"
-                       class="px-3 py-1.5 rounded-lg text-[11px] font-bold whitespace-nowrap border transition {{ $navTool['slug'] === $meta['slug'] ? 'bg-[#0B0F19] text-white border-[#0B0F19] shadow-sm' : 'bg-[#F8FAFC] text-[#565e74] border-border-subtle hover:border-[#0066FF] hover:text-[#0b1c30]' }}">
+                       class="px-3 py-1.5 rounded-lg text-[11px] font-bold whitespace-nowrap border transition {{ $navTool['slug'] === $meta['slug'] ? 'bg-[#17211b] text-white border-[#17211b] shadow-sm' : 'bg-[#f8f8f3] text-[#536058] border-border-subtle hover:border-[#184f3a] hover:text-[#17211b]' }}">
                         {{ $navTool['name'] }}
                     </a>
                 @endforeach
@@ -87,20 +87,20 @@
                 {{-- SPECIALIZED WORKSPACE A: HTML TO PDF (File / Raw HTML / Public URL Tabs) --}}
                 <template x-if="meta.slug === 'html-to-pdf'">
                     <div class="bg-white rounded-2xl border border-border-subtle shadow-sm overflow-hidden">
-                        <div class="px-4 sm:px-5 pt-4 pb-3 border-b border-border-subtle flex flex-wrap items-center justify-between gap-2 bg-[#F8FAFC]">
+                        <div class="px-4 sm:px-5 pt-4 pb-3 border-b border-border-subtle flex flex-wrap items-center justify-between gap-2 bg-[#f8f8f3]">
                             <div class="inline-flex flex-wrap p-1 bg-slate-200/70 rounded-xl gap-1 text-xs">
                                 <button type="button" @click="htmlMode = 'code'"
                                         class="px-3 py-1.5 rounded-lg font-bold transition"
-                                        :class="htmlMode === 'code' ? 'bg-white text-[#0b1c30] shadow-sm' : 'text-[#565e74]'">Paste HTML Code</button>
+                                        :class="htmlMode === 'code' ? 'bg-white text-[#17211b] shadow-sm' : 'text-[#536058]'">Paste HTML Code</button>
                                 <button type="button" @click="htmlMode = 'file'"
                                         class="px-3 py-1.5 rounded-lg font-bold transition"
-                                        :class="htmlMode === 'file' ? 'bg-white text-[#0b1c30] shadow-sm' : 'text-[#565e74]'">Upload .HTML File</button>
+                                        :class="htmlMode === 'file' ? 'bg-white text-[#17211b] shadow-sm' : 'text-[#536058]'">Upload .HTML File</button>
                                 <button type="button" @click="htmlMode = 'url'"
                                         class="px-3 py-1.5 rounded-lg font-bold transition"
-                                        :class="htmlMode === 'url' ? 'bg-white text-[#0b1c30] shadow-sm' : 'text-[#565e74]'">Webpage URL</button>
+                                        :class="htmlMode === 'url' ? 'bg-white text-[#17211b] shadow-sm' : 'text-[#536058]'">Webpage URL</button>
                             </div>
                             <button type="button" x-show="htmlMode === 'code'" @click="insertSampleHtml()"
-                                    class="text-xs font-bold text-[#0066FF] hover:underline">
+                                    class="text-xs font-bold text-[#184f3a] hover:underline">
                                 Load Starter Template
                             </button>
                         </div>
@@ -109,11 +109,11 @@
                             <div x-show="htmlMode === 'code'" class="space-y-3">
                                 <textarea x-model="htmlCode" rows="12"
                                           placeholder="Paste your clean <!DOCTYPE html> ... </html> or HTML snippet here..."
-                                          class="w-full p-4 rounded-xl bg-slate-50 border border-slate-200 font-mono text-xs text-slate-800 focus:bg-white focus:border-[#0066FF] focus:outline-none"></textarea>
+                                          class="w-full p-4 rounded-xl bg-slate-50 border border-slate-200 font-mono text-xs text-slate-800 focus:bg-white focus:border-[#184f3a] focus:outline-none"></textarea>
                                 <div class="flex items-center justify-between text-[11px] text-slate-500">
                                     <span>Supports inline CSS, Flexbox, tables &amp; print stylesheets.</span>
                                     <button type="button" @click="showHtmlPreview = !showHtmlPreview"
-                                            class="font-bold text-slate-800 hover:text-[#0066FF]"
+                                            class="font-bold text-slate-800 hover:text-[#184f3a]"
                                             x-text="showHtmlPreview ? 'Hide Live Preview' : 'Show Live Preview'"></button>
                                 </div>
                                 <iframe x-show="showHtmlPreview" x-cloak :srcdoc="htmlCode"
@@ -123,7 +123,7 @@
 
                             <div x-show="htmlMode === 'file'">
                                 <label class="block p-10 rounded-2xl border-2 border-dashed transition text-center cursor-pointer"
-                                       :class="dragging ? 'border-[#0066FF] bg-blue-50/50' : 'border-slate-300 bg-slate-50/60 hover:border-[#0066FF]'"
+                                       :class="dragging ? 'border-[#184f3a] bg-[#e8f7ed]/60' : 'border-slate-300 bg-slate-50/60 hover:border-[#184f3a]'"
                                        @dragover.prevent="dragging = true"
                                        @dragleave.prevent="dragging = false"
                                        @drop.prevent="dragging = false; handleDrop($event)">
@@ -137,7 +137,7 @@
                             <div x-show="htmlMode === 'url'" class="space-y-2">
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Public Webpage URL</label>
                                 <input type="url" x-model="htmlUrl" placeholder="https://example.com/article"
-                                       class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-[#0066FF] focus:outline-none">
+                                       class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-[#184f3a] focus:outline-none">
                                 <p class="text-[11px] text-slate-500">Fetches public HTTPS pages safely and converts the document into printable PDF format.</p>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                         <label class="block rounded-2xl border-2 border-dashed transition text-center cursor-pointer"
                                :class="[
                                    selectedFiles.length > 0 && meta.slug !== 'jpg-to-pdf' ? 'p-5' : 'p-7 sm:p-14',
-                                   dragging ? 'border-[#0066FF] bg-[#EFF6FF]' : 'border-slate-300 bg-[#F8FAFC] hover:border-[#0066FF]'
+                                   dragging ? 'border-[#184f3a] bg-[#e8f7ed]' : 'border-slate-300 bg-[#f8f8f3] hover:border-[#184f3a]'
                                ]"
                                @dragover.prevent="dragging = true"
                                @dragleave.prevent="dragging = false"
@@ -222,7 +222,7 @@
                                 </div>
                                 <button type="button" x-show="renderedJpgPages.length > 0 && !renderingPdf"
                                         @click="downloadAllJpgs()"
-                                        class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-[#0066FF] text-white text-xs font-extrabold transition shadow-sm">
+                                        class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-[#184f3a] text-white text-xs font-extrabold transition shadow-sm">
                                     Download All Pages (.zip)
                                 </button>
                             </div>
@@ -237,7 +237,7 @@
                                         <div class="flex items-center justify-between gap-2 text-[10.5px]">
                                             <span class="text-slate-500 font-medium" x-text="pg.width + '×' + pg.height + 'px'"></span>
                                             <button type="button" @click="downloadSingleJpg(pg)"
-                                                    class="px-2.5 py-1 rounded-lg bg-white border border-slate-300 hover:border-[#0066FF] text-slate-800 font-bold">
+                                                    class="px-2.5 py-1 rounded-lg bg-white border border-slate-300 hover:border-[#184f3a] text-slate-800 font-bold">
                                                 Save JPG
                                             </button>
                                         </div>
@@ -280,9 +280,9 @@
                             <div>
                                 <label class="block font-bold text-slate-600 mb-1.5">Margins</label>
                                 <div class="grid grid-cols-3 gap-1.5">
-                                    <button type="button" @click="opts.margin = 'none'" class="py-2 rounded-lg border font-bold" :class="opts.margin === 'none' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-600'">None</button>
-                                    <button type="button" @click="opts.margin = 'small'" class="py-2 rounded-lg border font-bold" :class="opts.margin === 'small' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-600'">Small</button>
-                                    <button type="button" @click="opts.margin = 'normal'" class="py-2 rounded-lg border font-bold" :class="opts.margin === 'normal' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-600'">Normal</button>
+                                    <button type="button" @click="opts.margin = 'none'" class="py-2 rounded-lg border font-bold" :class="opts.margin === 'none' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-600'">None</button>
+                                    <button type="button" @click="opts.margin = 'small'" class="py-2 rounded-lg border font-bold" :class="opts.margin === 'small' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-600'">Small</button>
+                                    <button type="button" @click="opts.margin = 'normal'" class="py-2 rounded-lg border font-bold" :class="opts.margin === 'normal' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-600'">Normal</button>
                                 </div>
                             </div>
                         </div>
@@ -294,15 +294,15 @@
                             <div>
                                 <label class="block font-bold text-slate-600 mb-1.5">Paper Format</label>
                                 <div class="grid grid-cols-2 gap-2">
-                                    <button type="button" @click="opts.page_size = 'a4'" class="py-2 rounded-lg border font-bold" :class="opts.page_size === 'a4' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-600'">A4</button>
-                                    <button type="button" @click="opts.page_size = 'letter'" class="py-2 rounded-lg border font-bold" :class="opts.page_size === 'letter' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-600'">US Letter</button>
+                                    <button type="button" @click="opts.page_size = 'a4'" class="py-2 rounded-lg border font-bold" :class="opts.page_size === 'a4' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-600'">A4</button>
+                                    <button type="button" @click="opts.page_size = 'letter'" class="py-2 rounded-lg border font-bold" :class="opts.page_size === 'letter' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-600'">US Letter</button>
                                 </div>
                             </div>
                             <div x-show="meta.slug === 'html-to-pdf'">
                                 <label class="block font-bold text-slate-600 mb-1.5">Orientation</label>
                                 <div class="grid grid-cols-2 gap-2">
-                                    <button type="button" @click="opts.orientation = 'portrait'" class="py-2 rounded-lg border font-bold" :class="opts.orientation === 'portrait' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-600'">Portrait</button>
-                                    <button type="button" @click="opts.orientation = 'landscape'" class="py-2 rounded-lg border font-bold" :class="opts.orientation === 'landscape' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-600'">Landscape</button>
+                                    <button type="button" @click="opts.orientation = 'portrait'" class="py-2 rounded-lg border font-bold" :class="opts.orientation === 'portrait' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-600'">Portrait</button>
+                                    <button type="button" @click="opts.orientation = 'landscape'" class="py-2 rounded-lg border font-bold" :class="opts.orientation === 'landscape' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-600'">Landscape</button>
                                 </div>
                             </div>
                         </div>
@@ -314,12 +314,12 @@
                             <div>
                                 <label class="block font-bold text-slate-600 mb-1.5">Orientation</label>
                                 <div class="grid grid-cols-2 gap-2">
-                                    <button type="button" @click="opts.orientation = 'landscape'" class="py-2 rounded-lg border font-bold" :class="opts.orientation === 'landscape' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-600'">Landscape</button>
-                                    <button type="button" @click="opts.orientation = 'portrait'" class="py-2 rounded-lg border font-bold" :class="opts.orientation === 'portrait' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-600'">Portrait</button>
+                                    <button type="button" @click="opts.orientation = 'landscape'" class="py-2 rounded-lg border font-bold" :class="opts.orientation === 'landscape' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-600'">Landscape</button>
+                                    <button type="button" @click="opts.orientation = 'portrait'" class="py-2 rounded-lg border font-bold" :class="opts.orientation === 'portrait' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-600'">Portrait</button>
                                 </div>
                             </div>
                             <label class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer">
-                                <input type="checkbox" x-model="opts.gridlines" class="rounded border-slate-300 text-[#0066FF]">
+                                <input type="checkbox" x-model="opts.gridlines" class="rounded border-slate-300 text-[#184f3a]">
                                 <span class="font-bold text-slate-700">Show cell gridlines in PDF</span>
                             </label>
                         </div>
@@ -345,13 +345,13 @@
                             <label class="block font-bold text-slate-600 mb-1">Extraction Mode</label>
                             <button type="button" @click="opts.mode = 'editable'"
                                     class="w-full text-left p-3 rounded-xl border transition"
-                                    :class="opts.mode === 'editable' ? 'border-[#0066FF] bg-blue-50/70' : 'border-slate-200'">
+                                    :class="opts.mode === 'editable' ? 'border-[#184f3a] bg-[#e8f7ed]/70' : 'border-slate-200'">
                                 <div class="font-bold text-slate-900">Editable Text &amp; Structure</div>
                                 <div class="text-[11px] text-slate-500 mt-0.5">Extracts selectable headings, bullets &amp; paragraphs into native Word text.</div>
                             </button>
                             <button type="button" @click="opts.mode = 'visual'"
                                     class="w-full text-left p-3 rounded-xl border transition"
-                                    :class="opts.mode === 'visual' ? 'border-[#0066FF] bg-blue-50/70' : 'border-slate-200'">
+                                    :class="opts.mode === 'visual' ? 'border-[#184f3a] bg-[#e8f7ed]/70' : 'border-slate-200'">
                                 <div class="font-bold text-slate-900">Exact Visual Layout (Scanned PDFs)</div>
                                 <div class="text-[11px] text-slate-500 mt-0.5">Preserves complex graphics &amp; scanned pages frame-by-frame inside DOCX.</div>
                             </button>
@@ -364,13 +364,13 @@
                             <label class="block font-bold text-slate-600 mb-1">Slide Conversion Mode</label>
                             <button type="button" @click="opts.mode = 'visual'"
                                     class="w-full text-left p-3 rounded-xl border transition"
-                                    :class="opts.mode === 'visual' ? 'border-[#0066FF] bg-blue-50/70' : 'border-slate-200'">
+                                    :class="opts.mode === 'visual' ? 'border-[#184f3a] bg-[#e8f7ed]/70' : 'border-slate-200'">
                                 <div class="font-bold text-slate-900">Exact Visual Slides (Recommended)</div>
                                 <div class="text-[11px] text-slate-500 mt-0.5">Each PDF page becomes a high-res 16:9 widescreen slide preserving design.</div>
                             </button>
                             <button type="button" @click="opts.mode = 'editable'"
                                     class="w-full text-left p-3 rounded-xl border transition"
-                                    :class="opts.mode === 'editable' ? 'border-[#0066FF] bg-blue-50/70' : 'border-slate-200'">
+                                    :class="opts.mode === 'editable' ? 'border-[#184f3a] bg-[#e8f7ed]/70' : 'border-slate-200'">
                                 <div class="font-bold text-slate-900">Editable Text &amp; Bullets</div>
                                 <div class="text-[11px] text-slate-500 mt-0.5">Reconstructs editable text titles and bullet points on slides.</div>
                             </button>
@@ -383,13 +383,13 @@
                             <label class="block font-bold text-slate-600 mb-1">Worksheet Layout</label>
                             <button type="button" @click="opts.merge_sheets = 'per_page'"
                                     class="w-full text-left p-3 rounded-xl border transition"
-                                    :class="opts.merge_sheets === 'per_page' ? 'border-[#0066FF] bg-blue-50/70' : 'border-slate-200'">
+                                    :class="opts.merge_sheets === 'per_page' ? 'border-[#184f3a] bg-[#e8f7ed]/70' : 'border-slate-200'">
                                 <div class="font-bold text-slate-900">One Sheet per PDF Page</div>
                                 <div class="text-[11px] text-slate-500 mt-0.5">Best for multi-page financial statements or invoices.</div>
                             </button>
                             <button type="button" @click="opts.merge_sheets = 'single_sheet'"
                                     class="w-full text-left p-3 rounded-xl border transition"
-                                    :class="opts.merge_sheets === 'single_sheet' ? 'border-[#0066FF] bg-blue-50/70' : 'border-slate-200'">
+                                    :class="opts.merge_sheets === 'single_sheet' ? 'border-[#184f3a] bg-[#e8f7ed]/70' : 'border-slate-200'">
                                 <div class="font-bold text-slate-900">Combine All Tables on One Sheet</div>
                                 <div class="text-[11px] text-slate-500 mt-0.5">Stacks extracted rows vertically into one continuous sheet.</div>
                             </button>
@@ -402,13 +402,13 @@
                             <label class="block font-bold text-slate-600 mb-1">ISO Archival Conformance</label>
                             <button type="button" @click="opts.conformance = '1b'"
                                     class="w-full text-left p-3 rounded-xl border transition"
-                                    :class="opts.conformance === '1b' ? 'border-[#0066FF] bg-blue-50/70' : 'border-slate-200'">
+                                    :class="opts.conformance === '1b' ? 'border-[#184f3a] bg-[#e8f7ed]/70' : 'border-slate-200'">
                                 <div class="font-bold text-slate-900">PDF/A-1b (ISO 19005-1)</div>
                                 <div class="text-[11px] text-slate-500 mt-0.5">Strict long-term archiving standard with sRGB ICC profile &amp; XMP metadata.</div>
                             </button>
                             <button type="button" @click="opts.conformance = '3b'"
                                     class="w-full text-left p-3 rounded-xl border transition"
-                                    :class="opts.conformance === '3b' ? 'border-[#0066FF] bg-blue-50/70' : 'border-slate-200'">
+                                    :class="opts.conformance === '3b' ? 'border-[#184f3a] bg-[#e8f7ed]/70' : 'border-slate-200'">
                                 <div class="font-bold text-slate-900">PDF/A-3b (ISO 19005-3)</div>
                                 <div class="text-[11px] text-slate-500 mt-0.5">Modern archival standard supporting richer document compliance metadata.</div>
                             </button>
@@ -421,7 +421,7 @@
                     <button type="button"
                             @click="runConversion()"
                             :disabled="converting || renderingPdf"
-                            class="w-full py-3.5 px-5 rounded-xl bg-slate-900 hover:bg-[#0066FF] disabled:opacity-50 text-white text-sm font-extrabold shadow-md transition flex items-center justify-center gap-2">
+                            class="w-full py-3.5 px-5 rounded-xl bg-slate-900 hover:bg-[#184f3a] disabled:opacity-50 text-white text-sm font-extrabold shadow-md transition flex items-center justify-center gap-2">
                         <svg x-show="converting || renderingPdf" class="w-4 h-4 animate-spin text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
                         <span x-text="converting ? (statusText || 'Converting...') : (meta.slug === 'pdf-to-jpg' ? 'Download JPG Pages' : meta.button_label)"></span>
                     </button>
@@ -451,7 +451,7 @@ function pdfConverterTool(meta) {
         renderedJpgPages: [],
 
         htmlMode: 'code',
-        htmlCode: `<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: Arial, sans-serif; color: #0f172a; padding: 32px; }\n  .card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; }\n  h1 { color: #0066ff; margin-top: 0; }\n</style>\n</head>\n<body>\n  <div class="card">\n    <h1>Project Status Summary</h1>\n    <p>Converted cleanly to crisp vector PDF using Formnexa HTML to PDF.</p>\n  </div>\n</body>\n</html>`,
+        htmlCode: `<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: Arial, sans-serif; color: #0f172a; padding: 32px; }\n  .card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; }\n  h1 { color: #184f3a; margin-top: 0; }\n</style>\n</head>\n<body>\n  <div class="card">\n    <h1>Project Status Summary</h1>\n    <p>Converted cleanly to crisp vector PDF using Formnexa HTML to PDF.</p>\n  </div>\n</body>\n</html>`,
         htmlUrl: '',
         showHtmlPreview: false,
 
@@ -542,7 +542,7 @@ function pdfConverterTool(meta) {
 <head>
 <style>
   body { font-family: Arial, sans-serif; color: #1e293b; padding: 32px; }
-  .header { display: flex; justify-content: space-between; border-bottom: 2px solid #0066ff; padding-bottom: 12px; margin-bottom: 20px; }
+  .header { display: flex; justify-content: space-between; border-bottom: 2px solid #184f3a; padding-bottom: 12px; margin-bottom: 20px; }
   table { width: 100%; border-collapse: collapse; margin-top: 16px; }
   th { background: #0f172a; color: #fff; text-align: left; padding: 10px; }
   td { border-bottom: 1px solid #e2e8f0; padding: 10px; }

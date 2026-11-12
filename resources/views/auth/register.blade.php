@@ -3,34 +3,36 @@
 @section('title', 'Create Free Account — Formnexa')
 
 @section('content')
-<div class="min-h-[calc(100vh-140px)] bg-[#F8FAFC] flex items-center justify-center py-10 sm:py-14 px-4 sm:px-6">
+<div class="min-h-[calc(100vh-140px)] bg-[#f8f8f3] flex items-center justify-center py-10 sm:py-14 px-4 sm:px-6">
     <div class="w-full max-w-md space-y-5 sm:space-y-6">
 
         <!-- Brand & Context Header -->
         <div class="text-center space-y-2">
             <a href="{{ route('home') }}" class="inline-flex items-center justify-center gap-2.5 mb-1">
-                <div class="w-11 h-11 rounded-xl bg-primary-container flex items-center justify-center shadow-md shadow-[#0066FF]/25">
-                    <img src="{{ asset('images/formnexa-icon-white.png') }}" alt="Formnexa" class="w-6 h-6 object-contain">
-                </div>
+                <span class="fn-brand-mark" style="width: 44px; height: 44px; border-radius: 13px; gap: 3.5px;" aria-hidden="true">
+                    <i class="b1" style="width: 4.5px; height: 21px;"></i>
+                    <i class="b2" style="width: 4.5px; height: 15px;"></i>
+                    <i class="b3" style="width: 4.5px; height: 22px;"></i>
+                </span>
             </a>
-            <h1 class="font-display text-2xl sm:text-3xl font-extrabold text-[#0b1c30] tracking-[-0.03em]">
+            <h1 class="font-display text-2xl sm:text-3xl font-extrabold text-[#17211b] tracking-[-0.03em]">
                 Create a free account
             </h1>
-            <p class="text-xs sm:text-sm text-[#565e74]">
+            <p class="text-xs sm:text-sm text-[#536058]">
                 Save your billing history, track payment status, and reload invoices anytime.
             </p>
         </div>
 
         <!-- Optional Note Banner -->
-        <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200/80 text-xs text-emerald-950 flex items-start gap-2.5">
-            <span class="material-symbols-outlined text-emerald-600 text-[18px] shrink-0 mt-0.5">verified</span>
+        <div class="p-3.5 rounded-xl bg-[#e8f7ed] border border-[#c8f3dc] text-xs text-[#17211b] flex items-start gap-2.5">
+            <span class="material-symbols-outlined text-[#184f3a] text-[18px] shrink-0 mt-0.5">verified</span>
             <div>
                 <strong>Optional &amp; Free Forever:</strong> Creating an account unlocks cloud invoice history without restricting any document generator tools.
             </div>
         </div>
 
         <!-- Signup Form Card -->
-        <div class="bg-white rounded-2xl shadow-lg border border-border-subtle p-6 sm:p-8">
+        <div class="bg-white rounded-2xl shadow-lg shadow-[#17211b]/5 border border-[#dfe4df] p-6 sm:p-8">
             @if ($errors->any())
                 <div class="mb-5 p-3.5 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium space-y-1">
                     @foreach ($errors->all() as $err)
@@ -43,42 +45,42 @@
                 @csrf
 
                 <div>
-                    <label for="name" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#565e74] mb-1.5">Full Name or Business Name</label>
+                    <label for="name" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#536058] mb-1.5">Full Name or Business Name</label>
                     <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus placeholder="John Doe / Acme Studio"
-                           class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-border-subtle text-sm text-[#0b1c30] placeholder:text-[#727687]/70 focus:border-[#0066FF] focus:ring-2 focus:ring-[#0066FF]/15 focus:outline-none transition">
+                           class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#dfe4df] text-sm text-[#17211b] placeholder:text-[#68736d]/70 focus:border-[#184f3a] focus:ring-2 focus:ring-[#184f3a]/15 focus:outline-none transition">
                 </div>
 
                 <div>
-                    <label for="email" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#565e74] mb-1.5">Email Address</label>
+                    <label for="email" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#536058] mb-1.5">Email Address</label>
                     <input id="email" type="email" name="email" value="{{ old('email') }}" required placeholder="you@company.com"
-                           class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-border-subtle text-sm text-[#0b1c30] placeholder:text-[#727687]/70 focus:border-[#0066FF] focus:ring-2 focus:ring-[#0066FF]/15 focus:outline-none transition">
+                           class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#dfe4df] text-sm text-[#17211b] placeholder:text-[#68736d]/70 focus:border-[#184f3a] focus:ring-2 focus:ring-[#184f3a]/15 focus:outline-none transition">
                 </div>
 
                 <div>
-                    <label for="password" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#565e74] mb-1.5">Password (Min. 6 chars)</label>
+                    <label for="password" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#536058] mb-1.5">Password (Min. 6 chars)</label>
                     <input id="password" type="password" name="password" required placeholder="Create a password"
-                           class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-border-subtle text-sm text-[#0b1c30] placeholder:text-[#727687]/70 focus:border-[#0066FF] focus:ring-2 focus:ring-[#0066FF]/15 focus:outline-none transition">
+                           class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#dfe4df] text-sm text-[#17211b] placeholder:text-[#68736d]/70 focus:border-[#184f3a] focus:ring-2 focus:ring-[#184f3a]/15 focus:outline-none transition">
                 </div>
 
                 <div>
-                    <label for="password_confirmation" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#565e74] mb-1.5">Confirm Password</label>
+                    <label for="password_confirmation" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#536058] mb-1.5">Confirm Password</label>
                     <input id="password_confirmation" type="password" name="password_confirmation" required placeholder="Re-enter password"
-                           class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-border-subtle text-sm text-[#0b1c30] placeholder:text-[#727687]/70 focus:border-[#0066FF] focus:ring-2 focus:ring-[#0066FF]/15 focus:outline-none transition">
+                           class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#dfe4df] text-sm text-[#17211b] placeholder:text-[#68736d]/70 focus:border-[#184f3a] focus:ring-2 focus:ring-[#184f3a]/15 focus:outline-none transition">
                 </div>
 
-                <button type="submit" class="w-full py-3 px-6 rounded-lg bg-primary-container hover:bg-electric-blue-hover text-white text-sm font-bold shadow-md shadow-[#0066FF]/20 transition mt-2">
+                <button type="submit" class="w-full py-3 px-6 rounded-xl bg-[#184f3a] hover:bg-[#123e2d] text-white text-sm font-bold shadow-md shadow-[#184f3a]/20 transition mt-2">
                     Create Free Account
                 </button>
             </form>
 
-            <div class="mt-6 pt-5 border-t border-border-subtle text-center text-xs text-[#565e74]">
+            <div class="mt-6 pt-5 border-t border-[#dfe4df] text-center text-xs text-[#536058]">
                 Already have an account?
-                <a href="{{ route('login') }}" class="font-bold text-[#0050cb] hover:underline ml-1">Sign In &rarr;</a>
+                <a href="{{ route('login') }}" class="font-bold text-[#184f3a] hover:underline ml-1">Sign In &rarr;</a>
             </div>
         </div>
 
         <div class="text-center">
-            <a href="{{ route('invoice.studio') }}" class="text-xs font-semibold text-[#565e74] hover:text-[#0b1c30] transition">
+            <a href="{{ route('invoice.studio') }}" class="text-xs font-semibold text-[#536058] hover:text-[#17211b] transition">
                 &larr; Continue as Guest without Signing Up
             </a>
         </div>

@@ -1,581 +1,1959 @@
 @extends('layouts.app')
 
 @section('title', 'Formnexa — Invoices, Resume Builder & PDF Converter Suite')
-@section('meta_description', 'Create branded invoices & 12 business documents, build ATS-ready resumes with FlowCV & Figma templates, and convert JPG, Word, PowerPoint, Excel, HTML & PDFs cleanly — 100% free.')
+@section('meta_description', 'Build ATS-ready resumes, create branded invoices & 12 business documents, and convert PDFs in seconds — all in one fast workspace. Free to start, no credit card required.')
+
+@push('styles')
+<style>
+    .fn-home {
+        --ink: #17211b;
+        --muted: #68736d;
+        --green: #184f3a;
+        --mint: #c8f3dc;
+        --lime: #d9f99d;
+        --cream: #f8f8f3;
+        --line: #dfe4df;
+        --purple: #7655d7;
+        --coral: #ff815f;
+        color: var(--ink);
+        background: #ffffff;
+        overflow-x: clip;
+    }
+
+    .fn-home h1,
+    .fn-home h2,
+    .fn-home h3 {
+        font-family: "Manrope", "DM Sans", sans-serif;
+        letter-spacing: -0.04em;
+    }
+
+    /* Hero */
+    .fn-hero {
+        position: relative;
+        overflow: hidden;
+        padding: 64px 24px 66px;
+        text-align: center;
+        background: radial-gradient(circle at 50% 0%, #f3faf5 0%, #fbfbf7 62%, #f4f8f4 100%);
+        border-radius: 0 0 46px 46px;
+    }
+
+    .fn-hero-glow {
+        position: absolute;
+        width: 560px;
+        height: 560px;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+    }
+    .fn-glow-one {
+        top: -280px;
+        left: -120px;
+        background: rgba(154, 230, 187, 0.42);
+    }
+    .fn-glow-two {
+        top: -220px;
+        right: -130px;
+        background: rgba(196, 181, 253, 0.25);
+    }
+
+    .fn-hero-inner {
+        position: relative;
+        z-index: 2;
+        max-width: 820px;
+        margin: 0 auto;
+    }
+
+    .fn-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 7px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid #e3e9e4;
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 600;
+        box-shadow: 0 6px 20px rgba(23, 33, 27, 0.04);
+    }
+    .fn-eyebrow .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #2f9a69;
+        box-shadow: 0 0 0 4px rgba(47, 154, 105, 0.16);
+        flex-shrink: 0;
+    }
+
+    .fn-hero h1 {
+        margin: 26px auto 0;
+        max-width: 780px;
+        font-size: clamp(38px, 6.2vw, 72px);
+        line-height: 1.03;
+        font-weight: 800;
+        letter-spacing: -0.045em;
+    }
+    .fn-hero h1 span {
+        color: var(--green);
+        font-weight: 600;
+    }
+
+    .fn-hero-copy {
+        margin: 22px auto 0;
+        max-width: 560px;
+        font-size: clamp(16px, 1.8vw, 19px);
+        line-height: 1.6;
+        color: var(--muted);
+    }
+
+    .fn-hero-actions {
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .fn-primary-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        padding: 15px 25px;
+        border-radius: 13px;
+        background: var(--green);
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 16px 32px rgba(24, 79, 58, 0.2);
+        transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .fn-primary-btn:hover {
+        background: #123e2d;
+        transform: translateY(-2px);
+    }
+    .fn-primary-btn.dark {
+        background: var(--ink);
+        box-shadow: 0 14px 28px rgba(23, 33, 27, 0.16);
+    }
+    .fn-primary-btn.dark:hover {
+        background: #223128;
+    }
+
+    .fn-secondary-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 22px;
+        border-radius: 13px;
+        background: #ffffff;
+        color: var(--ink);
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        border: 1px solid var(--line);
+        transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .fn-secondary-btn:hover {
+        border-color: #b5c1b8;
+        transform: translateY(-2px);
+    }
+
+    .fn-hero-note {
+        margin-top: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        color: var(--muted);
+        font-size: 13px;
+    }
+    .fn-hero-note span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* Interactive Product Stage */
+    .fn-product-stage {
+        position: relative;
+        z-index: 2;
+        max-width: 980px;
+        margin: 48px auto 0;
+    }
+
+    .fn-product-tabs {
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        padding: 6px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid #e3e8e3;
+        box-shadow: 0 12px 28px rgba(23, 33, 27, 0.05);
+        max-width: 100%;
+    }
+    .fn-product-tabs button {
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 11px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s ease, color 0.2s ease;
+    }
+    .fn-product-tabs button.active {
+        background: var(--ink);
+        color: #ffffff;
+    }
+
+    .fn-preview-shell {
+        margin-top: 18px;
+        border-radius: 26px;
+        padding: 16px;
+        border: 1px solid #e4e9e4;
+        background: #ffffff;
+        box-shadow: 0 30px 70px rgba(23, 33, 27, 0.09);
+        text-align: left;
+    }
+    .fn-preview-shell.violet {
+        background: linear-gradient(145deg, #f3eeff 0%, #ffffff 55%);
+    }
+    .fn-preview-shell.mint {
+        background: linear-gradient(145deg, #e8f8ee 0%, #ffffff 55%);
+    }
+    .fn-preview-shell.orange {
+        background: linear-gradient(145deg, #fff1ea 0%, #ffffff 55%);
+    }
+
+    .fn-preview-window {
+        border-radius: 18px;
+        border: 1px solid #ebeeeb;
+        background: #ffffff;
+        overflow: hidden;
+    }
+
+    .fn-window-top {
+        min-height: 48px;
+        padding: 8px 16px;
+        border-bottom: 1px solid #eef1ee;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+        background: #fcfdfb;
+    }
+    .fn-window-dots {
+        display: flex;
+        gap: 6px;
+    }
+    .fn-window-dots i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #dde3de;
+        display: block;
+    }
+    .fn-window-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--muted);
+    }
+    .fn-window-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 11px;
+        border-radius: 999px;
+        background: #e9f6ee;
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.15s ease;
+    }
+    .fn-window-pill:hover {
+        background: #d4eedc;
+    }
+
+    /* Stage 1: Resume preview */
+    .fn-resume-preview {
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 20px;
+        align-items: stretch;
+    }
+    .fn-preview-sidebar {
+        padding: 16px;
+        border-radius: 14px;
+        background: #fafaf8;
+        border: 1px solid #edf0ec;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .fn-side-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #828e87;
+    }
+    .fn-side-item {
+        padding: 9px 11px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #515d56;
+    }
+    .fn-side-item.done {
+        background: #ffffff;
+        color: var(--ink);
+        box-shadow: 0 2px 8px rgba(23, 33, 27, 0.04);
+    }
+    .fn-side-item.current {
+        background: #f0ebff;
+        color: #5d3ec4;
+    }
+
+    .fn-preview-canvas {
+        position: relative;
+        padding: 18px;
+        border-radius: 14px;
+        background: #f6f7f4;
+        display: grid;
+        place-items: center;
+    }
+    .fn-resume-paper {
+        width: 100%;
+        max-width: 470px;
+        padding: 24px;
+        border-radius: 14px;
+        background: #ffffff;
+        border: 1px solid #eaedea;
+        box-shadow: 0 18px 40px rgba(23, 33, 27, 0.07);
+    }
+    .fn-paper-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #eff2ef;
+    }
+    .fn-avatar {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: #ede7ff;
+        color: #5f41c4;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+    .fn-paper-head strong {
+        display: block;
+        font-size: 17px;
+    }
+    .fn-paper-head span {
+        display: block;
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 13px;
+    }
+    .fn-paper-grid {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: 1fr 120px;
+        gap: 18px;
+    }
+    .fn-paper-block b {
+        display: block;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #7b867f;
+    }
+    .fn-paper-block p {
+        margin: 6px 0 0;
+        font-size: 13px;
+        line-height: 1.5;
+        color: #36413b;
+    }
+    .fn-chip-list {
+        margin-top: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .fn-chip-list span {
+        padding: 4px 8px;
+        border-radius: 7px;
+        background: #f3f1fd;
+        color: #5b3ec2;
+        font-size: 11px;
+        font-weight: 600;
+    }
+    .fn-score-pill {
+        position: absolute;
+        right: 14px;
+        bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 14px;
+        background: var(--ink);
+        color: #ffffff;
+        box-shadow: 0 18px 34px rgba(23, 33, 27, 0.22);
+    }
+    .fn-score-pill > b {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: var(--mint);
+        color: var(--ink);
+        display: grid;
+        place-items: center;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+    .fn-score-pill strong {
+        display: block;
+        font-size: 12px;
+    }
+    .fn-score-pill span {
+        display: block;
+        font-size: 11px;
+        color: #b7c4bc;
+    }
+
+    /* Stage 2: Invoice preview */
+    .fn-invoice-preview {
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 1fr 230px;
+        gap: 20px;
+        align-items: start;
+    }
+    .fn-invoice-sheet {
+        padding: 24px;
+        border-radius: 16px;
+        border: 1px solid #e9ede9;
+        background: #ffffff;
+    }
+    .fn-inv-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid #eef1ee;
+    }
+    .fn-inv-top strong {
+        display: block;
+        font-size: 18px;
+    }
+    .fn-inv-top span {
+        color: var(--muted);
+        font-size: 13px;
+    }
+    .fn-inv-top > div:last-child {
+        text-align: right;
+    }
+    .fn-inv-top em {
+        display: block;
+        font-style: normal;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--green);
+    }
+    .fn-inv-rows {
+        margin-top: 16px;
+        display: grid;
+        gap: 10px;
+    }
+    .fn-inv-rows div {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: #f9faf8;
+        font-size: 14px;
+    }
+    .fn-inv-rows strong {
+        font-variant-numeric: tabular-nums;
+    }
+    .fn-inv-total {
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid #eef1ee;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+    }
+    .fn-inv-total span {
+        color: var(--muted);
+        font-size: 13px;
+    }
+    .fn-inv-total strong {
+        font-size: 26px;
+        color: var(--green);
+    }
+
+    .fn-invoice-options {
+        display: grid;
+        gap: 10px;
+    }
+    .fn-opt-card {
+        padding: 14px;
+        border-radius: 14px;
+        background: #f9faf8;
+        border: 1px solid #edf0ec;
+    }
+    .fn-opt-card span {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+    }
+    .fn-opt-card strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 14px;
+    }
+    .fn-swatches {
+        display: flex;
+        gap: 7px;
+        margin-top: 8px;
+    }
+    .fn-swatches i {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: block;
+    }
+
+    /* Stage 3: PDF Converter preview */
+    .fn-converter-preview {
+        padding: 24px;
+        display: grid;
+        gap: 16px;
+    }
+    .fn-drop-zone {
+        padding: 26px 18px;
+        border-radius: 16px;
+        border: 2px dashed #f0c2ae;
+        background: #fff8f4;
+        text-align: center;
+    }
+    .fn-drop-icon {
+        width: 44px;
+        height: 44px;
+        margin: 0 auto 10px;
+        border-radius: 13px;
+        background: #ffe7dc;
+        color: #cc5930;
+        display: grid;
+        place-items: center;
+    }
+    .fn-drop-zone strong {
+        display: block;
+        font-size: 16px;
+    }
+    .fn-drop-zone span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 13px;
+    }
+    .fn-file-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px;
+        border-radius: 14px;
+        border: 1px solid #ecefec;
+        background: #fbfcfa;
+        flex-wrap: wrap;
+    }
+    .fn-file-meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+    }
+    .fn-file-badge {
+        padding: 7px 10px;
+        border-radius: 9px;
+        background: #e9f6ee;
+        color: var(--green);
+        font-size: 11px;
+        font-weight: 800;
+        flex-shrink: 0;
+    }
+    .fn-file-meta strong {
+        display: block;
+        font-size: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .fn-file-meta span {
+        color: var(--muted);
+        font-size: 12px;
+    }
+    .fn-file-done {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    /* Trust Strip */
+    .fn-trust-strip {
+        padding: 44px 24px 10px;
+        text-align: center;
+    }
+    .fn-trust-strip p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--muted);
+    }
+    .fn-logo-row {
+        max-width: 900px;
+        margin: 18px auto 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        flex-wrap: wrap;
+        color: #849089;
+        font-weight: 700;
+        font-size: 15px;
+    }
+
+    /* Tools Section (Three Cards) */
+    .fn-tools-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 86px 24px 96px;
+    }
+    .fn-section-head {
+        max-width: 660px;
+        margin: 0 auto 48px;
+        text-align: center;
+    }
+    .fn-section-tag {
+        display: inline-block;
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+    .fn-section-head h2 {
+        margin: 12px 0 0;
+        font-size: clamp(30px, 4.4vw, 50px);
+        line-height: 1.07;
+        font-weight: 800;
+    }
+    .fn-section-head p {
+        margin: 16px 0 0;
+        font-size: 17px;
+        line-height: 1.65;
+        color: var(--muted);
+    }
+
+    .fn-tool-cards {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+    .fn-tool-card {
+        border-radius: 28px;
+        padding: 30px 26px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 450px;
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .fn-tool-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 24px 50px rgba(23, 33, 27, 0.08);
+    }
+    .fn-card-violet {
+        background: #f0ebff;
+    }
+    .fn-card-mint {
+        background: #e8f7ed;
+    }
+    .fn-card-orange {
+        background: #fff0e8;
+    }
+
+    .fn-card-index {
+        font-size: 12px;
+        font-weight: 800;
+        color: rgba(23, 33, 27, 0.45);
+    }
+    .fn-tool-card h3 {
+        margin: 14px 0 0;
+        font-size: 27px;
+        font-weight: 700;
+    }
+    .fn-tool-card p {
+        margin: 12px 0 0;
+        color: #46534b;
+        font-size: 15px;
+        line-height: 1.65;
+    }
+    .fn-card-link {
+        margin-top: 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    .fn-card-link:hover {
+        gap: 10px;
+    }
+
+    .fn-card-art {
+        position: relative;
+        margin-top: 26px;
+        height: 180px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+    }
+    .fn-art-page {
+        width: 86%;
+        height: 162px;
+        border-radius: 18px 18px 0 0;
+        background: #ffffff;
+        padding: 18px;
+        box-shadow: 0 18px 36px rgba(23, 33, 27, 0.09);
+        display: grid;
+        gap: 10px;
+        align-content: start;
+    }
+    .fn-art-page span {
+        height: 8px;
+        border-radius: 99px;
+        background: #edf0ed;
+    }
+    .fn-art-page span.line-w1 { width: 58%; background: #d6cbfc; }
+    .fn-art-page span.line-w2 { width: 88%; }
+    .fn-art-page span.line-w3 { width: 72%; }
+    .fn-art-score {
+        position: absolute;
+        right: 12px;
+        bottom: 24px;
+        padding: 8px 13px;
+        border-radius: 999px;
+        background: var(--purple);
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 800;
+        box-shadow: 0 10px 24px rgba(118, 85, 215, 0.35);
+    }
+
+    .fn-art-page.invoice {
+        background: #ffffff;
+    }
+    .fn-inv-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+    }
+    .fn-inv-line.total {
+        margin-top: 8px;
+        padding-top: 10px;
+        border-top: 1px solid #eef1ee;
+    }
+    .fn-paid-stamp {
+        position: absolute;
+        right: 12px;
+        bottom: 22px;
+        padding: 7px 14px;
+        border-radius: 999px;
+        background: var(--green);
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        transform: rotate(-7deg);
+    }
+
+    .fn-card-art.converter {
+        align-items: center;
+        gap: 14px;
+        padding-bottom: 18px;
+    }
+    .fn-format {
+        width: 82px;
+        height: 98px;
+        border-radius: 18px;
+        background: #ffffff;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        font-size: 16px;
+        box-shadow: 0 14px 30px rgba(23, 33, 27, 0.08);
+    }
+    .fn-format.doc { color: #3657d1; }
+    .fn-format.pdf { color: #d6552f; border: 2px solid #ffd8c8; }
+
+    /* Feature Showcase */
+    .fn-feature-section {
+        background: var(--cream);
+        padding: 96px 24px;
+    }
+    .fn-feature-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 56px;
+        align-items: center;
+    }
+    .fn-feature-visual {
+        position: relative;
+        min-height: 410px;
+        display: grid;
+        place-items: center;
+    }
+    .fn-visual-blob {
+        position: absolute;
+        width: 390px;
+        height: 390px;
+        max-width: 100%;
+        border-radius: 44% 56% 52% 48%;
+        background: radial-gradient(circle, #c8f3dc 0%, #e7f6ec 75%);
+    }
+    .fn-template-window {
+        position: relative;
+        z-index: 2;
+        width: 420px;
+        max-width: 100%;
+        border-radius: 22px;
+        background: #ffffff;
+        border: 1px solid #e5eae5;
+        box-shadow: 0 28px 60px rgba(23, 33, 27, 0.1);
+        overflow: hidden;
+        transform: rotate(-2deg);
+    }
+    .fn-tw-head {
+        height: 40px;
+        padding: 0 14px;
+        background: #fafaf8;
+        border-bottom: 1px solid #eef1ee;
+        display: flex;
+        gap: 6px;
+        align-items: center;
+    }
+    .fn-tw-head i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #dde3de;
+        display: block;
+    }
+    .fn-template-grid {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    .fn-mini-template {
+        height: 155px;
+        border-radius: 12px;
+        border: 1px solid #e8ece8;
+        background: #ffffff;
+        padding: 12px;
+        display: grid;
+        align-content: start;
+        gap: 8px;
+    }
+    .fn-mini-template b {
+        height: 34px;
+        border-radius: 8px;
+        background: #ede9fe;
+        display: block;
+    }
+    .fn-mini-template.active {
+        border-color: var(--green);
+        box-shadow: 0 0 0 3px rgba(24, 79, 58, 0.12);
+    }
+    .fn-mini-template.active b { background: #c8f3dc; }
+    .fn-mini-template.alt b { background: #ffe7dc; }
+    .fn-mini-template span {
+        height: 7px;
+        border-radius: 99px;
+        background: #eef1ee;
+    }
+    .fn-mini-template span.short { width: 65%; }
+
+    .fn-customize-card {
+        position: absolute;
+        right: 12px;
+        bottom: 24px;
+        z-index: 3;
+        width: 210px;
+        padding: 16px;
+        border-radius: 18px;
+        background: #ffffff;
+        border: 1px solid #e7ebe7;
+        box-shadow: 0 22px 44px rgba(23, 33, 27, 0.13);
+        transform: rotate(3deg);
+    }
+    .fn-customize-card strong {
+        display: block;
+        font-size: 13px;
+    }
+    .fn-swatch-row {
+        margin-top: 10px;
+        display: flex;
+        gap: 7px;
+    }
+    .fn-swatch-row i {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: block;
+    }
+    .fn-font-row {
+        margin-top: 12px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--muted);
+    }
+    .fn-font-row span:last-child {
+        color: var(--ink);
+        font-weight: 700;
+    }
+
+    .fn-feature-copy h2 {
+        margin: 12px 0 0;
+        font-size: clamp(30px, 4.2vw, 48px);
+        line-height: 1.07;
+        font-weight: 800;
+    }
+    .fn-feature-copy > p {
+        margin: 18px 0 0;
+        font-size: 17px;
+        line-height: 1.65;
+        color: var(--muted);
+    }
+    .fn-feature-points {
+        margin-top: 28px;
+        display: grid;
+        gap: 18px;
+    }
+    .fn-feature-points > div {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+    }
+    .fn-feature-points .ic {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+        background: #ffffff;
+        color: var(--green);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        box-shadow: 0 6px 16px rgba(23, 33, 27, 0.05);
+    }
+    .fn-feature-points strong {
+        display: block;
+        font-size: 15px;
+    }
+    .fn-feature-points span {
+        display: block;
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 14px;
+    }
+
+    /* Steps Section */
+    .fn-steps-section {
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 96px 24px;
+    }
+    .fn-steps {
+        position: relative;
+        margin-top: 58px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 28px;
+    }
+    .fn-step-line {
+        position: absolute;
+        top: 25px;
+        left: 16%;
+        right: 16%;
+        height: 1px;
+        background: var(--line);
+    }
+    .fn-steps article {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 0 12px;
+    }
+    .fn-steps article span {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 1px solid #d5ddd6;
+        display: grid;
+        place-items: center;
+        font-family: "Manrope", sans-serif;
+        font-weight: 800;
+        font-size: 15px;
+        color: var(--green);
+        box-shadow: 0 10px 24px rgba(23, 33, 27, 0.05);
+    }
+    .fn-steps h3 {
+        margin: 22px 0 0;
+        font-size: 22px;
+        font-weight: 700;
+    }
+    .fn-steps p {
+        margin: 10px auto 0;
+        max-width: 300px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.65;
+    }
+
+    /* Testimonial */
+    .fn-testimonial {
+        background: #193e30;
+        color: #ffffff;
+        padding: 84px 24px;
+        text-align: center;
+    }
+    .fn-testimonial-inner {
+        max-width: 820px;
+        margin: 0 auto;
+    }
+    .fn-quote-mark {
+        font-family: Georgia, serif;
+        font-size: 62px;
+        line-height: 0.6;
+        color: var(--mint);
+    }
+    .fn-testimonial blockquote {
+        margin: 20px 0 0;
+        font-family: "Manrope", sans-serif;
+        font-size: clamp(22px, 3vw, 32px);
+        line-height: 1.38;
+        font-weight: 600;
+        letter-spacing: -0.025em;
+    }
+    .fn-customer {
+        margin-top: 30px;
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        text-align: left;
+    }
+    .fn-customer b {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--mint);
+        color: var(--ink);
+        display: grid;
+        place-items: center;
+        font-size: 13px;
+        flex-shrink: 0;
+    }
+    .fn-customer strong {
+        display: block;
+        font-size: 15px;
+    }
+    .fn-customer span {
+        color: #b7d2c4;
+        font-size: 13px;
+    }
+    .fn-stars {
+        display: inline-flex;
+        gap: 3px;
+        color: var(--lime);
+        margin-left: 10px;
+    }
+
+    /* FAQ */
+    .fn-faq-section {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 96px 24px;
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 56px;
+        align-items: start;
+    }
+    .fn-faq-intro h2 {
+        margin: 12px 0 0;
+        font-size: clamp(30px, 4vw, 44px);
+        line-height: 1.08;
+        font-weight: 800;
+    }
+    .fn-faq-intro p {
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.65;
+    }
+    .fn-text-link {
+        margin-top: 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--green);
+        font-weight: 700;
+        font-size: 15px;
+        text-decoration: none;
+    }
+    .fn-faq-list {
+        border-top: 1px solid var(--line);
+    }
+    .fn-faq-item {
+        border-bottom: 1px solid var(--line);
+    }
+    .fn-faq-item button {
+        width: 100%;
+        border: 0;
+        background: transparent;
+        padding: 21px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        text-align: left;
+        cursor: pointer;
+        color: var(--ink);
+        font-size: 17px;
+        font-weight: 600;
+    }
+    .fn-faq-plus {
+        font-size: 22px;
+        font-weight: 400;
+        color: var(--green);
+        transition: transform 0.2s ease;
+        flex-shrink: 0;
+    }
+    .fn-faq-item.open .fn-faq-plus {
+        transform: rotate(45deg);
+    }
+    .fn-faq-answer p {
+        margin: 0;
+        padding-bottom: 22px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    /* CTA Section */
+    .fn-cta-section {
+        position: relative;
+        overflow: hidden;
+        max-width: 1200px;
+        margin: 0 auto 36px;
+        border-radius: 34px;
+        padding: 84px 24px;
+        text-align: center;
+        background: #e2f3e8;
+    }
+    .fn-cta-orb {
+        position: absolute;
+        width: 340px;
+        height: 340px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.56);
+        pointer-events: none;
+    }
+    .fn-orb-a { top: -150px; left: -120px; }
+    .fn-orb-b { bottom: -160px; right: -100px; background: rgba(187, 240, 208, 0.72); }
+
+    .fn-cta-inner {
+        position: relative;
+        z-index: 2;
+        max-width: 650px;
+        margin: 0 auto;
+    }
+    .fn-cta-spark {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 20px;
+        border-radius: 16px;
+        background: var(--green);
+        color: #ffffff;
+        display: grid;
+        place-items: center;
+    }
+    .fn-cta-section h2 {
+        margin: 0;
+        font-size: clamp(30px, 4.4vw, 52px);
+        line-height: 1.06;
+        font-weight: 800;
+    }
+    .fn-cta-section p {
+        margin: 16px auto 0;
+        max-width: 480px;
+        color: #425348;
+        font-size: 17px;
+        line-height: 1.6;
+    }
+
+    /* Tablet Breakpoint */
+    @media (max-width: 900px) {
+        .fn-resume-preview,
+        .fn-invoice-preview,
+        .fn-feature-inner,
+        .fn-faq-section {
+            grid-template-columns: 1fr;
+        }
+        .fn-tool-cards {
+            grid-template-columns: 1fr;
+        }
+        .fn-tool-card {
+            min-height: 410px;
+        }
+        .fn-score-pill {
+            position: static;
+            margin-top: 14px;
+            width: fit-content;
+        }
+        .fn-cta-section {
+            margin: 0 16px 24px;
+        }
+    }
+
+    /* Mobile Breakpoint */
+    @media (max-width: 640px) {
+        .fn-hero {
+            padding: 40px 16px 46px;
+            border-radius: 0 0 28px 28px;
+        }
+        .fn-product-tabs {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .fn-product-tabs button {
+            padding: 9px 6px;
+            font-size: 12px;
+            justify-content: center;
+            gap: 5px;
+        }
+        .fn-preview-shell {
+            padding: 10px;
+            border-radius: 20px;
+        }
+        .fn-resume-preview,
+        .fn-invoice-preview,
+        .fn-converter-preview {
+            padding: 12px;
+            gap: 14px;
+        }
+        .fn-preview-canvas {
+            padding: 10px;
+        }
+        .fn-resume-paper,
+        .fn-invoice-sheet {
+            padding: 16px;
+        }
+        .fn-paper-grid {
+            grid-template-columns: 1fr;
+        }
+        .fn-inv-top {
+            flex-direction: column;
+            gap: 8px;
+        }
+        .fn-inv-top > div:last-child {
+            text-align: left;
+        }
+        .fn-hero-note {
+            gap: 12px;
+        }
+        .fn-tools-section,
+        .fn-steps-section,
+        .fn-faq-section {
+            padding: 64px 16px;
+        }
+        .fn-feature-section {
+            padding: 68px 16px;
+        }
+        .fn-feature-visual {
+            min-height: 330px;
+        }
+        .fn-visual-blob {
+            width: 280px;
+            height: 280px;
+        }
+        .fn-template-window {
+            width: 100%;
+            max-width: 330px;
+            transform: rotate(-1deg);
+        }
+        .fn-template-grid {
+            padding: 12px;
+            gap: 8px;
+        }
+        .fn-mini-template {
+            height: 125px;
+            padding: 9px;
+        }
+        .fn-customize-card {
+            right: 4px;
+            bottom: 4px;
+            transform: scale(0.84) rotate(2deg);
+        }
+        .fn-steps {
+            grid-template-columns: 1fr;
+            gap: 36px;
+            margin-top: 40px;
+        }
+        .fn-step-line {
+            width: 1px;
+            height: auto;
+            top: 25px;
+            bottom: 25px;
+            left: 50%;
+            right: auto;
+        }
+        .fn-steps article {
+            background: #ffffff;
+            padding: 12px;
+        }
+        .fn-testimonial {
+            padding: 58px 18px;
+        }
+        .fn-customer {
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+        }
+        .fn-stars {
+            width: 100%;
+            justify-content: center;
+            margin-left: 0;
+        }
+        .fn-cta-section {
+            margin: 0 12px 16px;
+            padding: 58px 18px;
+            border-radius: 22px;
+        }
+    }
+</style>
+@endpush
 
 @section('content')
 @php
-    $totalConverters = count($converterGroups['to_pdf']) + count($converterGroups['from_pdf']);
+    $converterAll = \App\Support\ConverterCatalog::all();
+    $faqItems = [
+        [
+            'q' => 'Can I start creating without an account?',
+            'a' => 'Yes. Open any studio right away, build your resume, invoice, or converted PDF, and download your file immediately without logging in. Sign up anytime to save document history across devices.',
+        ],
+        [
+            'q' => 'How many document types does Formnexa support?',
+            'a' => 'Alongside our Resume Builder and Smart CV Importer, you get 12 business document generators (Invoices, Receipts, Quotes, Estimates, Credit Notes, Purchase Orders, Sales Orders, Proforma Invoices, Timesheets, Work Orders, Account Statements, and Packing Slips) plus ' . count($converterAll) . ' PDF conversion tools.',
+        ],
+        [
+            'q' => 'Will my resume work cleanly with ATS hiring software?',
+            'a' => 'Every resume layout is built around clean headings, readable typography, and structured PDF output so both Applicant Tracking Systems and hiring managers read every section clearly.',
+        ],
+        [
+            'q' => 'Are there watermarks on downloaded PDFs or converted files?',
+            'a' => 'Never. Every invoice, resume, and converted file exports cleanly at crisp resolution with zero Formnexa watermarks.',
+        ],
+    ];
 @endphp
 
-<div x-data="{ faqOpen: 1 }" class="bg-[#F8FAFC] text-[#0b1c30]">
+<div class="fn-home" x-data="{ activeProduct: 'resume', openFaq: 0, dirTab: 'docs' }">
 
-    {{-- =======================================================================
-         1. HERO SECTION (Stitch "Modern Electric Precision")
-         ======================================================================= --}}
-    <section class="relative pt-10 sm:pt-14 md:pt-20 pb-14 sm:pb-16 px-4 sm:px-6 overflow-hidden">
-        <div class="max-w-[1280px] mx-auto text-center relative z-10">
+    {{-- 1. HERO + INTERACTIVE PRODUCT STAGE --}}
+    <section class="fn-hero">
+        <div class="fn-hero-glow fn-glow-one" aria-hidden="true"></div>
+        <div class="fn-hero-glow fn-glow-two" aria-hidden="true"></div>
 
-            {{-- Status Pill Badge --}}
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-border-subtle shadow-sm mb-5 sm:mb-6">
-                <span class="w-2 h-2 rounded-full bg-badge-emerald animate-pulse shrink-0"></span>
-                <span class="font-mono text-[11px] sm:text-xs font-medium text-[#565e74]">100% Free &bull; Zero Watermarks &bull; No Sign-up Required</span>
-            </div>
+        <div class="fn-hero-inner">
+            <span class="fn-eyebrow">
+                <span class="dot" aria-hidden="true"></span>
+                <span>Your documents, beautifully simple</span>
+            </span>
 
-            {{-- Display Headline with Playful Micro-Badges --}}
-            <div class="relative max-w-4xl mx-auto my-2">
-                <span class="inline-block sm:mb-2 bg-badge-emerald text-white font-semibold text-[11px] tracking-[0.04em] px-3 py-1 rounded-full uppercase shadow-md shadow-emerald-500/20 -rotate-2">
-                    GET PAID
-                </span>
+            <h1>
+                Create documents that <span>move you forward.</span>
+            </h1>
 
-                <h1 class="font-display text-[36px] sm:text-[50px] lg:text-[60px] font-extrabold text-[#0b1c30] tracking-[-0.035em] leading-[1.08] mt-3 mb-4">
-                    Create invoices. <br class="hidden sm:inline">Build resumes. Convert PDFs.
-                </h1>
-
-                <div class="flex flex-wrap items-center justify-center gap-3 mt-1 mb-6">
-                    <span class="bg-primary-container text-white font-semibold text-[11px] tracking-[0.04em] px-3.5 py-1 rounded-full uppercase shadow-md shadow-blue-600/20 -rotate-3">
-                        GET HIRED
-                    </span>
-                    <span class="bg-badge-rose text-white font-semibold text-[11px] tracking-[0.04em] px-3.5 py-1 rounded-full uppercase shadow-md shadow-rose-500/20 rotate-3">
-                        CONVERT PDF
-                    </span>
-                </div>
-            </div>
-
-            {{-- Hero Subtitle --}}
-            <p class="max-w-2xl mx-auto text-[15px] sm:text-lg text-[#565e74] leading-relaxed mb-8">
-                Three complete document workflows in one fast modern workspace. Draft clean invoices, import or style designer resumes, and run {{ $totalConverters }} instant file conversions &mdash; free with no account required.
+            <p class="fn-hero-copy">
+                Build an interview-ready resume, send branded invoices &amp; quotes, or convert PDF files in seconds &mdash; all from one calm, fast workspace.
             </p>
 
-            {{-- Primary Action CTA Cluster (Stacked full-width on mobile, row on sm+) --}}
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-3.5 mb-12 sm:mb-14 max-w-md sm:max-w-none mx-auto">
-                <a href="{{ route('invoice.studio') }}"
-                   class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-primary-container hover:bg-electric-blue-hover text-white font-semibold text-sm shadow-lg shadow-[#0066FF]/25 flex items-center justify-center gap-2 transition duration-150 active:scale-95 whitespace-nowrap">
-                    <span>Open Invoice Generator</span>
-                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            <div class="fn-hero-actions">
+                <a href="{{ route('invoice.studio') }}" class="fn-primary-btn">
+                    <span>Create for free</span>
+                    <span aria-hidden="true">&rarr;</span>
                 </a>
-                <a href="{{ route('resume.builder') }}"
-                   class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-white text-[#0b1c30] border border-border-strong hover:bg-[#F8FAFC] hover:border-[#0b1c30] font-semibold text-sm flex items-center justify-center transition duration-150 whitespace-nowrap">
-                    Build Resume
-                </a>
-                <a href="{{ route('convert.hub') }}"
-                   class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-white text-[#0b1c30] border border-border-strong hover:bg-[#F8FAFC] hover:border-[#0b1c30] font-semibold text-sm flex items-center justify-center transition duration-150 whitespace-nowrap">
-                    {{ $totalConverters }} PDF Converters
+                <a href="#how" class="fn-secondary-btn">
+                    See how it works
                 </a>
             </div>
 
-            {{-- Quick Stats Counter Strip --}}
-            <div class="grid grid-cols-2 lg:grid-cols-4 max-w-4xl mx-auto rounded-xl bg-white border border-border-subtle shadow-sm overflow-hidden">
-                <div class="p-4 sm:p-5 border-b border-r lg:border-b-0 border-border-subtle">
-                    <div class="font-display text-2xl font-bold text-[#0b1c30]">12</div>
-                    <div class="font-mono text-[11px] sm:text-xs text-[#565e74] mt-0.5">Billing &amp; Order Generators</div>
-                </div>
-                <div class="p-4 sm:p-5 border-b lg:border-b-0 lg:border-r border-border-subtle">
-                    <div class="font-display text-2xl font-bold text-[#0b1c30]">15+</div>
-                    <div class="font-mono text-[11px] sm:text-xs text-[#565e74] mt-0.5">Designer Resume Templates</div>
-                </div>
-                <div class="p-4 sm:p-5 border-r border-border-subtle">
-                    <div class="font-display text-2xl font-bold text-[#0b1c30]">{{ $totalConverters }}</div>
-                    <div class="font-mono text-[11px] sm:text-xs text-[#565e74] mt-0.5">Fast PDF Conversion Tools</div>
-                </div>
-                <div class="p-4 sm:p-5">
-                    <div class="font-display text-2xl font-bold text-[#0050cb]">100% Free</div>
-                    <div class="font-mono text-[11px] sm:text-xs text-[#565e74] mt-0.5">Zero Watermarks &bull; No Sign-up</div>
-                </div>
+            <div class="fn-hero-note">
+                <span>
+                    <span class="material-symbols-outlined text-[16px] text-[#184f3a]">check_circle</span>
+                    No credit card
+                </span>
+                <span>
+                    <span class="material-symbols-outlined text-[16px] text-[#184f3a]">check_circle</span>
+                    Zero watermarks
+                </span>
+                <span>
+                    <span class="material-symbols-outlined text-[16px] text-[#184f3a]">shield</span>
+                    No sign-up required
+                </span>
             </div>
         </div>
-    </section>
 
-    {{-- =======================================================================
-         2. MODULE 01: INTERACTIVE OS-GRADE APP PREVIEW WINDOW (#0B0F19 Chrome)
-         ======================================================================= --}}
-    <section class="max-w-[1280px] mx-auto px-4 sm:px-6 mb-16 sm:mb-24" id="invoices">
-        <div class="rounded-xl overflow-hidden border border-border-strong bg-white shadow-xl">
-            {{-- Dark Window Chrome Titlebar --}}
-            <div class="bg-card-dark-header px-4 py-3 flex items-center justify-between text-white gap-3">
-                <div class="flex items-center gap-3 min-w-0">
-                    <div class="flex items-center gap-1.5 shrink-0">
-                        <span class="w-3 h-3 rounded-full bg-badge-rose inline-block"></span>
-                        <span class="w-3 h-3 rounded-full bg-badge-amber inline-block"></span>
-                        <span class="w-3 h-3 rounded-full bg-badge-emerald inline-block"></span>
-                    </div>
-                    <div class="font-mono text-slate-400 text-xs px-2.5 py-1 rounded bg-slate-800/70 hidden sm:block truncate">
-                        formnexa.app/invoice-generator
-                    </div>
-                </div>
-                <a href="{{ route('invoice.studio') }}"
-                   class="px-3 py-1.5 bg-slate-800 hover:bg-[#0066FF] text-xs font-semibold rounded-md text-white flex items-center gap-1.5 transition shrink-0 whitespace-nowrap">
-                    <span>Launch Live Tool</span>
-                    <span class="material-symbols-outlined text-[14px]">open_in_new</span>
-                </a>
+        {{-- Interactive Product Switcher --}}
+        <div class="fn-product-stage" id="tools">
+            <div class="fn-product-tabs" role="tablist" aria-label="Formnexa tools">
+                <button type="button" role="tab" :aria-selected="(activeProduct === 'resume').toString()"
+                        :class="activeProduct === 'resume' ? 'active' : ''"
+                        @click="activeProduct = 'resume'">
+                    <span class="material-symbols-outlined text-[17px]">description</span>
+                    <span>Resume Builder</span>
+                </button>
+                <button type="button" role="tab" :aria-selected="(activeProduct === 'invoice').toString()"
+                        :class="activeProduct === 'invoice' ? 'active' : ''"
+                        @click="activeProduct = 'invoice'">
+                    <span class="material-symbols-outlined text-[17px]">receipt_long</span>
+                    <span>Invoice Maker</span>
+                </button>
+                <button type="button" role="tab" :aria-selected="(activeProduct === 'pdf').toString()"
+                        :class="activeProduct === 'pdf' ? 'active' : ''"
+                        @click="activeProduct = 'pdf'">
+                    <span class="material-symbols-outlined text-[17px]">sync_alt</span>
+                    <span>PDF Converter</span>
+                </button>
             </div>
 
-            {{-- App Canvas Split Layout --}}
-            <div class="p-5 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 bg-[#f8f9ff]">
-                {{-- Left Pitch & Features --}}
-                <div class="lg:col-span-6 flex flex-col justify-between">
-                    <div>
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-electric-blue-subtle text-[#0050cb] border border-border-subtle font-mono text-[11px] font-semibold mb-4">
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#0066FF]"></span>
-                            MODULE 01 &bull; INVOICING &amp; BILLING
+            <div class="fn-preview-shell"
+                 :class="activeProduct === 'resume' ? 'violet' : (activeProduct === 'invoice' ? 'mint' : 'orange')">
+                <div class="fn-preview-window">
+                    <div class="fn-window-top">
+                        <div class="fn-window-dots">
+                            <i></i><i></i><i></i>
                         </div>
-                        <h2 class="font-display text-2xl sm:text-4xl font-bold text-[#0b1c30] tracking-[-0.025em] leading-tight mb-4">
-                            Generate custom invoices, quotes &amp; receipts in seconds.
-                        </h2>
-                        <p class="text-[15px] text-[#565e74] leading-relaxed mb-6">
-                            Switch between 12 billing formats, upload custom cover headers and logos, embed Stripe or PayPal links, and export clean zero-watermark PDFs.
-                        </p>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-7">
-                            <div class="flex items-center gap-2.5 p-3 rounded-lg bg-white border border-border-subtle">
-                                <span class="material-symbols-outlined text-[#0066FF] text-[20px]">layers</span>
-                                <span class="text-xs font-semibold text-[#0b1c30]">6 Layout Engines</span>
-                            </div>
-                            <div class="flex items-center gap-2.5 p-3 rounded-lg bg-white border border-border-subtle">
-                                <span class="material-symbols-outlined text-[#0066FF] text-[20px]">currency_exchange</span>
-                                <span class="text-xs font-semibold text-[#0b1c30]">24 Global Currencies</span>
-                            </div>
-                            <div class="flex items-center gap-2.5 p-3 rounded-lg bg-white border border-border-subtle">
-                                <span class="material-symbols-outlined text-[#0066FF] text-[20px]">draw</span>
-                                <span class="text-xs font-semibold text-[#0b1c30]">Digital Signature Pad</span>
-                            </div>
-                            <div class="flex items-center gap-2.5 p-3 rounded-lg bg-white border border-border-subtle">
-                                <span class="material-symbols-outlined text-[#0066FF] text-[20px]">send</span>
-                                <span class="text-xs font-semibold text-[#0b1c30]">Direct Client Email</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-border-subtle">
-                        <a href="{{ route('invoice.studio') }}"
-                           class="px-5 py-2.5 rounded-lg bg-primary-container hover:bg-electric-blue-hover text-white font-semibold text-xs sm:text-sm transition flex items-center gap-1.5 shadow-sm">
-                            <span>Open Invoice Studio</span>
-                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                        </a>
-                        <a href="{{ route('templates.index') }}" class="text-xs sm:text-sm font-semibold text-[#565e74] hover:text-[#0050cb] transition">
-                            20+ Templates &rarr;
+                        <span class="fn-window-title" x-text="activeProduct === 'resume' ? 'Formnexa · Resume Studio' : (activeProduct === 'invoice' ? 'Formnexa · Invoice Studio' : 'Formnexa · File Converter')"></span>
+                        <a :href="activeProduct === 'resume' ? '{{ route('resume.builder') }}' : (activeProduct === 'invoice' ? '{{ route('invoice.studio') }}' : '{{ route('convert.hub') }}')"
+                           class="fn-window-pill">
+                            <span x-text="activeProduct === 'resume' ? 'Open Resume Studio' : (activeProduct === 'invoice' ? 'Open Invoice Maker' : 'Open Converter Hub')"></span>
+                            <span aria-hidden="true">&rarr;</span>
                         </a>
                     </div>
-                </div>
 
-                {{-- Right Live Invoice Sheet Card --}}
-                <div class="lg:col-span-6">
-                    <div class="bg-white rounded-xl border border-border-strong p-5 sm:p-6 shadow-md relative overflow-hidden">
-                        <div class="flex flex-wrap justify-between items-start gap-2 border-b border-border-subtle pb-4 mb-5">
-                            <div class="min-w-0">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <div class="w-6 h-6 rounded bg-[#0b1c30] text-white flex items-center justify-center font-bold text-xs shrink-0">N</div>
-                                    <span class="font-display font-bold text-sm sm:text-base text-[#0b1c30] truncate">NORTHSTAR DESIGN STUDIO</span>
+                    {{-- Tab 1: Resume Preview --}}
+                    <div x-show="activeProduct === 'resume'" x-transition.opacity.duration.150ms class="fn-resume-preview">
+                        <div class="fn-preview-sidebar">
+                            <div class="fn-side-label">Sections</div>
+                            <div class="fn-side-item done">Personal info</div>
+                            <div class="fn-side-item done">Work experience</div>
+                            <div class="fn-side-item current">Skills &amp; ATS</div>
+                            <div class="fn-side-item">Education</div>
+                            <a href="{{ route('resume.builder', ['import' => 1]) }}"
+                               class="mt-auto inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#f0ebff] hover:bg-[#e3d9ff] text-[#5d3ec4] text-xs font-bold transition">
+                                <span class="material-symbols-outlined text-[15px]">upload_file</span>
+                                Import Existing CV
+                            </a>
+                        </div>
+
+                        <div class="fn-preview-canvas">
+                            <div class="fn-resume-paper">
+                                <div class="fn-paper-head">
+                                    <div class="fn-avatar">AM</div>
+                                    <div>
+                                        <strong>Amelia Morgan</strong>
+                                        <span>Senior Product Designer &middot; London</span>
+                                    </div>
                                 </div>
-                                <div class="font-mono text-[#727687] text-xs">INV-2026-04</div>
+                                <div class="fn-paper-grid">
+                                    <div class="fn-paper-block">
+                                        <b>Experience</b>
+                                        <p>Lead Designer at Northstar &mdash; grew signup completion by 34% across web &amp; mobile.</p>
+                                    </div>
+                                    <div class="fn-paper-block">
+                                        <b>Skills</b>
+                                        <div class="fn-chip-list">
+                                            <span>Figma</span>
+                                            <span>Design Systems</span>
+                                            <span>UX Research</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 shrink-0">
-                                Ready to Download
-                            </span>
+
+                            <div class="fn-score-pill">
+                                <b>92</b>
+                                <div>
+                                    <strong>ATS-ready layout!</strong>
+                                    <span>15+ curated CV templates</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Tab 2: Invoice Preview --}}
+                    <div x-show="activeProduct === 'invoice'" x-cloak x-transition.opacity.duration.150ms class="fn-invoice-preview">
+                        <div class="fn-invoice-sheet">
+                            <div class="fn-inv-top">
+                                <div>
+                                    <strong>Acme Studio</strong>
+                                    <span>Invoice #FN-2048</span>
+                                </div>
+                                <div>
+                                    <em>Due in 14 days</em>
+                                    <span>Bill to: Oakwood Media</span>
+                                </div>
+                            </div>
+                            <div class="fn-inv-rows">
+                                <div>
+                                    <span>Brand identity refresh</span>
+                                    <strong>$2,400</strong>
+                                </div>
+                                <div>
+                                    <span>Website design system</span>
+                                    <strong>$1,850</strong>
+                                </div>
+                            </div>
+                            <div class="fn-inv-total">
+                                <span>Total due</span>
+                                <strong>$4,250.00</strong>
+                            </div>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
-                            <div>
-                                <div class="font-mono text-[#727687] uppercase text-[10px] mb-1">Billed To</div>
-                                <div class="text-xs font-bold text-[#0b1c30]">Acme Commerce Inc.</div>
-                                <div class="text-xs text-[#565e74] truncate">billing@acmecommerce.io</div>
+                        <div class="fn-invoice-options">
+                            <div class="fn-opt-card">
+                                <span>Currency</span>
+                                <strong>USD &middot; EUR &middot; GBP &middot; PKR</strong>
                             </div>
-                            <div class="sm:text-right">
-                                <div class="font-mono text-[#727687] uppercase text-[10px] mb-1">Balance Due</div>
-                                <div class="font-display text-2xl font-extrabold text-[#0050cb]">$4,650.00</div>
-                                <div class="font-mono text-[#727687] text-[11px]">Due on receipt</div>
+                            <div class="fn-opt-card">
+                                <span>Brand theme</span>
+                                <div class="fn-swatches">
+                                    <i style="background: #184f3a"></i>
+                                    <i style="background: #7655d7"></i>
+                                    <i style="background: #ff815f"></i>
+                                    <i style="background: #17211b"></i>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="border border-border-subtle rounded-lg overflow-x-auto mb-5">
-                            <table class="w-full text-left text-xs sm:text-sm">
-                                <thead class="bg-[#f8f9ff] font-mono text-[#727687] text-[10px] uppercase border-b border-border-subtle">
-                                    <tr>
-                                        <th class="p-2.5">Description</th>
-                                        <th class="p-2.5 text-right">Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-border-subtle text-xs">
-                                    <tr>
-                                        <td class="p-2.5 text-[#0b1c30] font-medium">Brand Identity &amp; Design System</td>
-                                        <td class="p-2.5 text-right font-mono text-[#0b1c30] font-semibold whitespace-nowrap">$3,200.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2.5 text-[#0b1c30] font-medium">Responsive Marketing Website</td>
-                                        <td class="p-2.5 text-right font-mono text-[#0b1c30] font-semibold whitespace-nowrap">$1,450.00</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-3 border-t border-border-subtle">
-                            <div class="flex flex-wrap items-center gap-1.5 font-mono text-[11px] text-[#565e74]">
-                                <span class="px-2 py-0.5 bg-slate-100 rounded">Stripe</span>
-                                <span class="px-2 py-0.5 bg-slate-100 rounded">PayPal</span>
-                                <span class="px-2 py-0.5 bg-slate-100 rounded">Bank Transfer</span>
-                            </div>
-                            <a href="{{ route('invoice.studio') }}"
-                               class="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#0050cb] hover:bg-electric-blue-hover text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition">
-                                <span class="material-symbols-outlined text-[15px]">download</span>
-                                <span>Download Free PDF</span>
+                            <a href="{{ route('templates.index') }}"
+                               class="fn-opt-card hover:border-[#184f3a] transition block no-underline text-[#17211b]">
+                                <span>20+ Presets</span>
+                                <strong class="text-[#184f3a]">Browse Invoice Themes &rarr;</strong>
                             </a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    {{-- =======================================================================
-         3. MODULE 02: RESUME STUDIO & SMART CV IMPORTER
-         ======================================================================= --}}
-    <section class="max-w-[1280px] mx-auto px-4 sm:px-6 mb-16 sm:mb-24" id="resumes">
-        <div class="bg-white rounded-2xl border border-border-subtle p-5 sm:p-8 lg:p-12 shadow-sm">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                {{-- Left: Pitch & 3-Step Parser --}}
-                <div class="lg:col-span-7">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-electric-blue-subtle text-[#0050cb] border border-border-subtle font-mono text-[11px] font-semibold mb-4">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[#0066FF]"></span>
-                        MODULE 02 &bull; CAREER &amp; RESUMES
-                    </div>
-                    <h2 class="font-display text-2xl sm:text-4xl font-bold text-[#0b1c30] tracking-[-0.025em] leading-tight mb-4">
-                        FlowCV &amp; Figma-grade resume studio with live A4 preview.
-                    </h2>
-                    <p class="text-[15px] text-[#565e74] leading-relaxed mb-7">
-                        Build standout CVs side-by-side with live formatting. Customize section ordering, accent colors, fonts, profile photos, and download crisp ATS-friendly PDFs.
-                    </p>
-
-                    {{-- 3-Step Smart CV Parser Box --}}
-                    <div class="p-4 sm:p-6 rounded-xl bg-[#f8f9ff] border border-border-subtle mb-7">
-                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-                            <span class="text-xs font-bold text-[#0b1c30] flex items-center gap-2">
-                                <span class="material-symbols-outlined text-[#0066FF] text-[20px]">smart_toy</span>
-                                Smart CV Parser &amp; Importer
-                            </span>
-                            <span class="font-mono text-[#727687] text-[11px]">PDF / DOCX Supported</span>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div class="p-3.5 bg-white rounded-lg border border-border-subtle">
-                                <div class="font-mono text-[#0066FF] text-[11px] font-bold mb-1">STEP 01</div>
-                                <div class="text-xs font-bold text-[#0b1c30] mb-1">Upload or Paste</div>
-                                <p class="text-xs text-[#565e74]">Drop .pdf or .docx or paste LinkedIn summary.</p>
+                    {{-- Tab 3: PDF Converter Preview --}}
+                    <div x-show="activeProduct === 'pdf'" x-cloak x-transition.opacity.duration.150ms class="fn-converter-preview">
+                        <a href="{{ route('convert.hub') }}" class="fn-drop-zone block no-underline text-[#17211b] hover:border-[#e47857] transition">
+                            <div class="fn-drop-icon">
+                                <span class="material-symbols-outlined text-[22px]">upload_file</span>
                             </div>
-                            <div class="p-3.5 bg-white rounded-lg border border-border-subtle">
-                                <div class="font-mono text-[#0066FF] text-[11px] font-bold mb-1">STEP 02</div>
-                                <div class="text-xs font-bold text-[#0b1c30] mb-1">Auto-Structure</div>
-                                <p class="text-xs text-[#565e74]">Extracts roles, dates, bullets &amp; skills cleanly.</p>
-                            </div>
-                            <div class="p-3.5 bg-white rounded-lg border border-border-subtle">
-                                <div class="font-mono text-[#0066FF] text-[11px] font-bold mb-1">STEP 03</div>
-                                <div class="text-xs font-bold text-[#0b1c30] mb-1">Pick Any Theme</div>
-                                <p class="text-xs text-[#565e74]">Switch FlowCV sidebar or Figma serif in 1 click.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-3 sm:gap-4">
-                        <a href="{{ route('resume.builder') }}"
-                           class="px-5 py-2.5 rounded-lg bg-primary-container hover:bg-electric-blue-hover text-white font-semibold text-xs sm:text-sm transition shadow-sm flex items-center gap-2">
-                            <span>Open Resume Builder</span>
-                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                            <strong>Drop your file to convert</strong>
+                            <span>PDF, Word, Excel, PowerPoint, JPG, PNG or HTML &bull; {{ count($converterAll) }} fast tools</span>
                         </a>
-                        <a href="{{ route('resume.builder', ['import' => 1]) }}"
-                           class="px-4 py-2.5 rounded-lg bg-[#F8FAFC] border border-border-strong hover:border-[#0b1c30] text-[#0b1c30] font-semibold text-xs sm:text-sm transition">
-                            Import Existing CV
-                        </a>
-                        <a href="{{ route('resume.templates') }}" class="text-xs sm:text-sm font-semibold text-[#565e74] hover:text-[#0050cb] transition">
-                            Browse 15+ CV Themes &rarr;
-                        </a>
-                    </div>
-                </div>
-
-                {{-- Right: Miniature Resume Card --}}
-                <div class="lg:col-span-5">
-                    <div class="bg-white rounded-xl border border-border-strong p-5 shadow-lg max-w-sm mx-auto">
-                        <div class="flex items-center gap-3 border-b border-border-subtle pb-4 mb-4">
-                            <div class="w-12 h-12 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-sm tracking-wider shrink-0">
-                                BW
-                            </div>
-                            <div class="min-w-0">
-                                <div class="text-sm font-bold text-[#0b1c30] truncate">Brian Wayne</div>
-                                <div class="text-xs font-semibold text-[#0050cb]">Product Strategist</div>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-12 gap-3 text-xs">
-                            <div class="col-span-4 border-r border-border-subtle pr-2">
-                                <div class="font-mono uppercase text-[10px] text-[#727687] font-bold mb-2">Skills</div>
-                                <div class="flex flex-col gap-1 text-[#424656] font-mono text-[10.5px]">
-                                    <span>&bull; Strategy</span>
-                                    <span>&bull; Analytics</span>
-                                    <span>&bull; Figma UI</span>
-                                </div>
-                            </div>
-                            <div class="col-span-8 pl-1">
-                                <div class="font-mono uppercase text-[10px] text-[#727687] font-bold mb-2">Work Experience</div>
-                                <div class="mb-2.5">
-                                    <div class="text-[11px] text-[#0b1c30] font-semibold">Sr. Product Lead &bull; Horizon</div>
-                                    <div class="text-[10px] text-[#727687] font-mono">2023 &ndash; Present</div>
-                                    <p class="text-[11px] text-[#565e74] mt-0.5 leading-snug">Led cross-functional redesign driving +38% activation rate.</p>
-                                </div>
+                        <div class="fn-file-row">
+                            <div class="fn-file-meta">
+                                <span class="fn-file-badge">PDF</span>
                                 <div>
-                                    <div class="text-[11px] text-[#0b1c30] font-semibold">Business Analyst &bull; Apex</div>
-                                    <div class="text-[10px] text-[#727687] font-mono">2020 &ndash; 2023</div>
+                                    <strong>project-proposal-final.pdf</strong>
+                                    <span>1.8 MB &middot; Clean layout preserved</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-border-subtle flex justify-between items-center text-xs">
-                            <span class="font-mono text-[#727687] text-[11px]">Theme: Atlantic Flow</span>
-                            <span class="font-semibold text-emerald-600 text-[11px]">ATS Compliant &#10003;</span>
+                            <span class="fn-file-done">
+                                <span class="material-symbols-outlined text-[16px]">check_circle</span>
+                                Ready to download
+                            </span>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        {{-- Trust Strip --}}
+        <div class="fn-trust-strip">
+            <p>Trusted by freelancers, founders &amp; teams building what&apos;s next</p>
+            <div class="fn-logo-row">
+                <span>Northstar</span>
+                <span>Kestrel Labs</span>
+                <span>Brightfield</span>
+                <span>Studio Nine</span>
+                <span>Oakwood Co.</span>
             </div>
         </div>
     </section>
 
-    {{-- =======================================================================
-         4. MODULE 03: PDF CONVERTER SUITE (Dual Bento Grid)
-         ======================================================================= --}}
-    <section class="max-w-[1280px] mx-auto px-4 sm:px-6 mb-16 sm:mb-24" id="converters">
-        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-electric-blue-subtle text-[#0050cb] border border-border-subtle font-mono text-[11px] font-semibold mb-3">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#0066FF]"></span>
-                MODULE 03 &bull; PDF CONVERTER SUITE
-            </div>
-            <h2 class="font-display text-2xl sm:text-4xl font-bold text-[#0b1c30] tracking-[-0.025em] mb-3">
-                {{ $totalConverters }} essential file &amp; PDF conversions built in.
-            </h2>
-            <p class="text-[15px] text-[#565e74]">
-                No watermarks, no page limits locked behind paywalls. Convert images, Office documents, or HTML into PDF &mdash; and extract editable files cleanly.
-            </p>
+    {{-- 2. THREE POWERFUL TOOLS SECTION --}}
+    <section class="fn-tools-section">
+        <div class="fn-section-head">
+            <span class="fn-section-tag">ONE WORKSPACE</span>
+            <h2>One workspace. Three powerful tools.</h2>
+            <p>Everything you need to apply for a job, bill a client cleanly, or get a file into the exact format you need.</p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-            {{-- Convert TO PDF --}}
-            <div class="bg-white rounded-2xl border border-border-subtle p-5 sm:p-8 shadow-sm">
-                <div class="flex items-center justify-between pb-4 mb-4 border-b border-border-subtle">
-                    <div class="flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
-                        <h3 class="font-display text-base sm:text-lg font-bold text-[#0b1c30]">Convert To PDF</h3>
-                    </div>
-                    <span class="font-mono text-xs text-[#727687]">{{ count($converterGroups['to_pdf']) }} Quick Tools</span>
-                </div>
-                <div class="flex flex-col gap-3">
-                    @foreach($converterGroups['to_pdf'] as $cTool)
-                        <a href="{{ route('convert.tool', $cTool['slug']) }}"
-                           class="p-3.5 rounded-xl border border-border-subtle hover:border-[#0066FF] transition flex items-center justify-between gap-3 group bg-[#f8f9ff]/60 hover:bg-white">
-                            <div class="flex items-center gap-3 min-w-0">
-                                <span class="w-9 h-9 rounded-lg {{ $cTool['color_bg'] }} {{ $cTool['color_text'] }} border {{ $cTool['color_border'] }} flex items-center justify-center font-mono text-xs font-bold shrink-0">
-                                    {{ $cTool['badge'] }}
-                                </span>
-                                <div class="min-w-0">
-                                    <div class="text-xs sm:text-sm font-bold text-[#0b1c30] group-hover:text-[#0050cb] transition">{{ $cTool['name'] }}</div>
-                                    <div class="text-xs text-[#565e74] truncate">{{ $cTool['accept_label'] }}</div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined text-[#727687] group-hover:text-[#0066FF] group-hover:translate-x-1 transition-all text-[20px] shrink-0">arrow_forward</span>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-
-            {{-- Convert FROM PDF --}}
-            <div class="bg-white rounded-2xl border border-border-subtle p-5 sm:p-8 shadow-sm">
-                <div class="flex items-center justify-between pb-4 mb-4 border-b border-border-subtle">
-                    <div class="flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-badge-emerald"></span>
-                        <h3 class="font-display text-base sm:text-lg font-bold text-[#0b1c30]">Convert From PDF</h3>
-                    </div>
-                    <span class="font-mono text-xs text-[#727687]">{{ count($converterGroups['from_pdf']) }} Quick Tools</span>
-                </div>
-                <div class="flex flex-col gap-3">
-                    @foreach($converterGroups['from_pdf'] as $cTool)
-                        <a href="{{ route('convert.tool', $cTool['slug']) }}"
-                           class="p-3.5 rounded-xl border border-border-subtle hover:border-[#0066FF] transition flex items-center justify-between gap-3 group bg-[#f8f9ff]/60 hover:bg-white">
-                            <div class="flex items-center gap-3 min-w-0">
-                                <span class="w-9 h-9 rounded-lg {{ $cTool['color_bg'] }} {{ $cTool['color_text'] }} border {{ $cTool['color_border'] }} flex items-center justify-center font-mono text-xs font-bold shrink-0">
-                                    {{ $cTool['badge'] }}
-                                </span>
-                                <div class="min-w-0">
-                                    <div class="text-xs sm:text-sm font-bold text-[#0b1c30] group-hover:text-[#0050cb] transition">{{ $cTool['name'] }}</div>
-                                    <div class="text-xs text-[#565e74] truncate">{{ $cTool['tagline'] }}</div>
-                                </div>
-                            </div>
-                            <span class="material-symbols-outlined text-[#727687] group-hover:text-[#0066FF] group-hover:translate-x-1 transition-all text-[20px] shrink-0">arrow_forward</span>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- =======================================================================
-         5. CURATED DESIGN PRESETS GRID
-         ======================================================================= --}}
-    <section class="max-w-[1280px] mx-auto px-4 sm:px-6 mb-16 sm:mb-24" id="templates">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-4">
-            <div>
-                <div class="font-mono text-[#0050cb] text-xs font-semibold uppercase mb-2">Curated Design Presets</div>
-                <h2 class="font-display text-2xl sm:text-4xl font-bold text-[#0b1c30] tracking-[-0.025em]">
-                    Engineered for consultants, creators &amp; agencies.
-                </h2>
-            </div>
-            <div class="flex flex-wrap gap-2">
-                <a href="{{ route('templates.index') }}" class="px-3.5 py-1.5 rounded-full bg-[#dce9ff]/70 hover:bg-[#0066FF] hover:text-white text-[#0b1c30] text-xs font-semibold transition">
-                    20+ Invoices
-                </a>
-                <a href="{{ route('resume.templates') }}" class="px-3.5 py-1.5 rounded-full bg-[#dce9ff]/70 hover:bg-[#0066FF] hover:text-white text-[#0b1c30] text-xs font-semibold transition">
-                    15+ Resumes
-                </a>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-            @foreach(array_slice($resumeTemplates, 0, 4) as $idx => $rTpl)
-                <a href="{{ route('resume.builder', ['template' => $rTpl['slug']]) }}"
-                   class="bg-white rounded-xl border border-border-subtle p-5 hover:border-[#0066FF] hover:shadow-md transition flex flex-col justify-between group">
-                    <div>
-                        <div class="h-32 rounded-lg bg-[#f8f9ff] border border-border-subtle mb-4 p-3 flex flex-col justify-between overflow-hidden">
-                            @if($idx === 0)
-                                <div class="flex gap-2">
-                                    <div class="w-1/3 h-16 rounded" style="background-color: {{ $rTpl['accent_color'] ?? '#1B3142' }}; opacity: 0.25;"></div>
-                                    <div class="w-2/3 flex flex-col gap-1.5">
-                                        <div class="h-3 w-3/4 bg-slate-300 rounded"></div>
-                                        <div class="h-2 w-full bg-slate-200 rounded"></div>
-                                        <div class="h-2 w-5/6 bg-slate-200 rounded"></div>
-                                    </div>
-                                </div>
-                            @elseif($idx === 1)
-                                <div class="flex flex-col gap-2">
-                                    <div class="h-4 w-1/2 bg-slate-800 rounded"></div>
-                                    <div class="h-1.5 w-full bg-slate-300 rounded"></div>
-                                    <div class="h-1.5 w-4/5 bg-slate-200 rounded"></div>
-                                    <div class="h-1.5 w-full bg-slate-200 rounded"></div>
-                                </div>
-                            @elseif($idx === 2)
-                                <div class="flex gap-2 items-center">
-                                    <div class="w-1 h-16 bg-[#0066FF] rounded-full"></div>
-                                    <div class="flex flex-col gap-2 w-full">
-                                        <div class="h-2.5 w-2/3 bg-slate-300 rounded"></div>
-                                        <div class="h-2 w-full bg-slate-200 rounded"></div>
-                                        <div class="h-2.5 w-1/2 bg-slate-300 rounded"></div>
-                                    </div>
-                                </div>
-                            @else
-                                <div class="flex justify-between items-start">
-                                    <div class="h-3 w-1/3 bg-slate-800 rounded"></div>
-                                    <div class="h-6 w-6 rounded bg-slate-300"></div>
-                                </div>
-                                <div class="flex flex-col gap-1.5 mt-2">
-                                    <div class="h-2 w-full bg-slate-200 rounded"></div>
-                                    <div class="h-2 w-4/5 bg-slate-200 rounded"></div>
-                                </div>
-                            @endif
-                            <div class="text-[10px] font-mono text-[#727687] truncate">{{ $rTpl['badge'] ?? $rTpl['category_label'] }}</div>
-                        </div>
-                        <div class="text-sm font-bold text-[#0b1c30] group-hover:text-[#0050cb] transition">{{ $rTpl['name'] }}</div>
-                        <p class="text-xs text-[#565e74] mt-1 line-clamp-2">{{ $rTpl['description'] }}</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-border-subtle flex items-center justify-between text-xs font-semibold">
-                        <span class="text-[#0050cb]">Resume</span>
-                        <span class="text-[#565e74] group-hover:text-[#0050cb]">Use Theme &rarr;</span>
-                    </div>
-                </a>
-            @endforeach
-        </div>
-    </section>
-
-    {{-- =======================================================================
-         6. SUPPORTED DOCUMENTS GRID (All 12 Generators)
-         ======================================================================= --}}
-    <section class="max-w-[1280px] mx-auto px-4 sm:px-6 mb-16 sm:mb-24">
-        <div class="bg-white rounded-2xl border border-border-subtle p-5 sm:p-8 shadow-sm">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div class="fn-tool-cards">
+            {{-- Card 01: Resume Builder --}}
+            <article class="fn-tool-card fn-card-violet">
                 <div>
-                    <h3 class="font-display text-xl sm:text-2xl font-bold text-[#0b1c30]">12 Document Generators</h3>
-                    <p class="text-xs sm:text-sm text-[#565e74] mt-0.5">Every financial and billing tool you need for complete operations.</p>
+                    <span class="fn-card-index">01</span>
+                    <h3>Resume Builder</h3>
+                    <p>Build a clean, recruiter-approved CV in minutes or import an existing PDF/DOCX resume with smart section parsing.</p>
+                    <a href="{{ route('resume.builder') }}" class="fn-card-link">
+                        <span>Try Resume Builder</span>
+                        <span aria-hidden="true">&rarr;</span>
+                    </a>
                 </div>
-                <a href="{{ route('invoice.studio') }}" class="text-xs sm:text-sm font-semibold text-[#0050cb] flex items-center gap-1 hover:underline shrink-0">
-                    <span>View All 12 Studios</span>
-                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                </a>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                @foreach($generators as $slug => $gen)
-                    <a href="{{ $slug === 'invoice-generator' ? route('invoice.studio') : route('invoice.generator', $slug) }}"
-                       class="p-3 bg-[#f8f9ff] hover:bg-white rounded-lg border border-border-subtle hover:border-[#0066FF] transition text-center group">
-                        <div class="text-xs font-bold text-[#0b1c30] group-hover:text-[#0050cb] truncate">
-                            {{ str_replace(' Generator', '', $gen['name']) }}
+                <div class="fn-card-art">
+                    <div class="fn-art-page">
+                        <span class="line-w1"></span>
+                        <span class="line-w2"></span>
+                        <span class="line-w3"></span>
+                    </div>
+                    <div class="fn-art-score">15+ Themes</div>
+                </div>
+            </article>
+
+            {{-- Card 02: Invoice Maker --}}
+            <article class="fn-tool-card fn-card-mint">
+                <div>
+                    <span class="fn-card-index">02</span>
+                    <h3>Invoice &amp; Doc Maker</h3>
+                    <p>Create branded invoices, quotes, receipts &amp; 12 business documents with live taxes, currencies, and shareable links.</p>
+                    <a href="{{ route('invoice.studio') }}" class="fn-card-link">
+                        <span>Create an Invoice</span>
+                        <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </div>
+                <div class="fn-card-art">
+                    <div class="fn-art-page invoice">
+                        <div class="fn-inv-line">
+                            <span>Design Sprint</span>
+                            <strong>$1,800</strong>
                         </div>
-                        <div class="text-[10.5px] text-[#727687] font-mono mt-0.5 truncate">{{ $gen['prefix'] }}</div>
+                        <div class="fn-inv-line total">
+                            <span>Total</span>
+                            <strong>$2,950</strong>
+                        </div>
+                    </div>
+                    <div class="fn-paid-stamp">PAID</div>
+                </div>
+            </article>
+
+            {{-- Card 03: PDF Converter --}}
+            <article class="fn-tool-card fn-card-orange">
+                <div>
+                    <span class="fn-card-index">03</span>
+                    <h3>PDF Converter</h3>
+                    <p>Turn JPG, Word, Excel, PowerPoint &amp; HTML into crisp PDFs &mdash; or convert PDFs back into editable documents.</p>
+                    <a href="{{ route('convert.hub') }}" class="fn-card-link">
+                        <span>Explore {{ count($converterAll) }} Converters</span>
+                        <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </div>
+                <div class="fn-card-art converter">
+                    <div class="fn-format doc">DOCX</div>
+                    <span class="material-symbols-outlined text-[24px] text-[#e47857]">arrow_forward</span>
+                    <div class="fn-format pdf">PDF</div>
+                </div>
+            </article>
+        </div>
+
+        {{-- Compact Quick Directory for All 12 Generators, 10 Converters & Galleries --}}
+        <div class="mt-14 bg-[#f8f8f3] border border-[#dfe4df] rounded-[26px] p-5 sm:p-7">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#dfe4df]">
+                <div>
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Complete Suite Directory</span>
+                    <h3 class="text-xl font-bold text-[#17211b] mt-0.5 tracking-tight">Jump directly into any tool</h3>
+                </div>
+                <div class="inline-flex flex-wrap gap-1.5 bg-white p-1 rounded-xl border border-[#dfe4df]">
+                    <button type="button" @click="dirTab = 'docs'"
+                            :class="dirTab === 'docs' ? 'bg-[#17211b] text-white' : 'text-[#536058] hover:text-[#17211b]'"
+                            class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">
+                        12 Business Docs
+                    </button>
+                    <button type="button" @click="dirTab = 'conv'"
+                            :class="dirTab === 'conv' ? 'bg-[#17211b] text-white' : 'text-[#536058] hover:text-[#17211b]'"
+                            class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">
+                        {{ count($converterAll) }} PDF Converters
+                    </button>
+                    <button type="button" @click="dirTab = 'templates'"
+                            :class="dirTab === 'templates' ? 'bg-[#17211b] text-white' : 'text-[#536058] hover:text-[#17211b]'"
+                            class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">
+                        Template Galleries
+                    </button>
+                </div>
+            </div>
+
+            {{-- Directory Tab: 12 Business Document Generators --}}
+            <div x-show="dirTab === 'docs'" class="pt-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+                @foreach($generators as $slug => $meta)
+                    <a href="{{ $slug === 'invoice-generator' ? route('invoice.studio') : route('invoice.generator', $slug) }}"
+                       class="group flex items-center justify-between gap-2 px-3.5 py-3 rounded-xl bg-white border border-[#dfe4df] hover:border-[#184f3a] hover:shadow-sm transition">
+                        <span class="text-xs sm:text-[13px] font-semibold text-[#17211b] group-hover:text-[#184f3a] truncate">
+                            {{ $meta['name'] ?? ucwords(str_replace('-', ' ', $slug)) }}
+                        </span>
+                        <span class="text-xs text-[#68736d] group-hover:text-[#184f3a] shrink-0">&rarr;</span>
                     </a>
                 @endforeach
             </div>
+
+            {{-- Directory Tab: PDF Converters --}}
+            <div x-show="dirTab === 'conv'" x-cloak class="pt-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+                @foreach($converterAll as $cTool)
+                    <a href="{{ route('convert.tool', $cTool['slug']) }}"
+                       class="group flex items-center gap-2.5 px-3 py-3 rounded-xl bg-white border border-[#dfe4df] hover:border-[#184f3a] hover:shadow-sm transition">
+                        <span class="w-7 h-7 rounded-md {{ $cTool['color_bg'] }} {{ $cTool['color_text'] }} border {{ $cTool['color_border'] }} flex items-center justify-center font-mono font-bold text-[10px] shrink-0">
+                            {{ $cTool['badge'] }}
+                        </span>
+                        <span class="text-xs font-semibold text-[#17211b] group-hover:text-[#184f3a] truncate">{{ $cTool['name'] }}</span>
+                    </a>
+                @endforeach
+            </div>
+
+            {{-- Directory Tab: Template Galleries --}}
+            <div x-show="dirTab === 'templates'" x-cloak class="pt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="{{ route('resume.templates') }}"
+                   class="group flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#dfe4df] hover:border-[#7655d7] transition">
+                    <div class="flex items-center gap-3.5 min-w-0">
+                        <span class="w-11 h-11 rounded-xl bg-[#f0ebff] text-[#6142be] flex items-center justify-center font-display font-extrabold text-sm shrink-0">15+</span>
+                        <div class="min-w-0">
+                            <div class="text-sm font-bold text-[#17211b] group-hover:text-[#6142be] truncate">Resume Templates Gallery</div>
+                            <div class="text-xs text-[#68736d] truncate">Minimal, Editorial, Technical &amp; ATS CV layouts</div>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-[18px] text-[#68736d] group-hover:text-[#6142be] shrink-0">arrow_forward</span>
+                </a>
+                <a href="{{ route('templates.index') }}"
+                   class="group flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#dfe4df] hover:border-[#184f3a] transition">
+                    <div class="flex items-center gap-3.5 min-w-0">
+                        <span class="w-11 h-11 rounded-xl bg-[#e8f7ed] text-[#184f3a] flex items-center justify-center font-display font-extrabold text-sm shrink-0">20+</span>
+                        <div class="min-w-0">
+                            <div class="text-sm font-bold text-[#17211b] group-hover:text-[#184f3a] truncate">Invoice &amp; Business Presets</div>
+                            <div class="text-xs text-[#68736d] truncate">6 layout themes with custom branding swatches</div>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-[18px] text-[#68736d] group-hover:text-[#184f3a] shrink-0">arrow_forward</span>
+                </a>
+            </div>
         </div>
     </section>
 
-    {{-- =======================================================================
-         7. FAQ ACCORDION
-         ======================================================================= --}}
-    <section class="max-w-[820px] mx-auto px-4 sm:px-6 mb-16 sm:mb-24">
-        <div class="text-center mb-8 sm:mb-10">
-            <div class="font-mono text-xs text-[#727687] uppercase tracking-wider mb-2">Frequently Asked Questions</div>
-            <h2 class="font-display text-2xl sm:text-4xl font-bold text-[#0b1c30] tracking-[-0.025em]">
-                Everything you need to know
-            </h2>
+    {{-- 3. DESIGNED FOR YOU (FEATURE SHOWCASE) --}}
+    <section class="fn-feature-section" id="features">
+        <div class="fn-feature-inner">
+            <div class="fn-feature-visual" aria-hidden="true">
+                <div class="fn-visual-blob"></div>
+                <div class="fn-template-window">
+                    <div class="fn-tw-head">
+                        <i></i><i></i><i></i>
+                    </div>
+                    <div class="fn-template-grid">
+                        <div class="fn-mini-template">
+                            <b></b><span></span><span class="short"></span>
+                        </div>
+                        <div class="fn-mini-template active">
+                            <b></b><span></span><span class="short"></span>
+                        </div>
+                        <div class="fn-mini-template alt">
+                            <b></b><span></span><span class="short"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fn-customize-card">
+                    <strong>Brand theme</strong>
+                    <div class="fn-swatch-row">
+                        <i style="background: #184f3a"></i>
+                        <i style="background: #7655d7"></i>
+                        <i style="background: #ff815f"></i>
+                        <i style="background: #17211b"></i>
+                    </div>
+                    <div class="fn-font-row">
+                        <span>Typography</span>
+                        <span>Manrope</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fn-feature-copy">
+                <span class="fn-section-tag">DESIGNED FOR YOU</span>
+                <h2>Professional results. Zero design experience.</h2>
+                <p>Clean templates handle margins, spacing, typography, and print alignment automatically &mdash; so every PDF you share looks polished right away.</p>
+
+                <div class="fn-feature-points">
+                    <div>
+                        <span class="ic">
+                            <span class="material-symbols-outlined text-[19px]">auto_awesome</span>
+                        </span>
+                        <div>
+                            <strong>Smart, balanced formatting</strong>
+                            <span>Never fight broken page breaks or misaligned tables again.</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="ic">
+                            <span class="material-symbols-outlined text-[19px]">layers</span>
+                        </span>
+                        <div>
+                            <strong>One consistent style across documents</strong>
+                            <span>Match colors and typography across resumes, invoices, quotes, and receipts.</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="ic">
+                            <span class="material-symbols-outlined text-[19px]">shield_lock</span>
+                        </span>
+                        <div>
+                            <strong>Share securely or keep offline</strong>
+                            <span>Export crisp watermark-free PDFs instantly, or share live links when needed.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- 4. THREE EASY STEPS --}}
+    <section class="fn-steps-section" id="how">
+        <div class="fn-section-head">
+            <span class="fn-section-tag">SIMPLE BY DESIGN</span>
+            <h2>From blank page to done in three easy steps.</h2>
         </div>
 
-        <div class="space-y-3">
-            @foreach([
-                [1, 'Do I need an account to create invoices, build a resume, or convert PDFs?', 'No sign-up is ever required to use any of the three Formnexa suites. You can draft invoices, upload or edit resumes, convert files, and export watermark-free downloads immediately. Signing in is 100% optional and unlocks synced cloud history across devices.'],
-                [2, 'Can I import my existing CV and apply a new modern theme?', 'Yes. Inside the Resume Builder, click Import Existing CV to upload a PDF or DOCX resume (or paste raw text). Formnexa parses your sections cleanly so you can switch across FlowCV-style dark sidebars, Figma editorial serif layouts, and ATS templates in one click.'],
-                [3, 'Which file conversions are supported in the PDF suite?', 'You get 10 bidirectional tools: JPG to PDF, WORD to PDF, POWERPOINT to PDF, EXCEL to PDF, HTML to PDF, PDF to JPG (individual or ZIP), PDF to WORD (.docx), PDF to POWERPOINT (.pptx), PDF to EXCEL (.xlsx), and archival PDF to PDF/A-1b / 3b.'],
-                [4, 'How many business billing formats can I generate besides standard invoices?', 'Formnexa supports 12 tailored generators: Invoices, Receipts, Quotes, Estimates, Credit Notes, Purchase Orders, Sales Orders, Proforma Invoices, Timesheets, Work Orders, Account Statements, and Packing Slips &mdash; with 20+ customizable presets.'],
-            ] as [$idx, $q, $a])
-                <div class="border border-border-subtle rounded-xl bg-white overflow-hidden transition"
-                     :class="faqOpen === {{ $idx }} ? 'shadow-sm border-border-strong' : ''">
-                    <button type="button" @click="faqOpen = (faqOpen === {{ $idx }} ? null : {{ $idx }})"
-                            class="w-full p-5 text-left flex justify-between items-center gap-4 cursor-pointer">
-                        <h4 class="font-display text-sm sm:text-base text-[#0b1c30] font-semibold leading-snug">{{ $q }}</h4>
-                        <span class="material-symbols-outlined text-[#727687] transition-transform duration-200 shrink-0"
-                              :class="faqOpen === {{ $idx }} ? 'rotate-180 text-[#0066FF]' : ''">expand_more</span>
+        <div class="fn-steps">
+            <div class="fn-step-line" aria-hidden="true"></div>
+            <article>
+                <span>01</span>
+                <h3>Pick a tool</h3>
+                <p>Choose Resume Builder, Invoice Maker, any of the 12 business generators, or a PDF converter.</p>
+            </article>
+            <article>
+                <span>02</span>
+                <h3>Make it yours</h3>
+                <p>Fill in your details, import an existing CV, or drop your file &mdash; live previews update as you type.</p>
+            </article>
+            <article>
+                <span>03</span>
+                <h3>Download &amp; share</h3>
+                <p>Export a print-ready, watermark-free PDF or shareable link in seconds without friction.</p>
+            </article>
+        </div>
+    </section>
+
+    {{-- 5. TESTIMONIAL BAND --}}
+    <section class="fn-testimonial">
+        <div class="fn-testimonial-inner">
+            <div class="fn-quote-mark" aria-hidden="true">&ldquo;</div>
+            <blockquote>
+                Formnexa cut the time I spend on client proposals, invoices, and CVs in half. Everything looks consistent and takes minutes instead of an afternoon.
+            </blockquote>
+            <div class="fn-customer">
+                <b>SK</b>
+                <div>
+                    <strong>Sarah Khan</strong>
+                    <span>Independent Product Consultant</span>
+                </div>
+                <div class="fn-stars" aria-label="Rated 5 out of 5 stars">
+                    @for($s = 0; $s < 5; $s++)
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    @endfor
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- 6. FAQ ACCORDION --}}
+    <section class="fn-faq-section" id="faq">
+        <div class="fn-faq-intro">
+            <span class="fn-section-tag">GOOD TO KNOW</span>
+            <h2>Got questions? We&apos;ve got answers.</h2>
+            <p>Everything you need to know before generating your first resume, invoice, or converted file.</p>
+            <a href="{{ route('invoice.studio') }}" class="fn-text-link">
+                <span>Jump into the workspace</span>
+                <span aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+
+        <div class="fn-faq-list">
+            @foreach($faqItems as $idx => $item)
+                <div class="fn-faq-item" :class="openFaq === {{ $idx }} ? 'open' : ''">
+                    <button type="button"
+                            @click="openFaq = openFaq === {{ $idx }} ? null : {{ $idx }}"
+                            :aria-expanded="(openFaq === {{ $idx }}).toString()">
+                        <span>{{ $item['q'] }}</span>
+                        <span class="fn-faq-plus">+</span>
                     </button>
-                    <div x-show="faqOpen === {{ $idx }}" x-cloak x-transition.opacity.duration.150ms
-                         class="px-5 pb-5 text-sm text-[#565e74] leading-relaxed border-t border-border-subtle pt-3">
-                        {!! $a !!}
+                    <div class="fn-faq-answer" x-show="openFaq === {{ $idx }}" x-collapse.duration.200ms>
+                        <p>{{ $item['a'] }}</p>
                     </div>
                 </div>
             @endforeach
         </div>
     </section>
 
-    {{-- =======================================================================
-         8. HIGH-IMPACT BOTTOM DARK CTA BANNER
-         ======================================================================= --}}
-    <section class="max-w-[1280px] mx-auto px-4 sm:px-6 pb-16 sm:pb-24">
-        <div class="rounded-2xl bg-card-dark-header text-white p-8 sm:p-14 text-center relative overflow-hidden shadow-2xl">
-            <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-80 sm:w-96 h-80 sm:h-96 bg-[#0066FF]/20 blur-[90px] rounded-full pointer-events-none"></div>
-            <div class="relative z-10 max-w-2xl mx-auto">
-                <h2 class="font-display text-2xl sm:text-4xl font-bold mb-4 tracking-[-0.025em]">
-                    Start creating in seconds.
-                </h2>
-                <p class="text-sm sm:text-lg text-slate-300 mb-8">
-                    Jump straight into the workspace you need &mdash; no paywalls, no trial traps, and no forced registration.
-                </p>
-                <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
-                    <a href="{{ route('invoice.studio') }}"
-                       class="px-6 py-3 rounded-lg bg-primary-container hover:bg-electric-blue-hover text-white font-semibold text-sm transition shadow-lg shadow-[#0066FF]/25">
-                        Create an Invoice
-                    </a>
-                    <a href="{{ route('resume.builder') }}"
-                       class="px-6 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-semibold text-sm transition">
-                        Build a Resume
-                    </a>
-                    <a href="{{ route('convert.hub') }}"
-                       class="px-6 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-semibold text-sm transition">
-                        Convert PDFs
-                    </a>
-                </div>
+    {{-- 7. SOFT MINT CTA BANNER --}}
+    <section class="fn-cta-section">
+        <div class="fn-cta-orb fn-orb-a" aria-hidden="true"></div>
+        <div class="fn-cta-orb fn-orb-b" aria-hidden="true"></div>
+        <div class="fn-cta-inner">
+            <div class="fn-cta-spark">
+                <span class="material-symbols-outlined text-[24px]">auto_awesome</span>
+            </div>
+            <h2>Your next great document starts right here.</h2>
+            <p>Try Formnexa free &mdash; build a resume, generate a branded invoice, or convert a PDF in seconds.</p>
+            <div class="fn-hero-actions">
+                <a href="{{ route('invoice.studio') }}" class="fn-primary-btn dark">
+                    <span>Start creating &mdash; it&apos;s free</span>
+                    <span aria-hidden="true">&rarr;</span>
+                </a>
+                <a href="{{ route('resume.builder') }}" class="fn-secondary-btn">
+                    <span>Open Resume Builder</span>
+                </a>
             </div>
         </div>
     </section>

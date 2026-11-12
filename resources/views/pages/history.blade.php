@@ -4,14 +4,14 @@
 
 @section('header_actions')
 <a href="{{ route('invoice.studio') }}" class="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-lg text-xs font-semibold bg-white hover:bg-black/[0.04] border border-black/[0.09] text-[#111111] transition whitespace-nowrap shrink-0">
-    <svg class="w-3.5 h-3.5 text-[#0066FF] shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+    <svg class="w-3.5 h-3.5 text-[#184f3a] shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
     <span class="hidden sm:inline">Create Document</span>
     <span class="sm:hidden">New</span>
 </a>
 @endsection
 
 @section('content')
-<div class="min-h-screen bg-[#F8FAFC] py-8 sm:py-12">
+<div class="min-h-screen bg-[#f8f8f3] py-8 sm:py-12">
     <div class="max-w-[1280px] mx-auto px-4 sm:px-6 space-y-6 sm:space-y-8">
 
         <!-- Page Header -->
@@ -26,10 +26,10 @@
                 </p>
             </div>
             <div class="flex flex-wrap items-center gap-2.5">
-                <a href="{{ route('resume.builder') }}" class="px-4 py-2.5 rounded-xl bg-white border border-slate-200 hover:border-[#0066FF] text-xs font-bold text-slate-700 transition">
+                <a href="{{ route('resume.builder') }}" class="px-4 py-2.5 rounded-xl bg-white border border-slate-200 hover:border-[#184f3a] text-xs font-bold text-slate-700 transition">
                     + New Resume
                 </a>
-                <a href="{{ route('invoice.studio') }}" class="px-5 py-2.5 rounded-xl bg-[#0066FF] hover:bg-blue-700 text-white text-xs font-bold shadow-md shadow-blue-600/20 transition">
+                <a href="{{ route('invoice.studio') }}" class="px-5 py-2.5 rounded-xl bg-[#184f3a] hover:bg-[#123e2d] text-white text-xs font-bold shadow-md shadow-[#184f3a]/20 transition">
                     + New Invoice
                 </a>
             </div>
@@ -56,7 +56,7 @@
                 <div class="text-2xl font-black text-amber-700 mt-1">{{ $stats['pending_count'] }}</div>
             </div>
             <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm">
-                <div class="text-[11px] font-bold uppercase tracking-wider text-[#0066FF]">Cumulative Billed</div>
+                <div class="text-[11px] font-bold uppercase tracking-wider text-[#184f3a]">Cumulative Billed</div>
                 <div class="text-2xl font-black text-slate-900 mt-1">{{ number_format($stats['total_billed'], 2) }}</div>
             </div>
             <div class="col-span-2 lg:col-span-1 bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm">
@@ -73,7 +73,7 @@
                     <h2 class="text-sm sm:text-base font-extrabold text-slate-900">Saved Resumes &amp; CVs</h2>
                     <p class="text-[11px] text-slate-500">Download updated PDFs or switch templates anytime</p>
                 </div>
-                <a href="{{ route('resume.builder') }}" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-[#0066FF] text-white text-xs font-bold transition whitespace-nowrap">+ Build Resume</a>
+                <a href="{{ route('resume.builder') }}" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-[#184f3a] text-white text-xs font-bold transition whitespace-nowrap">+ Build Resume</a>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-5">
                 @foreach($resumes as $res)
@@ -87,8 +87,8 @@
                         </div>
                         <div class="flex items-center justify-between gap-2 pt-1">
                             <div class="flex items-center gap-1.5">
-                                <a href="{{ route('resume.builder', ['load' => $res->uuid]) }}" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-[#0066FF] text-xs font-bold text-slate-700 transition">Edit</a>
-                                <a href="{{ route('resume.show', $res->uuid) }}" target="_blank" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-[#0066FF] text-xs font-bold text-slate-700 transition">View</a>
+                                <a href="{{ route('resume.builder', ['load' => $res->uuid]) }}" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-[#184f3a] text-xs font-bold text-slate-700 transition">Edit</a>
+                                <a href="{{ route('resume.show', $res->uuid) }}" target="_blank" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-[#184f3a] text-xs font-bold text-slate-700 transition">View</a>
                                 <a href="{{ route('resume.pdf', $res->uuid) }}" class="px-3 py-1.5 rounded-lg bg-teal-50 text-teal-700 text-xs font-bold transition">PDF</a>
                             </div>
                             <form method="POST" action="{{ route('resume.destroy', $res->uuid) }}" onsubmit="return confirm('Delete resume {{ addslashes($res->title) }} permanently?');">
@@ -111,7 +111,7 @@
                 <input type="hidden" name="status" value="{{ $statusFilter }}">
                 <div class="relative flex-1">
                     <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-                    <input type="text" name="q" value="{{ $search }}" placeholder="Search by invoice #, client name, or email..." class="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 focus:bg-white focus:border-[#0066FF] focus:outline-none">
+                    <input type="text" name="q" value="{{ $search }}" placeholder="Search by invoice #, client name, or email..." class="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 focus:bg-white focus:border-[#184f3a] focus:outline-none">
                 </div>
                 <div class="flex items-center gap-2">
                     <button type="submit" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">Search</button>
@@ -168,7 +168,7 @@
                             <form method="POST" action="{{ route('invoice.status', $inv->uuid) }}" class="shrink-0">
                                 @csrf
                                 @method('PATCH')
-                                <select name="status" onchange="this.form.submit()" class="text-[11px] font-bold rounded-full px-3 py-1 border cursor-pointer focus:outline-none {{ $inv->status === 'paid' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : ($inv->status === 'sent' ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-slate-100 text-slate-700 border-slate-200') }}">
+                                <select name="status" onchange="this.form.submit()" class="text-[11px] font-bold rounded-full px-3 py-1 border cursor-pointer focus:outline-none {{ $inv->status === 'paid' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : ($inv->status === 'sent' ? 'bg-[#e8f7ed] text-blue-700 border-[#c8f3dc]' : 'bg-slate-100 text-slate-700 border-slate-200') }}">
                                     <option value="draft" {{ $inv->status === 'draft' ? 'selected' : '' }}>Draft</option>
                                     <option value="sent" {{ $inv->status === 'sent' ? 'selected' : '' }}>Sent</option>
                                     <option value="paid" {{ $inv->status === 'paid' ? 'selected' : '' }}>Paid</option>
@@ -240,7 +240,7 @@
                                     <form method="POST" action="{{ route('invoice.status', $inv->uuid) }}">
                                         @csrf
                                         @method('PATCH')
-                                        <select name="status" onchange="this.form.submit()" class="text-[11px] font-bold rounded-full px-3 py-1 border cursor-pointer focus:outline-none {{ $inv->status === 'paid' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : ($inv->status === 'sent' ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-slate-100 text-slate-700 border-slate-200') }}">
+                                        <select name="status" onchange="this.form.submit()" class="text-[11px] font-bold rounded-full px-3 py-1 border cursor-pointer focus:outline-none {{ $inv->status === 'paid' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : ($inv->status === 'sent' ? 'bg-[#e8f7ed] text-blue-700 border-[#c8f3dc]' : 'bg-slate-100 text-slate-700 border-slate-200') }}">
                                             <option value="draft" {{ $inv->status === 'draft' ? 'selected' : '' }}>Draft</option>
                                             <option value="sent" {{ $inv->status === 'sent' ? 'selected' : '' }}>Sent</option>
                                             <option value="paid" {{ $inv->status === 'paid' ? 'selected' : '' }}>Paid</option>
@@ -287,7 +287,7 @@
                         Create an invoice, quote, receipt, or choose a template in the studio. Any document you save, download, or email while signed in will appear here.
                     </p>
                     <div class="flex flex-wrap items-center justify-center gap-3">
-                        <a href="{{ route('invoice.studio') }}" class="px-5 py-2.5 rounded-xl bg-[#0066FF] text-white text-xs font-bold shadow-md hover:bg-blue-700 transition">Create First Invoice</a>
+                        <a href="{{ route('invoice.studio') }}" class="px-5 py-2.5 rounded-xl bg-[#184f3a] text-white text-xs font-bold shadow-md hover:bg-[#123e2d] transition">Create First Invoice</a>
                         <a href="{{ route('templates.index') }}" class="px-5 py-2.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold hover:bg-slate-200 transition">Browse Templates</a>
                     </div>
                 </div>

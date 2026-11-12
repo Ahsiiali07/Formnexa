@@ -3,7 +3,7 @@
 @section('title', 'Invoice #' . $invoice->invoice_number . ' — Formnexa')
 
 @section('header_actions')
-<a href="{{ route('invoice.pdf', $invoice->uuid) }}" class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-2 rounded-lg text-xs font-bold text-white bg-[#111111] hover:bg-[#0066FF] transition shadow-sm whitespace-nowrap shrink-0">
+<a href="{{ route('invoice.pdf', $invoice->uuid) }}" class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-2 rounded-lg text-xs font-bold text-white bg-[#111111] hover:bg-[#184f3a] transition shadow-sm whitespace-nowrap shrink-0">
     <svg class="w-4 h-4 text-teal-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
     <span class="hidden sm:inline">Download PDF</span>
     <span class="sm:hidden">PDF</span>

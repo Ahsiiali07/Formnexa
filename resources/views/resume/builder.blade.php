@@ -4,7 +4,7 @@
 
 @section('header_actions')
 <button type="button" @click="$dispatch('open-resume-history')" class="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-lg text-xs font-semibold bg-white hover:bg-black/[0.04] border border-black/[0.09] text-[#111111] transition whitespace-nowrap shrink-0 cursor-pointer">
-    <svg class="w-3.5 h-3.5 text-[#0066FF] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <svg class="w-3.5 h-3.5 text-[#184f3a] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
     <span class="hidden sm:inline">Saved Resumes</span>
     <span class="sm:hidden">Saved</span>
 </button>
@@ -22,7 +22,7 @@
         @js($openImport)
      )"
      x-init="init()"
-     class="bg-[#F8FAFC] min-h-screen pb-28 sm:pb-32">
+     class="bg-[#f8f8f3] min-h-screen pb-28 sm:pb-32">
 
     <!-- Toast Notification -->
     <div x-cloak x-show="toast.visible"
@@ -48,27 +48,27 @@
                 </div>
 
                 <input type="text" x-model="title" placeholder="Resume Document Title..."
-                       class="text-sm font-extrabold text-[#111111] bg-[#F8FAFC] border border-black/[0.09] rounded-lg px-3 py-1.5 w-full sm:w-64 focus:bg-white focus:border-[#0066FF] focus:outline-none">
+                       class="text-sm font-extrabold text-[#111111] bg-[#f8f8f3] border border-black/[0.09] rounded-lg px-3 py-1.5 w-full sm:w-64 focus:bg-white focus:border-[#184f3a] focus:outline-none">
             </div>
 
             <div class="flex flex-wrap items-center gap-2">
                 <!-- Import Existing CV / Paste Text Primary Trigger -->
                 <button type="button" @click="importTargetStyle = template_style; importModalOpen = true"
-                        class="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-lg text-xs font-bold bg-[#0066FF] hover:bg-[#0052CC] text-white shadow-sm transition whitespace-nowrap cursor-pointer">
+                        class="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-lg text-xs font-bold bg-[#184f3a] hover:bg-[#123e2d] text-white shadow-sm transition whitespace-nowrap cursor-pointer">
                     <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
                     <span>Import CV / Paste Text</span>
                 </button>
 
                 <!-- Template & Design Drawer Trigger -->
                 <button type="button" @click="designDrawerOpen = true"
-                        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white border border-black/[0.1] hover:border-[#0066FF] text-xs font-bold text-[#111111] transition whitespace-nowrap cursor-pointer">
+                        class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white border border-black/[0.1] hover:border-[#184f3a] text-xs font-bold text-[#111111] transition whitespace-nowrap cursor-pointer">
                     <span class="w-3 h-3 rounded-full border border-white shadow-sm shrink-0" :style="'background-color:' + accent_color"></span>
                     <span x-text="styles[template_style]?.name || 'Flow Navy Sidebar'"></span>
                     <svg class="w-3.5 h-3.5 text-black/45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </button>
 
                 <a href="{{ route('resume.templates') }}"
-                   class="hidden sm:inline-flex items-center gap-1 px-3.5 py-2 rounded-lg text-xs font-semibold bg-[#F8FAFC] hover:bg-black/10 text-[#111111] transition whitespace-nowrap">
+                   class="hidden sm:inline-flex items-center gap-1 px-3.5 py-2 rounded-lg text-xs font-semibold bg-[#f8f8f3] hover:bg-black/10 text-[#111111] transition whitespace-nowrap">
                     Browse Templates
                 </a>
 
@@ -104,13 +104,13 @@
             <div class="no-print lg:col-span-5 space-y-3" :class="mobileTab === 'preview' ? 'hidden lg:block' : 'block'">
 
                 <!-- Quick CV Import Callout Card -->
-                <div class="p-4 rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50/70 border border-blue-200/80 flex items-center justify-between gap-3">
+                <div class="p-4 rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50/70 border border-[#c8f3dc] flex items-center justify-between gap-3">
                     <div class="min-w-0">
                         <div class="text-xs font-extrabold text-slate-900">Have an existing CV or LinkedIn profile?</div>
                         <div class="text-[11px] text-slate-600 mt-0.5">Upload a PDF / DOCX file or paste raw CV text to auto-fill every section.</div>
                     </div>
                     <button type="button" @click="importTargetStyle = template_style; importModalOpen = true"
-                            class="px-3.5 py-2 rounded-xl bg-white border border-blue-200 hover:border-[#0066FF] text-[#0066FF] text-xs font-bold shadow-sm transition shrink-0">
+                            class="px-3.5 py-2 rounded-xl bg-white border border-[#c8f3dc] hover:border-[#184f3a] text-[#184f3a] text-xs font-bold shadow-sm transition shrink-0">
                         Import CV
                     </button>
                 </div>
@@ -119,7 +119,7 @@
                 <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
                     <button type="button" @click="toggleSection('personal')" class="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50/60 transition">
                         <div class="flex items-center gap-2.5">
-                            <span class="w-7 h-7 rounded-xl bg-blue-50 text-[#0066FF] flex items-center justify-center text-sm font-bold">&#128100;</span>
+                            <span class="w-7 h-7 rounded-xl bg-[#e8f7ed] text-[#184f3a] flex items-center justify-center text-sm font-bold">&#128100;</span>
                             <div>
                                 <div class="text-sm font-extrabold text-slate-900">Personal Details</div>
                                 <div class="text-[11px] text-slate-400" x-text="content.personal.full_name || 'Name, title, photo, contact links'"></div>
@@ -139,7 +139,7 @@
                                     <div class="w-12 h-12 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center font-bold text-sm">Photo</div>
                                 </template>
                                 <div class="flex flex-wrap gap-2">
-                                    <label class="cursor-pointer px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:border-[#0066FF] font-bold text-slate-700 transition">
+                                    <label class="cursor-pointer px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:border-[#184f3a] font-bold text-slate-700 transition">
                                         <span x-text="photo_data ? 'Change Photo' : 'Upload Photo'"></span>
                                         <input type="file" @change="handlePhotoUpload($event)" accept="image/*" class="hidden">
                                     </label>
@@ -147,7 +147,7 @@
                                 </div>
                             </div>
                             <label class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-600 cursor-pointer shrink-0">
-                                <input type="checkbox" x-model="content.personal.show_photo" class="rounded border-slate-300 text-[#0066FF] focus:ring-[#0066FF]">
+                                <input type="checkbox" x-model="content.personal.show_photo" class="rounded border-slate-300 text-[#184f3a] focus:ring-[#184f3a]">
                                 <span>Show Photo</span>
                             </label>
                         </div>
@@ -155,31 +155,31 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Full Name *</label>
-                                <input type="text" x-model="content.personal.full_name" placeholder="Brian T. Wayne" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 font-semibold focus:bg-white focus:border-[#0066FF] focus:outline-none">
+                                <input type="text" x-model="content.personal.full_name" placeholder="Brian T. Wayne" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 font-semibold focus:bg-white focus:border-[#184f3a] focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Professional Title</label>
-                                <input type="text" x-model="content.personal.job_title" placeholder="Business Development Consultant" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 font-semibold focus:bg-white focus:border-[#0066FF] focus:outline-none">
+                                <input type="text" x-model="content.personal.job_title" placeholder="Business Development Consultant" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 font-semibold focus:bg-white focus:border-[#184f3a] focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Email</label>
-                                <input type="email" x-model="content.personal.email" placeholder="you@domain.com" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:bg-white focus:border-[#0066FF] focus:outline-none">
+                                <input type="email" x-model="content.personal.email" placeholder="you@domain.com" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:bg-white focus:border-[#184f3a] focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Phone</label>
-                                <input type="text" x-model="content.personal.phone" placeholder="+1 555-0199" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:bg-white focus:border-[#0066FF] focus:outline-none">
+                                <input type="text" x-model="content.personal.phone" placeholder="+1 555-0199" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:bg-white focus:border-[#184f3a] focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Location</label>
-                                <input type="text" x-model="content.personal.location" placeholder="California, USA" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:bg-white focus:border-[#0066FF] focus:outline-none">
+                                <input type="text" x-model="content.personal.location" placeholder="California, USA" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:bg-white focus:border-[#184f3a] focus:outline-none">
                             </div>
                             <div>
                                 <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">LinkedIn URL</label>
-                                <input type="text" x-model="content.personal.linkedin" placeholder="linkedin.com/in/username" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:bg-white focus:border-[#0066FF] focus:outline-none">
+                                <input type="text" x-model="content.personal.linkedin" placeholder="linkedin.com/in/username" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:bg-white focus:border-[#184f3a] focus:outline-none">
                             </div>
                             <div class="sm:col-span-2">
                                 <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Website / Portfolio / GitHub</label>
-                                <input type="text" x-model="content.personal.website" placeholder="yourportfolio.com" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:bg-white focus:border-[#0066FF] focus:outline-none">
+                                <input type="text" x-model="content.personal.website" placeholder="yourportfolio.com" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:bg-white focus:border-[#184f3a] focus:outline-none">
                             </div>
                         </div>
                     </div>
@@ -201,7 +201,7 @@
                         </div>
                     </button>
                     <div x-show="openSection === 'summary'" x-transition class="px-5 pb-5 pt-2 border-t border-slate-100 text-xs">
-                        <textarea x-model="content.summary" rows="4" placeholder="Summarize your experience, achievements, and target impact in 2–4 sentences..." class="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 leading-relaxed focus:bg-white focus:border-[#0066FF] focus:outline-none resize-y"></textarea>
+                        <textarea x-model="content.summary" rows="4" placeholder="Summarize your experience, achievements, and target impact in 2–4 sentences..." class="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 leading-relaxed focus:bg-white focus:border-[#184f3a] focus:outline-none resize-y"></textarea>
                     </div>
                 </div>
 
@@ -232,19 +232,19 @@
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                                    <input type="text" x-model="exp.role" placeholder="Job Title (e.g. Product Manager)" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-900 font-semibold focus:border-[#0066FF] focus:outline-none">
-                                    <input type="text" x-model="exp.company" placeholder="Company Name" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#0066FF] focus:outline-none">
-                                    <input type="text" x-model="exp.start_date" placeholder="Start (e.g. Jan 2022)" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#0066FF] focus:outline-none">
-                                    <input type="text" x-model="exp.end_date" placeholder="End (e.g. Present)" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#0066FF] focus:outline-none">
-                                    <input type="text" x-model="exp.location" placeholder="Location (e.g. New York, NY)" class="sm:col-span-2 px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#0066FF] focus:outline-none">
+                                    <input type="text" x-model="exp.role" placeholder="Job Title (e.g. Product Manager)" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-900 font-semibold focus:border-[#184f3a] focus:outline-none">
+                                    <input type="text" x-model="exp.company" placeholder="Company Name" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#184f3a] focus:outline-none">
+                                    <input type="text" x-model="exp.start_date" placeholder="Start (e.g. Jan 2022)" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#184f3a] focus:outline-none">
+                                    <input type="text" x-model="exp.end_date" placeholder="End (e.g. Present)" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#184f3a] focus:outline-none">
+                                    <input type="text" x-model="exp.location" placeholder="Location (e.g. New York, NY)" class="sm:col-span-2 px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#184f3a] focus:outline-none">
                                 </div>
                                 <div>
                                     <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Key Achievements (One bullet per line)</label>
-                                    <textarea x-model="exp.bullets_text" rows="3" placeholder="• Increased revenue by 30%..." class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-slate-800 leading-relaxed focus:border-[#0066FF] focus:outline-none resize-y"></textarea>
+                                    <textarea x-model="exp.bullets_text" rows="3" placeholder="• Increased revenue by 30%..." class="w-full p-2.5 rounded-xl bg-white border border-slate-200 text-slate-800 leading-relaxed focus:border-[#184f3a] focus:outline-none resize-y"></textarea>
                                 </div>
                             </div>
                         </template>
-                        <button type="button" @click="addExperience()" class="w-full py-2.5 rounded-xl border-2 border-dashed border-slate-300 hover:border-[#0066FF] text-slate-700 hover:text-[#0066FF] font-bold transition">
+                        <button type="button" @click="addExperience()" class="w-full py-2.5 rounded-xl border-2 border-dashed border-slate-300 hover:border-[#184f3a] text-slate-700 hover:text-[#184f3a] font-bold transition">
                             + Add Work Experience
                         </button>
                     </div>
@@ -273,16 +273,16 @@
                                     <button type="button" @click="content.education.splice(idx, 1)" x-show="content.education.length > 1" class="text-rose-600 font-bold hover:underline">Delete</button>
                                 </div>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                                    <input type="text" x-model="edu.degree" placeholder="Degree (e.g. MBA, B.S. Computer Science)" class="sm:col-span-2 px-3 py-2 rounded-xl bg-white border border-slate-200 font-semibold text-slate-900 focus:border-[#0066FF] focus:outline-none">
-                                    <input type="text" x-model="edu.school" placeholder="University / School" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#0066FF] focus:outline-none">
-                                    <input type="text" x-model="edu.location" placeholder="Location" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#0066FF] focus:outline-none">
-                                    <input type="text" x-model="edu.start_date" placeholder="Start Year" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#0066FF] focus:outline-none">
-                                    <input type="text" x-model="edu.end_date" placeholder="End / Graduation Year" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#0066FF] focus:outline-none">
-                                    <input type="text" x-model="edu.details" placeholder="Honors, GPA, Coursework (Optional)" class="sm:col-span-2 px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#0066FF] focus:outline-none">
+                                    <input type="text" x-model="edu.degree" placeholder="Degree (e.g. MBA, B.S. Computer Science)" class="sm:col-span-2 px-3 py-2 rounded-xl bg-white border border-slate-200 font-semibold text-slate-900 focus:border-[#184f3a] focus:outline-none">
+                                    <input type="text" x-model="edu.school" placeholder="University / School" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#184f3a] focus:outline-none">
+                                    <input type="text" x-model="edu.location" placeholder="Location" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#184f3a] focus:outline-none">
+                                    <input type="text" x-model="edu.start_date" placeholder="Start Year" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#184f3a] focus:outline-none">
+                                    <input type="text" x-model="edu.end_date" placeholder="End / Graduation Year" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#184f3a] focus:outline-none">
+                                    <input type="text" x-model="edu.details" placeholder="Honors, GPA, Coursework (Optional)" class="sm:col-span-2 px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 focus:border-[#184f3a] focus:outline-none">
                                 </div>
                             </div>
                         </template>
-                        <button type="button" @click="addEducation()" class="w-full py-2.5 rounded-xl border-2 border-dashed border-slate-300 hover:border-[#0066FF] text-slate-700 hover:text-[#0066FF] font-bold transition">
+                        <button type="button" @click="addEducation()" class="w-full py-2.5 rounded-xl border-2 border-dashed border-slate-300 hover:border-[#184f3a] text-slate-700 hover:text-[#184f3a] font-bold transition">
                             + Add Education
                         </button>
                     </div>
@@ -311,8 +311,8 @@
                                 </label>
                             </div>
                             <div class="flex gap-2">
-                                <input type="text" x-model="skillInput" @keydown.enter.prevent="addSkillInput()" placeholder="e.g. Product Strategy, Figma, Laravel..." class="flex-1 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:bg-white focus:border-[#0066FF] focus:outline-none">
-                                <button type="button" @click="addSkillInput()" class="px-4 py-2 rounded-xl bg-slate-900 text-white font-bold hover:bg-[#0066FF] transition">Add</button>
+                                <input type="text" x-model="skillInput" @keydown.enter.prevent="addSkillInput()" placeholder="e.g. Product Strategy, Figma, Laravel..." class="flex-1 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:bg-white focus:border-[#184f3a] focus:outline-none">
+                                <button type="button" @click="addSkillInput()" class="px-4 py-2 rounded-xl bg-slate-900 text-white font-bold hover:bg-[#184f3a] transition">Add</button>
                             </div>
                             <div class="flex flex-wrap gap-1.5">
                                 <template x-for="(sk, idx) in content.skills" :key="'tag-' + idx">
@@ -341,13 +341,13 @@
                                         <template x-for="d in 5" :key="d">
                                             <button type="button" @click="lang.score = d"
                                                     class="w-3 h-3 rounded-full transition"
-                                                    :class="d <= (lang.score || 4) ? 'bg-[#0066FF]' : 'bg-slate-300'"></button>
+                                                    :class="d <= (lang.score || 4) ? 'bg-[#184f3a]' : 'bg-slate-300'"></button>
                                         </template>
                                     </div>
                                     <button type="button" @click="content.languages.splice(lIdx, 1)" class="text-rose-500 hover:text-rose-700 font-bold px-1">&times;</button>
                                 </div>
                             </template>
-                            <button type="button" @click="content.languages.push({name:'', level:'Fluent', score:4}); content.section_visibility.languages = true;" class="text-xs font-bold text-[#0066FF] hover:underline">
+                            <button type="button" @click="content.languages.push({name:'', level:'Fluent', score:4}); content.section_visibility.languages = true;" class="text-xs font-bold text-[#184f3a] hover:underline">
                                 + Add Language
                             </button>
                         </div>
@@ -384,7 +384,7 @@
                                     <button type="button" @click="content.awards.splice(aIdx, 1)" class="col-span-1 text-rose-500 font-bold text-center">&times;</button>
                                 </div>
                             </template>
-                            <button type="button" @click="content.awards.push({title:'', issuer:'', date:''}); content.section_visibility.awards = true;" class="text-xs font-bold text-[#0066FF] hover:underline">
+                            <button type="button" @click="content.awards.push({title:'', issuer:'', date:''}); content.section_visibility.awards = true;" class="text-xs font-bold text-[#184f3a] hover:underline">
                                 + Add Award / Certification
                             </button>
                         </div>
@@ -400,15 +400,15 @@
                             </div>
                             <template x-for="(proj, pIdx) in content.projects" :key="'edit-pr-' + pIdx">
                                 <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-                                    <div class="flex gap-2">
-                                        <input type="text" x-model="proj.name" placeholder="Project Name" class="flex-1 px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 font-semibold">
-                                        <input type="text" x-model="proj.link" placeholder="Link / URL" class="flex-1 px-2.5 py-1.5 rounded-lg bg-white border border-slate-200">
-                                        <button type="button" @click="content.projects.splice(pIdx, 1)" class="text-rose-500 font-bold px-2">&times;</button>
+                                    <div class="flex flex-wrap sm:flex-nowrap gap-2">
+                                        <input type="text" x-model="proj.name" placeholder="Project Name" class="min-w-0 flex-1 px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 font-semibold">
+                                        <input type="text" x-model="proj.link" placeholder="Link / URL" class="min-w-0 flex-1 px-2.5 py-1.5 rounded-lg bg-white border border-slate-200">
+                                        <button type="button" @click="content.projects.splice(pIdx, 1)" class="text-rose-500 font-bold px-2 shrink-0">&times;</button>
                                     </div>
                                     <textarea x-model="proj.description" rows="2" placeholder="Impact and tech used..." class="w-full p-2 rounded-lg bg-white border border-slate-200 resize-none"></textarea>
                                 </div>
                             </template>
-                            <button type="button" @click="content.projects.push({name:'', role:'', link:'', description:''}); content.section_visibility.projects = true;" class="text-xs font-bold text-[#0066FF] hover:underline">
+                            <button type="button" @click="content.projects.push({name:'', role:'', link:'', description:''}); content.section_visibility.projects = true;" class="text-xs font-bold text-[#184f3a] hover:underline">
                                 + Add Project
                             </button>
                         </div>
@@ -423,13 +423,13 @@
                         <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                         <span>Live A4 Preview &bull; <strong class="text-slate-800" x-text="styles[template_style]?.name"></strong></span>
                     </div>
-                    <button type="button" @click="designDrawerOpen = true" class="text-[#0066FF] font-bold hover:underline">
+                    <button type="button" @click="designDrawerOpen = true" class="text-[#184f3a] font-bold hover:underline">
                         Change Template / Color &rarr;
                     </button>
                 </div>
 
                 <!-- Scroll-safe wrapper on mobile for crisp A4 formatting -->
-                <div class="sm:hidden mb-2 px-2 py-1 rounded-lg bg-[#EFF6FF] border border-blue-200/70 text-[11px] font-medium text-[#0050cb] text-center">
+                <div class="sm:hidden mb-2 px-2 py-1 rounded-lg bg-[#e8f7ed] border border-[#c8f3dc] text-[11px] font-medium text-[#184f3a] text-center">
                     Swipe left/right on the sheet to inspect full A4 layout
                 </div>
                 <div class="w-full overflow-x-auto pb-2">
@@ -511,17 +511,17 @@
                 <div x-show="importMode === 'text'" class="space-y-2">
                     <div class="flex items-center justify-between">
                         <label class="font-bold text-slate-700 uppercase tracking-wider text-[10px]">Paste your existing resume or LinkedIn text</label>
-                        <button type="button" @click="fillSampleImportText()" class="text-[11px] font-bold text-[#0066FF] hover:underline">Insert Sample CV Text</button>
+                        <button type="button" @click="fillSampleImportText()" class="text-[11px] font-bold text-[#184f3a] hover:underline">Insert Sample CV Text</button>
                     </div>
                     <textarea x-model="importText" rows="9"
                               placeholder="Paste your entire CV here (Name, Email, Experience, Education, Skills, Languages)..."
-                              class="w-full p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-800 leading-relaxed focus:bg-white focus:border-[#0066FF] focus:outline-none"></textarea>
+                              class="w-full p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-800 leading-relaxed focus:bg-white focus:border-[#184f3a] focus:outline-none"></textarea>
                 </div>
 
                 <!-- File Upload Mode -->
                 <div x-show="importMode === 'file'" class="space-y-3">
-                    <label class="block p-8 rounded-2xl border-2 border-dashed border-slate-300 hover:border-[#0066FF] bg-slate-50 hover:bg-blue-50/30 text-center cursor-pointer transition">
-                        <svg class="w-10 h-10 text-[#0066FF] mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+                    <label class="block p-8 rounded-2xl border-2 border-dashed border-slate-300 hover:border-[#184f3a] bg-slate-50 hover:bg-[#e8f7ed]/40 text-center cursor-pointer transition">
+                        <svg class="w-10 h-10 text-[#184f3a] mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
                         <div class="text-sm font-extrabold text-slate-900" x-text="importFileName || 'Click to choose your CV file'"></div>
                         <div class="text-xs text-slate-500 mt-1">Supports PDF (.pdf), Word (.docx), Text (.txt), or JSON Resume (.json) up to 5MB</div>
                         <input type="file" @change="onImportFileSelect($event)" accept=".pdf,.docx,.txt,.md,.json" class="hidden">
@@ -548,7 +548,7 @@
             <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-3">
                 <button type="button" @click="importModalOpen = false" class="px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:bg-slate-200 transition">Cancel</button>
                 <button type="button" @click="runImport()" :disabled="importing"
-                        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0066FF] hover:bg-blue-700 text-white text-xs font-bold shadow-md transition disabled:opacity-50">
+                        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#184f3a] hover:bg-[#123e2d] text-white text-xs font-bold shadow-md transition disabled:opacity-50">
                     <svg x-show="importing" class="w-4 h-4 animate-spin text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
                     <span x-text="importing ? 'Parsing CV...' : 'Extract & Apply to Resume'"></span>
                 </button>
@@ -605,17 +605,17 @@
                             <div>
                                 <label class="block font-bold uppercase tracking-wider text-slate-500 mb-2">Font Family</label>
                                 <div class="grid grid-cols-3 gap-2">
-                                    <button type="button" @click="font_family = 'sans'; autoSave();" class="py-2 rounded-xl border font-sans font-bold transition" :class="font_family === 'sans' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-700'">Sans Serif</button>
-                                    <button type="button" @click="font_family = 'serif'; autoSave();" class="py-2 rounded-xl border font-editorial font-bold transition" :class="font_family === 'serif' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-700'">Editorial Serif</button>
-                                    <button type="button" @click="font_family = 'mono'; autoSave();" class="py-2 rounded-xl border font-tech-mono font-bold transition" :class="font_family === 'mono' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-700'">Tech Mono</button>
+                                    <button type="button" @click="font_family = 'sans'; autoSave();" class="py-2 rounded-xl border font-sans font-bold transition" :class="font_family === 'sans' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-700'">Sans Serif</button>
+                                    <button type="button" @click="font_family = 'serif'; autoSave();" class="py-2 rounded-xl border font-editorial font-bold transition" :class="font_family === 'serif' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-700'">Editorial Serif</button>
+                                    <button type="button" @click="font_family = 'mono'; autoSave();" class="py-2 rounded-xl border font-tech-mono font-bold transition" :class="font_family === 'mono' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-700'">Tech Mono</button>
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block font-bold uppercase tracking-wider text-slate-500 mb-2">Page Density</label>
                                 <div class="grid grid-cols-2 gap-2">
-                                    <button type="button" @click="density = 'comfortable'; autoSave();" class="py-2 rounded-xl border font-bold transition" :class="density !== 'compact' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-700'">Comfortable</button>
-                                    <button type="button" @click="density = 'compact'; autoSave();" class="py-2 rounded-xl border font-bold transition" :class="density === 'compact' ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-slate-200 text-slate-700'">Compact One-Page</button>
+                                    <button type="button" @click="density = 'comfortable'; autoSave();" class="py-2 rounded-xl border font-bold transition" :class="density !== 'compact' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-700'">Comfortable</button>
+                                    <button type="button" @click="density = 'compact'; autoSave();" class="py-2 rounded-xl border font-bold transition" :class="density === 'compact' ? 'border-[#184f3a] bg-[#e8f7ed] text-[#184f3a]' : 'border-slate-200 text-slate-700'">Compact One-Page</button>
                                 </div>
                             </div>
                         </div>
@@ -627,13 +627,13 @@
                                 <template x-for="(st, key) in styles" :key="key">
                                     <button type="button" @click="template_style = key; autoSave(); showToast('Switched layout to ' + st.name);"
                                             class="text-left p-2.5 rounded-2xl border-2 transition flex flex-col justify-between gap-2"
-                                            :class="template_style === key ? 'border-[#0066FF] bg-blue-50/50' : 'border-slate-200 hover:border-slate-300 bg-white'">
+                                            :class="template_style === key ? 'border-[#184f3a] bg-[#e8f7ed]/60' : 'border-slate-200 hover:border-slate-300 bg-white'">
                                         {{-- Mini Visual Wireframe Preview --}}
                                         <div class="w-full h-14 rounded-lg border border-slate-200/80 overflow-hidden bg-white p-1.5 flex flex-col justify-between"
                                              :class="key === 'editorial_figma' ? 'bg-[#FAF8F4]' : 'bg-white'">
                                             <template x-if="key === 'flow_sidebar'">
                                                 <div class="grid grid-cols-12 gap-1 h-full">
-                                                    <div class="col-span-4 rounded-xs" :style="'background:' + accent_color"></div>
+                                                    <div class="col-span-4 rounded-sm" :style="'background:' + accent_color"></div>
                                                     <div class="col-span-8 space-y-1 pt-0.5"><div class="h-1.5 w-3/4 bg-slate-200 rounded"></div><div class="h-1 w-full bg-slate-100 rounded"></div><div class="h-1 w-5/6 bg-slate-100 rounded"></div></div>
                                                 </div>
                                             </template>
@@ -657,13 +657,13 @@
                                             </template>
                                             <template x-if="key === 'executive_bold'">
                                                 <div class="space-y-1.5 h-full">
-                                                    <div class="h-3.5 w-full rounded-xs" :style="'background:' + accent_color"></div>
-                                                    <div class="grid grid-cols-12 gap-1"><div class="col-span-8 h-3 bg-slate-100 rounded-xs"></div><div class="col-span-4 h-3 bg-slate-200 rounded-xs"></div></div>
+                                                    <div class="h-3.5 w-full rounded-sm" :style="'background:' + accent_color"></div>
+                                                    <div class="grid grid-cols-12 gap-1"><div class="col-span-8 h-3 bg-slate-100 rounded-sm"></div><div class="col-span-4 h-3 bg-slate-200 rounded-sm"></div></div>
                                                 </div>
                                             </template>
                                             <template x-if="key === 'creative_card'">
                                                 <div class="grid grid-cols-12 gap-1 h-full">
-                                                    <div class="col-span-4 rounded-xs p-0.5" :style="'background:' + accent_color + '25'"><div class="w-2.5 h-2.5 rounded-xs" :style="'background:' + accent_color"></div></div>
+                                                    <div class="col-span-4 rounded-sm p-0.5" :style="'background:' + accent_color + '25'"><div class="w-2.5 h-2.5 rounded-sm" :style="'background:' + accent_color"></div></div>
                                                     <div class="col-span-8 space-y-1 pt-0.5"><div class="h-1.5 w-2/3 bg-slate-300 rounded"></div><div class="h-1 w-full bg-slate-100 rounded"></div></div>
                                                 </div>
                                             </template>
@@ -699,7 +699,7 @@
                                         <div>
                                             <div class="flex items-center justify-between gap-1 mb-0.5">
                                                 <span class="font-bold text-slate-900 truncate" x-text="st.name"></span>
-                                                <span x-show="template_style === key" class="text-[9.5px] font-extrabold text-[#0066FF] shrink-0">Active</span>
+                                                <span x-show="template_style === key" class="text-[9.5px] font-extrabold text-[#184f3a] shrink-0">Active</span>
                                             </div>
                                             <span x-show="st.badge" class="inline-block text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500 mb-1" x-text="st.badge"></span>
                                             <p class="text-[10px] text-slate-500 leading-snug line-clamp-2" x-text="st.tagline"></p>
@@ -712,13 +712,13 @@
 
                     <div x-show="designTab === 'presets'" class="space-y-2.5">
                         <template x-if="hasCustomCv">
-                            <div class="p-3 rounded-2xl bg-blue-50 border border-blue-200/80 text-[11px] text-slate-700 space-y-2">
+                            <div class="p-3 rounded-2xl bg-[#e8f7ed] border border-[#c8f3dc] text-[11px] text-slate-700 space-y-2">
                                 <div class="font-bold text-slate-900">Your uploaded CV stays active</div>
                                 <p class="leading-snug text-slate-600">Clicking any template applies its layout, colors &amp; typography around your own CV data.</p>
                             </div>
                         </template>
                         <template x-for="tpl in allTemplates" :key="tpl.slug">
-                            <div class="w-full p-3.5 rounded-2xl border border-slate-200 hover:border-[#0066FF] hover:bg-blue-50/30 transition flex items-center justify-between gap-3">
+                            <div class="w-full p-3.5 rounded-2xl border border-slate-200 hover:border-[#184f3a] hover:bg-[#e8f7ed]/40 transition flex items-center justify-between gap-3">
                                 <button type="button" @click="applyTemplatePreset(tpl, false)" class="text-left flex-1 min-w-0">
                                     <div class="text-[10px] font-bold uppercase tracking-wider" :style="'color:' + tpl.accent_color" x-text="tpl.category_label"></div>
                                     <div class="font-bold text-slate-900 mt-0.5" x-text="tpl.name"></div>
@@ -726,7 +726,7 @@
                                 </button>
                                 <div class="flex items-center gap-1.5 shrink-0">
                                     <button type="button" @click="applyTemplatePreset(tpl, false)"
-                                            class="px-2.5 py-1 rounded-full bg-slate-900 text-white text-[10px] font-bold hover:bg-[#0066FF] transition"
+                                            class="px-2.5 py-1 rounded-full bg-slate-900 text-white text-[10px] font-bold hover:bg-[#184f3a] transition"
                                             x-text="hasCustomCv ? 'Apply Theme' : 'Load'"></button>
                                     <button type="button" x-show="hasCustomCv" @click="applyTemplatePreset(tpl, true)"
                                             class="px-2 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold hover:bg-slate-200 transition" title="Replace your text with this template's sample CV">Sample</button>
@@ -763,27 +763,27 @@
 
                 <div class="flex-1 overflow-y-auto p-6 space-y-3 text-xs">
                     @guest
-                    <div class="p-4 rounded-2xl bg-blue-50/80 border border-blue-200/80 space-y-3 mb-4">
+                    <div class="p-4 rounded-2xl bg-[#e8f7ed]/80 border border-[#c8f3dc] space-y-3 mb-4">
                         <div class="font-bold text-slate-900">Save resumes across devices?</div>
                         <p class="text-[11px] text-slate-600 leading-relaxed">Sign in or create a free account anytime to permanently sync your resumes &amp; invoices.</p>
                         <div class="flex gap-2">
                             <a href="{{ route('login') }}" class="flex-1 text-center py-2 rounded-xl bg-slate-900 text-white font-bold">Login</a>
-                            <a href="{{ route('register') }}" class="flex-1 text-center py-2 rounded-xl bg-white border border-blue-200 text-[#0066FF] font-bold">Sign Up Free</a>
+                            <a href="{{ route('register') }}" class="flex-1 text-center py-2 rounded-xl bg-white border border-[#c8f3dc] text-[#184f3a] font-bold">Sign Up Free</a>
                         </div>
                     </div>
                     @endguest
 
                     @forelse($recentResumes as $past)
-                        <div class="p-4 rounded-2xl border border-slate-200 hover:border-[#0066FF] bg-slate-50/50 transition">
+                        <div class="p-4 rounded-2xl border border-slate-200 hover:border-[#184f3a] bg-slate-50/50 transition">
                             <div class="flex items-center justify-between mb-1">
                                 <span class="font-bold text-sm text-slate-900">{{ $past->title }}</span>
                                 <span class="w-2.5 h-2.5 rounded-full" style="background-color: {{ $past->accent_color ?: '#162a42' }}"></span>
                             </div>
                             <div class="text-slate-500 mb-3">{{ $past->content['personal']['full_name'] ?? 'Resume' }} &bull; {{ $past->created_at->diffForHumans() }}</div>
                             <div class="flex items-center gap-2">
-                                <a href="{{ route('resume.builder', ['load' => $past->uuid]) }}" class="px-3 py-1 bg-white border border-slate-300 rounded-full font-semibold text-slate-700 hover:border-[#0066FF]">Edit</a>
-                                <a href="{{ route('resume.pdf', $past->uuid) }}" class="px-3 py-1 bg-white border border-slate-300 rounded-full font-semibold text-slate-700 hover:border-[#0066FF]">PDF</a>
-                                <a href="{{ route('resume.show', $past->uuid) }}" target="_blank" class="px-3 py-1 bg-white border border-slate-300 rounded-full font-semibold text-slate-700 hover:border-[#0066FF]">View</a>
+                                <a href="{{ route('resume.builder', ['load' => $past->uuid]) }}" class="px-3 py-1 bg-white border border-slate-300 rounded-full font-semibold text-slate-700 hover:border-[#184f3a]">Edit</a>
+                                <a href="{{ route('resume.pdf', $past->uuid) }}" class="px-3 py-1 bg-white border border-slate-300 rounded-full font-semibold text-slate-700 hover:border-[#184f3a]">PDF</a>
+                                <a href="{{ route('resume.show', $past->uuid) }}" target="_blank" class="px-3 py-1 bg-white border border-slate-300 rounded-full font-semibold text-slate-700 hover:border-[#184f3a]">View</a>
                             </div>
                         </div>
                     @empty

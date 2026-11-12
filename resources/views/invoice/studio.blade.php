@@ -4,14 +4,14 @@
 
 @section('header_actions')
 <button type="button" @click="$dispatch('open-history-drawer')" class="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-lg text-xs font-semibold bg-white hover:bg-black/[0.04] border border-black/[0.09] text-[#111111] transition whitespace-nowrap shrink-0 cursor-pointer">
-    <svg class="w-3.5 h-3.5 text-[#0066FF] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <svg class="w-3.5 h-3.5 text-[#184f3a] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
     <span class="hidden sm:inline">Saved Invoices</span>
     <span class="sm:hidden">Saved</span>
 </button>
 @endsection
 
 @section('content')
-<div x-data="bloomInvoiceEditor(@js($loadedInvoice), @js($config ?? null), @js($loadedTemplate ?? null), @js($templateStyles ?? []), @js($templateColors ?? []), @js($allTemplates ?? []))" x-init="init()" class="relative bg-[#F8FAFC] pb-28 sm:pb-32">
+<div x-data="bloomInvoiceEditor(@js($loadedInvoice), @js($config ?? null), @js($loadedTemplate ?? null), @js($templateStyles ?? []), @js($templateColors ?? []), @js($allTemplates ?? []))" x-init="init()" class="relative bg-[#f8f8f3] pb-28 sm:pb-32">
 
     <!-- Toast Notification -->
     <div x-cloak x-show="toast.visible"
@@ -110,11 +110,11 @@
                 </div>
 
                 <!-- Custom Template & Color Switcher -->
-                <button type="button" @click="templateDrawerOpen = true" class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl bg-white border border-black/[0.09] hover:border-[#0066FF] shadow-sm text-xs font-semibold text-[#111111] transition group whitespace-nowrap cursor-pointer">
+                <button type="button" @click="templateDrawerOpen = true" class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl bg-white border border-black/[0.09] hover:border-[#184f3a] shadow-sm text-xs font-semibold text-[#111111] transition group whitespace-nowrap cursor-pointer">
                     <span class="w-3 h-3 rounded-full border border-white shadow-sm shrink-0" :style="'background-color:' + accent_color"></span>
                     <span class="text-black/45 font-medium text-[11px] uppercase tracking-wider hidden sm:inline">Template:</span>
-                    <span class="font-bold text-[#111111] group-hover:text-[#0066FF]" x-text="templateStyles[template_style]?.name || 'Modern Studio'"></span>
-                    <svg class="w-3.5 h-3.5 text-black/45 group-hover:text-[#0066FF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
+                    <span class="font-bold text-[#111111] group-hover:text-[#184f3a]" x-text="templateStyles[template_style]?.name || 'Modern Studio'"></span>
+                    <svg class="w-3.5 h-3.5 text-black/45 group-hover:text-[#184f3a]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
                 </button>
 
                 <button type="button" @click="resetForm()" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-black/50 hover:text-rose-600 hover:bg-white border border-transparent hover:border-black/[0.08] transition whitespace-nowrap cursor-pointer">
@@ -640,7 +640,7 @@
             </div>
             <div class="pt-4 flex items-center justify-end gap-3">
                 <button type="button" @click="emailModalOpen = false" class="px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">Cancel</button>
-                <button type="button" @click="sendEmailSubmit()" :disabled="sendingEmail" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-slate-900 hover:bg-[#0066FF] transition disabled:opacity-50">
+                <button type="button" @click="sendEmailSubmit()" :disabled="sendingEmail" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-slate-900 hover:bg-[#184f3a] transition disabled:opacity-50">
                     <svg x-show="sendingEmail" class="w-4 h-4 animate-spin text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
                     <span x-text="sendingEmail ? 'Sending...' : 'Send Invoice'"></span>
                 </button>
@@ -667,14 +667,14 @@
 
                 <div class="flex-1 overflow-y-auto p-6 space-y-3 font-sans-inter">
                     @guest
-                    <div class="p-4 rounded-2xl bg-blue-50/80 border border-blue-200/80 space-y-3 mb-4">
+                    <div class="p-4 rounded-2xl bg-[#e8f7ed]/80 border border-[#c8f3dc] space-y-3 mb-4">
                         <div class="text-xs font-bold text-slate-900">Want permanent access to your history?</div>
                         <p class="text-[11px] text-slate-600 leading-relaxed">
                             Signing in is optional for creating PDFs, but logging in syncs your saved documents permanently across devices.
                         </p>
                         <div class="flex items-center gap-2">
-                            <a href="{{ route('login') }}" class="flex-1 text-center px-3 py-2 rounded-xl bg-slate-900 hover:bg-[#0066FF] text-white text-xs font-bold transition">Login</a>
-                            <a href="{{ route('register') }}" class="flex-1 text-center px-3 py-2 rounded-xl bg-white border border-blue-200 hover:border-[#0066FF] text-[#0066FF] text-xs font-bold transition">Sign Up Free</a>
+                            <a href="{{ route('login') }}" class="flex-1 text-center px-3 py-2 rounded-xl bg-slate-900 hover:bg-[#184f3a] text-white text-xs font-bold transition">Login</a>
+                            <a href="{{ route('register') }}" class="flex-1 text-center px-3 py-2 rounded-xl bg-white border border-[#c8f3dc] hover:border-[#184f3a] text-[#184f3a] text-xs font-bold transition">Sign Up Free</a>
                         </div>
                     </div>
                     @endguest
@@ -682,7 +682,7 @@
                     @auth
                     <div class="mb-3 flex items-center justify-between px-1">
                         <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Your Recent Documents</span>
-                        <a href="{{ route('invoice.history.page') }}" class="text-xs font-bold text-[#0066FF] hover:underline">Full History &rarr;</a>
+                        <a href="{{ route('invoice.history.page') }}" class="text-xs font-bold text-[#184f3a] hover:underline">Full History &rarr;</a>
                     </div>
                     @endauth
 
@@ -777,7 +777,7 @@
                                 <template x-for="(style, key) in templateStyles" :key="key">
                                     <button type="button" @click="selectTemplateStyle(key)"
                                             class="text-left p-3 rounded-2xl border-2 transition flex flex-col justify-between group"
-                                            :class="template_style === key ? 'border-[#0066FF] bg-blue-50/50 shadow-sm' : 'border-slate-200 hover:border-slate-300 bg-white'">
+                                            :class="template_style === key ? 'border-[#184f3a] bg-[#e8f7ed]/60 shadow-sm' : 'border-slate-200 hover:border-slate-300 bg-white'">
                                         <div class="w-full">
                                             <!-- Miniature Wireframe Preview -->
                                             <div class="h-14 w-full rounded-lg bg-slate-50 border border-slate-200/80 mb-2 overflow-hidden relative p-2">
@@ -842,7 +842,7 @@
                                             </div>
                                             <div class="flex items-center justify-between">
                                                 <span class="font-bold text-xs text-slate-900" x-text="style.name"></span>
-                                                <span x-show="template_style === key" class="text-[10px] font-bold text-[#0066FF]">Active</span>
+                                                <span x-show="template_style === key" class="text-[10px] font-bold text-[#184f3a]">Active</span>
                                             </div>
                                             <div class="text-[10px] text-slate-500 mt-0.5 leading-snug" x-text="style.tagline"></div>
                                         </div>
@@ -856,10 +856,10 @@
                     <div x-show="templateTab === 'presets'" class="space-y-3">
                         <div class="flex items-center justify-between mb-2">
                             <span class="text-xs text-slate-500">Load sample structure &amp; line items:</span>
-                            <a href="{{ route('templates.index') }}" class="text-xs font-bold text-[#0066FF] hover:underline">Full Gallery &rarr;</a>
+                            <a href="{{ route('templates.index') }}" class="text-xs font-bold text-[#184f3a] hover:underline">Full Gallery &rarr;</a>
                         </div>
                         <template x-for="tpl in allTemplates" :key="tpl.slug">
-                            <button type="button" @click="applyIndustryTemplate(tpl)" class="w-full text-left p-3.5 rounded-2xl border border-slate-200 hover:border-[#0066FF] hover:bg-blue-50/30 transition flex items-center justify-between gap-3">
+                            <button type="button" @click="applyIndustryTemplate(tpl)" class="w-full text-left p-3.5 rounded-2xl border border-slate-200 hover:border-[#184f3a] hover:bg-[#e8f7ed]/40 transition flex items-center justify-between gap-3">
                                 <div>
                                     <div class="text-[10px] font-bold uppercase tracking-wider" :style="'color:' + tpl.accent_color" x-text="tpl.category_label"></div>
                                     <div class="font-bold text-xs text-slate-900 mt-0.5" x-text="tpl.name"></div>
@@ -882,13 +882,13 @@
     <!-- Bloom.io Marketing & Educational Sections (Below the Generator) -->
     <section id="features" class="no-print mt-16 sm:mt-24 max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-            <span class="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#0066FF] mb-2 block">Built for Creators &amp; Modern Businesses</span>
+            <span class="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#184f3a] mb-2 block">Built for Creators &amp; Modern Businesses</span>
             <h2 class="text-2xl sm:text-4xl font-extrabold text-[#111111] tracking-[-0.03em]">Everything you need to invoice with confidence</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-8">
             <div class="bg-white p-6 sm:p-8 rounded-3xl border border-black/[0.08] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition space-y-3">
-                <div class="w-12 h-12 rounded-2xl bg-[#F8FAFC] text-[#0066FF] flex items-center justify-center">
+                <div class="w-12 h-12 rounded-2xl bg-[#f8f8f3] text-[#184f3a] flex items-center justify-center">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
                 </div>
                 <h3 class="text-lg font-bold text-[#111111]">Custom Cover Photos &amp; Logo</h3>
@@ -898,7 +898,7 @@
             </div>
 
             <div class="bg-white p-6 sm:p-8 rounded-3xl border border-black/[0.08] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition space-y-3">
-                <div class="w-12 h-12 rounded-2xl bg-[#F8FAFC] text-emerald-600 flex items-center justify-center">
+                <div class="w-12 h-12 rounded-2xl bg-[#f8f8f3] text-emerald-600 flex items-center justify-center">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
                 <h3 class="text-lg font-bold text-[#111111]">Instant Online Payments</h3>
@@ -908,7 +908,7 @@
             </div>
 
             <div class="bg-white p-6 sm:p-8 rounded-3xl border border-black/[0.08] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition space-y-3">
-                <div class="w-12 h-12 rounded-2xl bg-[#F8FAFC] text-[#FF325A] flex items-center justify-center">
+                <div class="w-12 h-12 rounded-2xl bg-[#f8f8f3] text-[#FF325A] flex items-center justify-center">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
                 </div>
                 <h3 class="text-lg font-bold text-[#111111]">Digital Signature Pad</h3>
@@ -922,7 +922,7 @@
     <!-- FAQ Accordion (Bloom.io style) -->
     <section id="faq" class="no-print mt-16 sm:mt-24 max-w-4xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-8 sm:mb-12">
-            <span class="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#0066FF] mb-2 block">Common Questions</span>
+            <span class="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#184f3a] mb-2 block">Common Questions</span>
             <h2 class="text-2xl sm:text-3xl font-extrabold text-[#111111] tracking-[-0.03em]">Frequently Asked Questions</h2>
         </div>
 
