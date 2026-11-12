@@ -44,6 +44,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
         ];
     }
 
@@ -55,6 +56,11 @@ class User extends Authenticatable
     public function resumes(): HasMany
     {
         return $this->hasMany(Resume::class)->orderBy('created_at', 'desc');
+    }
+
+    public function blogPosts(): HasMany
+    {
+        return $this->hasMany(BlogPost::class)->orderBy('created_at', 'desc');
     }
 
     public function apiTokens(): HasMany

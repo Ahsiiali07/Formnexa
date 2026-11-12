@@ -1,22 +1,22 @@
 @extends('layouts.app')
 
-@section('title', $meta['name'] . ' — Free Online Converter | Formnexa')
-@section('meta_description', $meta['tagline'])
-
 @section('content')
+@php
+    $convSeoData = $convSeo ?? \App\Support\ToolSeoCatalog::converter($meta['slug']);
+@endphp
+<x-schema.tool :name="$meta['title'] . ' Converter'" :description="$meta['tagline']" category="UtilitiesApplication" />
+
 <div x-data="pdfConverterTool(@js($meta))" class="min-h-screen bg-[#f8f8f3] pb-16 sm:pb-20">
 
     {{-- Top Tool Switcher & Breadcrumb Strip --}}
     <section class="bg-white border-b border-border-subtle pt-6 sm:pt-7 pb-5 sm:pb-6 px-4 sm:px-6">
         <div class="max-w-[1280px] mx-auto space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-3">
-                <div class="flex flex-wrap items-center gap-2 text-xs text-[#536058]">
-                    <a href="{{ route('convert.hub') }}" class="font-bold text-[#17211b] hover:text-[#184f3a]">Convert PDF</a>
-                    <span>/</span>
-                    <span class="font-mono uppercase tracking-wider font-semibold">{{ $meta['group'] === 'to_pdf' ? 'Convert to PDF' : 'Convert from PDF' }}</span>
-                    <span>/</span>
-                    <span class="font-bold text-[#17211b]">{{ $meta['name'] }}</span>
-                </div>
+                <x-schema.breadcrumbs :items="[
+                    ['Home', url('/')],
+                    ['PDF Converter', route('convert.hub')],
+                    [$meta['name'], route('convert.tool', $meta['slug'])],
+                ]" />
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f8f8f3] border border-border-subtle text-emerald-700 text-[11px] font-bold">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                     100% Free &bull; No Sign-up Required
@@ -432,6 +432,62 @@
                 </div>
             </aside>
         </div>
+
+        {{-- Server-Rendered Converter SEO Guide, Limitations, Privacy, FAQ & Reverse Links --}}
+        <section class="mt-12 sm:mt-16 space-y-8">
+            <div class="bg-white rounded-[26px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="space-y-3">
+                        <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">3-Step Guide</span>
+                        <h2 class="font-display text-lg sm:text-xl font-extrabold text-[#17211b]">
+                            How to convert {{ $meta['name'] }}
+                        </h2>
+                        <ol class="space-y-2 text-xs sm:text-sm text-[#46534b] list-decimal pl-5 leading-relaxed">
+                            @foreach($convSeoData['steps'] as $stepText)
+                                <li>{{ $stepText }}</li>
+                            @endforeach
+                        </ol>
+                    </div>
+
+                    <div class="space-y-3">
+                        <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Quality &amp; Fidelity</span>
+                        <h2 class="font-display text-lg sm:text-xl font-extrabold text-[#17211b]">
+                            What is kept &amp; what may change
+                        </h2>
+                        <p class="text-xs sm:text-sm text-[#46534b] leading-relaxed">{{ $convSeoData['preserved'] }}</p>
+                        <p class="text-xs text-[#68736d] leading-relaxed">{{ $convSeoData['limitations'] }}</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">File Privacy</span>
+                        <h2 class="font-display text-lg sm:text-xl font-extrabold text-[#17211b]">
+                            How your files are handled
+                        </h2>
+                        <p class="text-xs sm:text-sm text-[#46534b] leading-relaxed">
+                            Your uploaded document is processed on-demand strictly for this conversion and delivered directly back to your browser. No account, email address, or permanent cloud storage is required.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-[26px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm">
+                <x-faq :items="$convSeoData['faqs']" :heading="$meta['name'] . ' — Questions & Answers'" />
+            </div>
+
+            <div class="bg-[#fff0e8] rounded-[24px] border border-[#fedac7] p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#b45309]">Related Converters</span>
+                    <h2 class="font-display text-lg sm:text-xl font-extrabold text-[#17211b] mt-0.5">Switch directions or convert another format</h2>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    @foreach($convSeoData['related'] as [$relName, $relUrl])
+                        <a href="{{ url($relUrl) }}" class="px-3.5 py-2 rounded-xl bg-white border border-[#f5c2a8] hover:border-[#b45309] text-xs font-bold text-[#17211b] transition">
+                            {{ $relName }} &rarr;
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </section>
     </div>
 </div>
 @endsection

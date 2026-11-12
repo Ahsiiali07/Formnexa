@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\EnsureAdmin;
+use App\Http\Middleware\NoIndex;
 use App\Http\Middleware\ResolveApiToken;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,6 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'api.auth' => ResolveApiToken::class . ':required',
             'api.optional' => ResolveApiToken::class . ':optional',
+            'noindex' => NoIndex::class,
+            'admin' => EnsureAdmin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

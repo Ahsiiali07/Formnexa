@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="pdf-worker-url" content="{{ asset('vendor/pdfjs/pdf.worker.min.mjs') }}">
-    <meta name="description" content="@yield('meta_description', 'Formnexa — Create professional resumes, build billing invoices, and convert PDFs cleanly in one fast workspace. Free to start, no credit card required.')">
-
-    <title>@yield('title', 'Formnexa — Invoices, Resumes & PDF Tools in One Workspace')</title>
+    @include('partials.seo-head')
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
@@ -254,7 +252,7 @@
                         <button type="button" @click="openResume = !openResume" @click.outside="openResume = false"
                                 class="px-3 py-2 rounded-lg flex items-center gap-1 transition-colors whitespace-nowrap cursor-pointer {{ request()->routeIs('resume.*') ? 'text-[#184f3a] bg-[#e8f7ed] font-semibold' : 'text-[#3f4a43] hover:text-[#17211b] hover:bg-[#f2f6f3]' }}">
                             <span>Resume<span class="hidden lg:inline"> Builder</span></span>
-                            <span class="material-symbols-outlined text-[17px] transition-transform duration-150" :class="openResume ? 'rotate-180' : ''">expand_more</span>
+                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px] transition-transform duration-150" :class="openResume ? 'rotate-180' : ''">expand_more</span>
                         </button>
 
                         <div x-show="openResume" x-cloak
@@ -275,7 +273,7 @@
                                 </a>
                                 <a href="{{ route('resume.builder', ['import' => 1]) }}" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#e8f7ed]/70 transition group">
                                     <span class="w-8 h-8 rounded-lg bg-[#e8f7ed] text-[#184f3a] border border-[#c8f3dc] flex items-center justify-center shrink-0">
-                                        <span class="material-symbols-outlined text-[17px]">upload_file</span>
+                                        <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px]">upload_file</span>
                                     </span>
                                     <div>
                                         <div class="text-xs font-bold text-[#17211b] group-hover:text-[#184f3a]">Import Existing CV</div>
@@ -298,7 +296,7 @@
                         <button type="button" @click="openConv = !openConv" @click.outside="openConv = false"
                                 class="px-3 py-2 rounded-lg flex items-center gap-1 transition-colors whitespace-nowrap cursor-pointer {{ request()->routeIs('convert.*') ? 'text-[#184f3a] bg-[#e8f7ed] font-semibold' : 'text-[#3f4a43] hover:text-[#17211b] hover:bg-[#f2f6f3]' }}">
                             <span>PDF Converter</span>
-                            <span class="material-symbols-outlined text-[17px] transition-transform duration-150" :class="openConv ? 'rotate-180' : ''">expand_more</span>
+                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px] transition-transform duration-150" :class="openConv ? 'rotate-180' : ''">expand_more</span>
                         </button>
 
                         <div x-show="openConv" x-cloak
@@ -353,7 +351,7 @@
                         <button type="button" @click="openTools = !openTools" @click.outside="openTools = false"
                                 class="px-3 py-2 rounded-lg flex items-center gap-1 transition-colors whitespace-nowrap cursor-pointer {{ request()->routeIs('templates.*') ? 'text-[#184f3a] bg-[#e8f7ed] font-semibold' : 'text-[#3f4a43] hover:text-[#17211b] hover:bg-[#f2f6f3]' }}">
                             <span>Templates<span class="hidden lg:inline"> &amp; Docs</span></span>
-                            <span class="material-symbols-outlined text-[17px] transition-transform duration-150" :class="openTools ? 'rotate-180' : ''">expand_more</span>
+                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px] transition-transform duration-150" :class="openTools ? 'rotate-180' : ''">expand_more</span>
                         </button>
 
                         <div x-show="openTools" x-cloak
@@ -410,6 +408,12 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- 5. Blog & SEO Guides -->
+                    <a href="{{ route('blog.index') }}"
+                       class="px-3 py-2 rounded-lg flex items-center gap-1.5 transition-all duration-150 whitespace-nowrap {{ request()->routeIs('blog.*') ? 'text-[#184f3a] bg-[#e8f7ed] font-semibold' : 'text-[#3f4a43] hover:text-[#17211b] hover:bg-[#f2f6f3]' }}">
+                        <span>Blog</span>
+                    </a>
                 </nav>
             </div>
 
@@ -439,7 +443,7 @@
                                 {{ substr(Auth::user()->name, 0, 1) }}
                             </span>
                             <span class="hidden lg:inline max-w-[110px] truncate">{{ Auth::user()->name }}</span>
-                            <span class="material-symbols-outlined text-[16px] text-[#68736d]">expand_more</span>
+                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#68736d]">expand_more</span>
                         </button>
 
                         <div x-show="userMenu" x-cloak x-transition class="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-xl shadow-[#17211b]/8 border border-[#dfe4df] p-2 z-50 text-xs">
@@ -447,6 +451,11 @@
                                 <div class="font-bold text-[#17211b] truncate">{{ Auth::user()->name }}</div>
                                 <div class="text-[11px] text-[#68736d] truncate">{{ Auth::user()->email }}</div>
                             </div>
+                            @if(Auth::user()->is_admin)
+                                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#e8f7ed] text-[#184f3a] font-bold transition mb-1">
+                                    Admin Dashboard
+                                </a>
+                            @endif
                             <a href="{{ route('invoice.history.page') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#e8f7ed] text-[#17211b] hover:text-[#184f3a] font-semibold transition">
                                 My Document History
                             </a>
@@ -472,8 +481,8 @@
                 <!-- Mobile Menu Toggle Button -->
                 <button type="button" @click="mobileMenu = !mobileMenu" aria-label="Toggle menu" :aria-expanded="mobileMenu.toString()"
                         class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-[9px] bg-white border border-[#dfe4df] text-[#17211b] hover:bg-[#f8f8f3] transition shrink-0">
-                    <span x-show="!mobileMenu" class="material-symbols-outlined text-[21px]">menu</span>
-                    <span x-show="mobileMenu" x-cloak class="material-symbols-outlined text-[21px]">close</span>
+                    <span aria-hidden="true" data-nosnippet translate="no" x-show="!mobileMenu" class="material-symbols-outlined text-[21px]">menu</span>
+                    <span aria-hidden="true" data-nosnippet translate="no" x-show="mobileMenu" x-cloak class="material-symbols-outlined text-[21px]">close</span>
                 </button>
             </div>
         </div>
@@ -497,41 +506,45 @@
                         <a href="{{ route('resume.builder') }}" @click="mobileMenu = false"
                            class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#f0ebff] border border-[#e3d9ff] text-[#17211b] font-bold text-xs">
                             <span class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-[18px] text-[#6142be]">badge</span>
+                                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#6142be]">badge</span>
                                 <span>Resume Builder &amp; CV Importer</span>
                             </span>
-                            <span class="material-symbols-outlined text-[16px] text-[#6142be]">arrow_forward</span>
+                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#6142be]">arrow_forward</span>
                         </a>
                         <a href="{{ route('invoice.studio') }}" @click="mobileMenu = false"
                            class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#e8f7ed] border border-[#c8f3dc] text-[#17211b] font-bold text-xs">
                             <span class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-[18px] text-[#184f3a]">receipt_long</span>
+                                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#184f3a]">receipt_long</span>
                                 <span>Invoice Maker &amp; 12 Document Tools</span>
                             </span>
-                            <span class="material-symbols-outlined text-[16px] text-[#184f3a]">arrow_forward</span>
+                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#184f3a]">arrow_forward</span>
                         </a>
                         <a href="{{ route('convert.hub') }}" @click="mobileMenu = false"
                            class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#fff0e8] border border-[#fedac7] text-[#17211b] font-bold text-xs">
                             <span class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-[18px] text-[#b45309]">picture_as_pdf</span>
+                                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#b45309]">picture_as_pdf</span>
                                 <span>{{ $converterCount }} PDF Converter Tools</span>
                             </span>
-                            <span class="material-symbols-outlined text-[16px] text-[#b45309]">arrow_forward</span>
+                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#b45309]">arrow_forward</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- Template Galleries -->
-                <div class="grid grid-cols-2 gap-2">
+                <!-- Template Galleries & Blog -->
+                <div class="grid grid-cols-3 gap-2">
                     <a href="{{ route('templates.index') }}" @click="mobileMenu = false"
-                       class="flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-[#17211b] font-bold text-xs">
-                        <span>Invoice Themes</span>
+                       class="flex items-center justify-between gap-1 px-3 py-2.5 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-[#17211b] font-bold text-xs">
+                        <span>Invoices</span>
                         <span class="font-mono text-[10px] font-bold text-[#184f3a]">20+</span>
                     </a>
                     <a href="{{ route('resume.templates') }}" @click="mobileMenu = false"
-                       class="flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-[#17211b] font-bold text-xs">
-                        <span>CV Themes</span>
+                       class="flex items-center justify-between gap-1 px-3 py-2.5 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-[#17211b] font-bold text-xs">
+                        <span>CVs</span>
                         <span class="font-mono text-[10px] font-bold text-[#6142be]">15+</span>
+                    </a>
+                    <a href="{{ route('blog.index') }}" @click="mobileMenu = false"
+                       class="flex items-center justify-center gap-1 px-3 py-2.5 rounded-xl bg-[#e8f7ed] border border-[#c8f3dc] text-[#184f3a] font-bold text-xs">
+                        <span>Blog &rarr;</span>
                     </a>
                 </div>
 
@@ -540,7 +553,7 @@
                     <button type="button" @click="mobileSection = (mobileSection === 'converters' ? '' : 'converters')"
                             class="w-full px-3.5 py-2.5 bg-[#f8f8f3] flex items-center justify-between text-xs font-bold text-[#17211b]">
                         <span>PDF Converters ({{ $converterCount }})</span>
-                        <span class="material-symbols-outlined text-[18px] text-[#68736d] transition-transform" :class="mobileSection === 'converters' ? 'rotate-180' : ''">expand_more</span>
+                        <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#68736d] transition-transform" :class="mobileSection === 'converters' ? 'rotate-180' : ''">expand_more</span>
                     </button>
                     <div x-show="mobileSection === 'converters'" class="p-2.5 grid grid-cols-2 gap-1.5 bg-white">
                         @foreach(\App\Support\ConverterCatalog::all() as $cTool)
@@ -558,7 +571,7 @@
                     <button type="button" @click="mobileSection = (mobileSection === 'generators' ? '' : 'generators')"
                             class="w-full px-3.5 py-2.5 bg-[#f8f8f3] flex items-center justify-between text-xs font-bold text-[#17211b]">
                         <span>12 Document Generators</span>
-                        <span class="material-symbols-outlined text-[18px] text-[#68736d] transition-transform" :class="mobileSection === 'generators' ? 'rotate-180' : ''">expand_more</span>
+                        <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#68736d] transition-transform" :class="mobileSection === 'generators' ? 'rotate-180' : ''">expand_more</span>
                     </button>
                     <div x-show="mobileSection === 'generators'" class="p-2.5 grid grid-cols-2 gap-1.5 bg-white">
                         @foreach([
@@ -599,17 +612,25 @@
                     @endguest
 
                     @auth
-                        <div class="grid grid-cols-2 gap-2">
-                            <a href="{{ route('invoice.history.page') }}" @click="mobileMenu = false"
-                               class="flex items-center justify-center py-2.5 rounded-[10px] bg-[#e8f7ed] text-[#184f3a] font-bold text-xs">
-                                Document History
-                            </a>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="w-full py-2.5 rounded-[10px] bg-rose-50 text-rose-600 font-bold text-xs">
-                                    Sign Out
-                                </button>
-                            </form>
+                        <div class="space-y-2">
+                            @if(Auth::user()->is_admin)
+                                <a href="{{ route('admin.dashboard') }}" @click="mobileMenu = false"
+                                   class="flex items-center justify-center py-2.5 rounded-[10px] bg-[#184f3a] text-white font-bold text-xs">
+                                    Admin Dashboard
+                                </a>
+                            @endif
+                            <div class="grid grid-cols-2 gap-2">
+                                <a href="{{ route('invoice.history.page') }}" @click="mobileMenu = false"
+                                   class="flex items-center justify-center py-2.5 rounded-[10px] bg-[#e8f7ed] text-[#184f3a] font-bold text-xs">
+                                    Document History
+                                </a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="w-full py-2.5 rounded-[10px] bg-rose-50 text-rose-600 font-bold text-xs">
+                                        Sign Out
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     @endauth
                 </div>
@@ -650,11 +671,11 @@
                     <h4 class="text-[14px] font-semibold text-white mb-4">Products</h4>
                     <ul class="space-y-2.5 text-[14px]">
                         <li><a href="{{ route('resume.builder') }}" class="hover:text-white transition-colors">Resume Builder</a></li>
-                        <li><a href="{{ route('resume.builder', ['import' => 1]) }}" class="hover:text-white transition-colors">Smart CV Importer</a></li>
                         <li><a href="{{ route('invoice.studio') }}" class="hover:text-white transition-colors">Invoice Maker</a></li>
                         <li><a href="{{ route('convert.hub') }}" class="hover:text-white transition-colors">PDF Converter</a></li>
                         <li><a href="{{ route('resume.templates') }}" class="hover:text-white transition-colors">Resume Templates</a></li>
                         <li><a href="{{ route('templates.index') }}" class="hover:text-white transition-colors">Invoice Templates</a></li>
+                        <li><a href="{{ route('blog.index') }}" class="hover:text-white transition-colors">Guides &amp; Blog</a></li>
                     </ul>
                 </div>
 
@@ -675,9 +696,10 @@
                 <div>
                     <h4 class="text-[14px] font-semibold text-white mb-4">Company</h4>
                     <ul class="space-y-2.5 text-[14px]">
-                        <li><a href="{{ route('home') }}#features" class="hover:text-white transition-colors">Why Formnexa</a></li>
-                        <li><a href="{{ route('home') }}#how" class="hover:text-white transition-colors">How it works</a></li>
-                        <li><a href="{{ route('home') }}#faq" class="hover:text-white transition-colors">Questions &amp; Answers</a></li>
+                        <li><a href="{{ url('/#features') }}" class="hover:text-white transition-colors">Why Formnexa</a></li>
+                        <li><a href="{{ url('/#how') }}" class="hover:text-white transition-colors">How it works</a></li>
+                        <li><a href="{{ url('/#faq') }}" class="hover:text-white transition-colors">Questions &amp; Answers</a></li>
+                        <li><a href="{{ route('blog.index') }}" class="hover:text-white transition-colors">Blog</a></li>
                         @auth
                             <li><a href="{{ route('invoice.history.page') }}" class="hover:text-white transition-colors">Document History</a></li>
                         @else

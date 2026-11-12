@@ -127,7 +127,13 @@ class ResumeController extends Controller
     public function show(string $uuid): View
     {
         $resume = Resume::where('uuid', $uuid)->firstOrFail();
-        return view('resume.show', compact('resume'));
+        return view('resume.show', [
+            'resume' => $resume,
+            'seo' => [
+                'title' => ($resume->title ?: 'Resume') . ' | Formnexa',
+                'robots' => 'noindex,nofollow',
+            ],
+        ]);
     }
 
     /**

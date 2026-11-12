@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Free CV & Resume Templates — Figma, FlowCV & ATS Styles | Formnexa')
-@section('meta_description', 'Browse 15 designer CV & resume templates inspired by Figma Community, FlowCV & Template.net. Customize layouts, colors, fonts & export PDFs for free.')
-
 @section('content')
 <div x-data="resumeGalleryPage()" class="min-h-screen bg-white">
 
     {{-- Modern Electric Precision Hero Banner --}}
-    <section class="relative overflow-hidden bg-[#f8f8f3] border-b border-border-subtle pt-10 pb-10 sm:pb-12 px-4 sm:px-6">
+    <section class="relative overflow-hidden bg-[#f8f8f3] border-b border-border-subtle pt-7 sm:pt-10 pb-10 sm:pb-12 px-4 sm:px-6">
         <div class="max-w-[1280px] mx-auto">
+            <div class="mb-4">
+                <x-schema.breadcrumbs :items="[['Home', url('/')], ['Resume Builder', route('resume.builder')], ['Resume Templates', route('resume.templates')]]" />
+            </div>
             <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
                 <div class="max-w-3xl">
                     <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-white border border-border-subtle text-emerald-700 font-mono text-[11px] font-semibold uppercase tracking-wider mb-4 shadow-sm">

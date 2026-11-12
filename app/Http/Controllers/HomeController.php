@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BlogPost;
 use App\Support\ConverterCatalog;
 use App\Support\ResumeCatalog;
 use App\Support\TemplateCatalog;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -17,6 +19,10 @@ class HomeController extends Controller
      */
     public function index(): View
     {
+        $latestPosts = Schema::hasTable('blog_posts')
+            ? BlogPost::published()->orderByDesc('published_at')->orderByDesc('id')->take(3)->get()
+            : collect();
+
         return view('home', [
             'generators' => InvoiceController::$generators,
             'invoiceStyles' => TemplateCatalog::styles(),
@@ -24,6 +30,7 @@ class HomeController extends Controller
             'resumeTemplates' => array_slice(ResumeCatalog::templates(), 0, 6),
             'resumeStyles' => ResumeCatalog::styles(),
             'converterGroups' => ConverterCatalog::grouped(),
+            'latestPosts' => $latestPosts,
         ]);
     }
 }

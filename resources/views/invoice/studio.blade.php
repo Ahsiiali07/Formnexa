@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Formnexa — ' . ($activeConfig['title'] ?? 'Smart Document Studio'))
-
 @section('header_actions')
 <button type="button" @click="$dispatch('open-history-drawer')" class="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-lg text-xs font-semibold bg-white hover:bg-black/[0.04] border border-black/[0.09] text-[#111111] transition whitespace-nowrap shrink-0 cursor-pointer">
     <svg class="w-3.5 h-3.5 text-[#184f3a] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -11,6 +9,15 @@
 @endsection
 
 @section('content')
+@php
+    $docSeoData = $docSeo ?? \App\Support\ToolSeoCatalog::document($config['slug'] ?? 'invoice-generator');
+    $docDisplayName = $config['name'] ?? 'Invoice Generator';
+    $docUrlPath = ($config['slug'] ?? 'invoice-generator') === 'invoice-generator'
+        ? route('invoice.studio')
+        : route('invoice.generator', $config['slug']);
+@endphp
+<x-schema.tool :name="'Free ' . $docDisplayName" :description="$config['subtitle'] ?? 'Create and download watermark-free business PDFs in minutes.'" />
+
 <div x-data="bloomInvoiceEditor(@js($loadedInvoice), @js($config ?? null), @js($loadedTemplate ?? null), @js($templateStyles ?? []), @js($templateColors ?? []), @js($allTemplates ?? []))" x-init="init()" class="relative bg-[#f8f8f3] pb-28 sm:pb-32">
 
     <!-- Toast Notification -->
@@ -28,7 +35,15 @@
     </div>
 
     <!-- Bloom.io-Inspired Hero Header & Document Studio Bar -->
-    <section class="no-print pt-7 sm:pt-11 pb-6 sm:pb-8 text-center max-w-6xl mx-auto px-4">
+    <section class="no-print pt-6 sm:pt-10 pb-6 sm:pb-8 text-center max-w-6xl mx-auto px-4">
+        <div class="flex justify-center mb-4">
+            <x-schema.breadcrumbs :items="[
+                ['Home', url('/')],
+                ['Business Documents', route('invoice.studio')],
+                [$docDisplayName, $docUrlPath],
+            ]" />
+        </div>
+
         <!-- 12 Document Types Switcher Ribbon -->
         <div class="mb-6 -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto scrollbar-hide">
             <div class="inline-flex sm:flex items-center sm:justify-center sm:flex-wrap gap-1.5 min-w-full sm:min-w-0">
@@ -919,42 +934,73 @@
         </div>
     </section>
 
-    <!-- FAQ Accordion (Bloom.io style) -->
-    <section id="faq" class="no-print mt-16 sm:mt-24 max-w-4xl mx-auto px-4 sm:px-6">
-        <div class="text-center mb-8 sm:mb-12">
-            <span class="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#184f3a] mb-2 block">Common Questions</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#111111] tracking-[-0.03em]">Frequently Asked Questions</h2>
+    <!-- Unique Document-Specific SEO Guide, Checklist, Comparison, FAQ & Related Tools -->
+    <section class="no-print mt-14 sm:mt-20 max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+        <div class="bg-white rounded-[28px] border border-[#dfe4df] p-6 sm:p-10 space-y-8 shadow-sm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Step-by-Step Guide</span>
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        How to create a {{ strtolower(str_replace(' Generator', '', $docDisplayName)) }} in 4 steps
+                    </h2>
+                    <ol class="space-y-2.5 text-xs sm:text-sm text-[#46534b] list-decimal pl-5 leading-relaxed">
+                        @foreach($docSeoData['steps'] as $stepText)
+                            <li>{{ $stepText }}</li>
+                        @endforeach
+                    </ol>
+                </div>
+
+                <div class="space-y-4">
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Required Fields Checklist</span>
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        What to include in your {{ strtolower(str_replace(' Generator', '', $docDisplayName)) }}
+                    </h2>
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-[#46534b] leading-relaxed">
+                        @foreach($docSeoData['checklist'] as $checkItem)
+                            <li class="flex items-start gap-2">
+                                <span class="text-[#184f3a] font-bold shrink-0">&check;</span>
+                                <span>{{ $checkItem }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-6 border-t border-[#dfe4df] grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-5 rounded-2xl bg-[#fbfbf7] border border-[#dfe4df] space-y-2">
+                    <h3 class="font-display text-base sm:text-lg font-extrabold text-[#17211b]">{{ $docSeoData['comparison_title'] }}</h3>
+                    <p class="text-xs sm:text-sm text-[#536058] leading-relaxed">{{ $docSeoData['comparison_body'] }}</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-[#e8f7ed]/70 border border-[#c8f3dc] space-y-2">
+                    <h3 class="font-display text-base sm:text-lg font-extrabold text-[#17211b]">Practical Tip</h3>
+                    <p class="text-xs sm:text-sm text-[#46534b] leading-relaxed">{{ $docSeoData['tips'] }}</p>
+                    <p class="text-[11px] text-[#184f3a] font-semibold pt-1">
+                        Supports USD, EUR, GBP, PKR (NTN/STRN compatible) &amp; 20 more currencies.
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <div class="space-y-3 sm:space-y-4 font-sans-inter" x-data="{ active: 1 }">
-            <div class="bg-white rounded-2xl border border-black/[0.08] p-5 cursor-pointer hover:border-black/25 transition" @click="active = (active === 1 ? null : 1)">
-                <div class="flex items-center justify-between gap-4 font-bold text-sm text-[#111111]">
-                    <span>Can I customize the {{ strtolower($config['title'] ?? 'document') }} template?</span>
-                    <svg class="w-4 h-4 text-black/45 transition-transform duration-200 shrink-0" :class="active === 1 ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-                </div>
-                <div x-show="active === 1" x-transition class="mt-3 text-xs text-black/60 leading-relaxed">
-                    Yes. Edit labels, add your logo, change currency, and adjust line items before downloading or printing your {{ strtolower($config['title'] ?? 'document') }}.
-                </div>
-            </div>
+        {{-- FAQ with Schema.org FAQPage --}}
+        <div class="bg-white rounded-[28px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm">
+            <x-faq :items="$docSeoData['faqs']" :heading="$docDisplayName . ' — Frequently Asked Questions'" />
+        </div>
 
-            <div class="bg-white rounded-2xl border border-black/[0.08] p-5 cursor-pointer hover:border-black/25 transition" @click="active = (active === 2 ? null : 2)">
-                <div class="flex items-center justify-between gap-4 font-bold text-sm text-[#111111]">
-                    <span>Is this {{ $config['name'] ?? 'Generator' }} completely free?</span>
-                    <svg class="w-4 h-4 text-black/45 transition-transform duration-200 shrink-0" :class="active === 2 ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-                </div>
-                <div x-show="active === 2" x-transition class="mt-3 text-xs text-black/60 leading-relaxed">
-                    Yes! You can generate unlimited {{ strtolower($config['title'] ?? 'document') }}s, download crisp PDFs, and share links without any watermarks or hidden charges.
-                </div>
+        {{-- Related Tools Internal Link Matrix --}}
+        <div class="bg-[#e8f7ed] rounded-[24px] border border-[#c8f3dc] p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+            <div class="space-y-1">
+                <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Related Formnexa Tools</span>
+                <h2 class="font-display text-lg sm:text-xl font-extrabold text-[#17211b]">Complete your billing workflow</h2>
             </div>
-
-            <div class="bg-white rounded-2xl border border-black/[0.08] p-5 cursor-pointer hover:border-black/25 transition" @click="active = (active === 3 ? null : 3)">
-                <div class="flex items-center justify-between gap-4 font-bold text-sm text-[#111111]">
-                    <span>Will I lose my draft if I refresh?</span>
-                    <svg class="w-4 h-4 text-black/45 transition-transform duration-200 shrink-0" :class="active === 3 ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-                </div>
-                <div x-show="active === 3" x-transition class="mt-3 text-xs text-black/60 leading-relaxed">
-                    No. Formnexa automatically caches your in-progress work locally in your browser, so you can resume editing at any time.
-                </div>
+            <div class="flex flex-wrap gap-2">
+                @foreach($docSeoData['related'] as [$relLabel, $relPath])
+                    <a href="{{ url($relPath) }}" class="px-3.5 py-2 rounded-xl bg-white border border-[#c6d1ca] hover:border-[#184f3a] text-xs font-bold text-[#17211b] hover:text-[#184f3a] transition">
+                        {{ $relLabel }} &rarr;
+                    </a>
+                @endforeach
+                <a href="{{ route('blog.index') }}" class="px-3.5 py-2 rounded-xl bg-[#184f3a] text-white text-xs font-bold hover:bg-[#123e2d] transition">
+                    Read Billing Guides &rarr;
+                </a>
             </div>
         </div>
     </section>

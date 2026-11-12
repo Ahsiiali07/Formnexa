@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\ConverterDispatcher;
 use App\Support\ConverterCatalog;
+use App\Support\ToolSeoCatalog;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -33,6 +34,7 @@ class ConverterController extends Controller
         return view('convert.tool', [
             'meta' => $meta,
             'groups' => ConverterCatalog::grouped(),
+            'convSeo' => ToolSeoCatalog::converter($tool),
         ]);
     }
 

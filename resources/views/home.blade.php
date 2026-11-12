@@ -1,8 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Formnexa — Invoices, Resume Builder & PDF Converter Suite')
-@section('meta_description', 'Build ATS-ready resumes, create branded invoices & 12 business documents, and convert PDFs in seconds — all in one fast workspace. Free to start, no credit card required.')
-
 @push('styles')
 <style>
     .fn-home {
@@ -1417,11 +1414,11 @@
             </span>
 
             <h1>
-                Create documents that <span>move you forward.</span>
+                Free Invoice Maker, <span>Resume Builder &amp; PDF Converter.</span>
             </h1>
 
             <p class="fn-hero-copy">
-                Build an interview-ready resume, send branded invoices &amp; quotes, or convert PDF files in seconds &mdash; all from one calm, fast workspace.
+                Create branded invoices, quotes &amp; business documents, build an interview-ready ATS resume, or convert PDF files cleanly in seconds &mdash; all in one calm workspace.
             </p>
 
             <div class="fn-hero-actions">
@@ -1436,15 +1433,15 @@
 
             <div class="fn-hero-note">
                 <span>
-                    <span class="material-symbols-outlined text-[16px] text-[#184f3a]">check_circle</span>
+                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#184f3a]">check_circle</span>
                     No credit card
                 </span>
                 <span>
-                    <span class="material-symbols-outlined text-[16px] text-[#184f3a]">check_circle</span>
+                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#184f3a]">check_circle</span>
                     Zero watermarks
                 </span>
                 <span>
-                    <span class="material-symbols-outlined text-[16px] text-[#184f3a]">shield</span>
+                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#184f3a]">shield</span>
                     No sign-up required
                 </span>
             </div>
@@ -1456,19 +1453,19 @@
                 <button type="button" role="tab" :aria-selected="(activeProduct === 'resume').toString()"
                         :class="activeProduct === 'resume' ? 'active' : ''"
                         @click="activeProduct = 'resume'">
-                    <span class="material-symbols-outlined text-[17px]">description</span>
+                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px]">description</span>
                     <span>Resume Builder</span>
                 </button>
                 <button type="button" role="tab" :aria-selected="(activeProduct === 'invoice').toString()"
                         :class="activeProduct === 'invoice' ? 'active' : ''"
                         @click="activeProduct = 'invoice'">
-                    <span class="material-symbols-outlined text-[17px]">receipt_long</span>
+                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px]">receipt_long</span>
                     <span>Invoice Maker</span>
                 </button>
                 <button type="button" role="tab" :aria-selected="(activeProduct === 'pdf').toString()"
                         :class="activeProduct === 'pdf' ? 'active' : ''"
                         @click="activeProduct = 'pdf'">
-                    <span class="material-symbols-outlined text-[17px]">sync_alt</span>
+                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px]">sync_alt</span>
                     <span>PDF Converter</span>
                 </button>
             </div>
@@ -1498,7 +1495,7 @@
                             <div class="fn-side-item">Education</div>
                             <a href="{{ route('resume.builder', ['import' => 1]) }}"
                                class="mt-auto inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#f0ebff] hover:bg-[#e3d9ff] text-[#5d3ec4] text-xs font-bold transition">
-                                <span class="material-symbols-outlined text-[15px]">upload_file</span>
+                                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[15px]">upload_file</span>
                                 Import Existing CV
                             </a>
                         </div>
@@ -1593,7 +1590,7 @@
                     <div x-show="activeProduct === 'pdf'" x-cloak x-transition.opacity.duration.150ms class="fn-converter-preview">
                         <a href="{{ route('convert.hub') }}" class="fn-drop-zone block no-underline text-[#17211b] hover:border-[#e47857] transition">
                             <div class="fn-drop-icon">
-                                <span class="material-symbols-outlined text-[22px]">upload_file</span>
+                                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[22px]">upload_file</span>
                             </div>
                             <strong>Drop your file to convert</strong>
                             <span>PDF, Word, Excel, PowerPoint, JPG, PNG or HTML &bull; {{ count($converterAll) }} fast tools</span>
@@ -1607,7 +1604,7 @@
                                 </div>
                             </div>
                             <span class="fn-file-done">
-                                <span class="material-symbols-outlined text-[16px]">check_circle</span>
+                                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px]">check_circle</span>
                                 Ready to download
                             </span>
                         </div>
@@ -1616,16 +1613,11 @@
             </div>
         </div>
 
-        {{-- Trust Strip --}}
+        {{-- Plain-text SEO Overview Strip (replaces unverified logos with clear product context) --}}
         <div class="fn-trust-strip">
-            <p>Trusted by freelancers, founders &amp; teams building what&apos;s next</p>
-            <div class="fn-logo-row">
-                <span>Northstar</span>
-                <span>Kestrel Labs</span>
-                <span>Brightfield</span>
-                <span>Studio Nine</span>
-                <span>Oakwood Co.</span>
-            </div>
+            <p class="max-w-[740px] mx-auto !text-[14px] !leading-[1.7] text-[#536058]">
+                Formnexa is a free online workspace for freelancers, small businesses, and job seekers. Create professional invoices, quotes, purchase orders, and receipts in 24 currencies including USD, EUR, GBP, and PKR; build an ATS-friendly resume or import an existing CV; and convert PDF files cleanly to and from Word, Excel, PowerPoint, and images with zero watermarks and no sign-up required.
+            </p>
         </div>
     </section>
 
@@ -1633,7 +1625,7 @@
     <section class="fn-tools-section">
         <div class="fn-section-head">
             <span class="fn-section-tag">ONE WORKSPACE</span>
-            <h2>One workspace. Three powerful tools.</h2>
+            <h2>Resume Builder, Invoice Maker and PDF Converter in one workspace.</h2>
             <p>Everything you need to apply for a job, bill a client cleanly, or get a file into the exact format you need.</p>
         </div>
 
@@ -1698,7 +1690,7 @@
                 </div>
                 <div class="fn-card-art converter">
                     <div class="fn-format doc">DOCX</div>
-                    <span class="material-symbols-outlined text-[24px] text-[#e47857]">arrow_forward</span>
+                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[24px] text-[#e47857]">arrow_forward</span>
                     <div class="fn-format pdf">PDF</div>
                 </div>
             </article>
@@ -1709,7 +1701,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#dfe4df]">
                 <div>
                     <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Complete Suite Directory</span>
-                    <h3 class="text-xl font-bold text-[#17211b] mt-0.5 tracking-tight">Jump directly into any tool</h3>
+                    <h2 class="text-xl sm:text-2xl font-bold text-[#17211b] mt-0.5 tracking-tight">All 12 document generators and 10 PDF converters</h2>
                 </div>
                 <div class="inline-flex flex-wrap gap-1.5 bg-white p-1 rounded-xl border border-[#dfe4df]">
                     <button type="button" @click="dirTab = 'docs'"
@@ -1767,7 +1759,7 @@
                             <div class="text-xs text-[#68736d] truncate">Minimal, Editorial, Technical &amp; ATS CV layouts</div>
                         </div>
                     </div>
-                    <span class="material-symbols-outlined text-[18px] text-[#68736d] group-hover:text-[#6142be] shrink-0">arrow_forward</span>
+                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#68736d] group-hover:text-[#6142be] shrink-0">arrow_forward</span>
                 </a>
                 <a href="{{ route('templates.index') }}"
                    class="group flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#dfe4df] hover:border-[#184f3a] transition">
@@ -1778,7 +1770,7 @@
                             <div class="text-xs text-[#68736d] truncate">6 layout themes with custom branding swatches</div>
                         </div>
                     </div>
-                    <span class="material-symbols-outlined text-[18px] text-[#68736d] group-hover:text-[#184f3a] shrink-0">arrow_forward</span>
+                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#68736d] group-hover:text-[#184f3a] shrink-0">arrow_forward</span>
                 </a>
             </div>
         </div>
@@ -1828,7 +1820,7 @@
                 <div class="fn-feature-points">
                     <div>
                         <span class="ic">
-                            <span class="material-symbols-outlined text-[19px]">auto_awesome</span>
+                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[19px]">auto_awesome</span>
                         </span>
                         <div>
                             <strong>Smart, balanced formatting</strong>
@@ -1837,7 +1829,7 @@
                     </div>
                     <div>
                         <span class="ic">
-                            <span class="material-symbols-outlined text-[19px]">layers</span>
+                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[19px]">layers</span>
                         </span>
                         <div>
                             <strong>One consistent style across documents</strong>
@@ -1846,7 +1838,7 @@
                     </div>
                     <div>
                         <span class="ic">
-                            <span class="material-symbols-outlined text-[19px]">shield_lock</span>
+                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[19px]">shield_lock</span>
                         </span>
                         <div>
                             <strong>Share securely or keep offline</strong>
@@ -1911,7 +1903,7 @@
     <section class="fn-faq-section" id="faq">
         <div class="fn-faq-intro">
             <span class="fn-section-tag">GOOD TO KNOW</span>
-            <h2>Got questions? We&apos;ve got answers.</h2>
+            <h2>Frequently asked questions about Formnexa.</h2>
             <p>Everything you need to know before generating your first resume, invoice, or converted file.</p>
             <a href="{{ route('invoice.studio') }}" class="fn-text-link">
                 <span>Jump into the workspace</span>
@@ -1926,7 +1918,7 @@
                             @click="openFaq = openFaq === {{ $idx }} ? null : {{ $idx }}"
                             :aria-expanded="(openFaq === {{ $idx }}).toString()">
                         <span>{{ $item['q'] }}</span>
-                        <span class="fn-faq-plus">+</span>
+                        <span class="fn-faq-plus" aria-hidden="true">+</span>
                     </button>
                     <div class="fn-faq-answer" x-show="openFaq === {{ $idx }}" x-collapse.duration.200ms>
                         <p>{{ $item['a'] }}</p>
@@ -1936,13 +1928,51 @@
         </div>
     </section>
 
+    {{-- 6.5. LATEST GUIDES & BLOG ARTICLES --}}
+    @if(isset($latestPosts) && $latestPosts->isNotEmpty())
+        <section class="max-w-[1160px] mx-auto px-4 sm:px-6 pb-20">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+                <div>
+                    <span class="fn-section-tag">GUIDES &amp; TEMPLATES BLOG</span>
+                    <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-[#17211b] tracking-tight mt-2">
+                        Practical guides to help you get paid &amp; hired.
+                    </h2>
+                </div>
+                <a href="{{ route('blog.index') }}" class="fn-text-link !mt-0 whitespace-nowrap">
+                    <span>Read all guides</span>
+                    <span aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                @foreach($latestPosts as $bPost)
+                    <article class="bg-[#f8f8f3] rounded-3xl border border-[#dfe4df] hover:border-[#184f3a] p-6 flex flex-col justify-between gap-4 transition">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between gap-2 text-xs font-semibold">
+                                <span class="px-2.5 py-1 rounded-full bg-white text-[#184f3a] border border-[#dfe4df]">{{ $bPost->category_label }}</span>
+                                <span class="text-[#68736d]">{{ $bPost->reading_time_minutes }} min read</span>
+                            </div>
+                            <h3 class="font-display text-lg sm:text-xl font-extrabold text-[#17211b] leading-snug">
+                                <a href="{{ route('blog.show', $bPost->slug) }}" class="hover:text-[#184f3a] transition">{{ $bPost->title }}</a>
+                            </h3>
+                            <p class="text-xs sm:text-sm text-[#536058] leading-relaxed">{{ \Illuminate\Support\Str::limit($bPost->excerpt, 125) }}</p>
+                        </div>
+                        <a href="{{ route('blog.show', $bPost->slug) }}" class="text-xs font-bold text-[#184f3a] hover:underline">
+                            Read guide &rarr;
+                        </a>
+                    </article>
+                @endforeach
+            </div>
+        </section>
+    @endif
+
     {{-- 7. SOFT MINT CTA BANNER --}}
     <section class="fn-cta-section">
         <div class="fn-cta-orb fn-orb-a" aria-hidden="true"></div>
         <div class="fn-cta-orb fn-orb-b" aria-hidden="true"></div>
         <div class="fn-cta-inner">
             <div class="fn-cta-spark">
-                <span class="material-symbols-outlined text-[24px]">auto_awesome</span>
+                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[24px]">auto_awesome</span>
             </div>
             <h2>Your next great document starts right here.</h2>
             <p>Try Formnexa free &mdash; build a resume, generate a branded invoice, or convert a PDF in seconds.</p>
@@ -1959,4 +1989,36 @@
     </section>
 
 </div>
+
+@push('schema')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@graph' => [
+        [
+            '@type' => 'Organization',
+            '@id' => url('/') . '#org',
+            'name' => 'Formnexa',
+            'url' => url('/'),
+            'logo' => asset('images/formnexa-logo.png'),
+        ],
+        [
+            '@type' => 'WebSite',
+            '@id' => url('/') . '#website',
+            'url' => url('/'),
+            'name' => 'Formnexa',
+            'publisher' => ['@id' => url('/') . '#org'],
+        ],
+        [
+            '@type' => 'FAQPage',
+            'mainEntity' => collect($faqItems)->map(fn ($i) => [
+                '@type' => 'Question',
+                'name' => $i['q'],
+                'acceptedAnswer' => ['@type' => 'Answer', 'text' => $i['a']],
+            ])->values()->all(),
+        ],
+    ],
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}
+</script>
+@endpush
 @endsection

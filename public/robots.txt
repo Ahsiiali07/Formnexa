@@ -1,2 +1,9 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /api/
+Disallow: /history
+Disallow: /blog-studio
+Disallow: /admin
+# Keep /build/, /vendor/ and /storage/ accessible so crawlers can render CSS/JS assets cleanly.
+
+Sitemap: https://formnexa.dcpakpattan.gov.pk/sitemap.xml

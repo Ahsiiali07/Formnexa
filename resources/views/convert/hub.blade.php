@@ -1,18 +1,20 @@
 @extends('layouts.app')
 
-@section('title', 'Free PDF Converter Tools — JPG, Word, PowerPoint, Excel, HTML & PDF/A | Formnexa')
-@section('meta_description', 'Convert to and from PDF effortlessly: JPG to PDF, Word to PDF, PowerPoint to PDF, Excel to PDF, HTML to PDF, PDF to JPG, PDF to Word, PDF to PowerPoint, PDF to Excel & PDF/A.')
-
 @section('content')
 @php
     $toCount = count($groups['to_pdf']);
     $fromCount = count($groups['from_pdf']);
     $totalCount = $toCount + $fromCount;
 @endphp
+<x-schema.tool name="Free Online PDF Converter Hub" description="Convert JPG, Word, Excel, PowerPoint and HTML to PDF, or turn PDFs into Word, Excel and JPG online." category="UtilitiesApplication" />
+
 <div x-data="{ tab: 'all' }" class="min-h-screen bg-[#f8f8f3] pb-16 sm:pb-20">
     {{-- Modern Electric Precision Hero Header --}}
-    <section class="bg-white border-b border-border-subtle pt-10 pb-10 sm:pb-12 px-4 sm:px-6">
+    <section class="bg-white border-b border-border-subtle pt-7 sm:pt-10 pb-10 sm:pb-12 px-4 sm:px-6">
         <div class="max-w-[1280px] mx-auto text-center">
+            <div class="flex justify-center mb-4">
+                <x-schema.breadcrumbs :items="[['Home', url('/')], ['PDF Converters', route('convert.hub')]]" />
+            </div>
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric-blue-subtle border border-[#c8f3dc] text-[#184f3a] font-mono text-[11px] font-semibold uppercase tracking-wider mb-4">
                 <span class="w-1.5 h-1.5 rounded-full bg-[#184f3a]"></span>
                 {{ $totalCount }} Free PDF Conversion Tools &bull; No Sign-up Required

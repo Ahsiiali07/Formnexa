@@ -6,6 +6,7 @@ use App\Models\Invoice;
 use App\Models\Resume;
 use App\Services\InvoiceService;
 use App\Support\TemplateCatalog;
+use App\Support\ToolSeoCatalog;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -204,6 +205,8 @@ class InvoiceController extends Controller
                 : collect();
         }
 
+        $docSeo = ToolSeoCatalog::document($type);
+
         return view('invoice.studio', compact(
             'loadedInvoice',
             'loadedTemplate',
@@ -212,7 +215,8 @@ class InvoiceController extends Controller
             'allGenerators',
             'templateStyles',
             'templateColors',
-            'allTemplates'
+            'allTemplates',
+            'docSeo'
         ));
     }
 
@@ -266,7 +270,13 @@ class InvoiceController extends Controller
     public function show(string $uuid): View
     {
         $invoice = Invoice::with('items')->where('uuid', $uuid)->firstOrFail();
-        return view('invoice.show', compact('invoice'));
+        return view('invoice.show', [
+            'invoice' => $invoice,
+            'seo' => [
+                'title' => 'Invoice #' . $invoice->invoice_number . ' | Formnexa',
+                'robots' => 'noindex,nofollow',
+            ],
+        ]);
     }
 
     /**

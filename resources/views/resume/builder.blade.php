@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Free Online Resume Builder & CV Importer — Formnexa')
-
 @section('header_actions')
 <button type="button" @click="$dispatch('open-resume-history')" class="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-lg text-xs font-semibold bg-white hover:bg-black/[0.04] border border-black/[0.09] text-[#111111] transition whitespace-nowrap shrink-0 cursor-pointer">
     <svg class="w-3.5 h-3.5 text-[#184f3a] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -11,6 +9,8 @@
 @endsection
 
 @section('content')
+<x-schema.tool name="Free ATS Resume Builder" description="Build an ATS-friendly resume with 15+ templates or import your existing PDF or DOCX CV." />
+
 <div x-data="resumeStudio(
         @js($loadedResume),
         @js($loadedTemplate),
@@ -40,6 +40,16 @@
 
     <!-- Top Resume Workspace Toolbar -->
     <section class="no-print bg-white border-b border-black/[0.07]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#f0f2ef]">
+                <x-schema.breadcrumbs :items="[
+                    ['Home', url('/')],
+                    ['Resume Templates', route('resume.templates')],
+                    ['ATS Resume Builder', route('resume.builder')],
+                ]" />
+                <h1 class="font-display text-xs sm:text-sm font-extrabold text-[#17211b] tracking-tight">Free Online ATS Resume Builder</h1>
+            </div>
+        </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
             <div class="flex flex-wrap items-center gap-2.5">
                 <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-[11px] font-bold whitespace-nowrap">
@@ -795,6 +805,48 @@
             </div>
         </div>
     </div>
+
+    {{-- ATS Resume Formatting Guide, FAQ & Internal Cross-Links --}}
+    <section class="no-print max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-14 space-y-8">
+        <div class="bg-white rounded-[26px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="space-y-3">
+                <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6142be]">ATS Compliance</span>
+                <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b]">What is an ATS-friendly resume?</h2>
+                <p class="text-xs sm:text-sm text-[#46534b] leading-relaxed">
+                    An Applicant Tracking System (ATS) scans uploaded CVs into structured candidate fields before a human recruiter reviews your application. Formnexa templates output clean, readable A4 text PDFs rather than flattened images so your skills, dates, and titles parse reliably.
+                </p>
+                <div class="pt-1 flex flex-wrap gap-2">
+                    <a href="{{ route('resume.templates') }}" class="px-3.5 py-2 rounded-xl bg-[#f0ebff] text-[#6142be] text-xs font-bold hover:bg-[#e3d9ff] transition">Browse 15+ CV Templates &rarr;</a>
+                    <a href="{{ route('blog.show', 'how-to-write-ats-friendly-resume-guide') }}" class="px-3.5 py-2 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-[#17211b] text-xs font-bold hover:border-[#184f3a] transition">Read ATS Resume Guide &rarr;</a>
+                </div>
+            </div>
+            <div class="space-y-3">
+                <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Formatting Rules</span>
+                <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b]">5 rules for higher shortlist rates</h2>
+                <ul class="space-y-2 text-xs sm:text-sm text-[#46534b]">
+                    <li>&check; Use standard headings (Experience, Education, Skills).</li>
+                    <li>&check; Lead bullets with measurable outcomes and numbers.</li>
+                    <li>&check; Match skills wording to the job description honestly.</li>
+                    <li>&check; Export as crisp vector PDF unless DOCX is explicitly required.</li>
+                    <li>&check; Import an existing PDF or DOCX CV anytime using the button above.</li>
+                </ul>
+                <div class="pt-1 flex flex-wrap gap-2">
+                    <a href="{{ route('convert.tool', 'pdf-to-word') }}" class="text-xs font-bold text-[#184f3a] hover:underline">PDF to Word &rarr;</a>
+                    <span class="text-[#c6d1ca]">&bull;</span>
+                    <a href="{{ route('convert.tool', 'word-to-pdf') }}" class="text-xs font-bold text-[#184f3a] hover:underline">Word to PDF &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-[26px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm">
+            <x-faq :items="[
+                ['q' => 'Can I import an existing PDF or Word resume?', 'a' => 'Yes. Click Import CV / Paste Text above to parse your current PDF, DOCX, TXT, or LinkedIn copy directly into editable Formnexa fields.'],
+                ['q' => 'Are Formnexa resumes ATS-safe?', 'a' => 'Yes. All exported A4 PDFs preserve selectable, clean reading-order text without unreadable image wrappers or watermarks.'],
+                ['q' => 'Can I switch layouts without retyping my details?', 'a' => 'Switch anytime across all 10 layout engines and 15+ designer templates with zero data loss.'],
+                ['q' => 'Is there a fee or watermark when downloading PDF?', 'a' => 'Never. Resume downloads are completely free and watermark-free.'],
+            ]" heading="Resume Builder — Frequently Asked Questions" />
+        </div>
+    </section>
 
 </div>
 @endsection

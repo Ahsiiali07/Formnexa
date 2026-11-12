@@ -38,8 +38,12 @@ class AuthController extends Controller
             $request->session()->regenerate();
             $this->claimGuestSessionInvoices(Auth::id(), $request);
 
+            $defaultTarget = Auth::user()->is_admin
+                ? route('admin.dashboard')
+                : route('invoice.history.page');
+
             return redirect()
-                ->intended(route('invoice.history.page'))
+                ->intended($defaultTarget)
                 ->with('success', 'Welcome back, ' . Auth::user()->name . '!');
         }
 

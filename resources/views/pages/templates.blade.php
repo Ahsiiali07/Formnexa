@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Free Invoice Templates (Customizable Layouts) — Formnexa')
-
 @section('header_actions')
 <a href="{{ route('invoice.studio') }}" class="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-lg text-xs font-semibold bg-white hover:bg-black/[0.04] border border-black/[0.09] text-[#111111] transition whitespace-nowrap shrink-0">
     <span class="hidden sm:inline">Open Studio</span>
@@ -15,7 +13,10 @@
 
     <!-- Modern Electric Precision Hero Section -->
     <section class="bg-[#f8f8f3] border-b border-border-subtle overflow-hidden">
-        <div class="max-w-[1280px] mx-auto px-4 sm:px-6 py-10 sm:py-16 lg:py-20">
+        <div class="max-w-[1280px] mx-auto px-4 sm:px-6 py-8 sm:py-16 lg:py-20">
+            <div class="mb-6 flex justify-center lg:justify-start">
+                <x-schema.breadcrumbs :items="[['Home', url('/')], ['Invoice Generator', route('invoice.studio')], ['Invoice Templates', route('templates.index')]]" />
+            </div>
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 <!-- Left Copy -->
                 <div class="lg:col-span-6 space-y-5 text-center lg:text-left">
