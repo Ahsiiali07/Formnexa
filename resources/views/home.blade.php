@@ -1433,15 +1433,15 @@
 
             <div class="fn-hero-note">
                 <span>
-                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#184f3a]">check_circle</span>
+                    <x-icon name="check-circle" class="w-4 h-4 text-[#184f3a]" />
                     No credit card
                 </span>
                 <span>
-                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#184f3a]">check_circle</span>
+                    <x-icon name="check-circle" class="w-4 h-4 text-[#184f3a]" />
                     Zero watermarks
                 </span>
                 <span>
-                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#184f3a]">shield</span>
+                    <x-icon name="shield" class="w-4 h-4 text-[#184f3a]" />
                     No sign-up required
                 </span>
             </div>
@@ -1453,19 +1453,19 @@
                 <button type="button" role="tab" :aria-selected="(activeProduct === 'resume').toString()"
                         :class="activeProduct === 'resume' ? 'active' : ''"
                         @click="activeProduct = 'resume'">
-                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px]">description</span>
+                    <x-icon name="document-text" class="w-[17px] h-[17px]" />
                     <span>Resume Builder</span>
                 </button>
                 <button type="button" role="tab" :aria-selected="(activeProduct === 'invoice').toString()"
                         :class="activeProduct === 'invoice' ? 'active' : ''"
                         @click="activeProduct = 'invoice'">
-                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px]">receipt_long</span>
+                    <x-icon name="receipt" class="w-[17px] h-[17px]" />
                     <span>Invoice Maker</span>
                 </button>
                 <button type="button" role="tab" :aria-selected="(activeProduct === 'pdf').toString()"
                         :class="activeProduct === 'pdf' ? 'active' : ''"
                         @click="activeProduct = 'pdf'">
-                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px]">sync_alt</span>
+                    <x-icon name="arrows-right-left" class="w-[17px] h-[17px]" />
                     <span>PDF Converter</span>
                 </button>
             </div>
@@ -1495,7 +1495,7 @@
                             <div class="fn-side-item">Education</div>
                             <a href="{{ route('resume.builder', ['import' => 1]) }}"
                                class="mt-auto inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#f0ebff] hover:bg-[#e3d9ff] text-[#5d3ec4] text-xs font-bold transition">
-                                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[15px]">upload_file</span>
+                                <x-icon name="upload" class="w-[15px] h-[15px]" />
                                 Import Existing CV
                             </a>
                         </div>
@@ -1590,7 +1590,7 @@
                     <div x-show="activeProduct === 'pdf'" x-cloak x-transition.opacity.duration.150ms class="fn-converter-preview">
                         <a href="{{ route('convert.hub') }}" class="fn-drop-zone block no-underline text-[#17211b] hover:border-[#e47857] transition">
                             <div class="fn-drop-icon">
-                                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[22px]">upload_file</span>
+                                <x-icon name="upload" class="w-[22px] h-[22px]" />
                             </div>
                             <strong>Drop your file to convert</strong>
                             <span>PDF, Word, Excel, PowerPoint, JPG, PNG or HTML &bull; {{ count($converterAll) }} fast tools</span>
@@ -1604,7 +1604,7 @@
                                 </div>
                             </div>
                             <span class="fn-file-done">
-                                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px]">check_circle</span>
+                                <x-icon name="check-circle" class="w-4 h-4" />
                                 Ready to download
                             </span>
                         </div>
@@ -1690,7 +1690,7 @@
                 </div>
                 <div class="fn-card-art converter">
                     <div class="fn-format doc">DOCX</div>
-                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[24px] text-[#e47857]">arrow_forward</span>
+                    <x-icon name="arrow-right" class="w-6 h-6 text-[#e47857]" />
                     <div class="fn-format pdf">PDF</div>
                 </div>
             </article>
@@ -1759,7 +1759,7 @@
                             <div class="text-xs text-[#68736d] truncate">Minimal, Editorial, Technical &amp; ATS CV layouts</div>
                         </div>
                     </div>
-                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#68736d] group-hover:text-[#6142be] shrink-0">arrow_forward</span>
+                    <x-icon name="arrow-right" class="w-[18px] h-[18px] text-[#68736d] group-hover:text-[#6142be]" />
                 </a>
                 <a href="{{ route('templates.index') }}"
                    class="group flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#dfe4df] hover:border-[#184f3a] transition">
@@ -1770,7 +1770,7 @@
                             <div class="text-xs text-[#68736d] truncate">6 layout themes with custom branding swatches</div>
                         </div>
                     </div>
-                    <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#68736d] group-hover:text-[#184f3a] shrink-0">arrow_forward</span>
+                    <x-icon name="arrow-right" class="w-[18px] h-[18px] text-[#68736d] group-hover:text-[#184f3a]" />
                 </a>
             </div>
         </div>
@@ -1820,7 +1820,7 @@
                 <div class="fn-feature-points">
                     <div>
                         <span class="ic">
-                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[19px]">auto_awesome</span>
+                            <x-icon name="sparkles" class="w-[19px] h-[19px]" />
                         </span>
                         <div>
                             <strong>Smart, balanced formatting</strong>
@@ -1829,7 +1829,7 @@
                     </div>
                     <div>
                         <span class="ic">
-                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[19px]">layers</span>
+                            <x-icon name="layers" class="w-[19px] h-[19px]" />
                         </span>
                         <div>
                             <strong>One consistent style across documents</strong>
@@ -1838,7 +1838,7 @@
                     </div>
                     <div>
                         <span class="ic">
-                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[19px]">shield_lock</span>
+                            <x-icon name="shield-check" class="w-[19px] h-[19px]" />
                         </span>
                         <div>
                             <strong>Share securely or keep offline</strong>
@@ -1972,7 +1972,7 @@
         <div class="fn-cta-orb fn-orb-b" aria-hidden="true"></div>
         <div class="fn-cta-inner">
             <div class="fn-cta-spark">
-                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[24px]">auto_awesome</span>
+                <x-icon name="sparkles" class="w-6 h-6" />
             </div>
             <h2>Your next great document starts right here.</h2>
             <p>Try Formnexa free &mdash; build a resume, generate a branded invoice, or convert a PDF in seconds.</p>

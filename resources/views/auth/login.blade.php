@@ -25,7 +25,7 @@
 
         <!-- Optional Note Banner -->
         <div class="p-3.5 rounded-xl bg-[#e8f7ed] border border-[#c8f3dc] text-xs text-[#17211b] flex items-start gap-2.5">
-            <span class="material-symbols-outlined text-[#184f3a] text-[18px] shrink-0 mt-0.5">info</span>
+            <x-icon name="info" class="w-[18px] h-[18px] text-[#184f3a] mt-0.5" />
             <div>
                 <strong>Account is optional:</strong> You can generate &amp; download documents anytime without logging in. Sign in only if you want to sync &amp; view your history.
             </div>

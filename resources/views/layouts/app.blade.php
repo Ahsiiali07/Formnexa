@@ -11,12 +11,7 @@
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('images/formnexa-icon-blue.png') }}">
 
-    <!-- Material Symbols (to be replaced with inline SVGs in next step) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-
-    <!-- Vite Compiled Assets (Tailwind CSS + Design System + Alpine.js + PDF Tools) -->
+    <!-- Vite Compiled Assets (Tailwind CSS + Self-Hosted Fonts + Alpine.js + PDF Tools) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
@@ -56,7 +51,7 @@
                         <button type="button" @click="openResume = !openResume" @click.outside="openResume = false"
                                 class="px-3 py-2 rounded-lg flex items-center gap-1 transition-colors whitespace-nowrap cursor-pointer {{ request()->routeIs('resume.*') ? 'text-[#184f3a] bg-[#e8f7ed] font-semibold' : 'text-[#3f4a43] hover:text-[#17211b] hover:bg-[#f2f6f3]' }}">
                             <span>Resume<span class="hidden lg:inline"> Builder</span></span>
-                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px] transition-transform duration-150" :class="openResume ? 'rotate-180' : ''">expand_more</span>
+                            <x-icon name="chevron-down" class="w-[17px] h-[17px] transition-transform duration-150" ::class="openResume ? 'rotate-180' : ''" />
                         </button>
 
                         <div x-show="openResume" x-cloak
@@ -77,7 +72,7 @@
                                 </a>
                                 <a href="{{ route('resume.builder', ['import' => 1]) }}" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#e8f7ed]/70 transition group">
                                     <span class="w-8 h-8 rounded-lg bg-[#e8f7ed] text-[#184f3a] border border-[#c8f3dc] flex items-center justify-center shrink-0">
-                                        <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px]">upload_file</span>
+                                        <x-icon name="upload" class="w-[17px] h-[17px]" />
                                     </span>
                                     <div>
                                         <div class="text-xs font-bold text-[#17211b] group-hover:text-[#184f3a]">Import Existing CV</div>
@@ -100,7 +95,7 @@
                         <button type="button" @click="openConv = !openConv" @click.outside="openConv = false"
                                 class="px-3 py-2 rounded-lg flex items-center gap-1 transition-colors whitespace-nowrap cursor-pointer {{ request()->routeIs('convert.*') ? 'text-[#184f3a] bg-[#e8f7ed] font-semibold' : 'text-[#3f4a43] hover:text-[#17211b] hover:bg-[#f2f6f3]' }}">
                             <span>PDF Converter</span>
-                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px] transition-transform duration-150" :class="openConv ? 'rotate-180' : ''">expand_more</span>
+                            <x-icon name="chevron-down" class="w-[17px] h-[17px] transition-transform duration-150" ::class="openConv ? 'rotate-180' : ''" />
                         </button>
 
                         <div x-show="openConv" x-cloak
@@ -155,7 +150,7 @@
                         <button type="button" @click="openTools = !openTools" @click.outside="openTools = false"
                                 class="px-3 py-2 rounded-lg flex items-center gap-1 transition-colors whitespace-nowrap cursor-pointer {{ request()->routeIs('templates.*') ? 'text-[#184f3a] bg-[#e8f7ed] font-semibold' : 'text-[#3f4a43] hover:text-[#17211b] hover:bg-[#f2f6f3]' }}">
                             <span>Templates<span class="hidden lg:inline"> &amp; Docs</span></span>
-                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[17px] transition-transform duration-150" :class="openTools ? 'rotate-180' : ''">expand_more</span>
+                            <x-icon name="chevron-down" class="w-[17px] h-[17px] transition-transform duration-150" ::class="openTools ? 'rotate-180' : ''" />
                         </button>
 
                         <div x-show="openTools" x-cloak
@@ -247,7 +242,7 @@
                                 {{ substr(Auth::user()->name, 0, 1) }}
                             </span>
                             <span class="hidden lg:inline max-w-[110px] truncate">{{ Auth::user()->name }}</span>
-                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#68736d]">expand_more</span>
+                            <x-icon name="chevron-down" class="w-4 h-4 text-[#68736d]" />
                         </button>
 
                         <div x-show="userMenu" x-cloak x-transition class="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-xl shadow-[#17211b]/8 border border-[#dfe4df] p-2 z-50 text-xs">
@@ -285,8 +280,8 @@
                 <!-- Mobile Menu Toggle Button -->
                 <button type="button" @click="mobileMenu = !mobileMenu" aria-label="Toggle menu" :aria-expanded="mobileMenu.toString()"
                         class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-[9px] bg-white border border-[#dfe4df] text-[#17211b] hover:bg-[#f8f8f3] transition shrink-0">
-                    <span aria-hidden="true" data-nosnippet translate="no" x-show="!mobileMenu" class="material-symbols-outlined text-[21px]">menu</span>
-                    <span aria-hidden="true" data-nosnippet translate="no" x-show="mobileMenu" x-cloak class="material-symbols-outlined text-[21px]">close</span>
+                    <x-icon name="bars" class="w-[21px] h-[21px]" x-show="!mobileMenu" />
+                    <x-icon name="x-mark" class="w-[21px] h-[21px]" x-show="mobileMenu" x-cloak />
                 </button>
             </div>
         </div>
@@ -310,26 +305,26 @@
                         <a href="{{ route('resume.builder') }}" @click="mobileMenu = false"
                            class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#f0ebff] border border-[#e3d9ff] text-[#17211b] font-bold text-xs">
                             <span class="flex items-center gap-2">
-                                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#6142be]">badge</span>
+                                <x-icon name="badge" class="w-[18px] h-[18px] text-[#6142be]" />
                                 <span>Resume Builder &amp; CV Importer</span>
                             </span>
-                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#6142be]">arrow_forward</span>
+                            <x-icon name="arrow-right" class="w-4 h-4 text-[#6142be]" />
                         </a>
                         <a href="{{ route('invoice.studio') }}" @click="mobileMenu = false"
                            class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#e8f7ed] border border-[#c8f3dc] text-[#17211b] font-bold text-xs">
                             <span class="flex items-center gap-2">
-                                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#184f3a]">receipt_long</span>
+                                <x-icon name="receipt" class="w-[18px] h-[18px] text-[#184f3a]" />
                                 <span>Invoice Maker &amp; 12 Document Tools</span>
                             </span>
-                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#184f3a]">arrow_forward</span>
+                            <x-icon name="arrow-right" class="w-4 h-4 text-[#184f3a]" />
                         </a>
                         <a href="{{ route('convert.hub') }}" @click="mobileMenu = false"
                            class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#fff0e8] border border-[#fedac7] text-[#17211b] font-bold text-xs">
                             <span class="flex items-center gap-2">
-                                <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#b45309]">picture_as_pdf</span>
+                                <x-icon name="document-pdf" class="w-[18px] h-[18px] text-[#b45309]" />
                                 <span>{{ $converterCount }} PDF Converter Tools</span>
                             </span>
-                            <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[16px] text-[#b45309]">arrow_forward</span>
+                            <x-icon name="arrow-right" class="w-4 h-4 text-[#b45309]" />
                         </a>
                     </div>
                 </div>
@@ -357,7 +352,7 @@
                     <button type="button" @click="mobileSection = (mobileSection === 'converters' ? '' : 'converters')"
                             class="w-full px-3.5 py-2.5 bg-[#f8f8f3] flex items-center justify-between text-xs font-bold text-[#17211b]">
                         <span>PDF Converters ({{ $converterCount }})</span>
-                        <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#68736d] transition-transform" :class="mobileSection === 'converters' ? 'rotate-180' : ''">expand_more</span>
+                        <x-icon name="chevron-down" class="w-[18px] h-[18px] text-[#68736d] transition-transform" ::class="mobileSection === 'converters' ? 'rotate-180' : ''" />
                     </button>
                     <div x-show="mobileSection === 'converters'" class="p-2.5 grid grid-cols-2 gap-1.5 bg-white">
                         @foreach(\App\Support\ConverterCatalog::all() as $cTool)
@@ -375,7 +370,7 @@
                     <button type="button" @click="mobileSection = (mobileSection === 'generators' ? '' : 'generators')"
                             class="w-full px-3.5 py-2.5 bg-[#f8f8f3] flex items-center justify-between text-xs font-bold text-[#17211b]">
                         <span>12 Document Generators</span>
-                        <span aria-hidden="true" data-nosnippet translate="no" class="material-symbols-outlined text-[18px] text-[#68736d] transition-transform" :class="mobileSection === 'generators' ? 'rotate-180' : ''">expand_more</span>
+                        <x-icon name="chevron-down" class="w-[18px] h-[18px] text-[#68736d] transition-transform" ::class="mobileSection === 'generators' ? 'rotate-180' : ''" />
                     </button>
                     <div x-show="mobileSection === 'generators'" class="p-2.5 grid grid-cols-2 gap-1.5 bg-white">
                         @foreach([

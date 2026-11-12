@@ -25,7 +25,7 @@
 
         <!-- Optional Note Banner -->
         <div class="p-3.5 rounded-xl bg-[#e8f7ed] border border-[#c8f3dc] text-xs text-[#17211b] flex items-start gap-2.5">
-            <span class="material-symbols-outlined text-[#184f3a] text-[18px] shrink-0 mt-0.5">verified</span>
+            <x-icon name="shield-check" class="w-[18px] h-[18px] text-[#184f3a] mt-0.5" />
             <div>
                 <strong>Optional &amp; Free Forever:</strong> Creating an account unlocks cloud invoice history without restricting any document generator tools.
             </div>
