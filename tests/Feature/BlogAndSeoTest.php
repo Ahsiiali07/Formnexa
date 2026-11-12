@@ -35,25 +35,36 @@ class BlogAndSeoTest extends TestCase
 
         $this->assertSame(1, preg_match_all('/<h1\b/i', $home->getContent()));
 
-        // Query parameters must strip cleanly from canonical URL
+        // Query parameters must strip cleanly from canonical URL and maintain a single H1
         $importView = $this->get('/resume-builder?import=1&utm_source=test');
         $importView->assertStatus(200)
             ->assertSee('<link rel="canonical" href="http://localhost/resume-builder">', false)
             ->assertSee('{"@context":"https://schema.org","@type":"WebApplication"', false)
             ->assertSee('{"@context":"https://schema.org","@type":"BreadcrumbList"', false);
+        $this->assertSame(1, preg_match_all('/<h1\b/i', $importView->getContent()));
+
+        $templates = $this->get('/resume-templates');
+        $templates->assertStatus(200);
+        $this->assertSame(1, preg_match_all('/<h1\b/i', $templates->getContent()));
 
         // Unique SEO copy + schema on document generator and converter tool
-        $this->get('/quote-generator')
-            ->assertStatus(200)
+        $quote = $this->get('/quote-generator');
+        $quote->assertStatus(200)
             ->assertSee('Free Quote Generator – Make a Quotation PDF | Formnexa', false)
             ->assertSee('Quote vs. Estimate &amp; Sales Order', false)
             ->assertSee('"@type":"FAQPage"', false);
+        $this->assertSame(1, preg_match_all('/<h1\b/i', $quote->getContent()));
 
-        $this->get('/convert/pdf-to-word')
-            ->assertStatus(200)
+        $pdfToWord = $this->get('/convert/pdf-to-word');
+        $pdfToWord->assertStatus(200)
             ->assertSee('PDF to Word Converter – Free PDF to DOCX | Formnexa', false)
             ->assertSee('Word to PDF Converter', false)
             ->assertSee('UtilitiesApplication', false);
+        $this->assertSame(1, preg_match_all('/<h1\b/i', $pdfToWord->getContent()));
+
+        $htmlToPdf = $this->get('/convert/html-to-pdf');
+        $htmlToPdf->assertStatus(200);
+        $this->assertSame(1, preg_match_all('/<h1\b/i', $htmlToPdf->getContent()));
     }
 
     public function test_private_and_auth_routes_emit_noindex_headers_and_meta(): void

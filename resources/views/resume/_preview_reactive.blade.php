@@ -23,9 +23,9 @@
                    :style="`background-color: ${accent_color};`">
                 <div class="space-y-5">
                     <div>
-                        <h1 class="text-[22px] font-black tracking-tight leading-[1.12] text-white break-words"
+                        <div class="text-[22px] font-black tracking-tight leading-[1.12] text-white break-words"
                             :class="font_family === 'serif' ? 'font-editorial font-bold' : ''"
-                            x-text="content.personal?.full_name || 'Your Name'"></h1>
+                            x-text="content.personal?.full_name || 'Your Name'"></div>
                         <p class="text-[12px] font-medium text-white/80 mt-1" x-text="content.personal?.job_title || 'Role / Headline'"></p>
 
                         <template x-if="content.personal?.show_photo">
@@ -210,8 +210,8 @@
                     </template>
                     <div class="min-w-0">
                         <div class="text-[9.5px] font-bold uppercase tracking-[0.26em] mb-1" :style="`color: ${accent_color}`">Curriculum Vitae</div>
-                        <h1 class="font-editorial text-[32px] font-bold tracking-tight leading-[1.08] text-[#1A1815]"
-                            x-text="content.personal?.full_name || 'Your Name'"></h1>
+                        <div class="font-editorial text-[32px] font-bold tracking-tight leading-[1.08] text-[#1A1815]"
+                            x-text="content.personal?.full_name || 'Your Name'"></div>
                         <p class="text-[13.5px] italic font-editorial text-[#59534A] mt-1" x-text="content.personal?.job_title || 'Title'"></p>
                     </div>
                 </div>
@@ -346,9 +346,9 @@
                         </div>
                     </template>
                     <div class="min-w-0">
-                        <h1 class="text-[24px] font-black tracking-tight text-slate-900 leading-tight"
+                        <div class="text-[24px] font-black tracking-tight text-slate-900 leading-tight"
                             :class="font_family === 'serif' ? 'font-editorial' : ''"
-                            x-text="content.personal?.full_name || 'Your Name'"></h1>
+                            x-text="content.personal?.full_name || 'Your Name'"></div>
                         <p class="text-[13px] font-bold mt-0.5" :style="`color: ${accent_color}`"
                            x-text="content.personal?.job_title || 'Title'"></p>
                     </div>
@@ -488,9 +488,9 @@
                         <span x-show="!content.personal?.show_photo || !avatarUrl()" x-text="initials()"></span>
                     </div>
                     <div class="min-w-0">
-                        <h1 class="text-[26px] font-black tracking-tight text-slate-900 leading-tight"
+                        <div class="text-[26px] font-black tracking-tight text-slate-900 leading-tight"
                             :class="font_family === 'serif' ? 'font-editorial' : ''"
-                            x-text="content.personal?.full_name || 'Your Name'"></h1>
+                            x-text="content.personal?.full_name || 'Your Name'"></div>
                         <p class="text-[13px] font-semibold tracking-wide text-slate-500 mt-0.5"
                            x-text="content.personal?.job_title || 'Title'"></p>
                     </div>
@@ -604,9 +604,9 @@
             <header class="rounded-2xl text-white px-7 py-6 shadow-sm space-y-4" :style="`background-color: ${accent_color}`">
                 <div class="flex items-center justify-between gap-5">
                     <div class="min-w-0">
-                        <h1 class="text-[27px] font-black tracking-tight leading-none text-white"
+                        <div class="text-[27px] font-black tracking-tight leading-none text-white"
                             :class="font_family === 'serif' ? 'font-editorial text-[30px]' : ''"
-                            x-text="content.personal?.full_name || 'Your Name'"></h1>
+                            x-text="content.personal?.full_name || 'Your Name'"></div>
                         <p class="text-[13px] font-semibold text-white/80 mt-1.5"
                            x-text="content.personal?.job_title || 'Executive Title'"></p>
                     </div>
@@ -728,9 +728,9 @@
                             <span x-show="!avatarUrl()" x-text="initials()"></span>
                         </div>
                     </template>
-                    <h1 class="text-[20px] font-black leading-tight text-slate-900"
+                    <div class="text-[20px] font-black leading-tight text-slate-900"
                         :class="font_family === 'serif' ? 'font-editorial' : ''"
-                        x-text="content.personal?.full_name || 'Your Name'"></h1>
+                        x-text="content.personal?.full_name || 'Your Name'"></div>
                     <p class="text-[11.5px] font-bold mt-1" :style="`color: ${accent_color}`"
                        x-text="content.personal?.job_title || 'Title'"></p>
                 </div>
@@ -850,8 +850,8 @@
                          :style="`background-color: ${accent_color}14; color: ${accent_color}`">
                         <span>$ whoami --role</span>
                     </div>
-                    <h1 class="text-[25px] font-black tracking-tight text-slate-900"
-                        x-text="content.personal?.full_name || 'Your Name'"></h1>
+                    <div class="text-[25px] font-black tracking-tight text-slate-900"
+                        x-text="content.personal?.full_name || 'Your Name'"></div>
                     <p class="font-tech-mono text-[12px] font-semibold mt-0.5" :style="`color: ${accent_color}`"
                        x-text="content.personal?.job_title || 'Software Engineer'"></p>
                 </div>
@@ -947,9 +947,9 @@
             <header class="border-t-[4px] pt-5 pb-5 border-b border-slate-200 grid grid-cols-12 gap-4 items-end"
                     :style="`border-top-color: ${accent_color}`">
                 <div class="col-span-8">
-                    <h1 class="text-[30px] font-black tracking-tight leading-none text-slate-900"
+                    <div class="text-[30px] font-black tracking-tight leading-none text-slate-900"
                         :class="font_family === 'serif' ? 'font-editorial' : ''"
-                        x-text="content.personal?.full_name || 'Your Name'"></h1>
+                        x-text="content.personal?.full_name || 'Your Name'"></div>
                     <p class="text-[13px] font-semibold mt-2" :style="`color: ${accent_color}`"
                        x-text="content.personal?.job_title || 'Title'"></p>
                 </div>
@@ -1025,9 +1025,9 @@
     <template x-if="template_style === 'ats_classic'">
         <div class="min-h-[1122px] bg-white text-slate-900" :class="density === 'compact' ? 'p-8 space-y-3.5' : 'p-10 space-y-4'">
             <header class="text-center pb-3 border-b-2 border-slate-900">
-                <h1 class="text-[24px] font-bold tracking-wide uppercase text-slate-900"
+                <div class="text-[24px] font-bold tracking-wide uppercase text-slate-900"
                     :class="font_family === 'serif' ? 'font-editorial tracking-normal' : ''"
-                    x-text="content.personal?.full_name || 'YOUR NAME'"></h1>
+                    x-text="content.personal?.full_name || 'YOUR NAME'"></div>
                 <div class="text-[11.5px] font-semibold text-slate-700 mt-0.5" x-text="content.personal?.job_title"></div>
                 <div class="text-[10.5px] text-slate-600 mt-1.5 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-0.5">
                     <span x-show="content.personal?.location" x-text="content.personal.location"></span>
@@ -1103,9 +1103,9 @@
         <div class="min-h-[1122px] bg-white p-7 space-y-4">
             <header class="flex items-end justify-between gap-4 border-b-2 pb-3" :style="`border-color: ${accent_color}`">
                 <div>
-                    <h1 class="text-[24px] font-black tracking-tight text-slate-900 leading-none"
+                    <div class="text-[24px] font-black tracking-tight text-slate-900 leading-none"
                         :class="font_family === 'serif' ? 'font-editorial' : ''"
-                        x-text="content.personal?.full_name || 'Your Name'"></h1>
+                        x-text="content.personal?.full_name || 'Your Name'"></div>
                     <p class="text-[12px] font-bold mt-1" :style="`color: ${accent_color}`"
                        x-text="content.personal?.job_title || 'Title'"></p>
                 </div>

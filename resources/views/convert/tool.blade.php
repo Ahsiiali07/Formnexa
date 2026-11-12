@@ -507,7 +507,7 @@ function pdfConverterTool(meta) {
         renderedJpgPages: [],
 
         htmlMode: 'code',
-        htmlCode: `<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: Arial, sans-serif; color: #0f172a; padding: 32px; }\n  .card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; }\n  h1 { color: #184f3a; margin-top: 0; }\n</style>\n</head>\n<body>\n  <div class="card">\n    <h1>Project Status Summary</h1>\n    <p>Converted cleanly to crisp vector PDF using Formnexa HTML to PDF.</p>\n  </div>\n</body>\n</html>`,
+        htmlCode: `<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: Arial, sans-serif; color: #0f172a; padding: 32px; }\n  .card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; }\n  h2 { color: #184f3a; margin-top: 0; }\n</style>\n</head>\n<body>\n  <div class="card">\n    <h2>Project Status Summary</h2>\n    <p>Converted cleanly to crisp vector PDF using Formnexa HTML to PDF.</p>\n  </div>\n</body>\n</html>`,
         htmlUrl: '',
         showHtmlPreview: false,
 
