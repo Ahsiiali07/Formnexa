@@ -131,10 +131,10 @@ class BlogController extends Controller
             'description' => $post->meta_description ?: Str::limit($post->excerpt, 155, ''),
             'canonical' => route('blog.show', $post->slug),
             'type' => 'article',
+            'image' => $post->cover_image ?: config('seo.default_image', 'images/og/default.jpg'),
+            'published_time' => ($post->published_at ?? $post->created_at)?->toIso8601String(),
+            'modified_time' => ($post->updated_at ?? $post->published_at ?? $post->created_at)?->toIso8601String(),
         ];
-        if ($post->cover_image) {
-            $seo['image'] = $post->cover_image;
-        }
         if (!$post->is_published) {
             $seo['robots'] = 'noindex,nofollow';
         }
@@ -215,7 +215,7 @@ class BlogController extends Controller
      */
     public function update(Request $request, BlogPost $post): RedirectResponse
     {
-        $data = $this->validatedPayload($request, $post->id);
+        $data = $this->validatedPayload($request, $post);
         $post->update($data);
         $this->refreshSitemapSafely();
 
@@ -241,7 +241,7 @@ class BlogController extends Controller
     /**
      * Validate create/update payload for SEO blog posts.
      */
-    protected function validatedPayload(Request $request, ?int $ignoreId = null): array
+    protected function validatedPayload(Request $request, ?BlogPost $existing = null): array
     {
         $categories = BlogPost::categories();
 
@@ -255,7 +255,7 @@ class BlogController extends Controller
 
         $validated = $request->validate([
             'title' => ['required', 'string', 'min:6', 'max:200'],
-            'slug' => ['required', 'string', 'max:200', Rule::unique('blog_posts', 'slug')->ignore($ignoreId)],
+            'slug' => ['required', 'string', 'max:200', Rule::unique('blog_posts', 'slug')->ignore($existing?->id)],
             'category' => ['required', 'string', Rule::in(array_keys($categories))],
             'excerpt' => ['required', 'string', 'min:20', 'max:450'],
             'content' => ['required', 'string', 'min:50'],
@@ -284,7 +284,7 @@ class BlogController extends Controller
             'focus_keyword' => ($validated['focus_keyword'] ?? null) ?: null,
             'reading_time_minutes' => max(1, (int) ceil($wordCount / 200)),
             'is_published' => $isPublished,
-            'published_at' => $isPublished ? now() : null,
+            'published_at' => $isPublished ? ($existing?->published_at ?? now()) : $existing?->published_at,
         ];
     }
 

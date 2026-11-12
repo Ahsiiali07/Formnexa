@@ -189,7 +189,7 @@ class AdminController extends Controller
      */
     public function updateBlog(Request $request, BlogPost $post): RedirectResponse
     {
-        $data = $this->validatedBlogPayload($request, $post->id);
+        $data = $this->validatedBlogPayload($request, $post);
         $post->update($data);
         $this->refreshSitemapSafely();
 
@@ -304,7 +304,7 @@ class AdminController extends Controller
             ->with('success', trim(Artisan::output()) ?: 'Sitemap regenerated successfully.');
     }
 
-    protected function validatedBlogPayload(Request $request, ?int $ignoreId = null): array
+    protected function validatedBlogPayload(Request $request, ?BlogPost $existing = null): array
     {
         $categories = BlogPost::categories();
 
@@ -317,7 +317,7 @@ class AdminController extends Controller
 
         $validated = $request->validate([
             'title' => ['required', 'string', 'min:6', 'max:200'],
-            'slug' => ['required', 'string', 'max:200', Rule::unique('blog_posts', 'slug')->ignore($ignoreId)],
+            'slug' => ['required', 'string', 'max:200', Rule::unique('blog_posts', 'slug')->ignore($existing?->id)],
             'category' => ['required', 'string', Rule::in(array_keys($categories))],
             'excerpt' => ['required', 'string', 'min:20', 'max:450'],
             'content' => ['required', 'string', 'min:50'],
@@ -346,7 +346,7 @@ class AdminController extends Controller
             'focus_keyword' => ($validated['focus_keyword'] ?? null) ?: null,
             'reading_time_minutes' => max(1, (int) ceil($wordCount / 200)),
             'is_published' => $isPublished,
-            'published_at' => $isPublished ? now() : null,
+            'published_at' => $isPublished ? ($existing?->published_at ?? now()) : $existing?->published_at,
         ];
     }
 

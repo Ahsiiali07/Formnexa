@@ -26,7 +26,10 @@ class SeoComposer
 
         // Strip query strings (?import=1, ?utm_*, ?q=...) from canonical URLs by default
         $seo['canonical'] = $seo['canonical'] ?? url()->current();
-        $seo['image'] = asset($seo['image'] ?? config('seo.default_image', 'images/formnexa-brand-kit.png'));
+        $rawImage = $seo['image'] ?? config('seo.default_image', 'images/og/default.jpg');
+        $seo['image'] = (str_starts_with($rawImage, 'http://') || str_starts_with($rawImage, 'https://'))
+            ? $rawImage
+            : asset($rawImage);
 
         $view->with('seo', $seo);
     }

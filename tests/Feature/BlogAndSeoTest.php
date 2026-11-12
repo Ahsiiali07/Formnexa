@@ -23,19 +23,24 @@ class BlogAndSeoTest extends TestCase
             ->assertSee('<title>Free Invoice Maker, Resume Builder &amp; PDF Tools | Formnexa</title>', false)
             ->assertSee('<link rel="canonical" href="http://localhost">', false)
             ->assertSee('property="og:title"', false)
+            ->assertSee('property="og:image" content="http://localhost/images/og/default.jpg"', false)
             ->assertSee('name="twitter:card" content="summary_large_image"', false)
+            ->assertSee('{"@context":"https://schema.org"', false)
             ->assertSee('"@type":"Organization"', false)
             ->assertSee('"@type":"WebSite"', false)
             ->assertSee('"@type":"FAQPage"', false)
+            ->assertSee('Free Invoice Maker, <span>Resume Builder &amp; PDF Converter</span>', false)
             ->assertSee('International Invoice Format Guide for Asia, USA &amp; Europe', false)
             ->assertDontSeeText('Pakistan');
+
+        $this->assertSame(1, preg_match_all('/<h1\b/i', $home->getContent()));
 
         // Query parameters must strip cleanly from canonical URL
         $importView = $this->get('/resume-builder?import=1&utm_source=test');
         $importView->assertStatus(200)
             ->assertSee('<link rel="canonical" href="http://localhost/resume-builder">', false)
-            ->assertSee('"@type":"WebApplication"', false)
-            ->assertSee('"@type":"BreadcrumbList"', false);
+            ->assertSee('{"@context":"https://schema.org","@type":"WebApplication"', false)
+            ->assertSee('{"@context":"https://schema.org","@type":"BreadcrumbList"', false);
 
         // Unique SEO copy + schema on document generator and converter tool
         $this->get('/quote-generator')
@@ -115,7 +120,15 @@ class BlogAndSeoTest extends TestCase
         $this->get('/blog/international-invoice-format-asia-usa-europe-guide')
             ->assertStatus(200)
             ->assertSee('property="og:type" content="article"', false)
-            ->assertSee('"@type":"BlogPosting"', false)
+            ->assertSee('property="og:image" content="http://localhost/images/og/default.jpg"', false)
+            ->assertSee('property="og:image:width" content="1200"', false)
+            ->assertSee('property="og:image:height" content="630"', false)
+            ->assertSee('name="twitter:image" content="http://localhost/images/og/default.jpg"', false)
+            ->assertSee('property="article:published_time"', false)
+            ->assertSee('property="article:modified_time"', false)
+            ->assertSee('{"@context":"https://schema.org","@type":"BlogPosting"', false)
+            ->assertSee('{"@context":"https://schema.org","@type":"BreadcrumbList"', false)
+            ->assertSee('"name":"International Invoice Format Guide for Asia, USA & Europe (Free Template)"', false)
             ->assertSee('Open Free Multi-Currency Invoice Generator', false)
             ->assertSee('<h2 id="essential-elements-of-a-cross-border-business-invoice"', false);
 

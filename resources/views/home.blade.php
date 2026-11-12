@@ -1414,7 +1414,7 @@
             </span>
 
             <h1>
-                Free Invoice Maker, <span>Resume Builder &amp; PDF Converter.</span>
+                Free Invoice Maker, <span>Resume Builder &amp; PDF Converter</span>
             </h1>
 
             <p class="fn-hero-copy">
@@ -1993,7 +1993,7 @@
 @push('schema')
 <script type="application/ld+json">
 {!! json_encode([
-    '@context' => 'https://schema.org',
+    '@@context' => 'https://schema.org',
     '@graph' => [
         [
             '@type' => 'Organization',

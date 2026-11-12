@@ -11,7 +11,7 @@
                 ['Home', url('/')],
                 ['Blog', route('blog.index')],
                 [$post->category_label, route('blog.category', $post->category)],
-                [\Illuminate\Support\Str::limit($post->title, 48), route('blog.show', $post->slug)],
+                [\Illuminate\Support\Str::limit($post->title, 48), route('blog.show', $post->slug), $post->title],
             ]" />
 
             <div class="max-w-3xl space-y-4">

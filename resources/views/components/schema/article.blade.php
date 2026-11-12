@@ -1,8 +1,16 @@
 @props(['post'])
+@php
+    $rawImage = $post->cover_image ?: config('seo.default_image', 'images/og/default.jpg');
+    $schemaImage = (str_starts_with($rawImage, 'http://') || str_starts_with($rawImage, 'https://'))
+        ? $rawImage
+        : asset($rawImage);
+    $publishedIso = ($post->published_at ?? $post->created_at)?->toIso8601String();
+    $modifiedIso = ($post->updated_at ?? $post->published_at ?? $post->created_at)?->toIso8601String();
+@endphp
 @push('schema')
 <script type="application/ld+json">
 {!! json_encode([
-    '@context' => 'https://schema.org',
+    '@@context' => 'https://schema.org',
     '@type' => 'BlogPosting',
     'headline' => $post->title,
     'description' => $post->meta_description ?: $post->excerpt,
@@ -10,9 +18,9 @@
         '@type' => 'WebPage',
         '@id' => route('blog.show', $post->slug),
     ],
-    'image' => [asset($post->cover_image ?: config('seo.default_image', 'images/formnexa-brand-kit.png'))],
-    'datePublished' => ($post->published_at ?? $post->created_at)?->toIso8601String(),
-    'dateModified' => $post->updated_at?->toIso8601String(),
+    'image' => [$schemaImage],
+    'datePublished' => $publishedIso,
+    'dateModified' => $modifiedIso,
     'author' => [
         '@type' => 'Organization',
         'name' => $post->author?->name ?: config('seo.site_name', 'Formnexa Editorial'),
