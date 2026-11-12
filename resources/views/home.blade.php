@@ -282,7 +282,7 @@
                         </div>
                     </div>
 
-                    {{-- MODULE PREVIEW E: CONVERT FROM PDF (5) --}}
+                    {{-- MODULE PREVIEW E: CONVERT FROM  New PDF (5) --}}
                     <div x-show="activeModule === 'from_pdf'" x-cloak x-transition.opacity.duration.200ms class="space-y-5">
                         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                             <div>
