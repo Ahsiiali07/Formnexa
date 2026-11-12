@@ -895,7 +895,7 @@
         align-content: start;
         gap: 8px;
     }
-    .fn-mini-template b {
+    .fn-mini-template .fn-mini-head {
         height: 34px;
         border-radius: 8px;
         background: #ede9fe;
@@ -905,14 +905,25 @@
         border-color: var(--green);
         box-shadow: 0 0 0 3px rgba(24, 79, 58, 0.12);
     }
-    .fn-mini-template.active b { background: #c8f3dc; }
-    .fn-mini-template.alt b { background: #ffe7dc; }
+    .fn-mini-template.active .fn-mini-head { background: #c8f3dc; }
+    .fn-mini-template.alt .fn-mini-head { background: #ffe7dc; }
     .fn-mini-template span {
         height: 7px;
         border-radius: 99px;
         background: #eef1ee;
     }
     .fn-mini-template span.short { width: 65%; }
+    .fn-sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
 
     .fn-customize-card {
         position: absolute;
@@ -1493,7 +1504,7 @@
                             <div class="fn-side-item done">Work experience</div>
                             <div class="fn-side-item current">Skills &amp; ATS</div>
                             <div class="fn-side-item">Education</div>
-                            <a href="{{ route('resume.builder', ['import' => 1]) }}"
+                            <a href="{{ route('resume.builder', ['import' => 1]) }}" rel="nofollow"
                                class="mt-auto inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#f0ebff] hover:bg-[#e3d9ff] text-[#5d3ec4] text-xs font-bold transition">
                                 <x-icon name="upload" class="w-[15px] h-[15px]" />
                                 Import Existing CV
@@ -1787,13 +1798,13 @@
                     </div>
                     <div class="fn-template-grid">
                         <div class="fn-mini-template">
-                            <b></b><span></span><span class="short"></span>
+                            <div class="fn-mini-head"></div><span></span><span class="short"></span>
                         </div>
                         <div class="fn-mini-template active">
-                            <b></b><span></span><span class="short"></span>
+                            <div class="fn-mini-head"></div><span></span><span class="short"></span>
                         </div>
                         <div class="fn-mini-template alt">
-                            <b></b><span></span><span class="short"></span>
+                            <div class="fn-mini-head"></div><span></span><span class="short"></span>
                         </div>
                     </div>
                 </div>
@@ -1958,7 +1969,7 @@
                             <p class="text-xs sm:text-sm text-[#536058] leading-relaxed">{{ \Illuminate\Support\Str::limit($bPost->excerpt, 125) }}</p>
                         </div>
                         <a href="{{ route('blog.show', $bPost->slug) }}" class="text-xs font-bold text-[#184f3a] hover:underline">
-                            Read guide &rarr;
+                            Read guide<span class="fn-sr-only">: {{ $bPost->title }}</span> &rarr;
                         </a>
                     </article>
                 @endforeach

@@ -31,9 +31,11 @@ class BlogAndSeoTest extends TestCase
             ->assertSee('"@type":"FAQPage"', false)
             ->assertSee('Free Invoice Maker, <span>Resume Builder &amp; PDF Converter</span>', false)
             ->assertSee('International Invoice Format Guide for Asia, USA &amp; Europe', false)
+            ->assertDontSee('<b></b>', false)
             ->assertDontSeeText('Pakistan');
 
         $this->assertSame(1, preg_match_all('/<h1\b/i', $home->getContent()));
+        $this->assertSame(0, preg_match_all('/<a\b(?![^>]*rel=["\']nofollow["\'])[^>]*href=["\'][^"\']*\?[^"\']*["\']/i', $home->getContent()));
 
         // Query parameters must strip cleanly from canonical URL and maintain a single H1
         $importView = $this->get('/resume-builder?import=1&utm_source=test');

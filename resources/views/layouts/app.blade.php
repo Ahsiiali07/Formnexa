@@ -70,7 +70,7 @@
                                         <div class="text-[11px] text-[#68736d] mt-0.5">ATS-ready &amp; modern layouts</div>
                                     </div>
                                 </a>
-                                <a href="{{ route('resume.builder', ['import' => 1]) }}" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#e8f7ed]/70 transition group">
+                                <a href="{{ route('resume.builder', ['import' => 1]) }}" rel="nofollow" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#e8f7ed]/70 transition group">
                                     <span class="w-8 h-8 rounded-lg bg-[#e8f7ed] text-[#184f3a] border border-[#c8f3dc] flex items-center justify-center shrink-0">
                                         <x-icon name="upload" class="w-[17px] h-[17px]" />
                                     </span>

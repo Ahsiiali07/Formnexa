@@ -6,7 +6,6 @@ use App\Models\BlogPost;
 use App\Support\ConverterCatalog;
 use App\Support\ResumeCatalog;
 use App\Support\TemplateCatalog;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -19,9 +18,11 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        $latestPosts = Schema::hasTable('blog_posts')
-            ? BlogPost::published()->orderByDesc('published_at')->orderByDesc('id')->take(3)->get()
-            : collect();
+        try {
+            $latestPosts = BlogPost::published()->orderByDesc('published_at')->orderByDesc('id')->take(3)->get();
+        } catch (\Throwable) {
+            $latestPosts = collect();
+        }
 
         return view('home', [
             'generators' => InvoiceController::$generators,
