@@ -6,30 +6,30 @@
 @section('content')
 <div x-data="resumeGalleryPage()" class="min-h-screen bg-white">
 
-    {{-- Bloom-Style Hero Banner --}}
-    <section class="relative overflow-hidden bg-[#F6F5F1] border-b border-black/[0.06] pt-11 pb-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
+    {{-- Modern Electric Precision Hero Banner --}}
+    <section class="relative overflow-hidden bg-[#F8FAFC] border-b border-border-subtle pt-10 pb-10 sm:pb-12 px-4 sm:px-6">
+        <div class="max-w-[1280px] mx-auto">
             <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
                 <div class="max-w-3xl">
-                    <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-md bg-white border border-black/[0.08] text-emerald-700 text-xs font-extrabold uppercase tracking-wider mb-4">
+                    <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-white border border-border-subtle text-emerald-700 font-mono text-[11px] font-semibold uppercase tracking-wider mb-4 shadow-sm">
                         15 Templates &bull; 10 Distinct Layout Engines &bull; No Sign-up Required
                     </div>
-                    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-[-0.035em] text-[#111111] leading-[1.08]">
+                    <h1 class="font-display text-3xl sm:text-5xl font-extrabold tracking-[-0.03em] text-[#0b1c30] leading-[1.08]">
                         Resume &amp; CV templates crafted like
                         <span class="text-[#0066FF]">Figma</span>, <span class="text-emerald-600">FlowCV</span> &amp; Editorial Print.
                     </h1>
-                    <p class="mt-4 text-base sm:text-lg text-black/65 font-sans-inter max-w-2xl leading-relaxed">
+                    <p class="mt-4 text-sm sm:text-lg text-[#565e74] max-w-2xl leading-relaxed">
                         Choose from warm editorial serif spreads, FlowCV-style dark portrait sidebars, connected career timelines with skill bars, and 100% ATS-verified Wall Street singles.
                     </p>
                 </div>
 
-                <div class="flex flex-wrap items-center gap-3 shrink-0">
+                <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 shrink-0">
                     <a href="{{ route('resume.builder', ['import' => 1]) }}"
-                       class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#111111] hover:bg-[#0066FF] text-white text-sm font-bold shadow-sm transition">
+                       class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-primary-container hover:bg-electric-blue-hover text-white text-sm font-bold shadow-sm transition">
                         <span>Import Existing CV &rarr;</span>
                     </a>
                     <a href="{{ route('resume.builder', ['blank' => 1]) }}"
-                       class="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white border border-black/10 text-[#111111] text-sm font-bold hover:border-black transition">
+                       class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white border border-border-strong text-[#0b1c30] text-sm font-bold hover:border-[#0b1c30] transition">
                         <span>+ Start Blank</span>
                     </a>
                 </div>
@@ -42,8 +42,8 @@
                             @click="activeCategory = '{{ $catKey }}'"
                             class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition border cursor-pointer"
                             :class="activeCategory === '{{ $catKey }}'
-                                ? 'bg-[#111111] text-white border-[#111111] shadow-2xs'
-                                : 'bg-white text-[#111111]/75 border-black/[0.08] hover:border-black/25 hover:text-[#111111]'">
+                                ? 'bg-[#0B0F19] text-white border-[#0B0F19] shadow-sm'
+                                : 'bg-white text-[#565e74] border-border-subtle hover:border-[#0066FF] hover:text-[#0b1c30]'">
                         {{ $catLabel }}
                         @if($catKey === 'all')
                             <span class="ml-1 text-[11px] opacity-75">({{ count($templates) }})</span>
@@ -74,7 +74,7 @@
 
                 <article x-show="activeCategory === 'all' || activeCategory === '{{ $tpl['category'] }}'"
                          x-transition.opacity.duration.200ms
-                         class="group flex flex-col bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-slate-300 transition-all duration-300 overflow-hidden">
+                         class="group flex flex-col bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-slate-300 transition-all duration-300 overflow-hidden">
 
                     {{-- Full Portrait A4 Canvas Showcase Frame (1 : 1.41) --}}
                     <div class="relative bg-slate-100/90 p-4 sm:p-5 border-b border-slate-200/70">
@@ -93,7 +93,7 @@
                                                 <div class="font-black text-[9.5px] leading-tight text-white">{{ $p['full_name'] ?? '' }}</div>
                                                 <div class="text-[6.5px] text-white/80 mt-0.5">{{ $p['job_title'] ?? '' }}</div>
                                                 @if(!empty($tpl['show_photo']))
-                                                    <div class="w-11 h-11 rounded-full mx-auto mt-2.5 border-2 border-white/30 bg-white/15 flex items-center justify-center font-black text-[10px] text-white overflow-hidden shadow-xs">
+                                                    <div class="w-11 h-11 rounded-full mx-auto mt-2.5 border-2 border-white/30 bg-white/15 flex items-center justify-center font-black text-[10px] text-white overflow-hidden shadow-sm">
                                                         @if(!empty($p['preset_avatar']))
                                                             <img src="{{ asset($p['preset_avatar']) }}" alt="" class="w-full h-full object-cover">
                                                         @else
@@ -379,7 +379,7 @@
                             @elseif($tStyle === 'creative_card')
                                 <div class="grid grid-cols-12 h-full text-[7.2px] leading-[1.35]">
                                     <div class="col-span-4 p-2.5 space-y-2.5 border-r" style="background: {{ $accent }}14; border-color: {{ $accent }}28;">
-                                        <div class="p-2 rounded-lg bg-white border shadow-2xs" style="border-color: {{ $accent }}24;">
+                                        <div class="p-2 rounded-lg bg-white border shadow-sm" style="border-color: {{ $accent }}24;">
                                             <div class="w-9 h-9 rounded-lg flex items-center justify-center text-white font-black text-[8.5px] mb-1.5 overflow-hidden" style="background: {{ $accent }};">
                                                 @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="" class="w-full h-full object-cover">@else{{ $init }}@endif
                                             </div>
@@ -597,7 +597,7 @@
                                     <h3 class="font-extrabold text-base text-slate-900 leading-snug">{{ $tpl['name'] }}</h3>
                                     <div class="text-xs font-semibold text-slate-500 mt-0.5">{{ $tpl['role'] }}</div>
                                 </div>
-                                <span class="w-4 h-4 rounded-full shrink-0 mt-1 border border-slate-200 shadow-2xs"
+                                <span class="w-4 h-4 rounded-full shrink-0 mt-1 border border-slate-200 shadow-sm"
                                       style="background-color: {{ $accent }};"
                                       title="Default accent {{ $accent }}"></span>
                             </div>
@@ -678,7 +678,7 @@
                                         @click="accent_color = '{{ $clr['hex'] }}'"
                                         class="w-7 h-7 rounded-full border-2 transition flex items-center justify-center"
                                         style="background-color: {{ $clr['hex'] }};"
-                                        :class="accent_color === '{{ $clr['hex'] }}' ? 'border-slate-900 ring-2 ring-slate-900/20 scale-110' : 'border-white shadow-xs'"
+                                        :class="accent_color === '{{ $clr['hex'] }}' ? 'border-slate-900 ring-2 ring-slate-900/20 scale-110' : 'border-white shadow-sm'"
                                         title="{{ $clr['name'] }}">
                                 </button>
                             @endforeach

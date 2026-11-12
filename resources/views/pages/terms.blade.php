@@ -3,7 +3,7 @@
 @section('title', 'Terms of Service — Formnexa')
 
 @section('content')
-<div class="min-h-screen bg-[#F6F5F1] py-10 sm:py-14">
+<div class="min-h-screen bg-[#F8FAFC] py-10 sm:py-14">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
 
         <!-- Breadcrumb Navigation -->

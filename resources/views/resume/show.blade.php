@@ -60,10 +60,10 @@
 @section('title', ($fullName ?: $resume->title) . ' — Resume | Formnexa')
 
 @section('content')
-<div class="min-h-screen bg-slate-100 py-6 sm:py-10 px-3 sm:px-6 print:bg-white print:p-0">
+<div class="min-h-screen bg-[#F8FAFC] py-6 sm:py-10 px-3 sm:px-6 print:bg-white print:p-0">
 
     {{-- Top Viewer Action Strip --}}
-    <div class="no-print max-w-[794px] mx-auto mb-5 flex flex-wrap items-center justify-between gap-3 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-xs">
+    <div class="no-print max-w-[794px] mx-auto mb-5 flex flex-wrap items-center justify-between gap-3 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm">
         <div class="min-w-0">
             <div class="text-xs font-extrabold text-slate-900 truncate">{{ $resume->title }}</div>
             <div class="text-[11px] text-slate-500">Updated {{ $resume->updated_at?->diffForHumans() }}</div>
@@ -83,7 +83,7 @@
                 Print
             </button>
             <a href="{{ route('resume.pdf', $resume->uuid) }}"
-               class="px-4 py-2 rounded-xl bg-[#0066FF] text-white text-xs font-extrabold shadow-xs hover:bg-blue-700 transition">
+               class="px-4 py-2 rounded-xl bg-[#0066FF] text-white text-xs font-extrabold shadow-sm hover:bg-blue-700 transition">
                 Download PDF
             </a>
         </div>
@@ -450,7 +450,7 @@
                                             @foreach($exps as $exp)
                                                 @continue(empty($exp['role']) && empty($exp['company']))
                                                 <div class="relative">
-                                                    <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full border-2 bg-white shadow-xs" style="border-color: {{ $accent }}"></span>
+                                                    <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full border-2 bg-white shadow-sm" style="border-color: {{ $accent }}"></span>
                                                     <div class="flex flex-wrap items-baseline justify-between gap-2">
                                                         <h3 class="font-extrabold text-[13px] text-slate-900">{{ $exp['role'] ?: ($exp['company'] ?? '') }}</h3>
                                                         <span class="px-2 py-0.5 rounded-full text-[9.5px] font-bold" style="background-color: {{ $accent }}14; color: {{ $accent }}">{{ implode(' – ', array_filter([$exp['start_date'] ?? '', $exp['end_date'] ?? ''])) }}</span>
@@ -694,7 +694,7 @@
                 @elseif($tStyle === 'creative_card')
                     <div class="grid grid-cols-12 min-h-[1122px] bg-white">
                         <aside class="col-span-4 border-r p-6 space-y-5" style="background-color: {{ $accent }}12; border-color: {{ $accent }}25;">
-                            <div class="p-4 rounded-2xl bg-white shadow-xs border" style="border-color: {{ $accent }}22;">
+                            <div class="p-4 rounded-2xl bg-white shadow-sm border" style="border-color: {{ $accent }}22;">
                                 @if($showPhoto)
                                     <div class="w-16 h-16 rounded-2xl mb-3 flex items-center justify-center text-white font-black text-xl shadow-sm overflow-hidden" style="background-color: {{ $accent }}">
                                         @if($photo)<img src="{{ $photo }}" alt="Portrait" class="w-full h-full object-cover">@else<span>{{ $initials }}</span>@endif

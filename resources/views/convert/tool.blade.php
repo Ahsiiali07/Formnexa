@@ -4,40 +4,40 @@
 @section('meta_description', $meta['tagline'])
 
 @section('content')
-<div x-data="pdfConverterTool(@js($meta))" class="min-h-screen bg-[#F6F5F1] pb-20">
+<div x-data="pdfConverterTool(@js($meta))" class="min-h-screen bg-[#F8FAFC] pb-16 sm:pb-20">
 
     {{-- Top Tool Switcher & Breadcrumb Strip --}}
-    <section class="bg-[#F6F5F1] border-b border-black/[0.06] pt-7 pb-6 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-6xl mx-auto space-y-4">
+    <section class="bg-white border-b border-border-subtle pt-6 sm:pt-7 pb-5 sm:pb-6 px-4 sm:px-6">
+        <div class="max-w-[1280px] mx-auto space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-3">
-                <div class="flex items-center gap-2 text-xs text-black/50">
-                    <a href="{{ route('convert.hub') }}" class="font-bold text-[#111111] hover:text-[#0066FF]">Convert PDF</a>
+                <div class="flex flex-wrap items-center gap-2 text-xs text-[#565e74]">
+                    <a href="{{ route('convert.hub') }}" class="font-bold text-[#0b1c30] hover:text-[#0066FF]">Convert PDF</a>
                     <span>/</span>
-                    <span class="uppercase tracking-wider font-semibold">{{ $meta['group'] === 'to_pdf' ? 'Convert to PDF' : 'Convert from PDF' }}</span>
+                    <span class="font-mono uppercase tracking-wider font-semibold">{{ $meta['group'] === 'to_pdf' ? 'Convert to PDF' : 'Convert from PDF' }}</span>
                     <span>/</span>
-                    <span class="font-bold text-[#111111]">{{ $meta['name'] }}</span>
+                    <span class="font-bold text-[#0b1c30]">{{ $meta['name'] }}</span>
                 </div>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white border border-black/[0.08] text-emerald-700 text-[11px] font-bold">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F8FAFC] border border-border-subtle text-emerald-700 text-[11px] font-bold">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                     100% Free &bull; No Sign-up Required
                 </span>
             </div>
 
-            <div class="flex items-start gap-4">
-                <span class="w-12 h-12 rounded-2xl {{ $meta['color_bg'] }} {{ $meta['color_text'] }} border {{ $meta['color_border'] }} flex items-center justify-center font-black text-base shrink-0 shadow-2xs">
+            <div class="flex items-start gap-3.5 sm:gap-4">
+                <span class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl {{ $meta['color_bg'] }} {{ $meta['color_text'] }} border {{ $meta['color_border'] }} flex items-center justify-center font-mono font-bold text-sm sm:text-base shrink-0 shadow-sm">
                     {{ $meta['badge'] }}
                 </span>
-                <div>
-                    <h1 class="text-2xl sm:text-4xl font-extrabold tracking-[-0.03em] text-[#111111] leading-tight">{{ $meta['title'] }}</h1>
-                    <p class="text-xs sm:text-sm text-black/60 font-sans-inter mt-1 max-w-2xl">{{ $meta['tagline'] }}</p>
+                <div class="min-w-0">
+                    <h1 class="font-display text-2xl sm:text-4xl font-extrabold tracking-[-0.03em] text-[#0b1c30] leading-tight">{{ $meta['title'] }}</h1>
+                    <p class="text-xs sm:text-sm text-[#565e74] mt-1 max-w-2xl">{{ $meta['tagline'] }}</p>
                 </div>
             </div>
 
-            {{-- Horizontal Quick Switcher Bar across all 10 conversions --}}
-            <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-hide pt-1">
+            {{-- Horizontal Quick Switcher Bar across all conversions --}}
+            <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-hide pt-1 pb-0.5">
                 @foreach(array_merge($groups['to_pdf'], $groups['from_pdf']) as $navTool)
                     <a href="{{ route('convert.tool', $navTool['slug']) }}"
-                       class="px-3 py-1.5 rounded-lg text-[11px] font-bold whitespace-nowrap border transition {{ $navTool['slug'] === $meta['slug'] ? 'bg-[#111111] text-white border-[#111111] shadow-2xs' : 'bg-white text-[#111111]/70 border-black/[0.08] hover:border-black/25 hover:text-[#111111]' }}">
+                       class="px-3 py-1.5 rounded-lg text-[11px] font-bold whitespace-nowrap border transition {{ $navTool['slug'] === $meta['slug'] ? 'bg-[#0B0F19] text-white border-[#0B0F19] shadow-sm' : 'bg-[#F8FAFC] text-[#565e74] border-border-subtle hover:border-[#0066FF] hover:text-[#0b1c30]' }}">
                         {{ $navTool['name'] }}
                     </a>
                 @endforeach
@@ -46,8 +46,8 @@
     </section>
 
     {{-- Main Two-Column Conversion Studio --}}
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
 
             {{-- LEFT / MAIN WORKSPACE (8 cols) --}}
             <div class="lg:col-span-8 space-y-5">
@@ -61,7 +61,7 @@
 
                 {{-- Success Download Card --}}
                 <div x-show="downloadResult" x-cloak
-                     class="p-6 rounded-2xl bg-emerald-50/90 border border-emerald-200 shadow-xs space-y-4">
+                     class="p-6 rounded-2xl bg-emerald-50/90 border border-emerald-200 shadow-sm space-y-4">
                     <div class="flex items-start justify-between gap-3">
                         <div class="flex items-center gap-3">
                             <span class="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-lg shrink-0">&#10003;</span>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="flex flex-wrap gap-2.5">
                         <button type="button" @click="triggerSavedDownload()"
-                                class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold shadow-xs transition">
+                                class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold shadow-sm transition">
                             Download File Again
                         </button>
                         <button type="button" @click="resetWorkspace()"
@@ -86,18 +86,18 @@
 
                 {{-- SPECIALIZED WORKSPACE A: HTML TO PDF (File / Raw HTML / Public URL Tabs) --}}
                 <template x-if="meta.slug === 'html-to-pdf'">
-                    <div class="bg-white rounded-2xl border border-slate-200/90 shadow-xs overflow-hidden">
-                        <div class="px-5 pt-4 pb-3 border-b border-slate-100 flex flex-wrap items-center justify-between gap-2 bg-slate-50/70">
-                            <div class="inline-flex p-1 bg-slate-200/70 rounded-full gap-1 text-xs">
+                    <div class="bg-white rounded-2xl border border-border-subtle shadow-sm overflow-hidden">
+                        <div class="px-4 sm:px-5 pt-4 pb-3 border-b border-border-subtle flex flex-wrap items-center justify-between gap-2 bg-[#F8FAFC]">
+                            <div class="inline-flex flex-wrap p-1 bg-slate-200/70 rounded-xl gap-1 text-xs">
                                 <button type="button" @click="htmlMode = 'code'"
-                                        class="px-3.5 py-1.5 rounded-full font-bold transition"
-                                        :class="htmlMode === 'code' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-600'">Paste HTML Code</button>
+                                        class="px-3 py-1.5 rounded-lg font-bold transition"
+                                        :class="htmlMode === 'code' ? 'bg-white text-[#0b1c30] shadow-sm' : 'text-[#565e74]'">Paste HTML Code</button>
                                 <button type="button" @click="htmlMode = 'file'"
-                                        class="px-3.5 py-1.5 rounded-full font-bold transition"
-                                        :class="htmlMode === 'file' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-600'">Upload .HTML File</button>
+                                        class="px-3 py-1.5 rounded-lg font-bold transition"
+                                        :class="htmlMode === 'file' ? 'bg-white text-[#0b1c30] shadow-sm' : 'text-[#565e74]'">Upload .HTML File</button>
                                 <button type="button" @click="htmlMode = 'url'"
-                                        class="px-3.5 py-1.5 rounded-full font-bold transition"
-                                        :class="htmlMode === 'url' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-600'">Webpage URL</button>
+                                        class="px-3 py-1.5 rounded-lg font-bold transition"
+                                        :class="htmlMode === 'url' ? 'bg-white text-[#0b1c30] shadow-sm' : 'text-[#565e74]'">Webpage URL</button>
                             </div>
                             <button type="button" x-show="htmlMode === 'code'" @click="insertSampleHtml()"
                                     class="text-xs font-bold text-[#0066FF] hover:underline">
@@ -146,18 +146,18 @@
 
                 {{-- WORKSPACE B: FILE DROPZONE & MULTI-IMAGE / PDF->JPG PREVIEWS --}}
                 <template x-if="meta.slug !== 'html-to-pdf'">
-                    <div class="bg-white rounded-2xl border border-slate-200/90 shadow-xs p-5 sm:p-6 space-y-5">
+                    <div class="bg-white rounded-2xl border border-border-subtle shadow-sm p-4 sm:p-6 space-y-5">
 
                         {{-- Dropzone --}}
                         <label class="block rounded-2xl border-2 border-dashed transition text-center cursor-pointer"
                                :class="[
-                                   selectedFiles.length > 0 && meta.slug !== 'jpg-to-pdf' ? 'p-5' : 'p-10 sm:p-14',
-                                   dragging ? 'border-[#0066FF] bg-blue-50/50' : 'border-slate-300 bg-slate-50/70 hover:border-[#0066FF]'
+                                   selectedFiles.length > 0 && meta.slug !== 'jpg-to-pdf' ? 'p-5' : 'p-7 sm:p-14',
+                                   dragging ? 'border-[#0066FF] bg-[#EFF6FF]' : 'border-slate-300 bg-[#F8FAFC] hover:border-[#0066FF]'
                                ]"
                                @dragover.prevent="dragging = true"
                                @dragleave.prevent="dragging = false"
                                @drop.prevent="dragging = false; handleDrop($event)">
-                            <span class="w-12 h-12 rounded-2xl {{ $meta['color_bg'] }} {{ $meta['color_text'] }} border {{ $meta['color_border'] }} inline-flex items-center justify-center font-black text-base mb-3 shadow-2xs">
+                            <span class="w-12 h-12 rounded-xl {{ $meta['color_bg'] }} {{ $meta['color_text'] }} border {{ $meta['color_border'] }} inline-flex items-center justify-center font-mono font-bold text-base mb-3 shadow-sm">
                                 {{ $meta['badge'] }}
                             </span>
                             <div class="text-base font-extrabold text-slate-900">
@@ -222,7 +222,7 @@
                                 </div>
                                 <button type="button" x-show="renderedJpgPages.length > 0 && !renderingPdf"
                                         @click="downloadAllJpgs()"
-                                        class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-[#0066FF] text-white text-xs font-extrabold transition shadow-xs">
+                                        class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-[#0066FF] text-white text-xs font-extrabold transition shadow-sm">
                                     Download All Pages (.zip)
                                 </button>
                             </div>
@@ -250,7 +250,7 @@
             </div>
 
             {{-- RIGHT SETTINGS & CONVERT SIDEBAR (4 cols) --}}
-            <aside class="lg:col-span-4 bg-white rounded-2xl border border-slate-200/90 shadow-xs p-5 sm:p-6 space-y-5 lg:sticky lg:top-24">
+            <aside class="lg:col-span-4 bg-white rounded-2xl border border-slate-200/90 shadow-sm p-5 sm:p-6 space-y-5 lg:sticky lg:top-24">
                 <div>
                     <div class="text-xs font-extrabold uppercase tracking-wider text-slate-400">Conversion Options</div>
                     <div class="text-base font-black text-slate-900 mt-0.5">{{ $meta['name'] }}</div>
@@ -611,11 +611,13 @@ function pdfConverterTool(meta) {
                     this.errorMsg = 'Please select a PDF file first.';
                     return;
                 }
-                if (!this.renderedJpgPages.length) {
-                    await this.renderPdfPreview();
+                if (window.FormnexaPdf) {
+                    if (!this.renderedJpgPages.length) {
+                        await this.renderPdfPreview();
+                    }
+                    await this.downloadAllJpgs();
+                    return;
                 }
-                await this.downloadAllJpgs();
-                return;
             }
 
             if (this.meta.slug === 'html-to-pdf') {
@@ -660,6 +662,10 @@ function pdfConverterTool(meta) {
                 fd.append('mode', this.opts.mode);
                 fd.append('merge_sheets', this.opts.merge_sheets);
                 fd.append('conformance', this.opts.conformance);
+                if (this.meta.slug === 'pdf-to-jpg') {
+                    fd.append('scale', this.opts.scale || '2.0');
+                    fd.append('output', 'auto');
+                }
 
                 // For PDF/A & Visual PowerPoint/Word modes, render crisp page frames in browser via PDF.js
                 const needsFrames = (
@@ -719,7 +725,18 @@ function pdfConverterTool(meta) {
 
         triggerSavedDownload() {
             if (!this.downloadResult?.blob) return;
-            window.FormnexaPdf.downloadBlob(this.downloadResult.blob, this.downloadResult.filename);
+            if (window.FormnexaPdf?.downloadBlob) {
+                window.FormnexaPdf.downloadBlob(this.downloadResult.blob, this.downloadResult.filename);
+                return;
+            }
+            const url = URL.createObjectURL(this.downloadResult.blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = this.downloadResult.filename || 'converted-file';
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 2500);
         },
 
         formatBytes(bytes) {

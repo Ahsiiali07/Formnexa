@@ -3,7 +3,7 @@
 @section('title', 'Invoice #' . $invoice->invoice_number . ' — Formnexa')
 
 @section('header_actions')
-<a href="{{ route('invoice.pdf', $invoice->uuid) }}" class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-2 rounded-lg text-xs font-bold text-white bg-[#111111] hover:bg-[#0066FF] transition shadow-2xs whitespace-nowrap shrink-0">
+<a href="{{ route('invoice.pdf', $invoice->uuid) }}" class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-2 rounded-lg text-xs font-bold text-white bg-[#111111] hover:bg-[#0066FF] transition shadow-sm whitespace-nowrap shrink-0">
     <svg class="w-4 h-4 text-teal-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
     <span class="hidden sm:inline">Download PDF</span>
     <span class="sm:hidden">PDF</span>
@@ -108,7 +108,7 @@
                  @if($style === 'stripe' || $style === 'compact') style="border-bottom: 2px solid {{ $accent }}" @endif>
                 <div class="flex items-center gap-4">
                     @if(!empty($invoice->logo_data))
-                    <div class="w-20 h-20 {{ $style === 'classic' ? 'rounded-none' : 'rounded-2xl' }} border border-slate-200 p-2 bg-white shadow-xs flex items-center justify-center overflow-hidden">
+                    <div class="w-20 h-20 {{ $style === 'classic' ? 'rounded-none' : 'rounded-2xl' }} border border-slate-200 p-2 bg-white shadow-sm flex items-center justify-center overflow-hidden">
                         <img src="{{ $invoice->logo_data }}" alt="Logo" class="max-w-full max-h-full object-contain">
                     </div>
                     @endif
@@ -285,7 +285,7 @@
                         <span class="font-bold">- {{ $invoice->currency_symbol }}{{ number_format($invoice->amount_paid, 2) }}</span>
                     </div>
                     @endif
-                    <div class="flex justify-between text-base font-black p-3 rounded-2xl bg-white border-2 text-slate-900 mt-3 shadow-xs" style="border-color: {{ $invoice->accent_color ?: '#0d9488' }}">
+                    <div class="flex justify-between text-base font-black p-3 rounded-2xl bg-white border-2 text-slate-900 mt-3 shadow-sm" style="border-color: {{ $invoice->accent_color ?: '#0d9488' }}">
                         <span>Balance Due</span>
                         <span style="color: {{ $invoice->accent_color ?: '#0d9488' }}">{{ $invoice->currency_symbol }}{{ number_format($invoice->balance_due, 2) }}</span>
                     </div>

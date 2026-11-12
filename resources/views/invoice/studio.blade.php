@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-<div x-data="bloomInvoiceEditor(@js($loadedInvoice), @js($config ?? null), @js($loadedTemplate ?? null), @js($templateStyles ?? []), @js($templateColors ?? []), @js($allTemplates ?? []))" x-init="init()" class="relative bg-[#F6F5F1] pb-28 sm:pb-32">
+<div x-data="bloomInvoiceEditor(@js($loadedInvoice), @js($config ?? null), @js($loadedTemplate ?? null), @js($templateStyles ?? []), @js($templateColors ?? []), @js($allTemplates ?? []))" x-init="init()" class="relative bg-[#F8FAFC] pb-28 sm:pb-32">
 
     <!-- Toast Notification -->
     <div x-cloak x-show="toast.visible"
@@ -37,7 +37,7 @@
                 @endphp
                 @foreach($allGenerators ?? \App\Http\Controllers\InvoiceController::$generators as $slug => $gen)
                     <a href="{{ $slug === 'invoice-generator' ? route('invoice.studio') : route('invoice.generator', $slug) }}"
-                       class="whitespace-nowrap px-3 py-1.5 rounded-lg text-[11px] font-semibold transition border shrink-0 {{ $currentSlug === $slug ? 'bg-[#111111] text-white border-[#111111] shadow-xs' : 'bg-white text-[#111111]/75 border-black/[0.08] hover:border-black/25 hover:text-[#111111]' }}">
+                       class="whitespace-nowrap px-3 py-1.5 rounded-lg text-[11px] font-semibold transition border shrink-0 {{ $currentSlug === $slug ? 'bg-[#111111] text-white border-[#111111] shadow-sm' : 'bg-white text-[#111111]/75 border-black/[0.08] hover:border-black/25 hover:text-[#111111]' }}">
                         {{ str_replace(' Generator', '', $gen['name']) }}
                     </a>
                 @endforeach
@@ -66,12 +66,12 @@
 
         <!-- Clean Mode & Workspace Controls Bar -->
         <div class="flex flex-col md:flex-row items-center justify-center gap-2.5 sm:gap-3">
-            <div class="inline-flex p-1 bg-white rounded-xl border border-black/[0.09] shadow-2xs">
-                <button type="button" @click="viewMode = 'edit'" class="px-4 sm:px-5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer" :class="viewMode === 'edit' ? 'bg-[#111111] text-white shadow-2xs' : 'text-[#111111]/65 hover:text-[#111111]'">
+            <div class="inline-flex p-1 bg-white rounded-xl border border-black/[0.09] shadow-sm">
+                <button type="button" @click="viewMode = 'edit'" class="px-4 sm:px-5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer" :class="viewMode === 'edit' ? 'bg-[#111111] text-white shadow-sm' : 'text-[#111111]/65 hover:text-[#111111]'">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
                     <span>Edit Mode</span>
                 </button>
-                <button type="button" @click="viewMode = 'preview'" class="px-4 sm:px-5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer" :class="viewMode === 'preview' ? 'bg-[#111111] text-white shadow-2xs' : 'text-[#111111]/65 hover:text-[#111111]'">
+                <button type="button" @click="viewMode = 'preview'" class="px-4 sm:px-5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer" :class="viewMode === 'preview' ? 'bg-[#111111] text-white shadow-sm' : 'text-[#111111]/65 hover:text-[#111111]'">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                     <span>Client Preview</span>
                 </button>
@@ -79,7 +79,7 @@
 
             <div class="flex flex-wrap items-center justify-center gap-2">
                 <!-- Quick Currency Switcher -->
-                <div class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-black/[0.09] shadow-2xs text-xs font-semibold text-[#111111] whitespace-nowrap">
+                <div class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-black/[0.09] shadow-sm text-xs font-semibold text-[#111111] whitespace-nowrap">
                     <span class="text-black/45 font-medium text-[11px] uppercase tracking-wider">Currency:</span>
                     <select x-model="currency" @change="onCurrencyChange()" class="bg-transparent font-bold text-[#111111] border-none p-0 pr-1.5 text-xs focus:ring-0 focus:outline-none cursor-pointer">
                         <option value="USD|$">USD ($)</option>
@@ -110,8 +110,8 @@
                 </div>
 
                 <!-- Custom Template & Color Switcher -->
-                <button type="button" @click="templateDrawerOpen = true" class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl bg-white border border-black/[0.09] hover:border-[#0066FF] shadow-2xs text-xs font-semibold text-[#111111] transition group whitespace-nowrap cursor-pointer">
-                    <span class="w-3 h-3 rounded-full border border-white shadow-xs shrink-0" :style="'background-color:' + accent_color"></span>
+                <button type="button" @click="templateDrawerOpen = true" class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl bg-white border border-black/[0.09] hover:border-[#0066FF] shadow-sm text-xs font-semibold text-[#111111] transition group whitespace-nowrap cursor-pointer">
+                    <span class="w-3 h-3 rounded-full border border-white shadow-sm shrink-0" :style="'background-color:' + accent_color"></span>
                     <span class="text-black/45 font-medium text-[11px] uppercase tracking-wider hidden sm:inline">Template:</span>
                     <span class="font-bold text-[#111111] group-hover:text-[#0066FF]" x-text="templateStyles[template_style]?.name || 'Modern Studio'"></span>
                     <svg class="w-3.5 h-3.5 text-black/45 group-hover:text-[#0066FF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
@@ -159,7 +159,7 @@
 
                     <!-- Touch-Friendly Bottom Cover Toolbar -->
                     <div class="no-print absolute bottom-2.5 left-3 right-3 sm:left-auto sm:right-4 flex items-center justify-between sm:justify-end gap-2">
-                        <label x-show="viewMode === 'edit'" class="sm:hidden cursor-pointer inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 text-slate-900 text-[10px] font-bold shadow-xs">
+                        <label x-show="viewMode === 'edit'" class="sm:hidden cursor-pointer inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 text-slate-900 text-[10px] font-bold shadow-sm">
                             <span>+ Cover</span>
                             <input type="file" @change="handleCoverUpload($event)" accept="image/*" class="hidden">
                         </label>
@@ -297,7 +297,7 @@
                             <span>Currency</span>
                             <span class="font-extrabold" x-text="'(' + currency_symbol + ')'"></span>
                         </span>
-                        <select x-model="currency" :disabled="viewMode === 'preview'" @change="onCurrencyChange()" class="w-full min-w-0 bg-white border border-slate-300 rounded-xl px-2 sm:px-2.5 py-1.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-teal-500 focus:outline-none shadow-xs">
+                        <select x-model="currency" :disabled="viewMode === 'preview'" @change="onCurrencyChange()" class="w-full min-w-0 bg-white border border-slate-300 rounded-xl px-2 sm:px-2.5 py-1.5 text-xs font-bold text-slate-900 focus:ring-2 focus:ring-teal-500 focus:outline-none shadow-sm">
                             <option value="USD|$">USD ($)</option>
                             <option value="EUR|€">EUR (€)</option>
                             <option value="GBP|£">GBP (£)</option>
@@ -335,7 +335,7 @@
                     <!-- From Details -->
                     <div class="space-y-2 transition-all"
                          :class="{
-                             'p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-xs': template_style === 'modern' || template_style === 'bold' || template_style === 'stripe',
+                             'p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm': template_style === 'modern' || template_style === 'bold' || template_style === 'stripe',
                              'p-4 rounded-none bg-white border border-slate-300': template_style === 'classic',
                              'py-2 px-0 border-0 shadow-none bg-transparent': template_style === 'minimal',
                              'p-3.5 rounded-lg bg-slate-50/50 border border-slate-200': template_style === 'compact'
@@ -349,7 +349,7 @@
                     <!-- Bill To (Client) Details -->
                     <div class="space-y-2 transition-all"
                          :class="{
-                             'p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-xs': template_style === 'modern' || template_style === 'bold' || template_style === 'stripe',
+                             'p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm': template_style === 'modern' || template_style === 'bold' || template_style === 'stripe',
                              'p-4 rounded-none bg-white border border-slate-300': template_style === 'classic',
                              'py-2 px-0 border-0 shadow-none bg-transparent': template_style === 'minimal',
                              'p-3.5 rounded-lg bg-slate-50/50 border border-slate-200': template_style === 'compact'
@@ -652,7 +652,7 @@
     <div x-cloak x-data="{ open: false }" @open-history-drawer.window="open = true" x-show="open" class="no-print fixed inset-0 z-50 overflow-hidden" @keydown.escape.window="open = false">
         <div class="absolute inset-0 bg-slate-950/40 backdrop-blur-xs transition-opacity" @click="open = false"></div>
         <div class="fixed inset-y-0 right-0 max-w-full flex pl-4 sm:pl-10">
-            <div class="relative z-10 w-screen max-w-md bg-white border-l border-slate-200 shadow-2xl flex flex-col">
+            <div class="relative z-10 w-full max-w-md bg-white border-l border-border-subtle shadow-2xl flex flex-col">
                 <div class="p-6 border-b border-slate-100 flex items-center justify-between">
                     <div>
                         <h3 class="text-base font-bold text-slate-900">Saved Invoices</h3>
@@ -725,7 +725,7 @@
     <div x-cloak x-show="templateDrawerOpen" class="no-print fixed inset-0 z-50 overflow-hidden" @keydown.escape.window="templateDrawerOpen = false">
         <div class="absolute inset-0 bg-slate-950/45 backdrop-blur-xs transition-opacity" @click="templateDrawerOpen = false"></div>
         <div class="fixed inset-y-0 right-0 max-w-full flex pl-4 sm:pl-10">
-            <div class="w-screen max-w-md bg-white border-l border-slate-200 shadow-2xl flex flex-col">
+            <div class="w-full max-w-md bg-white border-l border-border-subtle shadow-2xl flex flex-col">
                 <div class="p-6 border-b border-slate-100 flex items-center justify-between">
                     <div>
                         <h3 class="text-base font-extrabold text-slate-900">Customize Template</h3>
@@ -887,8 +887,8 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-8">
-            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-black/[0.08] shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition space-y-3">
-                <div class="w-12 h-12 rounded-2xl bg-[#F6F5F1] text-[#0066FF] flex items-center justify-center">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-black/[0.08] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition space-y-3">
+                <div class="w-12 h-12 rounded-2xl bg-[#F8FAFC] text-[#0066FF] flex items-center justify-center">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
                 </div>
                 <h3 class="text-lg font-bold text-[#111111]">Custom Cover Photos &amp; Logo</h3>
@@ -897,8 +897,8 @@
                 </p>
             </div>
 
-            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-black/[0.08] shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition space-y-3">
-                <div class="w-12 h-12 rounded-2xl bg-[#F6F5F1] text-emerald-600 flex items-center justify-center">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-black/[0.08] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition space-y-3">
+                <div class="w-12 h-12 rounded-2xl bg-[#F8FAFC] text-emerald-600 flex items-center justify-center">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
                 <h3 class="text-lg font-bold text-[#111111]">Instant Online Payments</h3>
@@ -907,8 +907,8 @@
                 </p>
             </div>
 
-            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-black/[0.08] shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition space-y-3">
-                <div class="w-12 h-12 rounded-2xl bg-[#F6F5F1] text-[#FF325A] flex items-center justify-center">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-black/[0.08] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition space-y-3">
+                <div class="w-12 h-12 rounded-2xl bg-[#F8FAFC] text-[#FF325A] flex items-center justify-center">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
                 </div>
                 <h3 class="text-lg font-bold text-[#111111]">Digital Signature Pad</h3>

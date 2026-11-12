@@ -11,8 +11,8 @@
 @endsection
 
 @section('content')
-<div class="min-h-screen bg-[#F6F5F1] py-10 sm:py-14">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+<div class="min-h-screen bg-[#F8FAFC] py-8 sm:py-12">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 space-y-6 sm:space-y-8">
 
         <!-- Page Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -43,23 +43,23 @@
 
         <!-- Quick Summary Stats -->
         <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
-            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm">
                 <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Invoices</div>
                 <div class="text-2xl font-black text-slate-900 mt-1">{{ $stats['total_count'] }}</div>
             </div>
-            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm">
                 <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-600">Paid Invoices</div>
                 <div class="text-2xl font-black text-emerald-700 mt-1">{{ $stats['paid_count'] }}</div>
             </div>
-            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm">
                 <div class="text-[11px] font-bold uppercase tracking-wider text-amber-600">Draft / Pending</div>
                 <div class="text-2xl font-black text-amber-700 mt-1">{{ $stats['pending_count'] }}</div>
             </div>
-            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm">
                 <div class="text-[11px] font-bold uppercase tracking-wider text-[#0066FF]">Cumulative Billed</div>
                 <div class="text-2xl font-black text-slate-900 mt-1">{{ number_format($stats['total_billed'], 2) }}</div>
             </div>
-            <div class="col-span-2 lg:col-span-1 bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+            <div class="col-span-2 lg:col-span-1 bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm">
                 <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-600">Saved Resumes</div>
                 <div class="text-2xl font-black text-slate-900 mt-1">{{ $stats['resume_count'] ?? 0 }}</div>
             </div>
@@ -106,7 +106,7 @@
         @endif
 
         <!-- Search & Filter Bar -->
-        <div class="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
             <form method="GET" action="{{ route('invoice.history.page') }}" class="flex-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 max-w-md">
                 <input type="hidden" name="status" value="{{ $statusFilter }}">
                 <div class="relative flex-1">

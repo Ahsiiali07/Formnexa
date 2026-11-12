@@ -22,7 +22,7 @@
         @js($openImport)
      )"
      x-init="init()"
-     class="bg-[#F6F5F1] min-h-screen pb-28 sm:pb-32">
+     class="bg-[#F8FAFC] min-h-screen pb-28 sm:pb-32">
 
     <!-- Toast Notification -->
     <div x-cloak x-show="toast.visible"
@@ -48,13 +48,13 @@
                 </div>
 
                 <input type="text" x-model="title" placeholder="Resume Document Title..."
-                       class="text-sm font-extrabold text-[#111111] bg-[#F6F5F1] border border-black/[0.09] rounded-lg px-3 py-1.5 w-full sm:w-64 focus:bg-white focus:border-[#0066FF] focus:outline-none">
+                       class="text-sm font-extrabold text-[#111111] bg-[#F8FAFC] border border-black/[0.09] rounded-lg px-3 py-1.5 w-full sm:w-64 focus:bg-white focus:border-[#0066FF] focus:outline-none">
             </div>
 
             <div class="flex flex-wrap items-center gap-2">
                 <!-- Import Existing CV / Paste Text Primary Trigger -->
                 <button type="button" @click="importTargetStyle = template_style; importModalOpen = true"
-                        class="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-lg text-xs font-bold bg-[#0066FF] hover:bg-[#0052CC] text-white shadow-2xs transition whitespace-nowrap cursor-pointer">
+                        class="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-lg text-xs font-bold bg-[#0066FF] hover:bg-[#0052CC] text-white shadow-sm transition whitespace-nowrap cursor-pointer">
                     <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
                     <span>Import CV / Paste Text</span>
                 </button>
@@ -62,13 +62,13 @@
                 <!-- Template & Design Drawer Trigger -->
                 <button type="button" @click="designDrawerOpen = true"
                         class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white border border-black/[0.1] hover:border-[#0066FF] text-xs font-bold text-[#111111] transition whitespace-nowrap cursor-pointer">
-                    <span class="w-3 h-3 rounded-full border border-white shadow-xs shrink-0" :style="'background-color:' + accent_color"></span>
+                    <span class="w-3 h-3 rounded-full border border-white shadow-sm shrink-0" :style="'background-color:' + accent_color"></span>
                     <span x-text="styles[template_style]?.name || 'Flow Navy Sidebar'"></span>
                     <svg class="w-3.5 h-3.5 text-black/45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </button>
 
                 <a href="{{ route('resume.templates') }}"
-                   class="hidden sm:inline-flex items-center gap-1 px-3.5 py-2 rounded-lg text-xs font-semibold bg-[#F6F5F1] hover:bg-black/10 text-[#111111] transition whitespace-nowrap">
+                   class="hidden sm:inline-flex items-center gap-1 px-3.5 py-2 rounded-lg text-xs font-semibold bg-[#F8FAFC] hover:bg-black/10 text-[#111111] transition whitespace-nowrap">
                     Browse Templates
                 </a>
 
@@ -110,13 +110,13 @@
                         <div class="text-[11px] text-slate-600 mt-0.5">Upload a PDF / DOCX file or paste raw CV text to auto-fill every section.</div>
                     </div>
                     <button type="button" @click="importTargetStyle = template_style; importModalOpen = true"
-                            class="px-3.5 py-2 rounded-xl bg-white border border-blue-200 hover:border-[#0066FF] text-[#0066FF] text-xs font-bold shadow-2xs transition shrink-0">
+                            class="px-3.5 py-2 rounded-xl bg-white border border-blue-200 hover:border-[#0066FF] text-[#0066FF] text-xs font-bold shadow-sm transition shrink-0">
                         Import CV
                     </button>
                 </div>
 
                 <!-- 1. Personal Details -->
-                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden">
+                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
                     <button type="button" @click="toggleSection('personal')" class="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50/60 transition">
                         <div class="flex items-center gap-2.5">
                             <span class="w-7 h-7 rounded-xl bg-blue-50 text-[#0066FF] flex items-center justify-center text-sm font-bold">&#128100;</span>
@@ -186,7 +186,7 @@
                 </div>
 
                 <!-- 2. Profile / Professional Summary -->
-                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden">
+                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
                     <button type="button" @click="toggleSection('summary')" class="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50/60 transition">
                         <div class="flex items-center gap-2.5">
                             <span class="w-7 h-7 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-sm font-bold">&#128221;</span>
@@ -206,7 +206,7 @@
                 </div>
 
                 <!-- 3. Work Experience -->
-                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden">
+                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
                     <button type="button" @click="toggleSection('experience')" class="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50/60 transition">
                         <div class="flex items-center gap-2.5">
                             <span class="w-7 h-7 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center text-sm font-bold">&#128188;</span>
@@ -251,7 +251,7 @@
                 </div>
 
                 <!-- 4. Education -->
-                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden">
+                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
                     <button type="button" @click="toggleSection('education')" class="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50/60 transition">
                         <div class="flex items-center gap-2.5">
                             <span class="w-7 h-7 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-sm font-bold">&#127891;</span>
@@ -289,7 +289,7 @@
                 </div>
 
                 <!-- 5. Skills & Languages -->
-                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden">
+                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
                     <button type="button" @click="toggleSection('skills')" class="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50/60 transition">
                         <div class="flex items-center gap-2.5">
                             <span class="w-7 h-7 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-sm font-bold">&#9889;</span>
@@ -355,7 +355,7 @@
                 </div>
 
                 <!-- 6. Awards & Projects -->
-                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden">
+                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
                     <button type="button" @click="toggleSection('extras')" class="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50/60 transition">
                         <div class="flex items-center gap-2.5">
                             <span class="w-7 h-7 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center text-sm font-bold">&#127942;</span>
@@ -429,6 +429,9 @@
                 </div>
 
                 <!-- Scroll-safe wrapper on mobile for crisp A4 formatting -->
+                <div class="sm:hidden mb-2 px-2 py-1 rounded-lg bg-[#EFF6FF] border border-blue-200/70 text-[11px] font-medium text-[#0050cb] text-center">
+                    Swipe left/right on the sheet to inspect full A4 layout
+                </div>
                 <div class="w-full overflow-x-auto pb-2">
                     <div class="min-w-[600px] sm:min-w-0">
                         @include('resume._preview_reactive')
@@ -500,8 +503,8 @@
             <div class="p-6 space-y-5 text-xs">
                 <!-- Import Source Tabs -->
                 <div class="inline-flex p-1 bg-slate-100 rounded-full border border-slate-200">
-                    <button type="button" @click="importMode = 'text'" class="px-4 py-1.5 rounded-full font-bold transition" :class="importMode === 'text' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'">Paste CV Text</button>
-                    <button type="button" @click="importMode = 'file'" class="px-4 py-1.5 rounded-full font-bold transition" :class="importMode === 'file' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'">Upload PDF / DOCX / TXT</button>
+                    <button type="button" @click="importMode = 'text'" class="px-4 py-1.5 rounded-full font-bold transition" :class="importMode === 'text' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600'">Paste CV Text</button>
+                    <button type="button" @click="importMode = 'file'" class="px-4 py-1.5 rounded-full font-bold transition" :class="importMode === 'file' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600'">Upload PDF / DOCX / TXT</button>
                 </div>
 
                 <!-- Paste Text Mode -->
@@ -559,7 +562,7 @@
     <div x-cloak x-show="designDrawerOpen" class="no-print fixed inset-0 z-50 overflow-hidden" @keydown.escape.window="designDrawerOpen = false">
         <div class="absolute inset-0 bg-slate-950/45 backdrop-blur-xs" @click="designDrawerOpen = false"></div>
         <div class="fixed inset-y-0 right-0 max-w-full flex pl-4 sm:pl-10">
-            <div class="w-screen max-w-md bg-white border-l border-slate-200 shadow-2xl flex flex-col">
+            <div class="w-full max-w-md bg-white border-l border-border-subtle shadow-2xl flex flex-col">
                 <div class="p-6 border-b border-slate-100 flex items-center justify-between">
                     <div>
                         <h3 class="text-base font-extrabold text-slate-900">Resume Design &amp; Templates</h3>
@@ -747,7 +750,7 @@
     <div x-cloak x-data="{ open: false }" @open-resume-history.window="open = true" x-show="open" class="no-print fixed inset-0 z-50 overflow-hidden" @keydown.escape.window="open = false">
         <div class="absolute inset-0 bg-slate-950/40 backdrop-blur-xs" @click="open = false"></div>
         <div class="fixed inset-y-0 right-0 max-w-full flex pl-4 sm:pl-10">
-            <div class="w-screen max-w-md bg-white border-l border-slate-200 shadow-2xl flex flex-col">
+            <div class="w-full max-w-md bg-white border-l border-border-subtle shadow-2xl flex flex-col">
                 <div class="p-6 border-b border-slate-100 flex items-center justify-between">
                     <div>
                         <h3 class="text-base font-bold text-slate-900">Saved Resumes</h3>

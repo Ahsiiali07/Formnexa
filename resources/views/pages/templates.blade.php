@@ -13,36 +13,36 @@
 @section('content')
 <div x-data="templateGallery(@js($templates), @js($styles), @js($colors))" class="bg-white min-h-screen">
 
-    <!-- Bloom-Style Hero Section -->
-    <section class="bg-[#F6F5F1] border-b border-black/[0.06] overflow-hidden">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+    <!-- Modern Electric Precision Hero Section -->
+    <section class="bg-[#F8FAFC] border-b border-border-subtle overflow-hidden">
+        <div class="max-w-[1280px] mx-auto px-4 sm:px-6 py-10 sm:py-16 lg:py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 <!-- Left Copy -->
                 <div class="lg:col-span-6 space-y-5 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white border border-black/[0.08] text-[#0066FF] text-xs font-extrabold uppercase tracking-wider">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-border-subtle text-[#0050cb] font-mono text-[11px] font-semibold uppercase tracking-wider shadow-sm">
                         100% Free &bull; 6 Visual Layouts &bull; 20+ Industry Templates
                     </div>
-                    <h1 class="text-3xl sm:text-5xl font-extrabold text-[#111111] tracking-[-0.035em] leading-[1.08]">
+                    <h1 class="font-display text-3xl sm:text-5xl font-extrabold text-[#0b1c30] tracking-[-0.03em] leading-[1.08]">
                         Invoice Templates
                     </h1>
-                    <p class="text-sm sm:text-lg text-black/65 font-sans-inter leading-relaxed max-w-xl mx-auto lg:mx-0">
+                    <p class="text-sm sm:text-lg text-[#565e74] leading-relaxed max-w-xl mx-auto lg:mx-0">
                         Choose from professionally designed templates across industries, formats, and layout styles &mdash; or customize your own inside the live invoice studio.
                     </p>
-                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1">
-                        <a href="#template-gallery" class="px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] text-white text-xs sm:text-sm font-bold shadow-[0_12px_28px_-6px_rgba(0,102,255,0.4)] transition whitespace-nowrap">
+                    <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center lg:justify-start gap-3 pt-1 max-w-sm sm:max-w-none mx-auto">
+                        <a href="#template-gallery" class="px-5 sm:px-6 py-3 sm:py-3.5 rounded-lg bg-primary-container hover:bg-electric-blue-hover text-white text-xs sm:text-sm font-bold shadow-lg shadow-[#0066FF]/25 transition whitespace-nowrap text-center">
                             Browse Our Templates
                         </a>
-                        <a href="{{ route('invoice.studio') }}" class="px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-white border border-black/[0.1] hover:border-black text-[#111111] text-xs sm:text-sm font-bold transition whitespace-nowrap">
+                        <a href="{{ route('invoice.studio') }}" class="px-5 sm:px-6 py-3 sm:py-3.5 rounded-lg bg-white border border-border-strong hover:border-[#0b1c30] text-[#0b1c30] text-xs sm:text-sm font-bold transition whitespace-nowrap text-center">
                             Make an Invoice
                         </a>
                     </div>
                 </div>
 
-                <!-- Right Floating Mockup Stack -->
+                <!-- Right Floating Mockup Stack (Overflow-Safe on Mobile) -->
                 <div class="lg:col-span-6 relative flex justify-center lg:justify-end">
-                    <div class="relative w-full max-w-md h-72 sm:h-96 mx-auto lg:mx-0">
+                    <div class="relative w-full max-w-[320px] sm:max-w-md h-64 sm:h-96 mx-auto lg:mx-0">
                         <!-- Back tilted card -->
-                        <div class="absolute right-0 top-6 w-72 sm:w-80 bg-white rounded-2xl border border-slate-200/90 shadow-xl p-6 transform rotate-3 opacity-85">
+                        <div class="hidden sm:block absolute right-0 top-6 w-72 sm:w-80 bg-white rounded-2xl border border-border-subtle shadow-xl p-6 transform rotate-3 opacity-85">
                             <div class="flex justify-between items-center mb-4">
                                 <span class="text-xs font-extrabold text-teal-600 uppercase tracking-wider">Quote</span>
                                 <span class="text-xs font-bold text-slate-400">#QUO-1042</span>
@@ -63,7 +63,7 @@
                         </div>
 
                         <!-- Front primary card -->
-                        <div class="relative z-10 w-72 sm:w-80 bg-white rounded-2xl border border-slate-200 shadow-2xl shadow-slate-300/60 p-6 transform -rotate-1 hover:rotate-0 transition duration-300">
+                        <div class="relative z-10 w-full max-w-[310px] sm:w-80 mx-auto sm:mx-0 bg-white rounded-2xl border border-border-strong shadow-2xl p-5 sm:p-6 sm:transform sm:-rotate-1 hover:rotate-0 transition duration-300">
                             <div class="flex justify-between items-center mb-5">
                                 <span class="text-xl font-extrabold text-slate-900 tracking-tight">Invoice</span>
                                 <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold">Modern Studio</span>
@@ -168,7 +168,7 @@
     <!-- Main Filterable Template Catalog -->
     <section id="template-gallery" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Search & Category Controls -->
-        <div class="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-xs mb-8 space-y-4">
+        <div class="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-sm mb-8 space-y-4">
             <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
                 <!-- Search Box -->
                 <div class="relative flex-1 max-w-md">
@@ -187,7 +187,7 @@
                 @foreach($categories as $catSlug => $catLabel)
                     <button type="button"
                             @click="selectedCategory = '{{ $catSlug }}'"
-                            :class="selectedCategory === '{{ $catSlug }}' ? 'bg-slate-900 text-white border-slate-900 shadow-xs' : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-900'"
+                            :class="selectedCategory === '{{ $catSlug }}' ? 'bg-slate-900 text-white border-slate-900 shadow-sm' : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-900'"
                             class="px-3.5 py-1.5 rounded-full text-xs font-semibold border transition">
                         {{ $catLabel }}
                     </button>
@@ -198,7 +198,7 @@
         <!-- Templates Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <template x-for="tpl in filteredTemplates()" :key="tpl.slug">
-                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-slate-300 transition duration-300 overflow-hidden flex flex-col group">
+                <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-slate-300 transition duration-300 overflow-hidden flex flex-col group">
                     
                     <!-- Live Mini Document Thumbnail -->
                     <div @click="openPreview(tpl)" class="cursor-pointer bg-slate-100/80 p-5 border-b border-slate-200/70 relative overflow-hidden">
@@ -277,7 +277,7 @@
                         </div>
 
                         <!-- Hover Preview Badge -->
-                        <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs border border-slate-200 shadow-xs text-[10px] font-bold text-slate-700 opacity-0 group-hover:opacity-100 transition">
+                        <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs border border-slate-200 shadow-sm text-[10px] font-bold text-slate-700 opacity-0 group-hover:opacity-100 transition">
                             Click to Preview
                         </div>
                     </div>
@@ -294,7 +294,7 @@
                         </div>
 
                         <div class="flex items-center gap-2 pt-2 border-t border-slate-100">
-                            <a :href="'{{ route('invoice.studio') }}?template=' + tpl.slug" class="flex-1 text-center px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-[#0066FF] text-white text-xs font-bold transition shadow-xs">
+                            <a :href="'{{ route('invoice.studio') }}?template=' + tpl.slug" class="flex-1 text-center px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-[#0066FF] text-white text-xs font-bold transition shadow-sm">
                                 Use Template
                             </a>
                             <button type="button" @click="openPreview(tpl)" class="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">
@@ -336,7 +336,7 @@
 
                     <div class="flex items-center gap-1 bg-white border border-slate-200 rounded-lg px-2 py-1">
                         @foreach($colors as $clr)
-                            <button type="button" @click="previewColor = '{{ $clr['hex'] }}'" class="w-4 h-4 rounded-full border border-white shadow-xs transition hover:scale-110" :class="previewColor === '{{ $clr['hex'] }}' ? 'ring-2 ring-slate-900 scale-110' : ''" style="background-color: {{ $clr['hex'] }}" title="{{ $clr['name'] }}"></button>
+                            <button type="button" @click="previewColor = '{{ $clr['hex'] }}'" class="w-4 h-4 rounded-full border border-white shadow-sm transition hover:scale-110" :class="previewColor === '{{ $clr['hex'] }}' ? 'ring-2 ring-slate-900 scale-110' : ''" style="background-color: {{ $clr['hex'] }}" title="{{ $clr['name'] }}"></button>
                         @endforeach
                         <input type="color" x-model="previewColor" class="w-5 h-5 rounded cursor-pointer border-0 p-0 bg-transparent" title="Custom Color">
                     </div>
@@ -479,7 +479,7 @@
 
     <!-- How Templates Work Section -->
     <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div class="bg-white rounded-3xl border border-slate-200/80 p-8 sm:p-12 shadow-xs">
+        <div class="bg-white rounded-3xl border border-slate-200/80 p-8 sm:p-12 shadow-sm">
             <div class="max-w-3xl mb-8">
                 <h2 class="text-2xl font-extrabold text-slate-900">How to Use Formnexa Invoice Templates</h2>
                 <p class="text-sm text-slate-600 mt-2">Skip formatting spreadsheets or fighting Word margins. Pick any layout, adjust your colors, and generate a crisp PDF in under a minute.</p>

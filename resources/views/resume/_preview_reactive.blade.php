@@ -202,7 +202,7 @@
             <header class="border-b pb-6 flex items-start justify-between gap-6" style="border-color: rgba(31,28,24,0.16);">
                 <div class="flex items-center gap-5 min-w-0">
                     <template x-if="content.personal?.show_photo">
-                        <div class="w-20 h-20 rounded-full border shrink-0 flex items-center justify-center text-xl font-bold tracking-tight overflow-hidden shadow-xs"
+                        <div class="w-20 h-20 rounded-full border shrink-0 flex items-center justify-center text-xl font-bold tracking-tight overflow-hidden shadow-sm"
                              :style="`border-color: ${accent_color}; color: ${accent_color}; background-color: #EFECE5;`">
                             <img x-show="avatarUrl()" :src="avatarUrl()" alt="Portrait" class="w-full h-full object-cover">
                             <span x-show="!avatarUrl()" x-text="initials()"></span>
@@ -377,7 +377,7 @@
                         <div class="relative pl-5 space-y-5 border-l-2 ml-1.5" :style="`border-color: ${accent_color}30`">
                             <template x-for="(exp, idx) in content.experience" :key="'tl-exp-' + idx">
                                 <div class="relative" x-show="exp.role || exp.company">
-                                    <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full border-2 bg-white shadow-xs"
+                                    <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full border-2 bg-white shadow-sm"
                                           :style="`border-color: ${accent_color}`"></span>
                                     <div class="flex flex-wrap items-baseline justify-between gap-2">
                                         <h3 class="font-extrabold text-[13px] text-slate-900" x-text="exp.role || exp.company"></h3>
@@ -720,7 +720,7 @@
         <div class="grid grid-cols-12 min-h-[1122px] bg-white">
             <aside class="col-span-4 border-r p-6 space-y-5"
                    :style="`background-color: ${accent_color}12; border-color: ${accent_color}25;`">
-                <div class="p-4 rounded-2xl bg-white shadow-xs border" :style="`border-color: ${accent_color}22;`">
+                <div class="p-4 rounded-2xl bg-white shadow-sm border" :style="`border-color: ${accent_color}22;`">
                     <template x-if="content.personal?.show_photo">
                         <div class="w-20 h-20 rounded-2xl mb-3 flex items-center justify-center text-white font-black text-xl shadow-sm overflow-hidden"
                              :style="`background-color: ${accent_color}`">
@@ -748,7 +748,7 @@
                     <div class="text-[9.5px] font-extrabold uppercase tracking-[0.18em] mb-2" :style="`color: ${accent_color}`">Toolbox &amp; Craft</div>
                     <div class="flex flex-wrap gap-1.5">
                         <template x-for="(sk, idx) in content.skills" :key="'cr-sk-' + idx">
-                            <span class="px-2.5 py-0.5 rounded-full bg-white text-[10px] font-bold shadow-2xs border"
+                            <span class="px-2.5 py-0.5 rounded-full bg-white text-[10px] font-bold shadow-sm border"
                                   :style="`border-color: ${accent_color}30; color: ${accent_color};`" x-text="sk"></span>
                         </template>
                     </div>
@@ -874,7 +874,7 @@
                 <div class="font-tech-mono text-[10px] font-bold uppercase tracking-wider mb-2" :style="`color: ${accent_color}`">// 02. TECH_STACK</div>
                 <div class="flex flex-wrap gap-1.5">
                     <template x-for="(sk, idx) in content.skills" :key="'ts-sk-' + idx">
-                        <span class="px-2 py-0.5 rounded bg-white border border-slate-300 font-tech-mono text-[10.5px] font-semibold text-slate-800 shadow-2xs" x-text="sk"></span>
+                        <span class="px-2 py-0.5 rounded bg-white border border-slate-300 font-tech-mono text-[10.5px] font-semibold text-slate-800 shadow-sm" x-text="sk"></span>
                     </template>
                 </div>
             </section>
