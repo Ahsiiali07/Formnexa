@@ -6,16 +6,25 @@ use App\Models\BlogPost;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 use Throwable;
 
 class GenerateSitemap extends Command
 {
-    protected $signature = 'seo:sitemap';
+    protected $signature = 'seo:sitemap {--url= : Override base URL (defaults to APP_URL)}';
 
     protected $description = 'Generate public/sitemap.xml from indexable static routes and published blog posts';
 
     public function handle(): int
     {
+        $baseUrl = rtrim((string) ($this->option('url') ?: config('app.url')), '/');
+        if ($baseUrl !== '') {
+            URL::forceRootUrl($baseUrl);
+            if (str_starts_with($baseUrl, 'https://')) {
+                URL::forceScheme('https');
+            }
+        }
+
         $entries = [];
 
         foreach (config('seo-pages', []) as $path => $page) {
