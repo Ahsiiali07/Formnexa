@@ -35,6 +35,8 @@ class BlogAndSeoTest extends TestCase
             ->assertDontSeeText('Pakistan');
 
         $this->assertSame(1, preg_match_all('/<h1\b/i', $home->getContent()));
+        $this->assertSame(0, preg_match_all('/<h4\b/i', $home->getContent()));
+        $this->assertSame(0, preg_match_all('/<a\b(?![^>]*\bhref=)[^>]*>/i', $home->getContent()));
         $this->assertSame(0, preg_match_all('/<a\b(?![^>]*rel=["\']nofollow["\'])[^>]*href=["\'][^"\']*\?[^"\']*["\']/i', $home->getContent()));
 
         // Query parameters must strip cleanly from canonical URL and maintain a single H1

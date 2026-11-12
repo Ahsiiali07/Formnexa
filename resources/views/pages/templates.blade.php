@@ -295,7 +295,7 @@
                         </div>
 
                         <div class="flex items-center gap-2 pt-2 border-t border-slate-100">
-                            <a :href="'{{ route('invoice.studio') }}?template=' + tpl.slug" class="flex-1 text-center px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-[#184f3a] text-white text-xs font-bold transition shadow-sm">
+                            <a href="{{ route('invoice.studio') }}" :href="'{{ route('invoice.studio') }}?template=' + tpl.slug" class="flex-1 text-center px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-[#184f3a] text-white text-xs font-bold transition shadow-sm">
                                 Use Template
                             </a>
                             <button type="button" @click="openPreview(tpl)" class="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">
@@ -470,7 +470,7 @@
                 <div class="text-xs text-slate-500">
                     Customization tip: You can edit every line, logo, and currency inside the studio.
                 </div>
-                <a :href="'{{ route('invoice.studio') }}?template=' + previewTemplate?.slug + '&style=' + previewStyle + '&color=' + encodeURIComponent(previewColor)"
+                <a href="{{ route('invoice.studio') }}" :href="'{{ route('invoice.studio') }}?template=' + previewTemplate?.slug + '&style=' + previewStyle + '&color=' + encodeURIComponent(previewColor)"
                    class="w-full sm:w-auto text-center px-5 py-2.5 rounded-xl bg-[#184f3a] hover:bg-[#123e2d] text-white text-xs font-bold shadow-md transition whitespace-nowrap">
                     Customize This Template &rarr;
                 </a>
@@ -488,17 +488,17 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
                 <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/60">
                     <div class="w-8 h-8 rounded-xl bg-blue-100 text-[#184f3a] font-extrabold flex items-center justify-center mb-3">1</div>
-                    <h4 class="font-bold text-sm text-slate-900 mb-1">Choose Industry or Blank Layout</h4>
+                    <h3 class="font-bold text-sm text-slate-900 mb-1">Choose Industry or Blank Layout</h3>
                     <p class="text-slate-600 leading-relaxed">Select a blank design style (Modern, Classic, Bold, Minimal, Stripe, or Compact) or start with pre-filled industry line items.</p>
                 </div>
                 <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/60">
                     <div class="w-8 h-8 rounded-xl bg-teal-100 text-teal-700 font-extrabold flex items-center justify-center mb-3">2</div>
-                    <h4 class="font-bold text-sm text-slate-900 mb-1">Customize Style, Color & Logo</h4>
+                    <h3 class="font-bold text-sm text-slate-900 mb-1">Customize Style, Color & Logo</h3>
                     <p class="text-slate-600 leading-relaxed">Upload your company logo, draw a digital signature, pick any brand accent color, and switch layouts live without losing data.</p>
                 </div>
                 <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/60">
                     <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 font-extrabold flex items-center justify-center mb-3">3</div>
-                    <h4 class="font-bold text-sm text-slate-900 mb-1">Download PDF or Send to Client</h4>
+                    <h3 class="font-bold text-sm text-slate-900 mb-1">Download PDF or Send to Client</h3>
                     <p class="text-slate-600 leading-relaxed">Export a clean A4 vector PDF matching your selected template, or send your client a live hosted invoice link with one click.</p>
                 </div>
             </div>

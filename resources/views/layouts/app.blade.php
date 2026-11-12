@@ -467,7 +467,7 @@
 
                 <!-- Column 1: Products -->
                 <div>
-                    <h4 class="text-[14px] font-semibold text-white mb-4">Products</h4>
+                    <h3 class="text-[14px] font-semibold text-white mb-4">Products</h3>
                     <ul class="space-y-2.5 text-[14px]">
                         <li><a href="{{ route('resume.builder') }}" class="hover:text-white transition-colors">Resume Builder</a></li>
                         <li><a href="{{ route('invoice.studio') }}" class="hover:text-white transition-colors">Invoice Maker</a></li>
@@ -480,7 +480,7 @@
 
                 <!-- Column 2: Document & PDF Tools -->
                 <div>
-                    <h4 class="text-[14px] font-semibold text-white mb-4">Popular Tools</h4>
+                    <h3 class="text-[14px] font-semibold text-white mb-4">Popular Tools</h3>
                     <ul class="space-y-2.5 text-[14px]">
                         <li><a href="{{ route('invoice.generator', 'receipt-generator') }}" class="hover:text-white transition-colors">Receipt Generator</a></li>
                         <li><a href="{{ route('invoice.generator', 'quote-generator') }}" class="hover:text-white transition-colors">Quote &amp; Estimate Maker</a></li>
@@ -493,7 +493,7 @@
 
                 <!-- Column 3: Company -->
                 <div>
-                    <h4 class="text-[14px] font-semibold text-white mb-4">Company</h4>
+                    <h3 class="text-[14px] font-semibold text-white mb-4">Company</h3>
                     <ul class="space-y-2.5 text-[14px]">
                         <li><a href="{{ url('/#features') }}" class="hover:text-white transition-colors">Why Formnexa</a></li>
                         <li><a href="{{ url('/#how') }}" class="hover:text-white transition-colors">How it works</a></li>

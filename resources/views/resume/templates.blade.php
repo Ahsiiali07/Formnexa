@@ -703,11 +703,13 @@
                 </div>
 
                 <div class="space-y-2 pt-3 border-t border-slate-200">
-                    <a :href="buildLaunchUrl(false)"
+                    <a href="{{ route('resume.builder') }}"
+                       :href="buildLaunchUrl(false)"
                        class="block w-full text-center py-3 rounded-xl bg-[#184f3a] text-white text-sm font-extrabold shadow-sm hover:bg-[#123e2d] transition">
                         Use This Design &rarr;
                     </a>
-                    <a :href="buildLaunchUrl(true)"
+                    <a href="{{ route('resume.builder', ['import' => 1]) }}" rel="nofollow"
+                       :href="buildLaunchUrl(true)"
                        class="block w-full text-center py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
                         &#128196; Use + Import My Existing CV
                     </a>

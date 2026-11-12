@@ -63,28 +63,28 @@
 
                     <div class="space-y-3 mt-4 text-xs sm:text-sm">
                         <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70">
-                            <h4 class="font-bold text-slate-900 mb-1">A. Document Content & Invoicing Details</h4>
+                            <h3 class="font-bold text-slate-900 mb-1">A. Document Content & Invoicing Details</h3>
                             <p class="text-slate-600">
                                 Information you enter into invoice fields: sender and business name, address, tax identification numbers, client name, client billing address, item descriptions, rates, quantities, discounts, tax rates, payment instructions, and additional terms.
                             </p>
                         </div>
 
                         <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70">
-                            <h4 class="font-bold text-slate-900 mb-1">B. Uploaded Logos, Cover Images & Signatures</h4>
+                            <h3 class="font-bold text-slate-900 mb-1">B. Uploaded Logos, Cover Images & Signatures</h3>
                             <p class="text-slate-600">
                                 Image files you select to personalize your document (such as your corporate logo or header banner), and vector paths created when drawing an electronic signature on the signature pad.
                             </p>
                         </div>
 
                         <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70">
-                            <h4 class="font-bold text-slate-900 mb-1">C. Recipient Delivery Information</h4>
+                            <h3 class="font-bold text-slate-900 mb-1">C. Recipient Delivery Information</h3>
                             <p class="text-slate-600">
                                 When using our "Send by Email" feature, we process the recipient email address, subject line, and optional message solely to transmit the invoice and PDF attachment directly to that recipient.
                             </p>
                         </div>
 
                         <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70">
-                            <h4 class="font-bold text-slate-900 mb-1">D. Automatically Collected Technical Logs</h4>
+                            <h3 class="font-bold text-slate-900 mb-1">D. Automatically Collected Technical Logs</h3>
                             <p class="text-slate-600">
                                 Standard web server access logs including IP address, browser type, operating system, timestamp, and referring URL, used exclusively for security diagnostics, rate limiting, and spam mitigation.
                             </p>
