@@ -1,0 +1,47 @@
+# Formnexa
+
+> Free, watermark-free online workspace for professional invoices, ATS-ready resumes, and fast PDF conversion tools with zero sign-up required.
+
+Formnexa is designed for freelancers, small businesses, contractors, and job seekers worldwide. All documents render in real-time, preserve crisp vector typography, support multi-currency billing (USD, EUR, GBP, PKR, SGD, AED, and more), and export directly to clean A4 PDFs.
+
+## Core Applications
+
+- [Free Invoice Generator](https://formnexa.dcpakpattan.gov.pk/invoice-generator): Create professional multi-currency invoices with tax lines, discounts, digital signatures, corporate logos, and instant PDF downloads.
+- [Free ATS Resume Builder](https://formnexa.dcpakpattan.gov.pk/resume-builder): Build ATS-friendly resumes across 10 layout engines and 15+ modern templates, or import existing PDF/DOCX resumes with intelligent section parsing.
+- [Resume Templates Gallery](https://formnexa.dcpakpattan.gov.pk/resume-templates): Browse 15+ recruiter-approved resume and CV templates across Modern, Minimal, Tech, and Executive styles.
+- [Invoice Templates Gallery](https://formnexa.dcpakpattan.gov.pk/templates): Browse 20+ invoice design templates tailored for freelancers, agencies, contractors, and consulting firms.
+- [Free Online PDF Converter Hub](https://formnexa.dcpakpattan.gov.pk/convert): 10 dedicated PDF conversion tools for converting documents and images without watermarks.
+
+## Document Generators
+
+- [Receipt Generator](https://formnexa.dcpakpattan.gov.pk/receipt-generator): Generate clean payment receipts with payment methods and balance settled.
+- [Quote Generator](https://formnexa.dcpakpattan.gov.pk/quote-generator): Build formal price quotations with validity terms and itemized pricing.
+- [Estimate Generator](https://formnexa.dcpakpattan.gov.pk/estimate-generator): Create job estimates covering labor, materials, and contingency terms.
+- [Credit Note Generator](https://formnexa.dcpakpattan.gov.pk/credit-note-generator): Issue credit notes and refund memos referencing original invoice numbers.
+- [Purchase Order Generator](https://formnexa.dcpakpattan.gov.pk/purchase-order-generator): Issue formal purchase orders with shipping terms and vendor info.
+- [Sales Order Generator](https://formnexa.dcpakpattan.gov.pk/sales-order-generator): Confirm customer purchases before fulfillment.
+- [Proforma Invoice Generator](https://formnexa.dcpakpattan.gov.pk/proforma-invoice-generator): Issue preliminary commercial invoices for international shipping and customs.
+- [Timesheet Generator](https://formnexa.dcpakpattan.gov.pk/timesheet-generator): Track weekly contractor and employee hours with billable rates and sign-off blocks.
+- [Work Order Generator](https://formnexa.dcpakpattan.gov.pk/work-order-generator): Create service job orders with maintenance instructions and parts lists.
+- [Account Statement Generator](https://formnexa.dcpakpattan.gov.pk/account-statement-generator): Generate chronological customer billing ledgers and balance statements.
+- [Packing Slip Generator](https://formnexa.dcpakpattan.gov.pk/packing-slip-generator): Print shipment packing slips and manifest checklists.
+
+## PDF Conversion Tools
+
+- [PDF to Word Converter](https://formnexa.dcpakpattan.gov.pk/convert/pdf-to-word): Convert PDF files into editable DOCX documents preserving layout and fonts.
+- [Word to PDF Converter](https://formnexa.dcpakpattan.gov.pk/convert/word-to-pdf): Convert Microsoft Word (.docx, .doc) files into clean, vector-sharp PDFs.
+- [JPG to PDF Converter](https://formnexa.dcpakpattan.gov.pk/convert/jpg-to-pdf): Merge photos and scans (JPG, PNG, WebP) into a single multi-page PDF.
+- [PDF to JPG Converter](https://formnexa.dcpakpattan.gov.pk/convert/pdf-to-jpg): Extract high-resolution image pages from PDF documents.
+- [Excel to PDF Converter](https://formnexa.dcpakpattan.gov.pk/convert/excel-to-pdf): Turn XLSX/CSV spreadsheets into formatted A4 landscape/portrait PDFs.
+- [PDF to Excel Converter](https://formnexa.dcpakpattan.gov.pk/convert/pdf-to-excel): Extract data tables from PDFs into clean Excel sheets.
+- [PowerPoint to PDF Converter](https://formnexa.dcpakpattan.gov.pk/convert/powerpoint-to-pdf): Convert presentation slide decks into presentation-ready PDFs.
+- [PDF to PowerPoint Converter](https://formnexa.dcpakpattan.gov.pk/convert/pdf-to-powerpoint): Turn PDF pages into editable presentation slides.
+- [HTML to PDF Converter](https://formnexa.dcpakpattan.gov.pk/convert/html-to-pdf): Render web code or live URLs to vector PDFs.
+- [PDF to PDF/A Converter](https://formnexa.dcpakpattan.gov.pk/convert/pdf-to-pdfa): Convert PDFs into ISO-compliant archival PDF/A documents.
+
+## Guides & Documentation
+
+- [Guides Blog](https://formnexa.dcpakpattan.gov.pk/blog): In-depth guides on billing compliance, ATS resume formatting, and file workflows.
+- [International Invoice Format Guide](https://formnexa.dcpakpattan.gov.pk/blog/international-invoice-format-asia-usa-europe-guide): Cross-border billing standards across Asia, the USA, and Europe covering VAT, GST, and EIN.
+- [How to Write an ATS-Friendly Resume](https://formnexa.dcpakpattan.gov.pk/blog/how-to-write-ats-friendly-resume-guide): Recruiter guidelines for passing ATS screening filters.
+- [Invoice vs Receipt vs Quote vs Proforma](https://formnexa.dcpakpattan.gov.pk/blog/invoice-vs-receipt-vs-quote-vs-proforma): Overview of business document types and when to issue each.
