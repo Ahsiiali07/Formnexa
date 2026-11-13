@@ -8,14 +8,14 @@
     @include('partials.seo-head')
 
     <!-- Favicon & Touch Icons (Formnexa Forest Green Brand Mark) -->
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <link rel="icon" type="image/png" sizes="48x48" href="{{ asset('favicon-48x48.png') }}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
-    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}?v=2">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ asset('favicon-48x48.png') }}?v=2">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}?v=2">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}?v=2">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}?v=2">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}?v=2">
 
     <!-- Vite Compiled Assets (Tailwind CSS + Self-Hosted Fonts + Alpine.js + PDF Tools) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
