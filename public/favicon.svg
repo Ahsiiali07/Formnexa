@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="fnGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f654a"/>
+      <stop offset="60%" stop-color="#184f3a"/>
+      <stop offset="100%" stop-color="#123e2d"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Squircle with #184f3a forest green gradient -->
+  <rect width="512" height="512" rx="154" fill="url(#fnGreenGrad)"/>
+  
+  <!-- Subtle border for clarity on dark backgrounds / dark mode tabs -->
+  <rect x="6" y="6" width="500" height="500" rx="148" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="12"/>
+  
+  <!-- Bar 1: White Pill -->
+  <rect x="124" y="128" width="60" height="256" rx="30" fill="#ffffff"/>
+  
+  <!-- Bar 2: Mint Pill (#c8f3dc) -->
+  <rect x="226" y="162" width="60" height="188" rx="30" fill="#c8f3dc"/>
+  
+  <!-- Bar 3: White Tilted Pill (-16 deg) -->
+  <g transform="translate(358, 256) rotate(-16)">
+    <rect x="-30" y="-136" width="60" height="272" rx="30" fill="#ffffff"/>
+  </g>
+</svg>

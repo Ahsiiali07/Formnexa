@@ -22,6 +22,8 @@ class BlogAndSeoTest extends TestCase
         $home->assertStatus(200)
             ->assertSee('<title>Free Invoice Maker, Resume Builder &amp; PDF Tools | Formnexa</title>', false)
             ->assertSee('<link rel="canonical" href="http://localhost">', false)
+            ->assertSee('href="http://localhost/favicon.svg"', false)
+            ->assertSee('href="http://localhost/apple-touch-icon.png"', false)
             ->assertSee('property="og:title"', false)
             ->assertSee('property="og:image" content="http://localhost/images/og/default.jpg"', false)
             ->assertSee('name="twitter:card" content="summary_large_image"', false)
