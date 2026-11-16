@@ -136,7 +136,7 @@
                 @if($showPhoto)
                     <div style="text-align: center; margin: 14px 0;">
                         @if($photo)
-                            <img src="{{ $photo }}" style="width: 82px; height: 82px; border-radius: 41px; border: 3px solid rgba(255,255,255,0.3); object-fit: cover;">
+                            <img src="{{ $photo }}" alt="{{ $fullName ?? 'Profile' }} Photo" style="width: 82px; height: 82px; border-radius: 41px; border: 3px solid rgba(255,255,255,0.3); object-fit: cover;">
                         @else
                             <div style="width: 78px; height: 78px; margin: 0 auto; border-radius: 39px; border: 2px solid #94A3B8; background-color: rgba(255,255,255,0.10); line-height: 74px; text-align: center; font-size: 20pt; font-weight: bold; color: #FFFFFF;">
                                 {{ $initials }}

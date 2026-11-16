@@ -95,7 +95,7 @@
                                                 @if(!empty($tpl['show_photo']))
                                                     <div class="w-11 h-11 rounded-full mx-auto mt-2.5 border-2 border-white/30 bg-white/15 flex items-center justify-center font-black text-[10px] text-white overflow-hidden shadow-sm">
                                                         @if(!empty($p['preset_avatar']))
-                                                            <img src="{{ asset($p['preset_avatar']) }}" alt="" class="w-full h-full object-cover">
+                                                            <img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Resume Profile' }} Portrait" class="w-full h-full object-cover">
                                                         @else
                                                             {{ $init }}
                                                         @endif
@@ -164,7 +164,7 @@
                                                 @if(!empty($tpl['show_photo']))
                                                     <div class="w-9 h-9 rounded-full border flex items-center justify-center font-bold text-[9px] shrink-0 overflow-hidden" style="border-color: {{ $accent }}; color: {{ $accent }}; background: #EFECE5;">
                                                         @if(!empty($p['preset_avatar']))
-                                                            <img src="{{ asset($p['preset_avatar']) }}" alt="" class="w-full h-full object-cover">
+                                                            <img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Resume Profile' }} Portrait" class="w-full h-full object-cover">
                                                         @else
                                                             {{ $init }}
                                                         @endif
@@ -228,7 +228,7 @@
                                             <div class="w-1 h-7 rounded-full" style="background-color: {{ $accent }};"></div>
                                             @if(!empty($tpl['show_photo']))
                                                 <div class="w-8 h-8 rounded-lg shrink-0 overflow-hidden flex items-center justify-center text-white font-black text-[8px]" style="background-color: {{ $accent }};">
-                                                    @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="" class="w-full h-full object-cover">@else{{ $init }}@endif
+                                                    @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Resume Profile' }} Portrait" class="w-full h-full object-cover">@else{{ $init }}@endif
                                                 </div>
                                             @endif
                                             <div>
@@ -381,7 +381,7 @@
                                     <div class="col-span-4 p-2.5 space-y-2.5 border-r" style="background: {{ $accent }}14; border-color: {{ $accent }}28;">
                                         <div class="p-2 rounded-lg bg-white border shadow-sm" style="border-color: {{ $accent }}24;">
                                             <div class="w-9 h-9 rounded-lg flex items-center justify-center text-white font-black text-[8.5px] mb-1.5 overflow-hidden" style="background: {{ $accent }};">
-                                                @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="" class="w-full h-full object-cover">@else{{ $init }}@endif
+                                                @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Resume Profile' }} Portrait" class="w-full h-full object-cover">@else{{ $init }}@endif
                                             </div>
                                             <div class="font-black text-[8.5px] text-slate-900 leading-tight">{{ $p['full_name'] ?? '' }}</div>
                                             <div class="text-[6px] font-bold mt-0.5" style="color: {{ $accent }}">{{ $p['job_title'] ?? '' }}</div>

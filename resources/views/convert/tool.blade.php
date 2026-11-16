@@ -182,7 +182,7 @@
                                 <template x-for="(item, idx) in selectedFiles" :key="item.uid">
                                     <div class="rounded-xl border border-slate-200 bg-slate-50 p-2 flex flex-col justify-between gap-2">
                                         <div class="aspect-[3/4] rounded-lg overflow-hidden bg-white border border-slate-200/80 flex items-center justify-center relative">
-                                            <img :src="item.previewUrl" alt="" class="w-full h-full object-contain">
+                                            <img :src="item.previewUrl" :alt="item.name ? item.name + ' preview' : 'File preview'" class="w-full h-full object-contain">
                                             <span class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-slate-900/80 text-white text-[10px] font-bold" x-text="'#' + (idx + 1)"></span>
                                         </div>
                                         <div class="text-[10.5px] font-semibold text-slate-700 truncate" x-text="item.name"></div>
@@ -231,7 +231,7 @@
                                 <template x-for="pg in renderedJpgPages" :key="pg.pageNumber">
                                     <div class="rounded-xl border border-slate-200 bg-slate-50 p-2.5 space-y-2 flex flex-col justify-between">
                                         <div class="aspect-[1/1.41] rounded-lg overflow-hidden bg-white border border-slate-200 relative">
-                                            <img :src="pg.dataUrl" alt="" class="w-full h-full object-contain">
+                                            <img :src="pg.dataUrl" :alt="'PDF page ' + pg.pageNumber + ' rendered JPG preview'" class="w-full h-full object-contain">
                                             <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded bg-slate-900/80 text-white text-[10px] font-bold" x-text="'Page ' + pg.pageNumber"></span>
                                         </div>
                                         <div class="flex items-center justify-between gap-2 text-[10.5px]">
