@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
+use App\Models\ContactMessage;
 use App\Models\Invoice;
 use App\Models\Resume;
 use App\Models\User;
@@ -29,6 +30,8 @@ class AdminController extends Controller
         $blogStatus = (string) $request->query('blog_status', 'all');
         $blogSearch = trim((string) $request->query('blog_q', ''));
         $invoiceSearch = trim((string) $request->query('inv_q', ''));
+        $contactSearch = trim((string) $request->query('contact_q', ''));
+        $contactStatus = (string) $request->query('contact_status', 'all');
 
         // KPI Metrics across every website module
         $stats = [
@@ -37,6 +40,8 @@ class AdminController extends Controller
             'blogs_total' => BlogPost::count(),
             'blogs_active' => BlogPost::where('is_published', true)->count(),
             'blogs_inactive' => BlogPost::where('is_published', false)->count(),
+            'contacts_total' => ContactMessage::count(),
+            'contacts_unread' => ContactMessage::where('is_read', false)->count(),
             'invoices_total' => Invoice::count(),
             'invoices_paid' => Invoice::where('status', 'paid')->count(),
             'invoices_pending' => Invoice::where('status', '!=', 'paid')->count(),
@@ -99,6 +104,23 @@ class AdminController extends Controller
             ->take(50)
             ->get();
 
+        // Contact Messages data
+        $contactsQuery = ContactMessage::orderByDesc('created_at');
+        if ($contactStatus === 'unread') {
+            $contactsQuery->where('is_read', false);
+        } elseif ($contactStatus === 'read') {
+            $contactsQuery->where('is_read', true);
+        }
+        if ($contactSearch !== '') {
+            $contactsQuery->where(function ($q) use ($contactSearch) {
+                $q->where('name', 'like', '%' . $contactSearch . '%')
+                    ->orWhere('email', 'like', '%' . $contactSearch . '%')
+                    ->orWhere('subject', 'like', '%' . $contactSearch . '%')
+                    ->orWhere('message', 'like', '%' . $contactSearch . '%');
+            });
+        }
+        $contacts = $contactsQuery->take(50)->get();
+
         // Sitemap inspection
         $sitemapPath = public_path('sitemap.xml');
         $sitemapMeta = [
@@ -114,9 +136,12 @@ class AdminController extends Controller
             'blogStatus' => $blogStatus,
             'blogSearch' => $blogSearch,
             'invoiceSearch' => $invoiceSearch,
+            'contactSearch' => $contactSearch,
+            'contactStatus' => $contactStatus,
             'stats' => $stats,
             'blogs' => $blogs,
             'blogCategories' => BlogPost::categories(),
+            'contacts' => $contacts,
             'invoices' => $invoices,
             'docTypeBreakdown' => $docTypeBreakdown,
             'resumes' => $resumes,
@@ -302,6 +327,31 @@ class AdminController extends Controller
         return redirect()
             ->route('admin.dashboard', ['tab' => 'seo'])
             ->with('success', trim(Artisan::output()) ?: 'Sitemap regenerated successfully.');
+    }
+
+    /**
+     * Toggle read/unread status for a contact inquiry.
+     */
+    public function toggleContactRead(ContactMessage $contact): RedirectResponse
+    {
+        $contact->is_read = !$contact->is_read;
+        $contact->save();
+
+        return redirect()
+            ->route('admin.dashboard', ['tab' => 'contacts'])
+            ->with('success', 'Message marked as ' . ($contact->is_read ? 'Read' : 'Unread') . '.');
+    }
+
+    /**
+     * Delete contact inquiry from Admin.
+     */
+    public function destroyContact(ContactMessage $contact): RedirectResponse
+    {
+        $contact->delete();
+
+        return redirect()
+            ->route('admin.dashboard', ['tab' => 'contacts'])
+            ->with('success', 'Contact inquiry deleted successfully.');
     }
 
     protected function validatedBlogPayload(Request $request, ?BlogPost $existing = null): array

@@ -52,7 +52,15 @@
         @endif
 
         {{-- Top Module KPIs --}}
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <button type="button" @click="tab = 'contacts'" class="text-left bg-white rounded-2xl border border-[#dfe4df] hover:border-[#184f3a] p-5 shadow-sm transition cursor-pointer">
+                <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Contact Inquiries</div>
+                <div class="font-display text-3xl font-extrabold text-[#17211b] mt-1">{{ $stats['contacts_total'] }}</div>
+                <div class="text-[11px] text-[#536058] mt-1">
+                    <span class="font-bold text-amber-600">{{ $stats['contacts_unread'] }} Unread</span> &bull; {{ $stats['contacts_total'] - $stats['contacts_unread'] }} Read
+                </div>
+            </button>
+
             <button type="button" @click="tab = 'blogs'" class="text-left bg-white rounded-2xl border border-[#dfe4df] hover:border-[#184f3a] p-5 shadow-sm transition cursor-pointer">
                 <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Blog Posts</div>
                 <div class="font-display text-3xl font-extrabold text-[#17211b] mt-1">{{ $stats['blogs_total'] }}</div>
@@ -92,6 +100,7 @@
         <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-hide pb-1">
             @foreach([
                 'overview' => 'Overview',
+                'contacts' => 'Contacts (' . $stats['contacts_total'] . ($stats['contacts_unread'] > 0 ? ' • ' . $stats['contacts_unread'] . ' new' : '') . ')',
                 'blogs' => 'Blogs (' . $stats['blogs_total'] . ')',
                 'invoices' => 'Invoices & Docs (' . $stats['invoices_total'] . ')',
                 'resumes' => 'Resumes (' . $stats['resumes_total'] . ')',
@@ -179,6 +188,183 @@
                         </form>
                     </div>
                 </div>
+            </div>
+
+            {{-- Recent Contact Inquiries in Overview --}}
+            <div class="bg-white rounded-3xl border border-[#dfe4df] p-6 shadow-sm space-y-4">
+                <div class="flex items-center justify-between gap-3">
+                    <div>
+                        <h2 class="font-display text-lg font-extrabold text-[#17211b]">Recent Contact Inquiries</h2>
+                        <p class="text-xs text-[#68736d]">Direct messages and feedback submitted via the public contact form</p>
+                    </div>
+                    <button type="button" @click="tab = 'contacts'" class="text-xs font-bold text-[#184f3a] hover:underline cursor-pointer">
+                        Manage All Inquiries ({{ $stats['contacts_total'] }}) &rarr;
+                    </button>
+                </div>
+                @if($contacts->isEmpty())
+                    <p class="text-xs text-[#68736d]">No inquiries received yet. Submissions from <a href="{{ route('contact') }}" target="_blank" class="text-[#184f3a] font-bold hover:underline">/contact</a> will appear here.</p>
+                @else
+                    <div class="divide-y divide-[#edf1ed]">
+                        @foreach($contacts->take(4) as $cMsg)
+                            <div class="py-3 flex flex-wrap items-center justify-between gap-3">
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-bold text-xs sm:text-sm text-[#17211b]">{{ $cMsg->name }}</span>
+                                        @if(!$cMsg->is_read)
+                                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">Unread</span>
+                                        @else
+                                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#e8f7ed] text-[#184f3a]">Read</span>
+                                        @endif
+                                        <span class="text-[11px] text-[#68736d]">&bull; {{ $cMsg->created_at?->diffForHumans() }}</span>
+                                        @if($cMsg->email)
+                                            <span class="text-[11px] text-[#68736d] hidden sm:inline">&bull; {{ $cMsg->email }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="text-xs font-semibold text-[#184f3a] truncate mt-0.5">{{ $cMsg->subject }}</div>
+                                    <div class="text-[11px] text-[#536058] line-clamp-1 mt-0.5">{{ \Illuminate\Support\Str::limit($cMsg->message, 140) }}</div>
+                                </div>
+                                <div class="flex items-center gap-2 shrink-0">
+                                    <form method="POST" action="{{ route('admin.contacts.toggle-read', $cMsg) }}">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" class="px-2.5 py-1 rounded-full text-[11px] font-bold transition cursor-pointer {{ $cMsg->is_read ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' : 'bg-amber-100 text-amber-800 hover:bg-amber-200' }}">
+                                            {{ $cMsg->is_read ? 'Mark Unread' : 'Mark Read' }}
+                                        </button>
+                                    </form>
+                                    <button type="button" @click="tab = 'contacts'" class="px-2.5 py-1 rounded-lg bg-[#f8f8f3] border border-[#dfe4df] text-[11px] font-bold text-[#17211b] hover:border-[#184f3a] cursor-pointer">
+                                        View
+                                    </button>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        {{-- TAB: CONTACT INQUIRIES MANAGEMENT --}}
+        <div x-show="tab === 'contacts'" x-cloak class="space-y-5">
+            <div class="bg-white rounded-3xl border border-[#dfe4df] p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex flex-wrap items-center gap-2">
+                    <a href="{{ route('admin.dashboard', ['tab' => 'contacts', 'contact_status' => 'all', 'contact_q' => $contactSearch]) }}"
+                       class="px-3.5 py-1.5 rounded-lg text-xs font-bold border transition {{ $contactStatus === 'all' ? 'bg-[#17211b] text-white border-[#17211b]' : 'bg-[#f8f8f3] text-[#536058] border-[#dfe4df]' }}">
+                        All ({{ $stats['contacts_total'] }})
+                    </a>
+                    <a href="{{ route('admin.dashboard', ['tab' => 'contacts', 'contact_status' => 'unread', 'contact_q' => $contactSearch]) }}"
+                       class="px-3.5 py-1.5 rounded-lg text-xs font-bold border transition {{ $contactStatus === 'unread' ? 'bg-amber-600 text-white border-amber-600' : 'bg-amber-50 text-amber-800 border-amber-200' }}">
+                        Unread ({{ $stats['contacts_unread'] }})
+                    </a>
+                    <a href="{{ route('admin.dashboard', ['tab' => 'contacts', 'contact_status' => 'read', 'contact_q' => $contactSearch]) }}"
+                       class="px-3.5 py-1.5 rounded-lg text-xs font-bold border transition {{ $contactStatus === 'read' ? 'bg-[#184f3a] text-white border-[#184f3a]' : 'bg-[#e8f7ed] text-[#184f3a] border-[#c8f3dc]' }}">
+                        Read ({{ $stats['contacts_total'] - $stats['contacts_unread'] }})
+                    </a>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2">
+                    <form method="GET" action="{{ route('admin.dashboard') }}" class="flex items-center gap-1.5">
+                        <input type="hidden" name="tab" value="contacts">
+                        <input type="hidden" name="contact_status" value="{{ $contactStatus }}">
+                        <input type="search" name="contact_q" value="{{ $contactSearch }}" placeholder="Search name, email, subject..."
+                               class="px-3 py-2 rounded-xl border border-[#dfe4df] text-xs text-[#17211b] w-48 sm:w-60 focus:border-[#184f3a] focus:outline-none">
+                        <button type="submit" class="px-3.5 py-2 rounded-xl bg-[#17211b] text-white text-xs font-bold cursor-pointer">Filter</button>
+                    </form>
+                    @if($contactSearch !== '' || $contactStatus !== 'all')
+                        <a href="{{ route('admin.dashboard', ['tab' => 'contacts']) }}" class="px-3 py-2 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-xs font-bold text-[#536058] hover:text-[#17211b]">Clear</a>
+                    @endif
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl border border-[#dfe4df] shadow-sm overflow-hidden">
+                <div class="px-6 py-4 border-b border-[#dfe4df] flex items-center justify-between">
+                    <div>
+                        <h2 class="font-display text-lg font-extrabold text-[#17211b]">Contact Form Messages ({{ $contacts->count() }})</h2>
+                        <p class="text-xs text-[#68736d]">Direct user inquiries, bug reports, and feedback</p>
+                    </div>
+                </div>
+
+                @if($contacts->isEmpty())
+                    <div class="p-12 text-center text-[#68736d] space-y-2">
+                        <div class="font-bold text-sm text-[#17211b]">No contact inquiries found</div>
+                        <p class="text-xs">
+                            @if($contactSearch !== '' || $contactStatus !== 'all')
+                                Try adjusting your filter or search terms.
+                            @else
+                                Submissions from the public <a href="{{ route('contact') }}" target="_blank" class="text-[#184f3a] font-bold hover:underline">/contact</a> page will appear here.
+                            @endif
+                        </p>
+                    </div>
+                @else
+                    <div class="divide-y divide-[#edf1ed]">
+                        @foreach($contacts as $msg)
+                            <div x-data="{ expanded: false }" class="p-5 sm:p-6 hover:bg-[#fafbf9] transition-colors">
+                                <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                                    <div class="min-w-0 flex-1 space-y-1.5">
+                                        <div class="flex flex-wrap items-center gap-2">
+                                            <span class="font-extrabold text-sm text-[#17211b]">{{ $msg->name }}</span>
+                                            @if(!$msg->is_read)
+                                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">Unread</span>
+                                            @else
+                                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#e8f7ed] text-[#184f3a] border border-[#c8f3dc]">Read</span>
+                                            @endif
+                                            <span class="text-[11px] text-[#68736d]">&bull; {{ $msg->created_at?->format('M j, Y \a\t H:i') }} ({{ $msg->created_at?->diffForHumans() }})</span>
+                                        </div>
+
+                                        <div class="text-xs sm:text-sm font-bold text-[#184f3a]">
+                                            {{ $msg->subject }}
+                                        </div>
+
+                                        <div class="flex flex-wrap items-center gap-3 text-xs text-[#68736d]">
+                                            @if($msg->email)
+                                                <span><strong>Email:</strong> <a href="mailto:{{ $msg->email }}" class="text-[#184f3a] hover:underline">{{ $msg->email }}</a></span>
+                                            @else
+                                                <span class="text-slate-400 italic">No email provided</span>
+                                            @endif
+                                            @if($msg->phone)
+                                                <span>&bull; <strong>Phone:</strong> {{ $msg->phone }}</span>
+                                            @endif
+                                            @if($msg->ip_address)
+                                                <span>&bull; <span class="font-mono text-[10px]">IP: {{ $msg->ip_address }}</span></span>
+                                            @endif
+                                        </div>
+
+                                        <div class="pt-2 text-xs sm:text-sm text-[#2a3830] leading-relaxed">
+                                            <div x-show="!expanded" class="line-clamp-2">
+                                                {{ $msg->message }}
+                                            </div>
+                                            <div x-show="expanded" x-cloak class="whitespace-pre-line bg-[#f8f8f3] rounded-2xl p-4 border border-[#dfe4df] text-xs sm:text-sm font-normal text-[#17211b]">
+                                                {{ $msg->message }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center gap-2 shrink-0 sm:self-start">
+                                        <button type="button" @click="expanded = !expanded"
+                                                class="px-3 py-1.5 rounded-lg bg-[#f8f8f3] border border-[#dfe4df] hover:border-[#184f3a] text-xs font-bold text-[#17211b] cursor-pointer">
+                                            <span x-text="expanded ? 'Collapse' : 'Read Full'"></span>
+                                        </button>
+
+                                        <form method="POST" action="{{ route('admin.contacts.toggle-read', $msg) }}">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit"
+                                                    class="px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer {{ $msg->is_read ? 'bg-slate-100 text-slate-700 hover:bg-slate-200' : 'bg-amber-100 text-amber-800 hover:bg-amber-200' }}">
+                                                {{ $msg->is_read ? 'Mark Unread' : 'Mark Read' }}
+                                            </button>
+                                        </form>
+
+                                        <form method="POST" action="{{ route('admin.contacts.destroy', $msg) }}" onsubmit="return confirm('Delete this contact message permanently?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="px-2.5 py-1.5 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-100 text-xs font-bold cursor-pointer">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         </div>
 

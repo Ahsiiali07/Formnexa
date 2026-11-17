@@ -20,6 +20,7 @@
     <!-- Vite Compiled Assets (Tailwind CSS + Self-Hosted Fonts + Alpine.js + PDF Tools) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
+    @stack('head')
 </head>
 <body class="min-h-full bg-white text-[#17211b] antialiased flex flex-col selection:bg-[#184f3a] selection:text-white">
 
@@ -28,10 +29,16 @@
         $converterCount = count(\App\Support\ConverterCatalog::all());
     @endphp
 
-    <!-- Sticky Navigation Bar (Figma Make FormNexa Aesthetic) -->
-    <header class="no-print sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-[#ecefe9] transition-all duration-200"
-            x-data="{ mobileMenu: false, mobileSection: '' }">
-        <div class="max-w-[1200px] mx-auto px-4 sm:px-6 h-[74px] flex items-center justify-between gap-3">
+    <!-- Floating Glass-Effect Navigation Header (Figma Make FormNexa Aesthetic) -->
+    <header class="no-print sticky top-0 z-50 w-full pointer-events-none transition-all duration-300"
+            x-data="{ scrolled: false, mobileMenu: false, mobileSection: '' }"
+            @scroll.window="scrolled = (window.pageYOffset > 24)">
+        <div class="pointer-events-auto mx-auto transition-all duration-300 px-3 sm:px-4"
+             :class="scrolled ? 'max-w-[1080px] pt-2' : 'max-w-[1180px] pt-3.5'">
+            <div class="rounded-2xl transition-all duration-300 px-3.5 sm:px-5 h-[64px] flex items-center justify-between gap-3 border backdrop-blur-xl"
+                 :class="scrolled
+                    ? 'bg-white/95 border-[#e0e6e1] shadow-[0_12px_40px_rgba(28,53,39,0.11)]'
+                    : 'bg-white/85 border-[#e8ece9]/80 shadow-[0_4px_24px_rgba(28,53,39,0.04)]'">
 
             <!-- Brand Logo + Desktop Nav -->
             <div class="flex items-center gap-6 xl:gap-9 min-w-0">
@@ -441,6 +448,7 @@
                 </div>
             </div>
         </div>
+        </div>
     </header>
 
     <!-- Main Content -->
@@ -512,6 +520,7 @@
                         @endauth
                         <li><a href="{{ route('privacy') }}" class="hover:text-white transition-colors">Privacy Policy</a></li>
                         <li><a href="{{ route('terms') }}" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="{{ route('contact') }}" class="hover:text-white transition-colors">Contact Us</a></li>
                     </ul>
                 </div>
             </div>

@@ -161,6 +161,11 @@ return [
         'description' => 'Review Formnexa Terms of Service covering free invoice generation, resume building, and PDF conversion tools.',
         'updated' => $d,
     ],
+    'contact' => [
+        'title' => 'Contact Us | Formnexa - Support & Inquiries',
+        'description' => 'Get in touch with the Formnexa team. Submit questions about our free invoice maker, ATS resume builder, or PDF conversion tools.',
+        'updated' => $d,
+    ],
 
     // ---------- Keep out of Google & Sitemap ----------
     'login' => [

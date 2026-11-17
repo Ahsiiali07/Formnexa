@@ -128,8 +128,13 @@
     "src": "node_modules/@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-JUvroZFt.css",
+    "file": "assets/app-DqXyNETh.css",
     "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/home.css": {
+    "file": "assets/home-CscROSwF.css",
+    "src": "resources/css/home.css",
     "isEntry": true
   },
   "resources/js/app.js": {

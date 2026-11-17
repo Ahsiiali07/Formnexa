@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ConverterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
@@ -84,6 +85,8 @@ Route::middleware(['auth', 'admin', 'noindex'])->group(function () {
     Route::delete('/admin/invoices/{invoice:id}', [AdminController::class, 'destroyInvoice'])->name('admin.invoices.destroy');
     Route::delete('/admin/resumes/{resume:id}', [AdminController::class, 'destroyResume'])->name('admin.resumes.destroy');
     Route::patch('/admin/users/{user:id}/toggle-admin', [AdminController::class, 'toggleUserAdmin'])->name('admin.users.toggle-admin');
+    Route::patch('/admin/contacts/{contact:id}/toggle-read', [AdminController::class, 'toggleContactRead'])->name('admin.contacts.toggle-read');
+    Route::delete('/admin/contacts/{contact:id}', [AdminController::class, 'destroyContact'])->name('admin.contacts.destroy');
     Route::post('/admin/seo/sitemap', [AdminController::class, 'regenerateSitemap'])->name('admin.seo.sitemap');
 
     // Blog Studio shortcuts
@@ -94,6 +97,10 @@ Route::middleware(['auth', 'admin', 'noindex'])->group(function () {
     Route::put('/blog-studio/{post:id}', [BlogController::class, 'update'])->name('blog.update');
     Route::delete('/blog-studio/{post:id}', [BlogController::class, 'destroy'])->name('blog.destroy');
 });
+
+// Contact Us Page (Public submission & direct inquiry)
+Route::get('/contact', [ContactController::class, 'show'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // Legal Pages (Terms of Service & Privacy Policy)
 Route::view('/terms', 'pages.terms')->name('terms');
