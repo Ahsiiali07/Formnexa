@@ -678,44 +678,110 @@
         color: var(--muted);
     }
 
+    /* Keyframe Animations for Modern UI */
+    @keyframes fnFloatSlow {
+        0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+        50% { transform: translateY(-9px) rotate(-0.5deg); }
+    }
+    @keyframes fnFloatCard {
+        0%, 100% { transform: translateY(0) rotate(3deg); }
+        50% { transform: translateY(-11px) rotate(3.6deg); }
+    }
+    @keyframes fnPulseBadge {
+        0%, 100% { transform: scale(1); box-shadow: 0 10px 24px rgba(118, 85, 215, 0.35); }
+        50% { transform: scale(1.05); box-shadow: 0 14px 30px rgba(118, 85, 215, 0.55); }
+    }
+    @keyframes fnStampPop {
+        0%, 100% { transform: rotate(-8deg) scale(1); box-shadow: 0 8px 20px rgba(24, 79, 58, 0.32); }
+        50% { transform: rotate(-6deg) scale(1.06); box-shadow: 0 14px 28px rgba(24, 79, 58, 0.48); }
+    }
+    @keyframes fnArrowBounce {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(4px); }
+    }
+    @keyframes fnScanBeam {
+        0% { top: 0; opacity: 0; }
+        15% { opacity: 0.9; }
+        85% { opacity: 0.9; }
+        100% { top: 100%; opacity: 0; }
+    }
+    @keyframes fnBeamFlow {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 200% 50%; }
+    }
+    @keyframes fnParticleTravel {
+        0% { transform: translateX(0); opacity: 0; }
+        25% { opacity: 1; }
+        75% { opacity: 1; }
+        100% { transform: translateX(48px); opacity: 0; }
+    }
+    @keyframes fnBlobPulse {
+        0%, 100% { transform: scale(1) rotate(0deg); }
+        50% { transform: scale(1.06) rotate(6deg); }
+    }
+
     .fn-tool-cards {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 20px;
+        gap: 24px;
     }
     .fn-tool-card {
         border-radius: 28px;
-        padding: 30px 26px 0;
+        padding: 34px 28px 0;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        min-height: 450px;
+        min-height: 480px;
         overflow: hidden;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        position: relative;
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
     }
     .fn-tool-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 24px 50px rgba(23, 33, 27, 0.08);
+        transform: translateY(-8px);
     }
     .fn-card-violet {
-        background: #f0ebff;
+        background: linear-gradient(180deg, #f3eefc 0%, #ebe2fa 100%);
+        border: 1px solid #dfd3f9;
+    }
+    .fn-card-violet:hover {
+        box-shadow: 0 28px 56px -12px rgba(118, 85, 215, 0.22);
+        border-color: #cbb4f7;
     }
     .fn-card-mint {
-        background: #e8f7ed;
+        background: linear-gradient(180deg, #eaf7ee 0%, #dcf3e2 100%);
+        border: 1px solid #c2eccd;
+    }
+    .fn-card-mint:hover {
+        box-shadow: 0 28px 56px -12px rgba(24, 79, 58, 0.22);
+        border-color: #9fe2b2;
     }
     .fn-card-orange {
-        background: #fff0e8;
+        background: linear-gradient(180deg, #fdf0e8 0%, #fae2d4 100%);
+        border: 1px solid #f9d8c7;
+    }
+    .fn-card-orange:hover {
+        box-shadow: 0 28px 56px -12px rgba(255, 129, 95, 0.22);
+        border-color: #f6baa0;
     }
 
     .fn-card-index {
+        display: inline-block;
+        font-family: var(--font-mono, monospace);
         font-size: 12px;
         font-weight: 800;
+        letter-spacing: 0.06em;
         color: rgba(23, 33, 27, 0.45);
+        background: rgba(255, 255, 255, 0.6);
+        padding: 2px 8px;
+        border-radius: 99px;
+        border: 1px solid rgba(23, 33, 27, 0.06);
     }
     .fn-tool-card h3 {
         margin: 14px 0 0;
-        font-size: 27px;
-        font-weight: 700;
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 1.15;
     }
     .fn-tool-card p {
         margin: 12px 0 0;
@@ -724,110 +790,487 @@
         line-height: 1.65;
     }
     .fn-card-link {
-        margin-top: 20px;
+        margin-top: 22px;
         display: inline-flex;
         align-items: center;
-        gap: 7px;
+        gap: 8px;
         color: var(--ink);
         text-decoration: none;
         font-size: 14px;
         font-weight: 700;
+        transition: color 0.2s ease;
     }
-    .fn-card-link:hover {
-        gap: 10px;
+    .fn-card-link span:last-child {
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        display: inline-block;
+    }
+    .fn-tool-card:hover .fn-card-link span:last-child {
+        transform: translateX(5px);
     }
 
     .fn-card-art {
         position: relative;
         margin-top: 26px;
-        height: 180px;
+        height: 205px;
         display: flex;
         align-items: flex-end;
         justify-content: center;
     }
-    .fn-art-page {
-        width: 86%;
-        height: 162px;
+
+    /* Card 01: Rich Realistic Resume Mockup Sheet */
+    .fn-resume-sheet {
+        width: 90%;
+        height: 185px;
         border-radius: 18px 18px 0 0;
         background: #ffffff;
-        padding: 18px;
-        box-shadow: 0 18px 36px rgba(23, 33, 27, 0.09);
-        display: grid;
+        padding: 14px 16px;
+        box-shadow: 0 20px 42px rgba(118, 85, 215, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+        border: 1px solid rgba(118, 85, 215, 0.18);
+        border-bottom: 0;
+        display: flex;
+        flex-direction: column;
         gap: 10px;
-        align-content: start;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
     }
-    .fn-art-page span {
-        height: 8px;
-        border-radius: 99px;
-        background: #edf0ed;
+    .fn-tool-card:hover .fn-resume-sheet {
+        transform: translateY(-4px);
     }
-    .fn-art-page span.line-w1 { width: 58%; background: #d6cbfc; }
-    .fn-art-page span.line-w2 { width: 88%; }
-    .fn-art-page span.line-w3 { width: 72%; }
-    .fn-art-score {
+    .fn-scan-beam {
         position: absolute;
-        right: 12px;
-        bottom: 24px;
-        padding: 8px 13px;
-        border-radius: 999px;
-        background: var(--purple);
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent 0%, #7655d7 40%, #a855f7 60%, transparent 100%);
+        box-shadow: 0 0 12px #a855f7;
+        animation: fnScanBeam 3.2s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 10;
+    }
+    .fn-rm-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 1px solid #f1f3f1;
+        padding-bottom: 8px;
+    }
+    .fn-rm-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #7655d7 0%, #906bf5 100%);
         color: #ffffff;
+        font-size: 11px;
+        font-weight: 800;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        box-shadow: 0 4px 10px rgba(118, 85, 215, 0.25);
+    }
+    .fn-rm-id {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+    }
+    .fn-rm-name {
         font-size: 13px;
         font-weight: 800;
-        box-shadow: 0 10px 24px rgba(118, 85, 215, 0.35);
+        color: var(--ink);
+        letter-spacing: -0.01em;
     }
-
-    .fn-art-page.invoice {
-        background: #ffffff;
+    .fn-rm-role {
+        font-size: 10.5px;
+        color: #718096;
+        font-weight: 600;
     }
-    .fn-inv-line {
+    .fn-rm-section {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    .fn-rm-sec-title {
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        color: #7655d7;
+        text-transform: uppercase;
+    }
+    .fn-rm-job-head {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-size: 14px;
+        font-size: 11px;
     }
-    .fn-inv-line.total {
-        margin-top: 8px;
-        padding-top: 10px;
-        border-top: 1px solid #eef1ee;
+    .fn-rm-job-head strong {
+        color: var(--ink);
+        font-weight: 700;
     }
-    .fn-paid-stamp {
+    .fn-rm-job-head span {
+        font-size: 9.5px;
+        color: #8c9b91;
+    }
+    .fn-rm-bullet {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 2px;
+    }
+    .fn-rm-bullet .fn-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #cbd5e1;
+        flex-shrink: 0;
+    }
+    .fn-rm-line {
+        height: 5px;
+        border-radius: 99px;
+        background: #e9ece9;
+    }
+    .fn-rm-tags {
+        display: flex;
+        gap: 5px;
+        margin-top: auto;
+    }
+    .fn-rm-tag {
+        font-size: 9px;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 6px;
+        background: #f1edfe;
+        color: #6142be;
+    }
+
+    /* Floating ATS Score Gauge Badge */
+    .fn-ats-badge {
+        position: absolute;
+        right: 8px;
+        bottom: 22px;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 7px 13px 7px 9px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(118, 85, 215, 0.25);
+        box-shadow: 0 12px 28px rgba(118, 85, 215, 0.28);
+        animation: fnPulseBadge 3.5s ease-in-out infinite;
+        z-index: 12;
+    }
+    .fn-ats-circle {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+    }
+    .fn-ats-ring {
+        width: 30px;
+        height: 30px;
+        transform: rotate(-90deg);
+    }
+    .fn-ats-ring-bg {
+        fill: none;
+        stroke: #ede9fe;
+        stroke-width: 3.5;
+    }
+    .fn-ats-ring-val {
+        fill: none;
+        stroke: #7655d7;
+        stroke-width: 3.5;
+        stroke-linecap: round;
+        transition: stroke-dasharray 0.5s ease;
+    }
+    .fn-ats-val {
+        position: absolute;
+        font-size: 9.5px;
+        font-weight: 900;
+        color: #5e3eb5;
+    }
+    .fn-ats-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.15;
+    }
+    .fn-ats-text strong {
+        font-size: 11.5px;
+        font-weight: 800;
+        color: var(--ink);
+    }
+    .fn-ats-text span {
+        font-size: 9px;
+        color: #7655d7;
+        font-weight: 700;
+    }
+
+    /* Card 02: Rich Realistic Invoice Mockup Sheet */
+    .fn-invoice-sheet {
+        width: 90%;
+        height: 185px;
+        border-radius: 18px 18px 0 0;
+        background: #ffffff;
+        padding: 14px 16px;
+        box-shadow: 0 20px 42px rgba(24, 79, 58, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+        border: 1px solid rgba(24, 79, 58, 0.18);
+        border-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+    .fn-tool-card:hover .fn-invoice-sheet {
+        transform: translateY(-4px);
+    }
+    .fn-im-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eef3ef;
+        padding-bottom: 8px;
+    }
+    .fn-im-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .fn-im-logo {
+        width: 26px;
+        height: 26px;
+        border-radius: 7px;
+        background: #184f3a;
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: 900;
+        display: grid;
+        place-items: center;
+    }
+    .fn-im-company {
+        display: block;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--ink);
+        line-height: 1.1;
+    }
+    .fn-im-num {
+        display: block;
+        font-size: 9px;
+        font-family: var(--font-mono, monospace);
+        color: #718096;
+        font-weight: 600;
+    }
+    .fn-im-date {
+        font-size: 10px;
+        font-weight: 600;
+        color: #536058;
+    }
+    .fn-im-table {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .fn-im-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 11px;
+        color: #46534b;
+    }
+    .fn-im-desc {
+        flex: 1;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 8px;
+    }
+    .fn-im-qty {
+        font-size: 9.5px;
+        color: #8c9b91;
+        margin-right: 8px;
+    }
+    .fn-im-amt {
+        font-weight: 700;
+        color: var(--ink);
+        font-variant-numeric: tabular-nums;
+    }
+    .fn-im-footer {
+        margin-top: auto;
+        border-top: 1.5px dashed #e2e8e2;
+        padding-top: 6px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+    .fn-im-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13.5px;
+        font-weight: 800;
+    }
+    .fn-im-total span {
+        color: var(--ink);
+    }
+    .fn-im-total strong {
+        color: #184f3a;
+        font-size: 14.5px;
+        font-variant-numeric: tabular-nums;
+    }
+
+    /* Realistic Rubber Stamp */
+    .fn-paid-stamp-v2 {
         position: absolute;
         right: 12px;
         bottom: 22px;
-        padding: 7px 14px;
-        border-radius: 999px;
-        background: var(--green);
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 12px;
+        border-radius: 8px;
+        background: #184f3a;
         color: #ffffff;
-        font-size: 12px;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        transform: rotate(-7deg);
+        font-size: 10.5px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        border: 2px solid #38a169;
+        box-shadow: 0 10px 24px rgba(24, 79, 58, 0.38);
+        animation: fnStampPop 3.8s ease-in-out infinite alternate;
+        z-index: 12;
     }
 
-    .fn-card-art.converter {
+    /* Card 03: Realistic PDF Converter Pipeline Stage */
+    .fn-converter-stage {
+        width: 100%;
+        height: 190px;
+        display: flex;
         align-items: center;
-        gap: 14px;
-        padding-bottom: 18px;
+        justify-content: center;
+        gap: 12px;
+        padding: 0 12px 14px;
+        position: relative;
     }
-    .fn-format {
-        width: 82px;
-        height: 98px;
+    .fn-conv-card {
+        width: 96px;
+        height: 124px;
         border-radius: 18px;
         background: #ffffff;
+        padding: 10px 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 18px 36px rgba(23, 33, 27, 0.1), 0 0 0 1px rgba(23, 33, 27, 0.05);
+        position: relative;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fn-tool-card:hover .fn-conv-card.fn-conv-docx {
+        transform: translateY(-4px) rotate(-3deg);
+    }
+    .fn-tool-card:hover .fn-conv-card.fn-conv-pdf {
+        transform: translateY(-4px) rotate(3deg);
+    }
+    .fn-conv-card.fn-conv-docx {
+        border: 1.5px solid #bfdbfe;
+        background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
+    }
+    .fn-conv-card.fn-conv-pdf {
+        border: 1.5px solid #fecaca;
+        background: linear-gradient(180deg, #ffffff 0%, #fff5f5 100%);
+    }
+    .fn-conv-badge {
+        font-family: var(--font-mono, monospace);
+        font-size: 9.5px;
+        font-weight: 900;
+        padding: 2px 7px;
+        border-radius: 6px;
+        background: #dbeafe;
+        color: #1d4ed8;
+    }
+    .fn-conv-badge.pdf-badge {
+        background: #fee2e2;
+        color: #b91c1c;
+    }
+    .fn-conv-icon {
         display: grid;
         place-items: center;
-        font-weight: 800;
-        font-size: 16px;
-        box-shadow: 0 14px 30px rgba(23, 33, 27, 0.08);
     }
-    .fn-format.doc { color: #3657d1; }
-    .fn-format.pdf { color: #d6552f; border: 2px solid #ffd8c8; }
+    .fn-conv-icon.docx-color { color: #2563eb; }
+    .fn-conv-icon.pdf-color { color: #dc2626; }
+    .fn-conv-meta {
+        text-align: center;
+        line-height: 1.15;
+    }
+    .fn-conv-name {
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--ink);
+    }
+    .fn-conv-size {
+        display: block;
+        font-size: 8.5px;
+        color: #718096;
+    }
+    .fn-conv-check {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #184f3a;
+        border: 2px solid #ffffff;
+        display: grid;
+        place-items: center;
+        box-shadow: 0 4px 10px rgba(24, 79, 58, 0.3);
+    }
+    .fn-conv-pipeline {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+    }
+    .fn-pipeline-track {
+        position: relative;
+        width: 58px;
+        height: 6px;
+        border-radius: 99px;
+        background: #ffe0d3;
+        overflow: hidden;
+    }
+    .fn-pipeline-beam {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, #ff815f, #ff5722, #ff815f);
+        background-size: 200% 100%;
+        animation: fnBeamFlow 1.6s linear infinite;
+    }
+    .fn-pipeline-action {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #e47857;
+        display: grid;
+        place-items: center;
+        box-shadow: 0 6px 14px rgba(228, 120, 87, 0.35);
+        animation: fnArrowBounce 1.8s ease-in-out infinite;
+    }
+    .fn-pipeline-status {
+        font-size: 9px;
+        font-weight: 800;
+        color: #d95a34;
+        white-space: nowrap;
+    }
 
     /* Feature Showcase */
     .fn-feature-section {
         background: var(--cream);
-        padding: 96px 24px;
+        padding: 104px 24px;
     }
     .fn-feature-inner {
         max-width: 1180px;
@@ -839,33 +1282,34 @@
     }
     .fn-feature-visual {
         position: relative;
-        min-height: 410px;
+        min-height: 420px;
         display: grid;
         place-items: center;
     }
     .fn-visual-blob {
         position: absolute;
-        width: 390px;
-        height: 390px;
+        width: 400px;
+        height: 400px;
         max-width: 100%;
         border-radius: 44% 56% 52% 48%;
         background: radial-gradient(circle, #c8f3dc 0%, #e7f6ec 75%);
+        animation: fnBlobPulse 8s ease-in-out infinite;
     }
     .fn-template-window {
         position: relative;
         z-index: 2;
-        width: 420px;
+        width: 430px;
         max-width: 100%;
-        border-radius: 22px;
+        border-radius: 24px;
         background: #ffffff;
-        border: 1px solid #e5eae5;
-        box-shadow: 0 28px 60px rgba(23, 33, 27, 0.1);
+        border: 1px solid #e2e8e2;
+        box-shadow: 0 32px 64px -12px rgba(23, 33, 27, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
         overflow: hidden;
-        transform: rotate(-2deg);
+        animation: fnFloatSlow 6s ease-in-out infinite;
     }
     .fn-tw-head {
-        height: 40px;
-        padding: 0 14px;
+        height: 42px;
+        padding: 0 16px;
         background: #fafaf8;
         border-bottom: 1px solid #eef1ee;
         display: flex;
@@ -880,39 +1324,122 @@
         display: block;
     }
     .fn-template-grid {
-        padding: 20px;
+        padding: 18px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
+        gap: 12px;
     }
     .fn-mini-template {
-        height: 155px;
-        border-radius: 12px;
-        border: 1px solid #e8ece8;
+        height: 182px;
+        border-radius: 14px;
+        border: 1.5px solid #e8ece8;
         background: #ffffff;
-        padding: 12px;
-        display: grid;
-        align-content: start;
-        gap: 8px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+        position: relative;
+        overflow: hidden;
     }
-    .fn-mini-template .fn-mini-head {
-        height: 34px;
-        border-radius: 8px;
-        background: #ede9fe;
-        display: block;
+    .fn-mini-template:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 26px rgba(0, 0, 0, 0.09);
     }
     .fn-mini-template.active {
-        border-color: var(--green);
-        box-shadow: 0 0 0 3px rgba(24, 79, 58, 0.12);
+        border-color: #184f3a;
+        box-shadow: 0 0 0 3px rgba(24, 79, 58, 0.16), 0 14px 30px rgba(24, 79, 58, 0.12);
     }
-    .fn-mini-template.active .fn-mini-head { background: #c8f3dc; }
-    .fn-mini-template.alt .fn-mini-head { background: #ffe7dc; }
-    .fn-mini-template span {
-        height: 7px;
+    .fn-mt-tag {
+        font-size: 8.5px;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border-radius: 4px;
+        text-align: center;
+        background: #f1f3f1;
+        color: #536058;
+    }
+    .fn-mini-template.active .fn-mt-tag {
+        background: #eaf7ee;
+        color: #184f3a;
+    }
+    .fn-mt-check {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        background: #184f3a;
+        display: grid;
+        place-items: center;
+        box-shadow: 0 2px 6px rgba(24, 79, 58, 0.35);
+    }
+    .fn-mt-head-bar {
+        height: 22px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        padding: 0 6px;
+        gap: 5px;
+    }
+    .fn-mini-template:nth-child(1) .fn-mt-head-bar { background: #ede9fe; }
+    .fn-mini-template.active .fn-mt-head-bar { background: #c8f3dc; }
+    .fn-mini-template.alt .fn-mt-head-bar { background: #ffe4d6; }
+
+    .fn-mt-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(23, 33, 27, 0.2);
+    }
+    .fn-mt-lines {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin: 6px 0;
+    }
+    .fn-mt-line {
+        height: 5px;
         border-radius: 99px;
-        background: #eef1ee;
+        background: #edf0ed;
     }
-    .fn-mini-template span.short { width: 65%; }
+    .fn-mt-line.accent {
+        background: #cbd5e1;
+    }
+    .fn-mt-table {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin: 4px 0;
+    }
+    .fn-mt-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .fn-mt-row span {
+        height: 4px;
+        border-radius: 99px;
+        background: #edf0ed;
+    }
+    .fn-mt-row strong {
+        width: 14px;
+        height: 4px;
+        border-radius: 99px;
+        background: #94a3b8;
+    }
+    .fn-mt-total {
+        height: 6px;
+        border-radius: 99px;
+        background: #184f3a;
+        width: 70%;
+        margin-top: 2px;
+    }
+
     .fn-sr-only {
         position: absolute;
         width: 1px;
@@ -927,42 +1454,91 @@
 
     .fn-customize-card {
         position: absolute;
-        right: 12px;
-        bottom: 24px;
+        right: 8px;
+        bottom: 20px;
         z-index: 3;
-        width: 210px;
-        padding: 16px;
-        border-radius: 18px;
-        background: #ffffff;
-        border: 1px solid #e7ebe7;
-        box-shadow: 0 22px 44px rgba(23, 33, 27, 0.13);
-        transform: rotate(3deg);
+        width: 232px;
+        padding: 16px 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(14px);
+        border: 1px solid rgba(231, 235, 231, 0.95);
+        box-shadow: 0 24px 48px -8px rgba(23, 33, 27, 0.16), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+        animation: fnFloatCard 5s ease-in-out infinite 0.8s;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
-    .fn-customize-card strong {
-        display: block;
-        font-size: 13px;
+    .fn-customize-card:hover {
+        box-shadow: 0 30px 60px -10px rgba(23, 33, 27, 0.22);
+    }
+    .fn-cust-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .fn-cust-top strong {
+        font-size: 13.5px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+    }
+    .fn-live-pill {
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        padding: 2px 7px;
+        border-radius: 99px;
+        background: #eaf7ee;
+        color: #184f3a;
+        border: 1px solid #c2eccd;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+    .fn-live-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #22c55e;
+        box-shadow: 0 0 6px #22c55e;
     }
     .fn-swatch-row {
-        margin-top: 10px;
+        margin-top: 11px;
         display: flex;
-        gap: 7px;
+        gap: 9px;
     }
     .fn-swatch-row i {
-        width: 20px;
-        height: 20px;
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
         display: block;
+        transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+        position: relative;
+    }
+    .fn-swatch-row i.active {
+        transform: scale(1.15);
+        box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #184f3a;
+    }
+    .fn-swatch-row i:hover {
+        transform: scale(1.25);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
     .fn-font-row {
         margin-top: 12px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         font-size: 12px;
         color: var(--muted);
     }
-    .fn-font-row span:last-child {
-        color: var(--ink);
+    .fn-font-pill {
+        font-size: 11px;
         font-weight: 700;
+        color: var(--ink);
+        background: #f1f3f1;
+        padding: 2px 8px;
+        border-radius: 6px;
     }
 
     .fn-feature-copy h2 {
@@ -1654,12 +2230,49 @@
                     </a>
                 </div>
                 <div class="fn-card-art">
-                    <div class="fn-art-page">
-                        <span class="line-w1"></span>
-                        <span class="line-w2"></span>
-                        <span class="line-w3"></span>
+                    <div class="fn-resume-sheet">
+                        <div class="fn-scan-beam" aria-hidden="true"></div>
+                        <div class="fn-rm-header">
+                            <div class="fn-rm-avatar">AM</div>
+                            <div class="fn-rm-id">
+                                <span class="fn-rm-name">Amelia Morgan</span>
+                                <span class="fn-rm-role">Lead Product Designer</span>
+                            </div>
+                        </div>
+                        <div class="fn-rm-section">
+                            <div class="fn-rm-sec-title">EXPERIENCE</div>
+                            <div class="fn-rm-job-head">
+                                <strong>Staff Designer &bull; Stripe</strong>
+                                <span>2022 &ndash; Pres.</span>
+                            </div>
+                            <div class="fn-rm-bullet">
+                                <span class="fn-dot"></span>
+                                <span class="fn-rm-line w-full"></span>
+                            </div>
+                            <div class="fn-rm-bullet">
+                                <span class="fn-dot"></span>
+                                <span class="fn-rm-line w-[75%]"></span>
+                            </div>
+                        </div>
+                        <div class="fn-rm-tags">
+                            <span class="fn-rm-tag">Figma</span>
+                            <span class="fn-rm-tag">Design Systems</span>
+                            <span class="fn-rm-tag">React</span>
+                        </div>
                     </div>
-                    <div class="fn-art-score">15+ Themes</div>
+                    <div class="fn-ats-badge">
+                        <div class="fn-ats-circle">
+                            <svg viewBox="0 0 36 36" class="fn-ats-ring">
+                                <path class="fn-ats-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <path class="fn-ats-ring-val" stroke-dasharray="98, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            </svg>
+                            <span class="fn-ats-val">98%</span>
+                        </div>
+                        <div class="fn-ats-text">
+                            <strong>ATS Match</strong>
+                            <span>17+ Themes</span>
+                        </div>
+                    </div>
                 </div>
             </article>
 
@@ -1675,17 +2288,42 @@
                     </a>
                 </div>
                 <div class="fn-card-art">
-                    <div class="fn-art-page invoice">
-                        <div class="fn-inv-line">
-                            <span>Design Sprint</span>
-                            <strong>$1,800</strong>
+                    <div class="fn-invoice-sheet">
+                        <div class="fn-im-header">
+                            <div class="fn-im-brand">
+                                <div class="fn-im-logo">SA</div>
+                                <div>
+                                    <span class="fn-im-company">Studio Apex Ltd.</span>
+                                    <span class="fn-im-num">#INV-2026-084</span>
+                                </div>
+                            </div>
+                            <div class="fn-im-date">Nov 16, 2026</div>
                         </div>
-                        <div class="fn-inv-line total">
-                            <span>Total</span>
-                            <strong>$2,950</strong>
+                        <div class="fn-im-table">
+                            <div class="fn-im-row">
+                                <span class="fn-im-desc">UI Design System &amp; Tokens</span>
+                                <span class="fn-im-qty">1 &times;</span>
+                                <strong class="fn-im-amt">$2,400.00</strong>
+                            </div>
+                            <div class="fn-im-row">
+                                <span class="fn-im-desc">API Backend Integration</span>
+                                <span class="fn-im-qty">1 &times;</span>
+                                <strong class="fn-im-amt">$1,850.00</strong>
+                            </div>
+                        </div>
+                        <div class="fn-im-footer">
+                            <div class="fn-im-total">
+                                <span>Total Due:</span>
+                                <strong>$4,250.00</strong>
+                            </div>
                         </div>
                     </div>
-                    <div class="fn-paid-stamp">PAID</div>
+                    <div class="fn-paid-stamp-v2">
+                        <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>PAID IN FULL</span>
+                    </div>
                 </div>
             </article>
 
@@ -1700,10 +2338,49 @@
                         <span aria-hidden="true">&rarr;</span>
                     </a>
                 </div>
-                <div class="fn-card-art converter">
-                    <div class="fn-format doc">DOCX</div>
-                    <x-icon name="arrow-right" class="w-6 h-6 text-[#e47857]" />
-                    <div class="fn-format pdf">PDF</div>
+                <div class="fn-card-art">
+                    <div class="fn-converter-stage">
+                        <div class="fn-conv-card fn-conv-docx">
+                            <span class="fn-conv-badge">DOCX</span>
+                            <div class="fn-conv-icon docx-color">
+                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                                </svg>
+                            </div>
+                            <div class="fn-conv-meta">
+                                <span class="fn-conv-name">Report.docx</span>
+                                <span class="fn-conv-size">1.4 MB</span>
+                            </div>
+                        </div>
+                        <div class="fn-conv-pipeline">
+                            <div class="fn-pipeline-track">
+                                <div class="fn-pipeline-beam"></div>
+                            </div>
+                            <div class="fn-pipeline-action">
+                                <svg class="w-4 h-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <span class="fn-pipeline-status">0.4s &bull; Lossless</span>
+                        </div>
+                        <div class="fn-conv-card fn-conv-pdf">
+                            <div class="fn-conv-check">
+                                <svg class="w-2.5 h-2.5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <span class="fn-conv-badge pdf-badge">PDF</span>
+                            <div class="fn-conv-icon pdf-color">
+                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-9.5 8.5h-2v1h2a1 1 0 0 0 0-2zm5 2h-1.5v-3h1.5a1.5 1.5 0 0 1 0 3zm3.5-3.5h-2.5v4H17v-1.5h-1v-1h1v-1.5z"/>
+                                </svg>
+                            </div>
+                            <div class="fn-conv-meta">
+                                <span class="fn-conv-name">Report.pdf</span>
+                                <span class="fn-conv-size">Ready to share</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </article>
         </div>
@@ -1765,7 +2442,7 @@
                 <a href="{{ route('resume.templates') }}"
                    class="group flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#dfe4df] hover:border-[#7655d7] transition">
                     <div class="flex items-center gap-3.5 min-w-0">
-                        <span class="w-11 h-11 rounded-xl bg-[#f0ebff] text-[#6142be] flex items-center justify-center font-display font-extrabold text-sm shrink-0">15+</span>
+                        <span class="w-11 h-11 rounded-xl bg-[#f0ebff] text-[#6142be] flex items-center justify-center font-display font-extrabold text-sm shrink-0">17+</span>
                         <div class="min-w-0">
                             <div class="text-sm font-bold text-[#17211b] group-hover:text-[#6142be] truncate">Resume Templates Gallery</div>
                             <div class="text-xs text-[#68736d] truncate">Minimal, Editorial, Technical &amp; ATS CV layouts</div>
@@ -1776,10 +2453,10 @@
                 <a href="{{ route('templates.index') }}"
                    class="group flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#dfe4df] hover:border-[#184f3a] transition">
                     <div class="flex items-center gap-3.5 min-w-0">
-                        <span class="w-11 h-11 rounded-xl bg-[#e8f7ed] text-[#184f3a] flex items-center justify-center font-display font-extrabold text-sm shrink-0">20+</span>
+                        <span class="w-11 h-11 rounded-xl bg-[#e8f7ed] text-[#184f3a] flex items-center justify-center font-display font-extrabold text-sm shrink-0">24+</span>
                         <div class="min-w-0">
                             <div class="text-sm font-bold text-[#17211b] group-hover:text-[#184f3a] truncate">Invoice &amp; Business Presets</div>
-                            <div class="text-xs text-[#68736d] truncate">6 layout themes with custom branding swatches</div>
+                            <div class="text-xs text-[#68736d] truncate">Modern presets with custom branding swatches</div>
                         </div>
                     </div>
                     <x-icon name="arrow-right" class="w-[18px] h-[18px] text-[#68736d] group-hover:text-[#184f3a]" />
@@ -1798,28 +2475,82 @@
                         <i></i><i></i><i></i>
                     </div>
                     <div class="fn-template-grid">
+                        {{-- Mini Template 1: Modern Tech CV --}}
                         <div class="fn-mini-template">
-                            <div class="fn-mini-head"></div><span></span><span class="short"></span>
+                            <div class="fn-mt-head-bar">
+                                <div class="fn-mt-dot"></div>
+                                <span class="fn-mt-line w-12 !h-1.5 !bg-purple-300"></span>
+                            </div>
+                            <div class="fn-mt-lines">
+                                <span class="fn-mt-line w-full"></span>
+                                <span class="fn-mt-line w-4/5"></span>
+                                <span class="fn-mt-line w-3/5 accent"></span>
+                            </div>
+                            <div class="flex gap-1">
+                                <span class="w-2.5 h-2.5 rounded-full bg-purple-200"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-purple-200"></span>
+                            </div>
+                            <span class="fn-mt-tag">Modern CV</span>
                         </div>
+
+                        {{-- Mini Template 2: Studio Invoice (Active) --}}
                         <div class="fn-mini-template active">
-                            <div class="fn-mini-head"></div><span></span><span class="short"></span>
+                            <div class="fn-mt-check">
+                                <svg class="w-2.5 h-2.5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div class="fn-mt-head-bar">
+                                <div class="fn-mt-dot !bg-[#184f3a]"></div>
+                                <span class="fn-mt-line w-10 !h-1.5 !bg-emerald-400"></span>
+                            </div>
+                            <div class="fn-mt-table">
+                                <div class="fn-mt-row">
+                                    <span class="w-12"></span>
+                                    <strong class="w-4"></strong>
+                                </div>
+                                <div class="fn-mt-row">
+                                    <span class="w-10"></span>
+                                    <strong class="w-5"></strong>
+                                </div>
+                            </div>
+                            <div class="fn-mt-total"></div>
+                            <span class="fn-mt-tag">Studio Invoice</span>
                         </div>
+
+                        {{-- Mini Template 3: Executive Quote / PO --}}
                         <div class="fn-mini-template alt">
-                            <div class="fn-mini-head"></div><span></span><span class="short"></span>
+                            <div class="fn-mt-head-bar">
+                                <div class="fn-mt-dot !bg-[#ff815f]"></div>
+                                <span class="fn-mt-line w-14 !h-1.5 !bg-orange-300"></span>
+                            </div>
+                            <div class="fn-mt-lines">
+                                <span class="fn-mt-line w-full"></span>
+                                <span class="fn-mt-line w-3/4"></span>
+                                <span class="fn-mt-line w-2/3 accent"></span>
+                            </div>
+                            <div class="w-8 h-1 bg-slate-300 rounded-full mt-1"></div>
+                            <span class="fn-mt-tag">Quote &amp; PO</span>
                         </div>
                     </div>
                 </div>
                 <div class="fn-customize-card">
-                    <strong>Brand theme</strong>
+                    <div class="fn-cust-top">
+                        <strong>Brand theme</strong>
+                        <span class="fn-live-pill">
+                            <span class="fn-live-dot"></span>
+                            <span>LIVE</span>
+                        </span>
+                    </div>
                     <div class="fn-swatch-row">
-                        <i style="background: #184f3a"></i>
-                        <i style="background: #7655d7"></i>
-                        <i style="background: #ff815f"></i>
-                        <i style="background: #17211b"></i>
+                        <i style="background: #184f3a" class="active" title="Forest Green"></i>
+                        <i style="background: #7655d7" title="Electric Violet"></i>
+                        <i style="background: #ff815f" title="Coral Flame"></i>
+                        <i style="background: #17211b" title="Obsidian Noir"></i>
                     </div>
                     <div class="fn-font-row">
                         <span>Typography</span>
-                        <span>Manrope</span>
+                        <span class="fn-font-pill">Manrope &bull; Clean</span>
                     </div>
                 </div>
             </div>
