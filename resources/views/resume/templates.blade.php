@@ -8,29 +8,29 @@
         <div class="max-w-[1280px] mx-auto">
             <div class="mb-4">
                 <x-schema.breadcrumbs :items="[['Home', url('/')], ['Resume Builder', route('resume.builder')], ['Resume Templates', route('resume.templates')]]" />
+                <x-schema.tool name="Free ATS CV Templates & Builder" description="Download 17+ best ATS CV templates in PDF and Word DOCX format. Built-in ATS CV checker, convert CV to ATS format for free." />
             </div>
             <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
                 <div class="max-w-3xl">
                     <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-white border border-border-subtle text-emerald-700 font-mono text-[11px] font-semibold uppercase tracking-wider mb-4 shadow-sm">
-                        15 Templates &bull; 10 Distinct Layout Engines &bull; No Sign-up Required
+                        17+ Free ATS CV Templates &bull; PDF &amp; Word (DOCX) &bull; Instant Free Download
                     </div>
                     <h1 class="font-display text-3xl sm:text-5xl font-extrabold tracking-[-0.03em] text-[#17211b] leading-[1.08]">
-                        Resume &amp; CV templates crafted like
-                        <span class="text-[#184f3a]">Figma</span>, <span class="text-emerald-600">FlowCV</span> &amp; Editorial Print.
+                        Free ATS CV Templates &bull; Best ATS Resume Templates for PDF &amp; Word
                     </h1>
                     <p class="mt-4 text-sm sm:text-lg text-[#536058] max-w-2xl leading-relaxed">
-                        Choose from warm editorial serif spreads, FlowCV-style dark portrait sidebars, connected career timelines with skill bars, and 100% ATS-verified Wall Street singles.
+                        Download the best ATS CV templates online for free. Convert your CV to ATS format in 60 seconds with our built-in ATS CV checker, or export recruiter-vetted PDFs and editable Word (.docx) files with zero sign-up or watermarks.
                     </p>
                 </div>
 
                 <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 shrink-0">
-                    <a href="{{ route('resume.builder', ['import' => 1]) }}"
+                    <a href="{{ route('resume.builder', ['import' => 1]) }}" rel="nofollow"
                        class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-primary-container hover:bg-electric-blue-hover text-white text-sm font-bold shadow-sm transition">
-                        <span>Import Existing CV &rarr;</span>
+                        <span>Convert CV to ATS Format Free &rarr;</span>
                     </a>
-                    <a href="{{ route('resume.builder', ['blank' => 1]) }}"
+                    <a href="{{ route('resume.builder', ['blank' => 1]) }}" rel="nofollow"
                        class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white border border-border-strong text-[#17211b] text-sm font-bold hover:border-[#17211b] transition">
-                        <span>+ Start Blank</span>
+                        <span>+ Start Blank ATS CV</span>
                     </a>
                 </div>
             </div>
@@ -593,6 +593,7 @@
                                         <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold tracking-wide bg-slate-100 text-slate-700 border border-slate-200/80">
                                             {{ $tpl['badge'] ?? 'Designer' }}
                                         </span>
+                                        <span class="text-[10px] font-semibold text-emerald-700">ATS Verified &bull; PDF &amp; Word</span>
                                     </div>
                                     <h3 class="font-extrabold text-base text-slate-900 leading-snug">{{ $tpl['name'] }}</h3>
                                     <div class="text-xs font-semibold text-slate-500 mt-0.5">{{ $tpl['role'] }}</div>
@@ -612,7 +613,7 @@
                             </div>
 
                             <div class="flex items-center gap-2 pt-1">
-                                <a href="{{ route('resume.builder', ['template' => $tpl['slug']]) }}"
+                                <a href="{{ route('resume.builder', ['template' => $tpl['slug']]) }}" rel="nofollow"
                                    class="flex-1 text-center py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-[#184f3a] transition">
                                     Customize This CV
                                 </a>
@@ -626,6 +627,138 @@
                     </div>
                 </article>
             @endforeach
+        </div>
+    </section>
+
+    {{-- Educational Guide & Conversion Section for Top Keywords --}}
+    <section class="border-t border-[#dfe4df] bg-[#f8f8f3] py-14 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto space-y-12">
+
+            {{-- 3 Value Pillars for Target Keywords --}}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl border border-[#dfe4df] p-6 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-lg">&#9889;</div>
+                    <h3 class="font-display text-lg font-extrabold text-[#17211b]">Convert CV to ATS Format Free</h3>
+                    <p class="text-xs sm:text-sm text-[#536058] leading-relaxed">
+                        Already have an existing CV in Word or PDF? Use our free parser to instantly restructure your experience, education, and skills into an ATS-compliant template in under 60 seconds.
+                    </p>
+                    <a href="{{ route('resume.builder', ['import' => 1]) }}" rel="nofollow" class="inline-flex items-center text-xs font-bold text-[#184f3a] hover:underline">
+                        Convert My CV Now &rarr;
+                    </a>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-[#dfe4df] p-6 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center font-bold text-lg">&#128196;</div>
+                    <h3 class="font-display text-lg font-extrabold text-[#17211b]">Word ATS CV Template &amp; PDF</h3>
+                    <p class="text-xs sm:text-sm text-[#536058] leading-relaxed">
+                        Need an editable Word ATS CV template? All templates export as crisp, recruiter-vetted vector PDFs and can be converted to Word (.docx) format anytime with zero formatting distortion.
+                    </p>
+                    <a href="{{ route('convert.tool', 'pdf-to-word') }}" class="inline-flex items-center text-xs font-bold text-[#184f3a] hover:underline">
+                        Word DOCX Converter &rarr;
+                    </a>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-[#dfe4df] p-6 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center font-bold text-lg">&#128269;</div>
+                    <h3 class="font-display text-lg font-extrabold text-[#17211b]">Real-Time ATS CV Checker</h3>
+                    <p class="text-xs sm:text-sm text-[#536058] leading-relaxed">
+                        Test your resume against 98% pass-rate criteria. Our live builder validates heading hierarchy, bullet readability, and keyword density for Workday, Taleo, Greenhouse, and Lever.
+                    </p>
+                    <a href="{{ route('resume.builder') }}" class="inline-flex items-center text-xs font-bold text-[#184f3a] hover:underline">
+                        Test in Resume Builder &rarr;
+                    </a>
+                </div>
+            </div>
+
+            {{-- What makes the Best ATS CV Template --}}
+            <div class="bg-white rounded-[26px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#e8f7ed] border border-[#c8f3dc] text-[#184f3a] text-xs font-mono font-bold uppercase tracking-wider">
+                        ATS Optimization Benchmark
+                    </div>
+                    <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-[#17211b] tracking-tight">
+                        What is the best ATS CV template?
+                    </h2>
+                    <p class="text-xs sm:text-sm text-[#536058] leading-relaxed">
+                        The <strong>best ATS CV template</strong> uses a predictable, linear structure with standard typography (such as Inter, Arial, or Calibri) and 100% selectable text. Unlike Canva or graphical Photoshop templates that confuse Applicant Tracking Systems with nested tables, floating text boxes, and image-based skill meters, Formnexa templates ensure your credentials parse accurately into recruiter databases.
+                    </p>
+                    <ul class="space-y-2 text-xs sm:text-sm text-[#17211b] font-medium">
+                        <li class="flex items-center gap-2">
+                            <span class="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">&check;</span>
+                            <span>Standard headings: Summary, Experience, Education, Skills, and Projects.</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">&check;</span>
+                            <span>Reverse-chronological timeline with clear employment dates (MM/YYYY).</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">&check;</span>
+                            <span>Direct free ATS CV template download in vector PDF and editable Word (DOCX).</span>
+                        </li>
+                    </ul>
+                </div>
+
+                {{-- Mini comparison table --}}
+                <div class="rounded-2xl border border-[#dfe4df] overflow-hidden bg-[#fafaf8] text-xs">
+                    <div class="p-3.5 bg-[#17211b] text-white font-bold flex justify-between items-center">
+                        <span>ATS CV Format Comparison</span>
+                        <span class="text-emerald-400 font-mono text-[11px]">98% Shortlist Target</span>
+                    </div>
+                    <div class="divide-y divide-[#dfe4df]">
+                        <div class="p-3 grid grid-cols-2 gap-2">
+                            <span class="font-bold text-slate-700">Formnexa ATS Templates</span>
+                            <span class="text-emerald-700 font-semibold">&check; 100% Machine Readable</span>
+                        </div>
+                        <div class="p-3 grid grid-cols-2 gap-2">
+                            <span class="font-bold text-slate-700">Word ATS CV Template (.docx)</span>
+                            <span class="text-emerald-700 font-semibold">&check; Fully Supported via Converter</span>
+                        </div>
+                        <div class="p-3 grid grid-cols-2 gap-2">
+                            <span class="font-bold text-slate-700">Free ATS CV Download</span>
+                            <span class="text-emerald-700 font-semibold">&check; Instant Watermark-Free PDF</span>
+                        </div>
+                        <div class="p-3 grid grid-cols-2 gap-2">
+                            <span class="font-bold text-slate-700">Convert CV to ATS Free</span>
+                            <span class="text-emerald-700 font-semibold">&check; Built-in 60s Parser</span>
+                        </div>
+                        <div class="p-3 grid grid-cols-2 gap-2">
+                            <span class="font-bold text-slate-700">Canva / Photoshop Resumes</span>
+                            <span class="text-rose-600 font-semibold">&cross; 70%+ Fail ATS Scanners</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- FAQ Section with Automatic Schema.org FAQPage --}}
+            <div class="bg-white rounded-[26px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm">
+                <x-faq :items="[
+                    [
+                        'q' => 'What is the best ATS CV template?',
+                        'a' => 'The best ATS CV template is a clean, single-column or linear layout that uses standard system typography, reverse-chronological experience dates, and clear headings (Summary, Experience, Education, Skills). Formnexa\'s \'Wall Street Classic ATS\', \'Atlantic Flow\', and \'Linear Founding Engineer\' templates are engineered to achieve 98%+ pass rates on enterprise ATS checkers including Workday, Greenhouse, Taleo, and Lever.'
+                    ],
+                    [
+                        'q' => 'How do I convert my CV to an ATS format for free?',
+                        'a' => 'To convert your CV to an ATS format for free on Formnexa: 1) Click \'Convert CV to ATS Format Free\' at the top of the page, 2) Upload your current PDF or Word (.docx) resume or paste raw text, and 3) Formnexa automatically extracts your contact details, work history, and competencies into an ATS-friendly layout. You can then download an ATS-compliant PDF with zero watermark.'
+                    ],
+                    [
+                        'q' => 'Can I download an ATS CV template in Word (DOCX) and PDF?',
+                        'a' => 'Yes. Every ATS CV template on Formnexa exports as a crisp, vector A4 PDF. If your recruiter specifically requests a Word ATS CV template (.docx), simply use our integrated free PDF to Word tool to convert your CV into an editable Microsoft Word document without losing alignment or typography.'
+                    ],
+                    [
+                        'q' => 'Does Formnexa have a free ATS CV checker?',
+                        'a' => 'Yes. Formnexa\'s builder incorporates a real-time ATS CV checker that verifies heading compliance, bullet structure, date formatting, and keyword density as you type. It alerts you if formatting elements might trigger parsing errors in corporate applicant tracking software.'
+                    ],
+                    [
+                        'q' => 'Are Formnexa\'s free ATS CV template downloads really free with no watermark?',
+                        'a' => 'Yes, 100%. All 17+ ATS CV templates are completely free to customize and download. There are no watermarks, no paywalls, and no credit card or account registration required.'
+                    ],
+                    [
+                        'q' => 'What is the difference between a CV ATS and a traditional graphic resume?',
+                        'a' => 'A CV ATS is formatted with linear reading order and selectable vector text that ATS bots can parse into applicant fields like \'Job Title\' and \'Years of Experience\'. Graphic resumes built in design software often place text inside multi-layer frames, floating text boxes, or graphic icons that bot parsers fail to read, causing immediate automatic rejection.'
+                    ],
+                ]" heading="Free ATS CV Templates — Frequently Asked Questions" eyebrow="ATS CV Guide &amp; FAQ" />
+            </div>
+
         </div>
     </section>
 

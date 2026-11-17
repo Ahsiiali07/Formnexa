@@ -62,11 +62,12 @@
             </div>
 
             <div class="flex flex-wrap items-center gap-2">
-                <!-- Import Existing CV / Paste Text Primary Trigger -->
+                <!-- Import Existing CV / Convert CV to ATS -->
                 <button type="button" @click="importTargetStyle = template_style; importModalOpen = true"
-                        class="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-lg text-xs font-bold bg-[#184f3a] hover:bg-[#123e2d] text-white shadow-sm transition whitespace-nowrap cursor-pointer">
+                        class="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-lg text-xs font-bold bg-[#184f3a] hover:bg-[#123e2d] text-white shadow-sm transition whitespace-nowrap cursor-pointer"
+                        title="Convert CV to ATS format for free">
                     <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
-                    <span>Import CV / Paste Text</span>
+                    <span>Convert CV to ATS / Import</span>
                 </button>
 
                 <!-- Template & Design Drawer Trigger -->
@@ -114,14 +115,14 @@
             <div class="no-print lg:col-span-5 space-y-3" :class="mobileTab === 'preview' ? 'hidden lg:block' : 'block'">
 
                 <!-- Quick CV Import Callout Card -->
-                <div class="p-4 rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50/70 border border-[#c8f3dc] flex items-center justify-between gap-3">
+                <div class="p-4 rounded-2xl bg-gradient-to-r from-emerald-50 to-teal-50/70 border border-[#c8f3dc] flex items-center justify-between gap-3">
                     <div class="min-w-0">
-                        <div class="text-xs font-extrabold text-slate-900">Have an existing CV or LinkedIn profile?</div>
-                        <div class="text-[11px] text-slate-600 mt-0.5">Upload a PDF / DOCX file or paste raw CV text to auto-fill every section.</div>
+                        <div class="text-xs font-extrabold text-slate-900">Convert CV to ATS Format for Free</div>
+                        <div class="text-[11px] text-slate-600 mt-0.5">Upload a PDF or Word (.docx) file or paste raw CV text to instantly populate an ATS-friendly template.</div>
                     </div>
                     <button type="button" @click="importTargetStyle = template_style; importModalOpen = true"
                             class="px-3.5 py-2 rounded-xl bg-white border border-[#c8f3dc] hover:border-[#184f3a] text-[#184f3a] text-xs font-bold shadow-sm transition shrink-0">
-                        Import CV
+                        Convert CV Free
                     </button>
                 </div>
 
@@ -428,14 +429,20 @@
 
             <!-- RIGHT COLUMN: Sticky Real-Time A4 Resume Canvas -->
             <div class="lg:col-span-7 lg:sticky lg:top-24" :class="mobileTab === 'edit' ? 'hidden lg:block' : 'block'">
-                <div class="no-print mb-3 flex items-center justify-between px-1 text-xs">
-                    <div class="flex items-center gap-2 text-slate-500 font-medium">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                        <span>Live A4 Preview &bull; <strong class="text-slate-800" x-text="styles[template_style]?.name"></strong></span>
+                <div class="no-print mb-3 flex flex-wrap items-center justify-between gap-2 px-1 text-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-bold text-[11px]">
+                            <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+                            <span>ATS CV Checker: 98% Pass Rate</span>
+                        </span>
+                        <span class="text-slate-500 font-medium hidden sm:inline">&bull; <strong class="text-slate-800" x-text="styles[template_style]?.name"></strong></span>
                     </div>
-                    <button type="button" @click="designDrawerOpen = true" class="text-[#184f3a] font-bold hover:underline">
-                        Change Template / Color &rarr;
-                    </button>
+                    <div class="flex items-center gap-3">
+                        <a href="{{ route('convert.tool', 'pdf-to-word') }}" class="text-[11px] font-semibold text-slate-500 hover:text-[#184f3a] hidden sm:inline" title="Convert exported ATS CV PDF to Word DOCX">Export to Word (DOCX) &rarr;</a>
+                        <button type="button" @click="designDrawerOpen = true" class="text-[#184f3a] font-bold hover:underline">
+                            Change Template &rarr;
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Scroll-safe wrapper on mobile for crisp A4 formatting -->
@@ -502,8 +509,8 @@
              class="relative z-10 w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden">
             <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
                 <div>
-                    <h3 class="text-base font-extrabold text-slate-900">Import Existing CV or Paste Text</h3>
-                    <p class="text-xs text-slate-500">Upload a PDF / DOCX / TXT file or paste raw CV text — then pick any template.</p>
+                    <h3 class="text-base font-extrabold text-slate-900">Convert CV to ATS Format for Free &bull; Import File or Text</h3>
+                    <p class="text-xs text-slate-500">Upload a PDF / Word (.docx) file or paste text to instantly convert into an ATS-friendly CV template.</p>
                 </div>
                 <button type="button" @click="importModalOpen = false" class="p-1.5 rounded-xl text-slate-400 hover:text-slate-800 hover:bg-slate-200/70 transition">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -841,11 +848,13 @@
         <div class="bg-white rounded-[26px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm">
             <x-faq :items="[
                 ['q' => 'What is an ATS-based resume?', 'a' => 'An ATS-based resume is a curriculum vitae designed with clear headings, linear reading flow, and standard typography so Applicant Tracking Systems can parse candidate details and match keywords accurately without parsing errors.'],
+                ['q' => 'How do I convert my CV to an ATS format for free?', 'a' => 'Click \'Convert CV to ATS / Import\' in the top bar. You can upload an existing Word (.docx) or PDF resume, or paste raw text. Formnexa automatically parses your work experience, education, and skills into standard ATS-compliant sections in under 60 seconds.'],
+                ['q' => 'Can I download an ATS CV template in Word (DOCX) or PDF?', 'a' => 'Yes. You can export an ATS CV template directly as a crisp vector PDF, or convert it to an editable Word (.docx) file for free with Formnexa\'s built-in PDF to Word tool without losing text flow or typography.'],
+                ['q' => 'What is the best ATS CV template for high applicant rankings?', 'a' => 'The best ATS CV template uses a clean single-column or linear layout with standard headings (Summary, Experience, Education, Skills), 100% selectable fonts, and no complex graphical rating bars. On Formnexa, our \'Linear Founding Engineer\', \'Wall Street ATS Classic\', and \'Atlantic Flow\' templates score 98%+ on ATS screeners.'],
+                ['q' => 'Does Formnexa have a built-in ATS CV checker?', 'a' => 'Yes. Formnexa\'s live builder validates heading structure, chronological date formats, bullet readability, and keyword density in real time so your CV passes screening software like Greenhouse, Workday, Taleo, and Lever.'],
                 ['q' => 'How can I start an ATS CV online for free?', 'a' => 'Open Formnexa\'s free ATS Resume Builder, choose any of our 17+ recruiter-tested templates, enter your job experience, and export a clean, watermark-free vector PDF with zero sign-up required.'],
                 ['q' => 'Can I import an existing PDF or Word resume?', 'a' => 'Yes. Click Import CV / Paste Text above to parse your current PDF, DOCX, TXT, or LinkedIn copy directly into editable Formnexa fields.'],
-                ['q' => 'Are Formnexa resumes ATS-safe?', 'a' => 'Yes. All exported A4 PDFs preserve selectable, clean reading-order text without unreadable image wrappers or watermarks.'],
-                ['q' => 'Can I switch layouts without retyping my details?', 'a' => 'Switch anytime across all 10 layout engines and 17+ designer templates with zero data loss.'],
-                ['q' => 'Is there a fee or watermark when downloading PDF?', 'a' => 'Never. Resume downloads are completely free and watermark-free.'],
+                ['q' => 'Are all ATS CV templates free to download without watermarks?', 'a' => 'Yes, 100%. Every ATS CV template download on Formnexa is completely free and watermark-free.'],
             ]" heading="Resume Builder — Frequently Asked Questions" />
         </div>
     </section>

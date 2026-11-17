@@ -79,12 +79,12 @@ return [
     // ---------- Resume ----------
     'resume-builder' => [
         'title' => 'Start ATS CV Online Free – ATS-Based Resume Builder | Formnexa',
-        'description' => 'Start an ATS CV online for free with 17+ recruiter-approved templates or import an existing PDF/DOCX resume. Real-time preview, zero watermarks, no sign-up.',
+        'description' => 'Start an ATS CV online for free or convert CV to ATS format. 17+ best ATS CV templates, built-in ATS CV checker, and instant Word (DOCX) & PDF download.',
         'updated' => $d,
     ],
     'resume-templates' => [
-        'title' => 'Free Resume Templates – 17+ Modern ATS-Friendly CVs | Formnexa',
-        'description' => 'Choose from 17+ modern, tech, minimal and editorial resume templates. All 100% ATS-friendly. Edit online and download a watermark-free PDF.',
+        'title' => 'Free ATS CV Templates – Best ATS Resume Templates (Word & PDF) | Formnexa',
+        'description' => 'Download 17+ free ATS CV templates in PDF & Word (DOCX). Convert CV to ATS format for free, test with built-in ATS CV checker, and download with zero watermark.',
         'updated' => $d,
     ],
 
