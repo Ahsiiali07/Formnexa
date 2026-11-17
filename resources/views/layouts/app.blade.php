@@ -30,7 +30,7 @@
     @endphp
 
     <!-- Floating Glass-Effect Navigation Header (Figma Make FormNexa Aesthetic) -->
-    <header class="no-print sticky top-0 z-50 w-full pointer-events-none transition-all duration-300"
+    <header class="no-print {{ (request()->is('admin*') || request()->is('blog-studio*')) ? 'relative' : 'sticky top-0' }} z-50 w-full pointer-events-none transition-all duration-300"
             x-data="{ scrolled: false, mobileMenu: false, mobileSection: '' }"
             @scroll.window="scrolled = (window.pageYOffset > 24)">
         <div class="pointer-events-auto mx-auto transition-all duration-300 px-3 sm:px-4"

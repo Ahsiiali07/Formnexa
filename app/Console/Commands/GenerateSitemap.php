@@ -17,7 +17,22 @@ class GenerateSitemap extends Command
 
     public function handle(): int
     {
-        $baseUrl = rtrim((string) ($this->option('url') ?: config('app.url')), '/');
+        $baseUrl = rtrim((string) $this->option('url'), '/');
+
+        if ($baseUrl === '') {
+            // When invoked via web request (e.g. Admin Dashboard), detect the live domain
+            if (request()->hasHeader('Host')) {
+                $detected = rtrim(request()->getSchemeAndHttpHost(), '/');
+                if ($detected !== '' && !str_contains($detected, '127.0.0.1')) {
+                    $baseUrl = $detected;
+                }
+            }
+        }
+
+        if ($baseUrl === '') {
+            $baseUrl = rtrim((string) config('app.url'), '/');
+        }
+
         if ($baseUrl !== '') {
             URL::forceRootUrl($baseUrl);
             if (str_starts_with($baseUrl, 'https://')) {

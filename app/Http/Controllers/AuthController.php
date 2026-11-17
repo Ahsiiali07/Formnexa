@@ -39,8 +39,8 @@ class AuthController extends Controller
             $this->claimGuestSessionInvoices(Auth::id(), $request);
 
             $defaultTarget = Auth::user()->is_admin
-                ? route('admin.dashboard')
-                : route('invoice.history.page');
+                ? route('admin.dashboard', [], false)
+                : route('invoice.history.page', [], false);
 
             return redirect()
                 ->intended($defaultTarget)

@@ -170,7 +170,7 @@ class AdminController extends Controller
             'toolOptions' => $this->toolOptions(),
             'isEdit' => false,
             'formAction' => route('admin.blogs.store'),
-            'backUrl' => route('admin.dashboard', ['tab' => 'blogs']),
+            'backUrl' => route('admin.dashboard', ['tab' => 'blogs'], false),
             'backLabel' => 'Back to Admin Blogs',
             'seo' => ['robots' => 'noindex,nofollow', 'title' => 'New Blog Article — Admin | Formnexa'],
         ]);
@@ -187,8 +187,7 @@ class AdminController extends Controller
         $post = BlogPost::create($data);
         $this->refreshSitemapSafely();
 
-        return redirect()
-            ->route('admin.dashboard', ['tab' => 'blogs'])
+        return redirect(route('admin.dashboard', ['tab' => 'blogs'], false))
             ->with('success', 'Blog "' . $post->title . '" created (' . ($post->is_published ? 'Active' : 'Inactive') . ') and sitemap refreshed.');
     }
 
@@ -203,7 +202,7 @@ class AdminController extends Controller
             'toolOptions' => $this->toolOptions(),
             'isEdit' => true,
             'formAction' => route('admin.blogs.update', $post),
-            'backUrl' => route('admin.dashboard', ['tab' => 'blogs']),
+            'backUrl' => route('admin.dashboard', ['tab' => 'blogs'], false),
             'backLabel' => 'Back to Admin Blogs',
             'seo' => ['robots' => 'noindex,nofollow', 'title' => 'Edit Blog — Admin | Formnexa'],
         ]);
@@ -218,8 +217,7 @@ class AdminController extends Controller
         $post->update($data);
         $this->refreshSitemapSafely();
 
-        return redirect()
-            ->route('admin.dashboard', ['tab' => 'blogs'])
+        return redirect(route('admin.dashboard', ['tab' => 'blogs'], false))
             ->with('success', 'Blog "' . $post->title . '" updated and sitemap refreshed.');
     }
 
@@ -237,8 +235,7 @@ class AdminController extends Controller
 
         $label = $nextState ? 'Active (Published)' : 'Inactive (Hidden from public)';
 
-        return redirect()
-            ->route('admin.dashboard', ['tab' => 'blogs'])
+        return redirect(route('admin.dashboard', ['tab' => 'blogs'], false))
             ->with('success', 'Blog "' . $post->title . '" marked ' . $label . '.');
     }
 
@@ -251,8 +248,7 @@ class AdminController extends Controller
         $post->delete();
         $this->refreshSitemapSafely();
 
-        return redirect()
-            ->route('admin.dashboard', ['tab' => 'blogs'])
+        return redirect(route('admin.dashboard', ['tab' => 'blogs'], false))
             ->with('success', 'Blog "' . $title . '" deleted and removed from sitemap.');
     }
 
@@ -267,8 +263,7 @@ class AdminController extends Controller
             'balance_due' => $next === 'paid' ? 0 : $invoice->total,
         ]);
 
-        return redirect()
-            ->route('admin.dashboard', ['tab' => 'invoices'])
+        return redirect(route('admin.dashboard', ['tab' => 'invoices'], false))
             ->with('success', 'Document #' . $invoice->invoice_number . ' updated to ' . strtoupper($next) . '.');
     }
 
@@ -280,8 +275,7 @@ class AdminController extends Controller
         $num = $invoice->invoice_number;
         $invoice->delete();
 
-        return redirect()
-            ->route('admin.dashboard', ['tab' => 'invoices'])
+        return redirect(route('admin.dashboard', ['tab' => 'invoices'], false))
             ->with('success', 'Document #' . $num . ' deleted.');
     }
 
@@ -293,8 +287,7 @@ class AdminController extends Controller
         $title = $resume->title;
         $resume->delete();
 
-        return redirect()
-            ->route('admin.dashboard', ['tab' => 'resumes'])
+        return redirect(route('admin.dashboard', ['tab' => 'resumes'], false))
             ->with('success', 'Resume "' . $title . '" deleted.');
     }
 
@@ -304,16 +297,14 @@ class AdminController extends Controller
     public function toggleUserAdmin(User $user): RedirectResponse
     {
         if ($user->id === Auth::id()) {
-            return redirect()
-                ->route('admin.dashboard', ['tab' => 'users'])
+            return redirect(route('admin.dashboard', ['tab' => 'users'], false))
                 ->with('error', 'You cannot remove your own administrator permission while signed in.');
         }
 
         $user->is_admin = !$user->is_admin;
         $user->save();
 
-        return redirect()
-            ->route('admin.dashboard', ['tab' => 'users'])
+        return redirect(route('admin.dashboard', ['tab' => 'users'], false))
             ->with('success', $user->name . ' admin access ' . ($user->is_admin ? 'enabled.' : 'revoked.'));
     }
 
@@ -322,10 +313,13 @@ class AdminController extends Controller
      */
     public function regenerateSitemap(): RedirectResponse
     {
-        Artisan::call('seo:sitemap');
+        $params = [];
+        if (request()->hasHeader('Host') && !str_contains(request()->getHost(), 'localhost')) {
+            $params['--url'] = request()->getSchemeAndHttpHost();
+        }
+        Artisan::call('seo:sitemap', $params);
 
-        return redirect()
-            ->route('admin.dashboard', ['tab' => 'seo'])
+        return redirect(route('admin.dashboard', ['tab' => 'seo'], false))
             ->with('success', trim(Artisan::output()) ?: 'Sitemap regenerated successfully.');
     }
 
@@ -337,8 +331,7 @@ class AdminController extends Controller
         $contact->is_read = !$contact->is_read;
         $contact->save();
 
-        return redirect()
-            ->route('admin.dashboard', ['tab' => 'contacts'])
+        return redirect(route('admin.dashboard', ['tab' => 'contacts'], false))
             ->with('success', 'Message marked as ' . ($contact->is_read ? 'Read' : 'Unread') . '.');
     }
 
@@ -349,8 +342,7 @@ class AdminController extends Controller
     {
         $contact->delete();
 
-        return redirect()
-            ->route('admin.dashboard', ['tab' => 'contacts'])
+        return redirect(route('admin.dashboard', ['tab' => 'contacts'], false))
             ->with('success', 'Contact inquiry deleted successfully.');
     }
 
@@ -430,7 +422,11 @@ class AdminController extends Controller
     protected function refreshSitemapSafely(): void
     {
         try {
-            Artisan::call('seo:sitemap');
+            $params = [];
+            if (request()->hasHeader('Host') && !str_contains(request()->getHost(), 'localhost')) {
+                $params['--url'] = request()->getSchemeAndHttpHost();
+            }
+            Artisan::call('seo:sitemap', $params);
         } catch (\Throwable) {
             // Non-blocking
         }

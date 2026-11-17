@@ -191,8 +191,7 @@ class BlogController extends Controller
         $post = BlogPost::create($data);
         $this->refreshSitemapSafely();
 
-        return redirect()
-            ->route('blog.manage')
+        return redirect(route('blog.manage', [], false))
             ->with('success', 'Article "' . $post->title . '" saved and sitemap updated.');
     }
 
@@ -219,8 +218,7 @@ class BlogController extends Controller
         $post->update($data);
         $this->refreshSitemapSafely();
 
-        return redirect()
-            ->route('blog.manage')
+        return redirect(route('blog.manage', [], false))
             ->with('success', 'Article "' . $post->title . '" updated and sitemap refreshed.');
     }
 
@@ -233,8 +231,7 @@ class BlogController extends Controller
         $post->delete();
         $this->refreshSitemapSafely();
 
-        return redirect()
-            ->route('blog.manage')
+        return redirect(route('blog.manage', [], false))
             ->with('success', 'Article "' . $title . '" removed.');
     }
 

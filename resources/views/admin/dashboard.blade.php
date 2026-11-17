@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-<div class="min-h-screen bg-[#f8f8f3] py-7 sm:py-10 px-4 sm:px-6"
+<div class="min-h-screen bg-[#f8f8f3] pt-4 sm:pt-6 pb-12 sm:pb-16 px-4 sm:px-6"
      x-data="{ tab: @js($activeTab ?: 'overview') }">
     <div class="max-w-[1280px] mx-auto space-y-7">
 
@@ -684,7 +684,7 @@
                     </p>
                 </div>
                 <div class="flex flex-wrap gap-2 shrink-0">
-                    <a href="{{ url('/sitemap.xml') }}" target="_blank" class="px-4 py-2.5 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-xs font-bold text-[#17211b]">Open sitemap.xml</a>
+                    <a href="/sitemap.xml" target="_blank" class="px-4 py-2.5 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-xs font-bold text-[#17211b]">Open sitemap.xml</a>
                     <form method="POST" action="{{ route('admin.seo.sitemap') }}">
                         @csrf
                         <button type="submit" class="px-5 py-2.5 rounded-xl bg-[#184f3a] hover:bg-[#123e2d] text-white text-xs font-bold cursor-pointer">
