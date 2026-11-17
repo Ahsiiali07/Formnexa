@@ -182,6 +182,7 @@
                         </div>
                         <form method="POST" action="{{ route('admin.seo.sitemap') }}">
                             @csrf
+                            <input type="hidden" name="sitemap_url" :value="window.location.origin" value="https://formnexa.dcpakpattan.gov.pk">
                             <button type="submit" class="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#c8f3dc] hover:bg-white text-[#17211b] text-xs font-extrabold transition cursor-pointer">
                                 Regenerate sitemap.xml Now
                             </button>
@@ -687,6 +688,7 @@
                     <a href="/sitemap.xml" target="_blank" class="px-4 py-2.5 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-xs font-bold text-[#17211b]">Open sitemap.xml</a>
                     <form method="POST" action="{{ route('admin.seo.sitemap') }}">
                         @csrf
+                        <input type="hidden" name="sitemap_url" :value="window.location.origin" value="https://formnexa.dcpakpattan.gov.pk">
                         <button type="submit" class="px-5 py-2.5 rounded-xl bg-[#184f3a] hover:bg-[#123e2d] text-white text-xs font-bold cursor-pointer">
                             Regenerate Sitemap
                         </button>

@@ -20,17 +20,34 @@ class GenerateSitemap extends Command
         $baseUrl = rtrim((string) $this->option('url'), '/');
 
         if ($baseUrl === '') {
-            // When invoked via web request (e.g. Admin Dashboard), detect the live domain
-            if (request()->hasHeader('Host')) {
-                $detected = rtrim(request()->getSchemeAndHttpHost(), '/');
-                if ($detected !== '' && !str_contains($detected, '127.0.0.1')) {
-                    $baseUrl = $detected;
+            // Check X-Forwarded-Host from reverse proxy
+            if (request()->hasHeader('x-forwarded-host')) {
+                $fHost = explode(',', request()->header('x-forwarded-host'))[0];
+                if (!str_contains($fHost, 'localhost') && !str_contains($fHost, '127.0.0.1')) {
+                    $proto = request()->header('x-forwarded-proto') ?: 'https';
+                    $baseUrl = rtrim($proto . '://' . trim($fHost), '/');
                 }
             }
         }
 
+        if ($baseUrl === '' && request()->hasHeader('Host')) {
+            $h = request()->getHost();
+            if (!str_contains($h, 'localhost') && !str_contains($h, '127.0.0.1')) {
+                $baseUrl = rtrim(request()->getSchemeAndHttpHost(), '/');
+            }
+        }
+
+        if ($baseUrl === '' && !app()->environment('testing')) {
+            $cfg = rtrim((string) config('app.url'), '/');
+            if ($cfg !== '' && !str_contains($cfg, 'localhost') && !str_contains($cfg, '127.0.0.1')) {
+                $baseUrl = $cfg;
+            } else {
+                $baseUrl = 'https://formnexa.dcpakpattan.gov.pk';
+            }
+        }
+
         if ($baseUrl === '') {
-            $baseUrl = rtrim((string) config('app.url'), '/');
+            $baseUrl = rtrim((string) config('app.url', 'http://localhost'), '/');
         }
 
         if ($baseUrl !== '') {
