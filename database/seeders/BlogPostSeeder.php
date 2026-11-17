@@ -27,7 +27,7 @@ class BlogPostSeeder extends Seeder
                 'featured_tool_label' => 'Open Free Multi-Currency Invoice Generator',
                 'reading_time_minutes' => 5,
                 'excerpt' => 'A practical guide to issuing compliant cross-border invoices across Asia, the USA, and Europe — covering VAT/EIN/GST fields, SWIFT & IBAN details, and watermark-free PDFs.',
-                'published_at' => now()->subDays(1),
+                'published_at' => now(),
                 'content' => <<<'MD'
 Whether you run a software agency in Singapore or Tokyo, consult for startups across the USA, or supply B2B clients across Germany, France, and the UK, using a standardized **international invoice format for Asia, the USA, and Europe** speeds up finance approvals and eliminates wire delays.
 
@@ -315,6 +315,172 @@ When billing by the hour or sprint day, attach or reference a clean weekly summa
 1. Open the [Free Timesheet Generator](/timesheet-generator).
 2. Enter each task or day as a line item with hours (`Qty`) and hourly rate (`Rate`).
 3. Share the PDF with your project manager for Friday approval, then convert approved totals into your final bill in the [Invoice Generator](/invoice-generator).
+MD,
+            ],
+            [
+                'title' => 'How to Start an ATS CV Online Free: 2026 Step-by-Step Guide & Formats',
+                'slug' => 'how-to-start-an-ats-cv-online-free-guide',
+                'category' => 'resumes',
+                'category_label' => 'Resumes & ATS',
+                'focus_keyword' => 'ats cv online start',
+                'meta_title' => 'Start an ATS CV Online Free: 2026 Guide & Formats | Formnexa',
+                'meta_description' => 'Learn how to start an ATS CV online for free. Understand what an ATS-based resume is, formatting guidelines that pass recruiter filters, and export clean PDFs.',
+                'featured_tool_route' => 'resume.builder',
+                'featured_tool_label' => 'Start Your ATS CV Online Free',
+                'reading_time_minutes' => 5,
+                'excerpt' => 'A complete guide to starting an ATS-friendly CV online: formatting rules that beat automated screening filters, section structure, keyword density, and instant watermark-free PDF exports.',
+                'published_at' => now()->subHours(6),
+                'content' => <<<'MD'
+When applying for competitive tech, corporate, or remote roles, over 75% of job applications are filtered by Applicant Tracking Systems (ATS) like Workday, Greenhouse, Taleo, and Lever before a human recruiter ever sees them. Learning how to **start an ATS CV online** with clean parsing guarantees your qualifications get scored accurately.
+
+## What is an ATS-Based Resume?
+
+An **ATS-based resume** is a structured curriculum vitae formatted specifically to allow automated parsing algorithms to extract your personal contact information, job titles, employer names, employment dates, core competencies, and educational background without data loss.
+
+Unlike graphic-heavy design portfolios that use complex layered text boxes, tables inside tables, and rasterized text, an ATS-friendly resume uses semantic hierarchy:
+
+- Standard section headings (`Experience`, `Education`, `Skills`, `Summary`).
+- Chronological or reverse-chronological timeline ordering (`MM/YYYY – MM/YYYY`).
+- Standard unicode typography and bullet points that convert cleanly into raw text strings.
+- Standard vector PDF formatting rather than scanned JPG images.
+
+## Core Formatting Rules to Beat ATS Scanners
+
+1. **Use Single-Column or Native Structural Columns:** Avoid floating geometric shapes or background image watermarks that obscure text streams.
+2. **Standard Contact Header:** Place your full name, email, phone number, location (City, State/Country), and LinkedIn or portfolio URL at the top. Never tuck your phone number or email inside an image or header graphic.
+3. **Keyword Alignment:** Mirror the exact hard skills and keywords mentioned in the job description (e.g., *React, PostgreSQL, Agile Scrum, Financial Modeling*).
+4. **Action-Oriented Bullet Points:** Use the Google formula: *"Accomplished [X], as measured by [Y], by doing [Z]"*.
+
+## How to Start Your ATS CV Online in Formnexa
+
+You can create an ATS-compliant resume without installing software or paying recurring subscriptions:
+
+1. Open the [Free ATS Resume Builder](/resume-builder).
+2. Choose a curated layout from the [Resume Templates Gallery](/resume-templates) (such as Modern Minimal, Editorial, or Linear Tech).
+3. Fill in your career milestones, bullet achievements, and technical skill tags.
+4. Preview the real-time layout and click **Download PDF** for an instant, watermark-free document ready for job portals.
+MD,
+            ],
+            [
+                'title' => 'Convert PDF to DOCX Without Losing Formatting: The Complete Guide',
+                'slug' => 'convert-pdf-to-docx-without-losing-formatting-guide',
+                'category' => 'pdf-tools',
+                'category_label' => 'PDF & File Conversion',
+                'focus_keyword' => 'pdf to docx without losing format',
+                'meta_title' => 'Convert PDF to DOCX Without Losing Formatting | Formnexa',
+                'meta_description' => 'Discover how to convert PDF to Word DOCX without losing formatting, tables, or fonts. Free online conversion with zero watermarks and no registration required.',
+                'featured_tool_route' => 'convert.tool:pdf-to-word',
+                'featured_tool_label' => 'Convert PDF to Word (DOCX) Free',
+                'reading_time_minutes' => 4,
+                'excerpt' => 'Stop fighting broken tables and scrambled paragraphs. Discover how to convert PDF documents into editable Word (.docx) files while preserving original fonts, margins, and column layouts.',
+                'published_at' => now()->subHours(12),
+                'content' => <<<'MD'
+Converting a contract, academic paper, invoice, or resume from **PDF to DOCX without losing formatting** is one of the most common productivity challenges. When low-grade converters run, they frequently turn paragraphs into fragmented text frames, break tables into disjointed lines, and misalign margins.
+
+## Why Do Most PDF to Word Converters Break Formatting?
+
+PDF and Microsoft Word (.docx) use fundamentally opposing document architectures:
+
+- **PDF (Vector Positioning):** Characters and lines are positioned on rigid 2D $(X, Y)$ coordinate points. The file does not inherently know what a "paragraph" or "table" is—it only knows where to place visual glyphs.
+- **DOCX (Reflowable Flow):** Microsoft Word uses reflowable paragraphs, dynamic margins, table cells, and cascading styles. When text changes, content flows naturally to the next line or page.
+
+A high-quality converter must perform **intelligent layout reconstruction**: identifying which text clusters form headings, calculating table rows and columns, and translating visual margins into native Word document styles.
+
+## How Formnexa Preserves Document Layout
+
+Formnexa's [PDF to Word Converter](/convert/pdf-to-word) provides dual conversion engines tailored to your specific file needs:
+
+1. **Editable Text Mode:** Reconstructs digital text into native Microsoft Word paragraphs, headings, bullet lists, and tables so you can edit words and rewrite sentences smoothly.
+2. **Visual Layout Mode:** Ideal for complex multi-column brochures, graphic resumes, or image-heavy PDFs where preserving exact visual placement takes priority.
+
+## Step-by-Step: Converting PDF to DOCX Free
+
+1. Go to the [PDF to Word Tool](/convert/pdf-to-word).
+2. Drag and drop your `.pdf` file (up to 25 MB).
+3. Select your conversion mode and click **Convert PDF to Word**.
+4. Download your crisp `.docx` document and open it in Microsoft Word, Google Docs, or LibreOffice with layout and fonts preserved.
+MD,
+            ],
+            [
+                'title' => 'Free Packing Slip Template & Guide: How to Create Shipping Slips for E-Commerce',
+                'slug' => 'free-packing-slip-template-ecommerce-shipping-guide',
+                'category' => 'business-docs',
+                'category_label' => 'Business Operations',
+                'focus_keyword' => 'packing slip generator',
+                'meta_title' => 'Free Packing Slip Generator & Shipping Guide | Formnexa',
+                'meta_description' => 'Create and print professional packing slips online for free. Learn what to include on a packing list, differences vs invoices, and download instant PDFs.',
+                'featured_tool_route' => 'invoice.generator:packing-slip-generator',
+                'featured_tool_label' => 'Open Free Packing Slip Generator',
+                'reading_time_minutes' => 4,
+                'excerpt' => 'Streamline order fulfillment and warehouse dispatches. Learn the essential elements of an e-commerce packing slip, compare packing slips vs commercial invoices, and print clean PDFs.',
+                'published_at' => now()->subHours(18),
+                'content' => <<<'MD'
+Whether you run an online Shopify or Etsy store, manage a 3PL warehouse, or ship wholesale B2B pallets, placing a clean, professional packing slip inside every outbound box prevents fulfillment mistakes, simplifies returns, and builds customer trust.
+
+## What is a Packing Slip?
+
+A **packing slip** (also known as a shipping list, bill of parcels, or unpacking note) is a shipping document enclosed inside a parcel that details the exact physical contents, SKU codes, item descriptions, and quantities included in the delivery.
+
+### Packing Slip vs. Commercial Invoice: What is the Difference?
+
+| Feature | Packing Slip | Commercial Invoice |
+|---|---|---|
+| **Primary Audience** | Warehouse packers, carrier dispatch, receiving customer | Accounts payable, finance, customs authorities |
+| **Primary Focus** | Physical item verification & SKU counts | Financial balance due, taxes, bank details & payment terms |
+| **Pricing Display** | Optional (often omitted for gifts or drop-shipping) | Mandatory itemized prices and grand totals |
+| **Timing** | Enclosed inside or affixed outside the shipping box | Sent electronically before or upon dispatch for payment |
+
+## What Should Every Professional Packing Slip Include?
+
+1. **Company Branding & Contact Info:** Business name, warehouse address, and support email.
+2. **Order Reference & Dates:** Order number (`#ORD-9021`), packing slip reference (`#PS-4401`), and ship date.
+3. **Ship-To & Deliver-To Address:** Customer name, destination address, and courier tracking code.
+4. **Itemized SKU & Quantity Table:** Clear item name, variant/size, and quantity ordered vs. quantity shipped.
+5. **Special Instructions / Return Policy:** A short note explaining how the customer can request exchanges, report damaged goods, or initiate returns.
+
+## How to Generate a Free Packing Slip PDF in 60 Seconds
+
+1. Open the [Free Packing Slip Generator](/packing-slip-generator).
+2. Enter your company name, order number, and recipient's delivery address.
+3. Add your items with SKU names and quantities (prices can be left zeroed or customized).
+4. Download or print the ready-to-fold PDF with zero watermarks.
+MD,
+            ],
+            [
+                'title' => 'Word File to PDF Converter: Convert DOCX to Print-Ready PDF Online Free',
+                'slug' => 'word-file-to-pdf-converter-docx-free-guide',
+                'category' => 'pdf-tools',
+                'category_label' => 'PDF & File Conversion',
+                'focus_keyword' => 'word file to pdf',
+                'meta_title' => 'Word File to PDF Converter – Convert DOCX Online Free | Formnexa',
+                'meta_description' => 'Convert Word files (.docx, .doc) to crisp, searchable PDF documents online for free. Keep exact page formatting, fonts, and hyperlinks with zero watermarks.',
+                'featured_tool_route' => 'convert.tool:word-to-pdf',
+                'featured_tool_label' => 'Convert Word to PDF Free',
+                'reading_time_minutes' => 4,
+                'excerpt' => 'Turn Microsoft Word documents into lock-tight, universally readable PDFs. Keep formatting consistent across iPhones, Androids, Macs, and Windows without installing Office.',
+                'published_at' => now()->subHours(24),
+                'content' => <<<'MD'
+Sharing Microsoft Word documents (.docx) across different devices frequently results in unintended formatting shifts: missing fonts substitute into default typefaces, line wraps push paragraphs onto unexpected pages, and tables overflow margins. Converting your **Word file to PDF** guarantees that clients, hiring managers, and printers see your document exactly as intended.
+
+## Top Reasons to Convert Word Documents to PDF Before Sending
+
+1. **Universal Visual Fidelity:** A PDF preserves fixed typographical kerning, custom fonts, embedded logos, and exact page breaks regardless of whether the recipient uses an iPhone, Android device, MacBook, or Windows PC.
+2. **Accidental Edit Prevention:** Sending a PDF ensures clients or reviewers do not accidentally overwrite numbers, delete clauses, or alter terms.
+3. **Printing Accuracy:** Commercial print shops and office printers require PDF standards to prevent margin clipping and color mismatches.
+4. **Compact File Size:** Exporting to PDF strips unnecessary Word revision histories and compresses high-resolution assets cleanly.
+
+## Key Checks Before Converting Word to PDF
+
+- **Check Page Breaks:** Ensure section headers do not sit as orphans at the bottom of a page without their following paragraphs.
+- **Verify Hyperlinks:** Digital PDFs preserve clickable URLs and email links when exported properly.
+- **Image Resolution:** Ensure embedded diagrams or photos maintain at least 150–300 DPI for sharp reading.
+
+## How to Convert Word to PDF Free on Formnexa
+
+1. Open the [Word to PDF Converter](/convert/word-to-pdf).
+2. Upload your `.docx` or `.doc` file.
+3. Click **Convert to PDF** — the conversion completes in under a second.
+4. Download your crisp, search-indexed PDF with zero watermarks.
 MD,
             ],
         ];

@@ -45,3 +45,7 @@ Formnexa is designed for freelancers, small businesses, contractors, and job see
 - [International Invoice Format Guide](https://formnexa.dcpakpattan.gov.pk/blog/international-invoice-format-asia-usa-europe-guide): Cross-border billing standards across Asia, the USA, and Europe covering VAT, GST, and EIN.
 - [How to Write an ATS-Friendly Resume](https://formnexa.dcpakpattan.gov.pk/blog/how-to-write-ats-friendly-resume-guide): Recruiter guidelines for passing ATS screening filters.
 - [Invoice vs Receipt vs Quote vs Proforma](https://formnexa.dcpakpattan.gov.pk/blog/invoice-vs-receipt-vs-quote-vs-proforma): Overview of business document types and when to issue each.
+- [Start an ATS CV Online Free Guide](https://formnexa.dcpakpattan.gov.pk/blog/how-to-start-an-ats-cv-online-free-guide): 2026 recruiter guidelines and section formatting to start an ATS-compliant resume online.
+- [Convert PDF to DOCX Without Losing Formatting](https://formnexa.dcpakpattan.gov.pk/blog/convert-pdf-to-docx-without-losing-formatting-guide): How to preserve tables, fonts, and column layout when converting PDF to Word.
+- [Free Packing Slip Generator & Shipping Guide](https://formnexa.dcpakpattan.gov.pk/blog/free-packing-slip-template-ecommerce-shipping-guide): E-commerce packing slip best practices, differences vs commercial invoices, and free PDF maker.
+- [Word File to PDF Converter Guide](https://formnexa.dcpakpattan.gov.pk/blog/word-file-to-pdf-converter-docx-free-guide): How to turn Microsoft Word DOCX files into print-ready, font-embedded PDFs.

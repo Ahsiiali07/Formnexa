@@ -501,6 +501,7 @@ class ToolSeoCatalog
                 'preserved' => 'Extracts paragraphs, headings, and document flow cleanly from native digital PDFs into editable `.docx` files (and preserves page visuals when Visual Mode is selected).',
                 'limitations' => 'Scanned image-only PDFs or complex multi-column magazine brochures may need light spacing tweaks or Visual Mode to preserve exact appearance.',
                 'faqs' => [
+                    ['q' => 'How can I convert PDF to DOCX without losing formatting?', 'a' => 'Formnexa reconstructs paragraphs, headings, tables, and alignment so your converted Word (.docx) file matches the original PDF layout cleanly without scrambling.'],
                     ['q' => 'Which mode should I pick — Editable or Visual?', 'a' => 'Choose Editable Text when you want to edit paragraphs or copy text inside Word; choose Visual Layout when exact visual appearance matters most.'],
                     ['q' => 'Will scanned PDFs become editable text?', 'a' => 'Scanned image PDFs have no embedded text layer, so Visual Mode preserves exact page graphics cleanly without distorting them.'],
                     ['q' => 'Is PDF to Word free without page watermarks?', 'a' => 'Yes, downloaded `.docx` files contain zero watermarks.'],

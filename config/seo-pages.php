@@ -71,20 +71,20 @@ return [
         'updated' => $d,
     ],
     'packing-slip-generator' => [
-        'title' => 'Free Packing Slip Generator – Packing List | Formnexa',
-        'description' => 'Make a packing slip with order details, items and quantities for shipments. Download a clean PDF. Free, no watermark.',
+        'title' => 'Free Packing Slip Generator – Packing List & Shipping Slip PDF | Formnexa',
+        'description' => 'Create and print professional packing slips online for free. Add order number, SKU items, shipping details and download instant PDFs with zero watermarks.',
         'updated' => $d,
     ],
 
     // ---------- Resume ----------
     'resume-builder' => [
-        'title' => 'Free ATS Resume Builder – Make a CV Online | Formnexa',
-        'description' => 'Build an ATS-friendly resume with 15+ templates or import your existing PDF or DOCX CV. Live preview, free PDF, no watermark.',
+        'title' => 'Start ATS CV Online Free – ATS-Based Resume Builder | Formnexa',
+        'description' => 'Start an ATS CV online for free with 17+ recruiter-approved templates or import an existing PDF/DOCX resume. Real-time preview, zero watermarks, no sign-up.',
         'updated' => $d,
     ],
     'resume-templates' => [
-        'title' => 'Free Resume Templates – 15+ ATS-Friendly CVs | Formnexa',
-        'description' => 'Choose from 15+ modern, minimal and editorial resume templates. All are ATS-friendly. Edit online and download a free PDF.',
+        'title' => 'Free Resume Templates – 17+ Modern ATS-Friendly CVs | Formnexa',
+        'description' => 'Choose from 17+ modern, tech, minimal and editorial resume templates. All 100% ATS-friendly. Edit online and download a watermark-free PDF.',
         'updated' => $d,
     ],
 
@@ -100,8 +100,8 @@ return [
         'updated' => $d,
     ],
     'convert/word-to-pdf' => [
-        'title' => 'Word to PDF Converter – Free DOCX to PDF | Formnexa',
-        'description' => 'Convert Word documents to PDF online while keeping fonts and layout. Fast, free and no watermark. No sign-up needed.',
+        'title' => 'Word File to PDF Converter – Free DOCX to PDF Online | Formnexa',
+        'description' => 'Convert Word files (.docx, .doc) to crisp, searchable PDF documents online for free. Keep exact formatting, fonts, and layout with zero watermarks.',
         'updated' => $d,
     ],
     'convert/powerpoint-to-pdf' => [
@@ -126,7 +126,7 @@ return [
     ],
     'convert/pdf-to-word' => [
         'title' => 'PDF to Word Converter – Free PDF to DOCX | Formnexa',
-        'description' => 'Convert PDF to an editable Word document with text and layout preserved. Free, fast, no watermark and no sign-up.',
+        'description' => 'Convert PDF to an editable Word (DOCX) document without losing formatting or tables. Free, fast, zero watermark and no sign-up.',
         'updated' => $d,
     ],
     'convert/pdf-to-powerpoint' => [

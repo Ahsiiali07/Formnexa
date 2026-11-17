@@ -1973,6 +1973,14 @@
             'a' => 'Yes. Open any studio right away, build your resume, invoice, or converted PDF, and download your file immediately without logging in. Sign up anytime to save document history across devices.',
         ],
         [
+            'q' => 'How do I start an ATS CV online for free?',
+            'a' => 'Open the ATS Resume Builder to pick from 17+ recruiter-vetted templates, enter your job experience and skills, or upload an existing PDF/DOCX resume to auto-fill sections in seconds with zero watermarks.',
+        ],
+        [
+            'q' => 'Can I convert PDF to Word DOCX without losing formatting?',
+            'a' => 'Yes. Formnexa\'s PDF to Word converter reconstructs native paragraphs, tables, headings, and font spacing cleanly so you can edit the resulting DOCX in Microsoft Word or Google Docs with zero formatting loss.',
+        ],
+        [
             'q' => 'How many document types does Formnexa support?',
             'a' => 'Alongside our Resume Builder and Smart CV Importer, you get 12 business document generators (Invoices, Receipts, Quotes, Estimates, Credit Notes, Purchase Orders, Sales Orders, Proforma Invoices, Timesheets, Work Orders, Account Statements, and Packing Slips) plus ' . count($converterAll) . ' PDF conversion tools.',
         ],
@@ -2203,8 +2211,8 @@
 
         {{-- Plain-text SEO Overview Strip (replaces unverified logos with clear product context) --}}
         <div class="fn-trust-strip">
-            <p class="max-w-[740px] mx-auto !text-[14px] !leading-[1.7] text-[#536058]">
-                Formnexa is a free online workspace for freelancers, small businesses, and job seekers. Create professional invoices, quotes, purchase orders, and receipts in 24 currencies including USD, EUR, GBP, and PKR; build an ATS-friendly resume or import an existing CV; and convert PDF files cleanly to and from Word, Excel, PowerPoint, and images with zero watermarks and no sign-up required.
+            <p class="max-w-[760px] mx-auto !text-[14px] !leading-[1.7] text-[#536058]">
+                Formnexa is a free online workspace for freelancers, small businesses, and job seekers. Create professional invoices, quotes, receipts, and packing slips in 24 currencies; start an ATS CV online or import an existing resume; and convert PDF files to and from Word DOCX without losing formatting, with zero watermarks and no sign-up required.
             </p>
         </div>
     </section>
@@ -2222,10 +2230,10 @@
             <article class="fn-tool-card fn-card-violet">
                 <div>
                     <span class="fn-card-index">01</span>
-                    <h3>Resume Builder</h3>
-                    <p>Build a clean, recruiter-approved CV in minutes or import an existing PDF/DOCX resume with smart section parsing.</p>
+                    <h3>ATS Resume Builder</h3>
+                    <p>Start a recruiter-approved ATS CV online in minutes or import an existing PDF/DOCX resume with smart section parsing.</p>
                     <a href="{{ route('resume.builder') }}" class="fn-card-link">
-                        <span>Try Resume Builder</span>
+                        <span>Start ATS CV Online</span>
                         <span aria-hidden="true">&rarr;</span>
                     </a>
                 </div>
@@ -2281,9 +2289,9 @@
                 <div>
                     <span class="fn-card-index">02</span>
                     <h3>Invoice &amp; Doc Maker</h3>
-                    <p>Create branded invoices, quotes, receipts &amp; 12 business documents with live taxes, currencies, and shareable links.</p>
+                    <p>Create branded invoices, quotes, receipts, packing slips &amp; 12 business documents with live taxes, currencies, and shareable links.</p>
                     <a href="{{ route('invoice.studio') }}" class="fn-card-link">
-                        <span>Create an Invoice</span>
+                        <span>Create Free Invoice</span>
                         <span aria-hidden="true">&rarr;</span>
                     </a>
                 </div>
@@ -2331,8 +2339,8 @@
             <article class="fn-tool-card fn-card-orange">
                 <div>
                     <span class="fn-card-index">03</span>
-                    <h3>PDF Converter</h3>
-                    <p>Turn JPG, Word, Excel, PowerPoint &amp; HTML into crisp PDFs &mdash; or convert PDFs back into editable documents.</p>
+                    <h3>PDF &amp; Word Converter</h3>
+                    <p>Convert PDF to DOCX without losing formatting, turn Word into crisp PDFs, or export JPG, Excel &amp; PowerPoint seamlessly.</p>
                     <a href="{{ route('convert.hub') }}" class="fn-card-link">
                         <span>Explore {{ count($converterAll) }} Converters</span>
                         <span aria-hidden="true">&rarr;</span>

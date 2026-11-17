@@ -47,7 +47,7 @@
                     ['Resume Templates', route('resume.templates')],
                     ['ATS Resume Builder', route('resume.builder')],
                 ]" />
-                <h1 class="font-display text-xs sm:text-sm font-extrabold text-[#17211b] tracking-tight">Free Online ATS Resume Builder</h1>
+                <h1 class="font-display text-xs sm:text-sm font-extrabold text-[#17211b] tracking-tight">Start ATS CV Online Free &bull; ATS-Based Resume Builder</h1>
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
@@ -811,13 +811,13 @@
         <div class="bg-white rounded-[26px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="space-y-3">
                 <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6142be]">ATS Compliance</span>
-                <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b]">What is an ATS-friendly resume?</h2>
+                <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b]">What is an ATS-based resume?</h2>
                 <p class="text-xs sm:text-sm text-[#46534b] leading-relaxed">
-                    An Applicant Tracking System (ATS) scans uploaded CVs into structured candidate fields before a human recruiter reviews your application. Formnexa templates output clean, readable A4 text PDFs rather than flattened images so your skills, dates, and titles parse reliably.
+                    An <strong>ATS-based resume</strong> is a curriculum vitae engineered specifically for Applicant Tracking System software (such as Workday, Greenhouse, Taleo, and Lever) to extract your work experience, job titles, and core competencies accurately before human recruiter review. Formnexa outputs clean vector A4 PDFs with 100% selectable text, standard heading hierarchy, and zero unreadable design artifacts so your resume ranks at the top of candidate applicant pools.
                 </p>
                 <div class="pt-1 flex flex-wrap gap-2">
-                    <a href="{{ route('resume.templates') }}" class="px-3.5 py-2 rounded-xl bg-[#f0ebff] text-[#6142be] text-xs font-bold hover:bg-[#e3d9ff] transition">Browse 15+ CV Templates &rarr;</a>
-                    <a href="{{ route('blog.show', 'how-to-write-ats-friendly-resume-guide') }}" class="px-3.5 py-2 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-[#17211b] text-xs font-bold hover:border-[#184f3a] transition">Read ATS Resume Guide &rarr;</a>
+                    <a href="{{ route('resume.templates') }}" class="px-3.5 py-2 rounded-xl bg-[#f0ebff] text-[#6142be] text-xs font-bold hover:bg-[#e3d9ff] transition">Browse 17+ CV Templates &rarr;</a>
+                    <a href="{{ route('blog.show', 'how-to-start-an-ats-cv-online-free-guide') }}" class="px-3.5 py-2 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-[#17211b] text-xs font-bold hover:border-[#184f3a] transition">Read ATS CV Online Guide &rarr;</a>
                 </div>
             </div>
             <div class="space-y-3">
@@ -840,9 +840,11 @@
 
         <div class="bg-white rounded-[26px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm">
             <x-faq :items="[
+                ['q' => 'What is an ATS-based resume?', 'a' => 'An ATS-based resume is a curriculum vitae designed with clear headings, linear reading flow, and standard typography so Applicant Tracking Systems can parse candidate details and match keywords accurately without parsing errors.'],
+                ['q' => 'How can I start an ATS CV online for free?', 'a' => 'Open Formnexa\'s free ATS Resume Builder, choose any of our 17+ recruiter-tested templates, enter your job experience, and export a clean, watermark-free vector PDF with zero sign-up required.'],
                 ['q' => 'Can I import an existing PDF or Word resume?', 'a' => 'Yes. Click Import CV / Paste Text above to parse your current PDF, DOCX, TXT, or LinkedIn copy directly into editable Formnexa fields.'],
                 ['q' => 'Are Formnexa resumes ATS-safe?', 'a' => 'Yes. All exported A4 PDFs preserve selectable, clean reading-order text without unreadable image wrappers or watermarks.'],
-                ['q' => 'Can I switch layouts without retyping my details?', 'a' => 'Switch anytime across all 10 layout engines and 15+ designer templates with zero data loss.'],
+                ['q' => 'Can I switch layouts without retyping my details?', 'a' => 'Switch anytime across all 10 layout engines and 17+ designer templates with zero data loss.'],
                 ['q' => 'Is there a fee or watermark when downloading PDF?', 'a' => 'Never. Resume downloads are completely free and watermark-free.'],
             ]" heading="Resume Builder — Frequently Asked Questions" />
         </div>
