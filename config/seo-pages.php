@@ -4,15 +4,15 @@ $d = '2026-11-12';
 
 return [
     '/' => [
-        'title' => 'Free Invoice Maker, Resume Builder & PDF Tools | Formnexa',
-        'description' => 'Create invoices, ATS-ready resumes and 12 business documents, or convert PDFs online. Free, no watermark, no sign-up needed.',
+        'title' => 'Free Invoice Maker, ATS Resume Builder & PDF Converter Tools | Formnexa',
+        'description' => 'Free invoice generator, ATS-based resume builder, and 10 PDF converters. Convert PDF to DOCX without losing format, make invoices, and start ATS CV online free.',
         'updated' => $d,
     ],
 
     // ---------- Invoices and business documents ----------
     'invoice-generator' => [
-        'title' => 'Free Invoice Generator – Create & Download PDF | Formnexa',
-        'description' => 'Make a professional invoice in minutes. Add taxes, logo and currency (USD, EUR, GBP, PKR). Free, no watermark, no sign-up.',
+        'title' => 'Free Invoice Generator – Free Online Invoice Maker PDF | Formnexa',
+        'description' => 'Free invoice generator & invoice maker. Create, email, and download invoices in USD, EUR, GBP & 24 currencies. Add taxes, payment links, and mail invoice to foreign customers with zero watermark.',
         'updated' => $d,
     ],
     'templates' => [
@@ -61,8 +61,8 @@ return [
         'updated' => $d,
     ],
     'work-order-generator' => [
-        'title' => 'Free Work Order Generator – Work Order Template | Formnexa',
-        'description' => 'Create a work order with job details, assignee, materials and sign-off. Download a print-ready PDF. Free, no sign-up.',
+        'title' => 'Work Order Generator Free – Create Work Order PDF Online | Formnexa',
+        'description' => 'Work order generator free for maintenance, contractors, and field service teams. Add labor tasks, replacement parts, and sign-off. Instant printable PDF with zero watermark.',
         'updated' => $d,
     ],
     'account-statement-generator' => [
@@ -79,12 +79,12 @@ return [
     // ---------- Resume ----------
     'resume-builder' => [
         'title' => 'Start ATS CV Online Free – ATS-Based Resume Builder | Formnexa',
-        'description' => 'Start an ATS CV online for free or convert CV to ATS format. 17+ best ATS CV templates, built-in ATS CV checker, and instant Word (DOCX) & PDF download.',
+        'description' => 'Start an ATS CV online for free or convert CV to ATS format. Check ATS CV scale score, 17+ best ATS CV templates, built-in ATS CV checker, and instant Word (DOCX) & PDF download.',
         'updated' => $d,
     ],
     'resume-templates' => [
-        'title' => 'Free ATS CV Templates – Best ATS Resume Templates (Word & PDF) | Formnexa',
-        'description' => 'Download 17+ free ATS CV templates in PDF & Word (DOCX). Convert CV to ATS format for free, test with built-in ATS CV checker, and download with zero watermark.',
+        'title' => 'Free ATS CV Template Word & PDF – Best ATS Resume Templates | Formnexa',
+        'description' => 'Download 17+ free ATS CV templates in Word (DOCX) & PDF. Convert CV to ATS format for free, score 95%+ on the ATS CV scale, and download with zero watermark.',
         'updated' => $d,
     ],
 
@@ -125,8 +125,8 @@ return [
         'updated' => $d,
     ],
     'convert/pdf-to-word' => [
-        'title' => 'PDF to Word Converter – Free PDF to DOCX | Formnexa',
-        'description' => 'Convert PDF to an editable Word (DOCX) document without losing formatting or tables. Free, fast, zero watermark and no sign-up.',
+        'title' => 'PDF to Word Converter – PDF to DOCX Without Losing Format | Formnexa',
+        'description' => 'Convert PDF to DOCX without losing format, tables, or fonts. Free online PDF to Word converter, instant DOCX download, zero watermarks, and no sign-up required.',
         'updated' => $d,
     ],
     'convert/pdf-to-powerpoint' => [

@@ -31,6 +31,7 @@ class ToolSeoCatalog
                 'tips' => 'Specify an exact calendar due date (such as Net 14) and attach a Stripe, PayPal, or local bank transfer note so finance teams can settle on first review.',
                 'faqs' => [
                     ['q' => 'Can I generate invoices in PKR or USD with tax lines?', 'a' => 'Yes. Switch between 24 currencies including PKR (Rs), USD, EUR, and GBP, and add custom tax percentages, shipping, or discounts inline.'],
+                    ['q' => 'How can I mail invoices to foreign countries or customers?', 'a' => 'To mail invoices to foreign countries or international customers: 1) Select the client\'s home currency (USD, EUR, GBP, SGD, AED) in the studio, 2) Include their overseas address, country code, and VAT/EIN/Tax ID, 3) Add your international SWIFT/BIC or IBAN bank details or a digital payment link, and 4) Download a watermark-free PDF to email or mail invoices to foreign countries directly.'],
                     ['q' => 'Are downloaded invoice PDFs watermark-free?', 'a' => 'Every invoice PDF and shareable link generated on Formnexa is clean, print-ready, and free of any watermark.'],
                     ['q' => 'Can I include my business NTN or VAT number?', 'a' => 'Yes. Enter your NTN, STRN, VAT, or EIN directly in the sender address block or notes area so it renders cleanly on the exported PDF.'],
                     ['q' => 'Do I need an account to create and save invoices?', 'a' => 'No sign-up is required. Your work stays cached in your browser session, and optional accounts let you sync history across devices.'],
@@ -291,6 +292,7 @@ class ToolSeoCatalog
                 'comparison_body' => 'An Estimate quotes expected project costs before approval; a Work Order instructs technicians what work to perform and captures sign-off; a Packing Slip tracks goods in transit.',
                 'tips' => 'Capture the customer signature right on a tablet or phone after completing field work, then generate the final PDF on the spot.',
                 'faqs' => [
+                    ['q' => 'Is this work order generator free to use?', 'a' => 'Yes, Formnexa provides a work order generator free for contractors and maintenance teams. Create, customize, sign, and export unlimited work orders as clean printable PDFs without watermarks.'],
                     ['q' => 'Can I use this on mobile in the field?', 'a' => 'Yes, the entire studio and signature pad work smoothly on phone and tablet browsers.'],
                     ['q' => 'Can I separate parts and labor costs?', 'a' => 'Yes, add distinct rows for labor rates and material quantities.'],
                     ['q' => 'Are saved drafts lost on refresh?', 'a' => 'No, active drafts auto-cache in your browser storage.'],

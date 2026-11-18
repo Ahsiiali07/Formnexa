@@ -52,6 +52,16 @@ Before sending a PDF invoice to an overseas client or corporate procurement team
 | Tax Display | Sales tax only where nexus applies | Explicit VAT rate or Reverse-Charge note | GST / Consumption Tax breakdown |
 | Preferred Bank Format | Routing + Account Number (ACH / Wire) | IBAN + BIC / SWIFT | SWIFT + Local Branch / Clearing Code |
 
+## How to Mail Invoices to Foreign Countries & Overseas Customers
+
+When you need to **mail invoices to foreign countries** or bill a foreign customer electronically across borders, following standard international accounting protocols ensures prompt settlement without banking friction:
+
+1. **Agree on Settlement Currency Upfront:** Specify whether payment should be settled in the customer's currency (`USD`, `EUR`, `GBP`) or your local currency. Formnexa lets you switch between 24 currencies with zero fee.
+2. **Include Complete International Wire Coordinates:** Provide your bank's name, SWIFT / BIC code, account number, and IBAN (essential for European clients). For US customers, specify whether ACH (domestic transfer) or Fedwire (international wire) is supported.
+3. **Attach a Single-Click Digital Payment Link:** Embed a Stripe, PayPal, or Wise payment URL directly on the invoice so overseas finance managers can pay by corporate credit card without expensive wire fees.
+4. **Clarify Cross-Border Tax Handling:** For B2B export of digital services, many jurisdictions qualify for 0% zero-rated VAT or reverse-charge mechanisms. Add a note: *"Services provided internationally – Subject to Reverse Charge"* in the invoice notes field.
+5. **Send Both Downloadable Vector PDF & Direct Web Link:** In Formnexa, generate a clean, print-ready PDF invoice with zero watermarks. You can email the PDF file directly to accounts payable and include the secure live view link for one-click verification.
+
 ## How to Create a Multi-Currency Invoice in Minutes
 
 1. Open the [Free Online Invoice Generator](/invoice-generator) with no sign-up required.
@@ -305,8 +315,17 @@ Hourly consultants, engineering contractors, and field maintenance teams often l
 
 A **Work Order** documents what needs to be done, who is assigned, estimated materials, and — critically — includes a **client authorization signature** before work starts or upon site completion.
 
-- Generate printable or digital sign-off sheets with the [Free Work Order Generator](/work-order-generator).
+- Generate printable or digital sign-off sheets with the [Work Order Generator Free](/work-order-generator).
 - If you first need budget approval before dispatching a crew, start with the [Estimate Generator](/estimate-generator).
+
+## Work Order Generator Free for Contractors & Field Service
+
+Using a **work order generator free** of subscriptions helps trade businesses and independent contractors:
+
+- Define job site addresses and safety prerequisites clearly.
+- Separate technician labor hours from physical replacement parts and materials.
+- Capture physical or digital authorization signatures directly on mobile devices before leaving the customer site.
+- Export clean, printable PDFs with zero watermarks.
 
 ## Logging Hours With a Clean Weekly Timesheet
 
@@ -560,6 +579,72 @@ Formnexa includes an active **ATS CV checker** directly inside the builder. As y
 - &check; **Zero Watermarks or Hidden Fees:** Unlimited free downloads with no sign-up required.
 
 Ready to improve your interview callback rate? [Browse 17+ Free ATS CV Templates](/resume-templates) and convert your CV to ATS format today.
+MD,
+            ],
+            [
+                'title' => 'What is an ATS-Based Resume? (How to Score 95%+ on the ATS CV Scale in 2026)',
+                'slug' => 'what-is-an-ats-based-resume-guide',
+                'category' => 'resumes',
+                'category_label' => 'Resumes & ATS',
+                'focus_keyword' => 'what is ats based resume',
+                'meta_title' => 'What is an ATS-Based Resume? ATS CV Scale & Guide (2026) | Formnexa',
+                'meta_description' => 'What is an ATS-based resume and how does the ATS CV scale work? Learn how Workday and Taleo screen CVs, score 95%+, and get free ATS templates in Word & PDF.',
+                'featured_tool_route' => 'resume.builder',
+                'featured_tool_label' => 'Build Your Free ATS Resume Now',
+                'reading_time_minutes' => 6,
+                'excerpt' => 'Over 75% of CVs are rejected before a human recruiter reads them. Learn what an ATS-based resume is, how the ATS CV scale ranks applicants, and how to get free Word & PDF templates.',
+                'published_at' => now(),
+                'content' => <<<'MD'
+When applying for jobs online at modern companies, over 75% of submissions never reach human recruiters. Instead, they are screened, parsed, and scored by an **Applicant Tracking System (ATS)** like Workday, Taleo, Greenhouse, or Lever.
+
+To pass this digital gatekeeper, you need to understand **what an ATS-based resume is** and how to optimize your qualifications against the **ATS CV scale**.
+
+---
+
+## What is an ATS-Based Resume?
+
+An **ATS-based resume** is a professional curriculum vitae engineered specifically so automated resume-parsing software can extract your contact details, employment history, job titles, dates, education, and technical competencies cleanly without parsing errors.
+
+Unlike graphic resumes created in Canva, Photoshop, or multi-column page builders—which confuse bots with floating text boxes, graphic skill bars, and icon graphics—an ATS-friendly resume features:
+
+- **100% Selectable Vector Text:** No flattened image text or unreadable fonts.
+- **Semantic Hierarchy:** Clear standard headings (`Professional Summary`, `Work Experience`, `Education`, `Skills`).
+- **Linear Reading Order:** Content flows sequentially from top to bottom so software doesn't mix two different columns together.
+- **Consistent Date Syntax:** Standard formats (such as `MM/YYYY – MM/YYYY` or `Jan 2022 – Present`) that algorithmic parsers recognize.
+
+---
+
+## How Does the ATS CV Scale Work?
+
+When an Applicant Tracking System parses your resume, it evaluates your profile against the hiring manager's job requisition and generates a match rating on the **ATS CV scale** (typically scored from **0% to 100%**):
+
+- **Below 60% (Automatic Rejection):** Missing core mandatory keywords, unreadable file format (e.g., raster image PDF), or scrambled section structure.
+- **60% – 79% (Borderline / Waitlist):** The candidate has relevant background but formatting flaws or missing exact keyword phrases prevented higher scoring.
+- **80% – 89% (Qualified / Recruiter Review):** High keyword match, recognized job titles, and standard section hierarchy. Resumes in this tier are sent to human talent acquisition teams.
+- **90% – 100% (Top Tier Shortlist):** Near-perfect keyword alignment with measurable achievements, reverse-chronological dates, and 100% machine-readable formatting.
+
+Formnexa’s free ATS CV templates are pre-configured to achieve **95%+ on the ATS CV scale** on enterprise screeners.
+
+---
+
+## 5 Rules to Score 95%+ on the ATS CV Scale
+
+1. **Use Standard Section Headings:** Always stick to recognized labels: `Professional Summary`, `Work Experience`, `Education`, `Skills`, and `Certifications`. Never use creative labels like *"Where I've Been"* or *"My Passions"*.
+2. **Mirror Job Keywords Honestly:** Analyze the job posting for required technical tools and methodologies (e.g., *Python, SQL, Financial Modeling, Agile Scrum*). Include these exact terms in your Skills list and experience bullets.
+3. **Quantify Your Accomplishments:** Use numbers, percentages, and metrics. For example: *"Reduced AWS cloud infrastructure spend by 28% across 6 production clusters"* performs significantly better than *"Managed cloud servers"*.
+4. **Choose the Best ATS CV Template:** Single-column or clean linear layouts (such as Formnexa's *Linear Founding Engineer* or *Wall Street Classic ATS*) ensure parsers never misread your timeline.
+5. **Download Clean Vector PDF or Word (DOCX):** If the application asks for PDF, use a clean vector PDF. If it specifically requests Word format, use our [PDF to Word Converter](/convert/pdf-to-word) to convert your CV to DOCX without losing formatting.
+
+---
+
+## Free ATS CV Template Word & PDF: How to Start
+
+You can build or convert your CV right now in Formnexa without paywalls or subscriptions:
+
+1. **Start From Scratch or Convert:** Open the [Free ATS Resume Builder](/resume-builder). If you already have an existing CV, click **Convert CV to ATS / Import** to parse your current Word or PDF file in 60 seconds.
+2. **Choose Your Template:** Browse 17+ recruiter-vetted designs in our [Resume Templates Gallery](/resume-templates).
+3. **Real-Time Validation:** Our built-in ATS CV checker monitors formatting and bullet readability as you type.
+4. **Instant Download:** Export your print-ready, watermark-free vector PDF or convert it to an editable Word DOCX file in one click.
 MD,
             ],
         ];

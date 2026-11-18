@@ -614,9 +614,9 @@ class ResumeCatalog
                 'show_photo' => false,
                 'popular' => true,
                 'badge' => 'ATS 100%',
-                'tagline' => 'Gold-standard institutional black-ink single column with serif headings and crisp double-ruled section dividers.',
-                'description' => 'Engineered to score 100/100 on Workday, Greenhouse, Lever & Taleo ATS parsers for finance and law.',
-                'tags' => ['ATS Gold', 'Double Rule', 'Single Column'],
+                'tagline' => 'Gold-standard basic resume template: institutional black-ink single column with serif headings and crisp double-ruled section dividers.',
+                'description' => 'Classic basic resume template engineered to score 100/100 on Workday, Greenhouse, Lever & Taleo ATS parsers for finance and law.',
+                'tags' => ['Basic Resume Template', 'ATS Gold', 'Single Column'],
                 'preset_content' => $build([
                     'personal' => [
                         'full_name' => 'Jonathan Sterling, CFA',

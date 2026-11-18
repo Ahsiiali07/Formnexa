@@ -19,7 +19,7 @@
                         Free ATS CV Templates &bull; Best ATS Resume Templates for PDF &amp; Word
                     </h1>
                     <p class="mt-4 text-sm sm:text-lg text-[#536058] max-w-2xl leading-relaxed">
-                        Download the best ATS CV templates online for free. Convert your CV to ATS format in 60 seconds with our built-in ATS CV checker, or export recruiter-vetted PDFs and editable Word (.docx) files with zero sign-up or watermarks.
+                        Download the best ATS CV templates and basic resume templates online for free. Convert your CV to ATS format in 60 seconds with our built-in ATS CV checker, or export recruiter-vetted PDFs and editable Word (.docx) files with zero sign-up or watermarks.
                     </p>
                 </div>
 
@@ -735,6 +735,14 @@
                     [
                         'q' => 'What is the best ATS CV template?',
                         'a' => 'The best ATS CV template is a clean, single-column or linear layout that uses standard system typography, reverse-chronological experience dates, and clear headings (Summary, Experience, Education, Skills). Formnexa\'s \'Wall Street Classic ATS\', \'Atlantic Flow\', and \'Linear Founding Engineer\' templates are engineered to achieve 98%+ pass rates on enterprise ATS checkers including Workday, Greenhouse, Taleo, and Lever.'
+                    ],
+                    [
+                        'q' => 'Where can I find a basic resume template that passes ATS screening?',
+                        'a' => 'Formnexa provides classic basic resume templates—including our Wall Street Double-Rule, Atlantic Flow, and Zurich Swiss designs—engineered with single-column linear layout, standard system fonts, and zero confusing graphic bars. These basic resume templates achieve 98%+ pass rates on Workday, Taleo, and Greenhouse and download directly as watermark-free PDFs or editable Word DOCX files.'
+                    ],
+                    [
+                        'q' => 'What is the ATS CV scale and how does scoring work?',
+                        'a' => 'The ATS CV scale is a match percentage from 0% to 100% computed by candidate screening algorithms (like Workday, Taleo, and Greenhouse). Resumes scoring 80%+ generally pass the preliminary automated gate and reach human recruiters. Formnexa ATS CV templates are structured to achieve 95%+ on the ATS scale by preserving selectable text, correct heading tags, standard date formats, and clean keyword placement.'
                     ],
                     [
                         'q' => 'How do I convert my CV to an ATS format for free?',

@@ -20,7 +20,7 @@ class BlogAndSeoTest extends TestCase
 
         $home = $this->get('/');
         $home->assertStatus(200)
-            ->assertSee('<title>Free Invoice Maker, Resume Builder &amp; PDF Tools | Formnexa</title>', false)
+            ->assertSee('<title>Free Invoice Maker, ATS Resume Builder &amp; PDF Converter Tools | Formnexa</title>', false)
             ->assertSee('<link rel="canonical" href="http://localhost">', false)
             ->assertSee('href="http://localhost/favicon.svg?v=2"', false)
             ->assertSee('href="http://localhost/apple-touch-icon.png?v=2"', false)
@@ -63,7 +63,7 @@ class BlogAndSeoTest extends TestCase
 
         $pdfToWord = $this->get('/convert/pdf-to-word');
         $pdfToWord->assertStatus(200)
-            ->assertSee('PDF to Word Converter – Free PDF to DOCX | Formnexa', false)
+            ->assertSee('PDF to Word Converter – PDF to DOCX Without Losing Format | Formnexa', false)
             ->assertSee('Word to PDF Converter', false)
             ->assertSee('UtilitiesApplication', false);
         $this->assertSame(1, preg_match_all('/<h1\b/i', $pdfToWord->getContent()));

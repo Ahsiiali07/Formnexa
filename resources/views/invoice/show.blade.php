@@ -232,14 +232,14 @@
 
                     @if($invoice->notes)
                     <div>
-                        <h4 class="font-bold uppercase tracking-wider text-[10px] text-slate-400 mb-1">Notes & Payment Instructions</h4>
+                        <h3 class="font-bold uppercase tracking-wider text-[10px] text-slate-400 mb-1">Notes & Payment Instructions</h3>
                         <div class="p-4 bg-slate-50 rounded-2xl text-slate-700 whitespace-pre-line leading-relaxed border border-slate-200">{{ $invoice->notes }}</div>
                     </div>
                     @endif
 
                     @if($invoice->terms)
                     <div>
-                        <h4 class="font-bold uppercase tracking-wider text-[10px] text-slate-400 mb-1">Terms & Conditions</h4>
+                        <h3 class="font-bold uppercase tracking-wider text-[10px] text-slate-400 mb-1">Terms & Conditions</h3>
                         <div class="p-4 bg-slate-50 rounded-2xl text-slate-700 whitespace-pre-line leading-relaxed border border-slate-200">{{ $invoice->terms }}</div>
                     </div>
                     @endif
