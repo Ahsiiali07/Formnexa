@@ -4,7 +4,7 @@ $d = '2026-11-12';
 
 return [
     '/' => [
-        'title' => 'Free Invoice Maker, ATS Resume Builder & PDF Converter Tools | Formnexa',
+        'title' => 'Free Invoice Maker, ATS Resume Builder & PDF Tools | Formnexa',
         'description' => 'Free invoice generator, ATS-based resume builder, and 10 PDF converters. Convert PDF to DOCX without losing format, make invoices, and start ATS CV online free.',
         'updated' => $d,
     ],

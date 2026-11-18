@@ -17,8 +17,15 @@ class BlogController extends Controller
     /**
      * Public Blog Directory (/blog)
      */
-    public function index(Request $request): View
+    public function index(Request $request): View|RedirectResponse
     {
+        // 301 redirect /blog?page=1 to /blog to prevent duplicate content & meta description issues
+        if ($request->query('page') === '1') {
+            $params = $request->query();
+            unset($params['page']);
+            return redirect()->route('blog.index', $params, 301);
+        }
+
         $categories = BlogPost::categories();
         $search = trim((string) $request->query('q', ''));
 
@@ -50,9 +57,11 @@ class BlogController extends Controller
         if ($search !== '') {
             $seo['robots'] = 'noindex,follow';
             $seo['title'] = 'Search Guides: ' . Str::limit($search, 30) . ' | Formnexa';
+            $seo['description'] = 'Search results for ' . Str::limit($search, 40) . ' across Formnexa guides, templates, and PDF tools.';
         } elseif ($posts->currentPage() > 1) {
             $seo['canonical'] = $posts->url($posts->currentPage());
             $seo['title'] = 'Blog Guides – Page ' . $posts->currentPage() . ' | Formnexa';
+            $seo['description'] = 'Explore page ' . $posts->currentPage() . ' of Formnexa guides on invoice formats, ATS resumes, PDF conversion workflows, and billing templates.';
         }
 
         return view('blog.index', [
@@ -69,8 +78,13 @@ class BlogController extends Controller
     /**
      * Public Blog Category Listing (/blog/category/{category})
      */
-    public function category(string $category): View
+    public function category(string $category): View|RedirectResponse
     {
+        // 301 redirect /blog/category/name?page=1 to /blog/category/name
+        if (request()->query('page') === '1') {
+            return redirect()->route('blog.category', ['category' => $category], 301);
+        }
+
         $categories = BlogPost::categories();
         abort_unless(array_key_exists($category, $categories), 404);
 
@@ -88,9 +102,14 @@ class BlogController extends Controller
             ->pluck('total', 'category')
             ->all();
 
+        $catDesc = 'Read step-by-step tutorials, formats, and checklists on ' . strtolower($categoryLabel) . ' using Formnexa free PDF tools.';
+        if ($posts->currentPage() > 1) {
+            $catDesc = 'Explore page ' . $posts->currentPage() . ' of ' . strtolower($categoryLabel) . ' guides, formats, and checklists on Formnexa.';
+        }
+
         $seo = [
-            'title' => $categoryLabel . ' Guides & Templates | Formnexa Blog',
-            'description' => 'Read step-by-step tutorials, formats, and checklists on ' . strtolower($categoryLabel) . ' using Formnexa free PDF tools.',
+            'title' => ($posts->currentPage() > 1 ? $categoryLabel . ' Guides – Page ' . $posts->currentPage() . ' | Formnexa Blog' : $categoryLabel . ' Guides & Templates | Formnexa Blog'),
+            'description' => $catDesc,
             'canonical' => $posts->currentPage() > 1
                 ? $posts->url($posts->currentPage())
                 : route('blog.category', $category),

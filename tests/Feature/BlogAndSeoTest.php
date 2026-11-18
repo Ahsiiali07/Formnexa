@@ -20,7 +20,7 @@ class BlogAndSeoTest extends TestCase
 
         $home = $this->get('/');
         $home->assertStatus(200)
-            ->assertSee('<title>Free Invoice Maker, ATS Resume Builder &amp; PDF Converter Tools | Formnexa</title>', false)
+            ->assertSee('<title>Free Invoice Maker, ATS Resume Builder &amp; PDF Tools | Formnexa</title>', false)
             ->assertSee('<link rel="canonical" href="http://localhost">', false)
             ->assertSee('href="http://localhost/favicon.svg?v=2"', false)
             ->assertSee('href="http://localhost/apple-touch-icon.png?v=2"', false)
@@ -39,7 +39,7 @@ class BlogAndSeoTest extends TestCase
         $this->assertSame(1, preg_match_all('/<h1\b/i', $home->getContent()));
         $this->assertSame(0, preg_match_all('/<h4\b/i', $home->getContent()));
         $this->assertSame(0, preg_match_all('/<a\b(?![^>]*\bhref=)[^>]*>/i', $home->getContent()));
-        $this->assertSame(0, preg_match_all('/<a\b(?![^>]*rel=["\']nofollow["\'])[^>]*href=["\'][^"\']*\?[^"\']*["\']/i', $home->getContent()));
+        $this->assertSame(0, preg_match_all('/<a\b[^>]*rel=["\']nofollow["\'][^>]*href=["\'](?:https?:\/\/(?:localhost|formnexa\.dcpakpattan\.gov\.pk)|\/)[^"\']*["\']/i', $home->getContent()));
 
         // Query parameters must strip cleanly from canonical URL and maintain a single H1
         $importView = $this->get('/resume-builder?import=1&utm_source=test');

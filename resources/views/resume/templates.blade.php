@@ -24,11 +24,11 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 shrink-0">
-                    <a href="{{ route('resume.builder', ['import' => 1]) }}" rel="nofollow"
+                    <a href="{{ route('resume.builder', ['import' => 1]) }}"
                        class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-primary-container hover:bg-electric-blue-hover text-white text-sm font-bold shadow-sm transition">
                         <span>Convert CV to ATS Format Free &rarr;</span>
                     </a>
-                    <a href="{{ route('resume.builder', ['blank' => 1]) }}" rel="nofollow"
+                    <a href="{{ route('resume.builder', ['blank' => 1]) }}"
                        class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white border border-border-strong text-[#17211b] text-sm font-bold hover:border-[#17211b] transition">
                         <span>+ Start Blank ATS CV</span>
                     </a>
@@ -613,7 +613,7 @@
                             </div>
 
                             <div class="flex items-center gap-2 pt-1">
-                                <a href="{{ route('resume.builder', ['template' => $tpl['slug']]) }}" rel="nofollow"
+                                <a href="{{ route('resume.builder', ['template' => $tpl['slug']]) }}"
                                    class="flex-1 text-center py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-[#184f3a] transition">
                                     Customize This CV
                                 </a>
@@ -642,7 +642,7 @@
                     <p class="text-xs sm:text-sm text-[#536058] leading-relaxed">
                         Already have an existing CV in Word or PDF? Use our free parser to instantly restructure your experience, education, and skills into an ATS-compliant template in under 60 seconds.
                     </p>
-                    <a href="{{ route('resume.builder', ['import' => 1]) }}" rel="nofollow" class="inline-flex items-center text-xs font-bold text-[#184f3a] hover:underline">
+                    <a href="{{ route('resume.builder', ['import' => 1]) }}" class="inline-flex items-center text-xs font-bold text-[#184f3a] hover:underline">
                         Convert My CV Now &rarr;
                     </a>
                 </div>
@@ -849,7 +849,7 @@
                        class="block w-full text-center py-3 rounded-xl bg-[#184f3a] text-white text-sm font-extrabold shadow-sm hover:bg-[#123e2d] transition">
                         Use This Design &rarr;
                     </a>
-                    <a href="{{ route('resume.builder', ['import' => 1]) }}" rel="nofollow"
+                    <a href="{{ route('resume.builder', ['import' => 1]) }}"
                        :href="buildLaunchUrl(true)"
                        class="block w-full text-center py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
                         &#128196; Use + Import My Existing CV

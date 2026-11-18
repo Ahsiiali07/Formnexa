@@ -135,10 +135,16 @@
                             <i></i><i></i><i></i>
                         </div>
                         <span class="fn-window-title" x-text="activeProduct === 'resume' ? 'Formnexa · Resume Studio' : (activeProduct === 'invoice' ? 'Formnexa · Invoice Studio' : 'Formnexa · File Converter')"></span>
-                        <a href="{{ route('resume.builder') }}"
-                           :href="activeProduct === 'resume' ? '{{ route('resume.builder') }}' : (activeProduct === 'invoice' ? '{{ route('invoice.studio') }}' : '{{ route('convert.hub') }}')"
-                           class="fn-window-pill">
-                            <span x-text="activeProduct === 'resume' ? 'Open Resume Studio' : (activeProduct === 'invoice' ? 'Open Invoice Maker' : 'Open Converter Hub')"></span>
+                        <a href="{{ route('resume.builder') }}" x-show="activeProduct === 'resume'" class="fn-window-pill">
+                            <span>Open Resume Studio</span>
+                            <span aria-hidden="true">&rarr;</span>
+                        </a>
+                        <a href="{{ route('invoice.studio') }}" x-show="activeProduct === 'invoice'" x-cloak class="fn-window-pill">
+                            <span>Open Invoice Maker</span>
+                            <span aria-hidden="true">&rarr;</span>
+                        </a>
+                        <a href="{{ route('convert.hub') }}" x-show="activeProduct === 'pdf'" x-cloak class="fn-window-pill">
+                            <span>Open Converter Hub</span>
                             <span aria-hidden="true">&rarr;</span>
                         </a>
                     </div>
@@ -151,7 +157,7 @@
                             <div class="fn-side-item done">Work experience</div>
                             <div class="fn-side-item current">Skills &amp; ATS</div>
                             <div class="fn-side-item">Education</div>
-                            <a href="{{ route('resume.builder', ['import' => 1]) }}" rel="nofollow"
+                            <a href="{{ route('resume.builder', ['import' => 1]) }}"
                                class="mt-auto inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#f0ebff] hover:bg-[#e3d9ff] text-[#5d3ec4] text-xs font-bold transition">
                                 <x-icon name="upload" class="w-[15px] h-[15px]" />
                                 Import Existing CV
