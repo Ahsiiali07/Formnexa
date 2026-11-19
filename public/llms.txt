@@ -7,9 +7,9 @@ Formnexa is designed for freelancers, small businesses, contractors, and job see
 ## Core Applications
 
 - [Free Invoice Generator](https://formnexa.dcpakpattan.gov.pk/invoice-generator): Create professional multi-currency invoices with tax lines, discounts, digital signatures, corporate logos, and instant PDF downloads.
-- [Free ATS Resume Builder](https://formnexa.dcpakpattan.gov.pk/resume-builder): Build ATS-friendly resumes across 10 layout engines and 15+ modern templates, or import existing PDF/DOCX resumes with intelligent section parsing.
-- [Resume Templates Gallery](https://formnexa.dcpakpattan.gov.pk/resume-templates): Browse 15+ recruiter-approved resume and CV templates across Modern, Minimal, Tech, and Executive styles.
-- [Invoice Templates Gallery](https://formnexa.dcpakpattan.gov.pk/templates): Browse 20+ invoice design templates tailored for freelancers, agencies, contractors, and consulting firms.
+- [Free ATS Resume Builder](https://formnexa.dcpakpattan.gov.pk/resume-builder): Build ATS-friendly resumes across 10 layout engines and 17 curated templates, or import existing PDF/DOCX resumes with intelligent section parsing.
+- [Resume Templates Gallery](https://formnexa.dcpakpattan.gov.pk/resume-templates): Browse 17 curated resume and CV templates across Modern, Minimal, Tech, and Executive styles.
+- [Invoice Templates Gallery](https://formnexa.dcpakpattan.gov.pk/templates): Browse 24 invoice design templates tailored for freelancers, agencies, contractors, and consulting firms.
 - [Free Online PDF Converter Hub](https://formnexa.dcpakpattan.gov.pk/convert): 10 dedicated PDF conversion tools for converting documents and images without watermarks.
 
 ## Document Generators

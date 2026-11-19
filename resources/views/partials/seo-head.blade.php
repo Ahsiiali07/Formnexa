@@ -1,5 +1,10 @@
 <title>{{ $seo['title'] ?? 'Formnexa — Invoices, Resumes & PDF Tools' }}</title>
 <meta name="description" content="{{ $seo['description'] ?? '' }}">
+@if(!empty($seo['keywords']))
+<meta name="keywords" content="{{ $seo['keywords'] }}">
+@endif
+<meta name="author" content="Formnexa">
+<meta name="publisher" content="Formnexa">
 <meta name="robots" content="{{ $seo['robots'] ?? 'index,follow,max-image-preview:large' }}">
 <link rel="canonical" href="{{ $seo['canonical'] ?? url()->current() }}">
 <meta name="theme-color" content="#ffffff">

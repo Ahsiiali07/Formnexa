@@ -615,7 +615,7 @@ class ResumeCatalog
                 'popular' => true,
                 'badge' => 'ATS 100%',
                 'tagline' => 'Gold-standard basic resume template: institutional black-ink single column with serif headings and crisp double-ruled section dividers.',
-                'description' => 'Classic basic resume template engineered to score 100/100 on Workday, Greenhouse, Lever & Taleo ATS parsers for finance and law.',
+                'description' => 'Classic basic resume template engineered with clean single-column structure for corporate, finance, and legal roles.',
                 'tags' => ['Basic Resume Template', 'ATS Gold', 'Single Column'],
                 'preset_content' => $build([
                     'personal' => [

@@ -887,7 +887,7 @@
                 </div>
 
                 <div class="p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
-                    <a href="{{ route('templates.index') }}" class="text-xs font-bold text-slate-600 hover:text-slate-900 transition">Browse 20+ Templates</a>
+                    <a href="{{ route('templates.index') }}" class="text-xs font-bold text-slate-600 hover:text-slate-900 transition">Browse 24 Templates</a>
                     <button type="button" @click="templateDrawerOpen = false" class="px-5 py-2 rounded-full bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">Done</button>
                 </div>
             </div>
@@ -1226,11 +1226,11 @@ document.addEventListener('alpine:init', () => {
 
         setPresetCover(type) {
             if (type === 'emerald') {
-                this.cover_image = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80';
+                this.cover_image = '/images/covers/emerald.webp';
             } else if (type === 'abstract') {
-                this.cover_image = 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1200&q=80';
+                this.cover_image = '/images/covers/abstract.webp';
             } else if (type === 'dark') {
-                this.cover_image = 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=1200&q=80';
+                this.cover_image = '/images/covers/obsidian.webp';
             }
             this.showToast('Cover preset applied');
         },

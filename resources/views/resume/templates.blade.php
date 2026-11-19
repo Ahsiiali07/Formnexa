@@ -8,18 +8,18 @@
         <div class="max-w-[1280px] mx-auto">
             <div class="mb-4">
                 <x-schema.breadcrumbs :items="[['Home', url('/')], ['Resume Builder', route('resume.builder')], ['Resume Templates', route('resume.templates')]]" />
-                <x-schema.tool name="Free ATS CV Templates & Builder" description="Download 17+ best ATS CV templates in PDF and Word DOCX format. Built-in ATS CV checker, convert CV to ATS format for free." />
+                <x-schema.tool name="Free ATS CV Templates & Builder" description="Download 17 best ATS CV templates in PDF and Word DOCX format. Built-in ATS CV checker, convert CV to ATS format for free." />
             </div>
             <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
                 <div class="max-w-3xl">
                     <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-white border border-border-subtle text-emerald-700 font-mono text-[11px] font-semibold uppercase tracking-wider mb-4 shadow-sm">
-                        17+ Free ATS CV Templates &bull; PDF &amp; Word (DOCX) &bull; Instant Free Download
+                        17 Free ATS CV Templates &bull; PDF &amp; Word (DOCX) &bull; Instant Free Download
                     </div>
                     <h1 class="font-display text-3xl sm:text-5xl font-extrabold tracking-[-0.03em] text-[#17211b] leading-[1.08]">
                         Free ATS CV Templates &bull; Best ATS Resume Templates for PDF &amp; Word
                     </h1>
                     <p class="mt-4 text-sm sm:text-lg text-[#536058] max-w-2xl leading-relaxed">
-                        Download the best ATS CV templates and basic resume templates online for free. Convert your CV to ATS format in 60 seconds with our built-in ATS CV checker, or export recruiter-vetted PDFs and editable Word (.docx) files with zero sign-up or watermarks.
+                        Download the best ATS CV templates and basic resume templates online for free. Convert your CV to ATS format in 60 seconds with our built-in ATS CV checker, or export clean vector PDFs and editable Word (.docx) files with zero sign-up or watermarks.
                     </p>
                 </div>
 
@@ -651,7 +651,7 @@
                     <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center font-bold text-lg">&#128196;</div>
                     <h3 class="font-display text-lg font-extrabold text-[#17211b]">Word ATS CV Template &amp; PDF</h3>
                     <p class="text-xs sm:text-sm text-[#536058] leading-relaxed">
-                        Need an editable Word ATS CV template? All templates export as crisp, recruiter-vetted vector PDFs and can be converted to Word (.docx) format anytime with zero formatting distortion.
+                        Need an editable Word ATS CV template? All templates export as crisp vector PDFs and can be converted to Word (.docx) format anytime with layout kept as closely as possible.
                     </p>
                     <a href="{{ route('convert.tool', 'pdf-to-word') }}" class="inline-flex items-center text-xs font-bold text-[#184f3a] hover:underline">
                         Word DOCX Converter &rarr;
@@ -662,7 +662,7 @@
                     <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center font-bold text-lg">&#128269;</div>
                     <h3 class="font-display text-lg font-extrabold text-[#17211b]">Real-Time ATS CV Checker</h3>
                     <p class="text-xs sm:text-sm text-[#536058] leading-relaxed">
-                        Test your resume against 98% pass-rate criteria. Our live builder validates heading hierarchy, bullet readability, and keyword density for Workday, Taleo, Greenhouse, and Lever.
+                        Test your resume structure in real time. Our live builder validates heading hierarchy, bullet readability, and keyword density for common screening software.
                     </p>
                     <a href="{{ route('resume.builder') }}" class="inline-flex items-center text-xs font-bold text-[#184f3a] hover:underline">
                         Test in Resume Builder &rarr;
@@ -702,7 +702,7 @@
                 <div class="rounded-2xl border border-[#dfe4df] overflow-hidden bg-[#fafaf8] text-xs">
                     <div class="p-3.5 bg-[#17211b] text-white font-bold flex justify-between items-center">
                         <span>ATS CV Format Comparison</span>
-                        <span class="text-emerald-400 font-mono text-[11px]">98% Shortlist Target</span>
+                        <span class="text-emerald-400 font-mono text-[11px]">Structured Layout</span>
                     </div>
                     <div class="divide-y divide-[#dfe4df]">
                         <div class="p-3 grid grid-cols-2 gap-2">
@@ -723,7 +723,7 @@
                         </div>
                         <div class="p-3 grid grid-cols-2 gap-2">
                             <span class="font-bold text-slate-700">Canva / Photoshop Resumes</span>
-                            <span class="text-rose-600 font-semibold">&cross; 70%+ Fail ATS Scanners</span>
+                            <span class="text-rose-600 font-semibold">&cross; Frequently Fail Parsers</span>
                         </div>
                     </div>
                 </div>
@@ -734,15 +734,15 @@
                 <x-faq :items="[
                     [
                         'q' => 'What is the best ATS CV template?',
-                        'a' => 'The best ATS CV template is a clean, single-column or linear layout that uses standard system typography, reverse-chronological experience dates, and clear headings (Summary, Experience, Education, Skills). Formnexa\'s \'Wall Street Classic ATS\', \'Atlantic Flow\', and \'Linear Founding Engineer\' templates are engineered to achieve 98%+ pass rates on enterprise ATS checkers including Workday, Greenhouse, Taleo, and Lever.'
+                        'a' => 'The best ATS CV template is a clean, single-column or linear layout that uses standard system typography, reverse-chronological experience dates, and clear headings (Summary, Experience, Education, Skills). Formnexa\'s \'Wall Street Classic ATS\', \'Atlantic Flow\', and \'Linear Founding Engineer\' templates are engineered with clean single-column structure for enterprise ATS checkers.'
                     ],
                     [
                         'q' => 'Where can I find a basic resume template that passes ATS screening?',
-                        'a' => 'Formnexa provides classic basic resume templates—including our Wall Street Double-Rule, Atlantic Flow, and Zurich Swiss designs—engineered with single-column linear layout, standard system fonts, and zero confusing graphic bars. These basic resume templates achieve 98%+ pass rates on Workday, Taleo, and Greenhouse and download directly as watermark-free PDFs or editable Word DOCX files.'
+                        'a' => 'Formnexa provides classic basic resume templates—including our Wall Street Double-Rule, Atlantic Flow, and Zurich Swiss designs—engineered with single-column linear layout, standard system fonts, and zero confusing graphic bars. These basic resume templates download directly as watermark-free PDFs or editable Word DOCX files.'
                     ],
                     [
                         'q' => 'What is the ATS CV scale and how does scoring work?',
-                        'a' => 'The ATS CV scale is a match percentage from 0% to 100% computed by candidate screening algorithms (like Workday, Taleo, and Greenhouse). Resumes scoring 80%+ generally pass the preliminary automated gate and reach human recruiters. Formnexa ATS CV templates are structured to achieve 95%+ on the ATS scale by preserving selectable text, correct heading tags, standard date formats, and clean keyword placement.'
+                        'a' => 'The ATS CV scale is a match percentage from 0% to 100% computed by candidate screening algorithms (like Workday, Taleo, and Greenhouse). Resumes scoring 80%+ generally pass the preliminary automated gate and reach human recruiters. Formnexa ATS CV templates are structured for high readability on the ATS scale by preserving selectable text, correct heading tags, standard date formats, and clean keyword placement.'
                     ],
                     [
                         'q' => 'How do I convert my CV to an ATS format for free?',
@@ -750,7 +750,7 @@
                     ],
                     [
                         'q' => 'Can I download an ATS CV template in Word (DOCX) and PDF?',
-                        'a' => 'Yes. Every ATS CV template on Formnexa exports as a crisp, vector A4 PDF. If your recruiter specifically requests a Word ATS CV template (.docx), simply use our integrated free PDF to Word tool to convert your CV into an editable Microsoft Word document without losing alignment or typography.'
+                        'a' => 'Yes. Every ATS CV template on Formnexa exports as a crisp, vector A4 PDF. If your recruiter specifically requests a Word ATS CV template (.docx), simply use our integrated free PDF to Word tool to convert your CV into an editable Microsoft Word document while keeping layout as closely as possible.'
                     ],
                     [
                         'q' => 'Does Formnexa have a free ATS CV checker?',
@@ -758,7 +758,7 @@
                     ],
                     [
                         'q' => 'Are Formnexa\'s free ATS CV template downloads really free with no watermark?',
-                        'a' => 'Yes, 100%. All 17+ ATS CV templates are completely free to customize and download. There are no watermarks, no paywalls, and no credit card or account registration required.'
+                        'a' => 'Yes, 100%. All 17 ATS CV templates are completely free to customize and download. There are no watermarks, no paywalls, and no credit card or account registration required.'
                     ],
                     [
                         'q' => 'What is the difference between a CV ATS and a traditional graphic resume?',

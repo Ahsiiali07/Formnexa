@@ -836,17 +836,17 @@ class TemplateCatalog
             [
                 'key' => 'emerald',
                 'name' => 'Emerald',
-                'url' => 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
+                'url' => '/images/covers/emerald.webp',
             ],
             [
                 'key' => 'abstract',
                 'name' => 'Abstract',
-                'url' => 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1200&q=80',
+                'url' => '/images/covers/abstract.webp',
             ],
             [
                 'key' => 'dark',
                 'name' => 'Obsidian',
-                'url' => 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=1200&q=80',
+                'url' => '/images/covers/obsidian.webp',
             ],
         ];
     }

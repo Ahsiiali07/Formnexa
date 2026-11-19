@@ -93,7 +93,7 @@
                                     </div>
                                 </a>
                                 <a href="{{ route('resume.templates') }}" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#f8f8f3] transition group border-t border-[#dfe4df] pt-2.5">
-                                    <span class="w-8 h-8 rounded-lg bg-[#fff0e8] text-[#b45309] border border-[#fed7c3] flex items-center justify-center shrink-0 font-mono font-bold text-[11px]">15+</span>
+                                    <span class="w-8 h-8 rounded-lg bg-[#fff0e8] text-[#b45309] border border-[#fed7c3] flex items-center justify-center shrink-0 font-mono font-bold text-[11px]">17</span>
                                     <div>
                                         <div class="text-xs font-bold text-[#17211b] group-hover:text-[#184f3a]">Resume Templates Gallery</div>
                                         <div class="text-[11px] text-[#68736d] mt-0.5">Editorial serif &amp; ATS themes</div>
@@ -177,17 +177,17 @@
                             <div class="bg-white rounded-2xl shadow-xl shadow-[#17211b]/8 border border-[#dfe4df] p-4 text-xs space-y-3">
                                 <div class="grid grid-cols-2 gap-2.5 pb-3 border-b border-[#dfe4df]">
                                     <a href="{{ route('templates.index') }}" class="flex items-center gap-3 p-2.5 rounded-xl bg-[#f8f8f3] hover:bg-[#e8f7ed] transition group">
-                                        <span class="w-9 h-9 rounded-lg bg-[#e8f7ed] text-[#184f3a] border border-[#c8f3dc] flex items-center justify-center shrink-0 font-mono text-xs font-extrabold">20+</span>
+                                        <span class="w-9 h-9 rounded-lg bg-[#e8f7ed] text-[#184f3a] border border-[#c8f3dc] flex items-center justify-center shrink-0 font-mono text-xs font-extrabold">24</span>
                                         <div>
                                             <div class="font-bold text-[#17211b] group-hover:text-[#184f3a]">Invoice Templates</div>
-                                            <div class="text-[11px] text-[#68736d]">6 layouts &amp; industry styles</div>
+                                            <div class="text-[11px] text-[#68736d]">6 layouts &amp; 24 designs</div>
                                         </div>
                                     </a>
                                     <a href="{{ route('resume.templates') }}" class="flex items-center gap-3 p-2.5 rounded-xl bg-[#f8f8f3] hover:bg-[#f0ebff] transition group">
-                                        <span class="w-9 h-9 rounded-lg bg-[#f0ebff] text-[#6142be] border border-[#ddd2fb] flex items-center justify-center shrink-0 font-mono text-xs font-extrabold">15+</span>
+                                        <span class="w-9 h-9 rounded-lg bg-[#f0ebff] text-[#6142be] border border-[#ddd2fb] flex items-center justify-center shrink-0 font-mono text-xs font-extrabold">17</span>
                                         <div>
                                             <div class="font-bold text-[#17211b] group-hover:text-[#6142be]">Resume Templates</div>
-                                            <div class="text-[11px] text-[#68736d]">Editorial, modern &amp; ATS designs</div>
+                                            <div class="text-[11px] text-[#68736d]">10 layouts &amp; 17 designs</div>
                                         </div>
                                     </a>
                                 </div>
@@ -347,12 +347,12 @@
                     <a href="{{ route('templates.index') }}" @click="mobileMenu = false"
                        class="flex items-center justify-between gap-1 px-3 py-2.5 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-[#17211b] font-bold text-xs">
                         <span>Invoices</span>
-                        <span class="font-mono text-[10px] font-bold text-[#184f3a]">20+</span>
+                        <span class="font-mono text-[10px] font-bold text-[#184f3a]">24</span>
                     </a>
                     <a href="{{ route('resume.templates') }}" @click="mobileMenu = false"
                        class="flex items-center justify-between gap-1 px-3 py-2.5 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-[#17211b] font-bold text-xs">
                         <span>CVs</span>
-                        <span class="font-mono text-[10px] font-bold text-[#6142be]">15+</span>
+                        <span class="font-mono text-[10px] font-bold text-[#6142be]">17</span>
                     </a>
                     <a href="{{ route('blog.index') }}" @click="mobileMenu = false"
                        class="flex items-center justify-center gap-1 px-3 py-2.5 rounded-xl bg-[#e8f7ed] border border-[#c8f3dc] text-[#184f3a] font-bold text-xs">
@@ -476,20 +476,6 @@
                     <div class="flex flex-wrap items-center gap-2 text-[11px] font-mono pt-1">
                         <span class="px-2.5 py-1 rounded-full bg-white/[0.06] text-[#c8f3dc] border border-white/[0.08]">No Sign-up Required</span>
                         <span class="px-2.5 py-1 rounded-full bg-white/[0.06] text-[#c8f3dc] border border-white/[0.08]">Zero Watermarks</span>
-                    </div>
-                    <div class="flex items-center gap-3 pt-2 text-[#9eb2a7]">
-                        <a href="https://twitter.com/formnexa" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" aria-label="X (Twitter)">
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        </a>
-                        <a href="https://www.linkedin.com/company/formnexa" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" aria-label="LinkedIn">
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.39 9.74v-8.37H5.07v8.37h2.78z"/></svg>
-                        </a>
-                        <a href="https://www.facebook.com/formnexa" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" aria-label="Facebook">
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
-                        </a>
-                        <a href="https://www.youtube.com/@formnexa" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" aria-label="YouTube">
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M21.58 7.19a2.5 2.5 0 0 0-1.76-1.77C18.26 5 12 5 12 5s-6.26 0-7.82.42A2.5 2.5 0 0 0 2.42 7.19 26.2 26.2 0 0 0 2 12a26.2 26.2 0 0 0 .42 4.81 2.5 2.5 0 0 0 1.76 1.77C5.74 19 12 19 12 19s6.26 0 7.82-.42a2.5 2.5 0 0 0 1.76-1.77C22 15.63 22 12 22 12s0-3.63-.42-4.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
-                        </a>
                     </div>
                 </div>
 

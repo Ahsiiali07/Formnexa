@@ -14,11 +14,11 @@
         ],
         [
             'q' => 'How do I start an ATS CV online for free?',
-            'a' => 'Open the ATS Resume Builder to pick from 17+ recruiter-vetted templates, enter your job experience and skills, or upload an existing PDF/DOCX resume to auto-fill sections in seconds with zero watermarks.',
+            'a' => 'Open the ATS Resume Builder to pick from 17 curated templates, enter your job experience and skills, or upload an existing PDF/DOCX resume to auto-fill sections in seconds with zero watermarks.',
         ],
         [
             'q' => 'Can I convert PDF to Word DOCX without losing formatting?',
-            'a' => 'Yes. Formnexa\'s PDF to Word converter reconstructs native paragraphs, tables, headings, and font spacing cleanly so you can edit the resulting DOCX in Microsoft Word or Google Docs with zero formatting loss.',
+            'a' => 'Yes. Formnexa\'s PDF to Word converter reconstructs native paragraphs, tables, headings, and font spacing so you can edit the resulting DOCX in Microsoft Word or Google Docs while keeping layout as closely as possible.',
         ],
         [
             'q' => 'How many document types does Formnexa support?',
@@ -49,8 +49,8 @@
                 <svg class="w-4 h-4 text-[#6142be]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h12v20H6z"/><circle cx="12" cy="8" r="2"/><path d="M9 14h6M9 18h6"/></svg>
             </span>
             <div>
-                <strong>Resume score</strong>
-                <small>Excellent &bull; 98% ATS match</small>
+                <strong>Example score</strong>
+                <small>ATS-compliant layout</small>
             </div>
         </div>
         <div class="fn-floating-chip fn-chip-pdf" aria-hidden="true">
@@ -192,8 +192,8 @@
                             <div class="fn-score-pill">
                                 <b>92</b>
                                 <div>
-                                    <strong>ATS-ready layout!</strong>
-                                    <span>15+ curated CV templates</span>
+                                    <strong>Example score</strong>
+                                    <span>17 curated CV templates</span>
                                 </div>
                             </div>
                         </div>
@@ -205,7 +205,7 @@
                             <div class="fn-inv-top">
                                 <div>
                                     <strong>Acme Studio</strong>
-                                    <span>Invoice #FN-2048</span>
+                                    <span>Invoice #FN-2048 &bull; Example</span>
                                 </div>
                                 <div>
                                     <em>Due in 14 days</em>
@@ -244,7 +244,7 @@
                             </div>
                             <a href="{{ route('templates.index') }}"
                                class="fn-opt-card hover:border-[#184f3a] transition block no-underline text-[#17211b]">
-                                <span>20+ Presets</span>
+                                <span>24 Templates</span>
                                 <strong class="text-[#184f3a]">Browse Invoice Themes &rarr;</strong>
                             </a>
                         </div>
@@ -295,8 +295,8 @@
                         <x-icon name="document-text" class="w-5 h-5" />
                     </div>
                     <div>
-                        <strong>17+ ATS CV Templates</strong>
-                        <span>Engineered for 98%+ pass rates on Taleo, Workday &amp; Greenhouse</span>
+                        <strong>17 ATS CV Templates</strong>
+                        <span>Clean linear layouts built for standard screening systems</span>
                     </div>
                 </div>
 
@@ -315,8 +315,8 @@
                         <x-icon name="arrows-right-left" class="w-5 h-5" />
                     </div>
                     <div>
-                        <strong>Lossless PDF Tools</strong>
-                        <span>Convert Word to PDF &amp; PDF to DOCX preserving original layouts</span>
+                        <strong>Fast PDF Tools</strong>
+                        <span>Convert Word to PDF &amp; PDF to DOCX that keeps layout as closely as possible</span>
                     </div>
                 </div>
             </div>
@@ -327,7 +327,7 @@
                     <span>All-in-One Professional Workspace</span>
                 </div>
                 <p>
-                    Formnexa is a free online workspace for freelancers, small businesses, and job seekers. Create professional invoices, quotes, receipts, and packing slips in 24 currencies; start an ATS CV online or import an existing resume; and convert PDF files to and from Word DOCX without losing formatting, with zero watermarks and no sign-up required.
+                    Formnexa is a free online workspace for freelancers, small businesses, and job seekers. Create professional invoices, quotes, receipts, and packing slips in 24 currencies; start an ATS CV online or import an existing resume; and convert PDF files to and from Word DOCX while keeping layout as closely as possible, with zero watermarks and no sign-up required.
                 </p>
             </div>
         </div>
@@ -347,7 +347,7 @@
                 <div>
                     <span class="fn-card-index">01</span>
                     <h3>ATS Resume Builder</h3>
-                    <p>Start a recruiter-approved ATS CV online in minutes or import an existing PDF/DOCX resume with smart section parsing.</p>
+                    <p>Build an ATS-friendly CV online in minutes or import an existing PDF/DOCX resume with smart section parsing.</p>
                     <a href="{{ route('resume.builder') }}" class="fn-card-link">
                         <span>Start ATS CV Online</span>
                         <span aria-hidden="true">&rarr;</span>
@@ -393,8 +393,8 @@
                             <span class="fn-ats-val">98%</span>
                         </div>
                         <div class="fn-ats-text">
-                            <strong>ATS Match</strong>
-                            <span>17+ Themes</span>
+                            <strong>Example Score</strong>
+                            <span>17 Curated Themes</span>
                         </div>
                     </div>
                 </div>
@@ -485,7 +485,7 @@
                                     <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                 </svg>
                             </div>
-                            <span class="fn-pipeline-status">0.4s &bull; Lossless</span>
+                            <span class="fn-pipeline-status">Fast &bull; Preserves layout</span>
                         </div>
                         <div class="fn-conv-card fn-conv-pdf">
                             <div class="fn-conv-check">
@@ -566,7 +566,7 @@
                 <a href="{{ route('resume.templates') }}"
                    class="group flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#dfe4df] hover:border-[#7655d7] transition">
                     <div class="flex items-center gap-3.5 min-w-0">
-                        <span class="w-11 h-11 rounded-xl bg-[#f0ebff] text-[#6142be] flex items-center justify-center font-display font-extrabold text-sm shrink-0">17+</span>
+                        <span class="w-11 h-11 rounded-xl bg-[#f0ebff] text-[#6142be] flex items-center justify-center font-display font-extrabold text-sm shrink-0">17</span>
                         <div class="min-w-0">
                             <div class="text-sm font-bold text-[#17211b] group-hover:text-[#6142be] truncate">Resume Templates Gallery</div>
                             <div class="text-xs text-[#68736d] truncate">Minimal, Editorial, Technical &amp; ATS CV layouts</div>
@@ -577,7 +577,7 @@
                 <a href="{{ route('templates.index') }}"
                    class="group flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#dfe4df] hover:border-[#184f3a] transition">
                     <div class="flex items-center gap-3.5 min-w-0">
-                        <span class="w-11 h-11 rounded-xl bg-[#e8f7ed] text-[#184f3a] flex items-center justify-center font-display font-extrabold text-sm shrink-0">24+</span>
+                        <span class="w-11 h-11 rounded-xl bg-[#e8f7ed] text-[#184f3a] flex items-center justify-center font-display font-extrabold text-sm shrink-0">24</span>
                         <div class="min-w-0">
                             <div class="text-sm font-bold text-[#17211b] group-hover:text-[#184f3a] truncate">Invoice &amp; Business Presets</div>
                             <div class="text-xs text-[#68736d] truncate">Modern presets with custom branding swatches</div>
@@ -629,7 +629,7 @@
                             <div class="fn-doc-foot">
                                 <span class="fn-ats-score">
                                     <svg class="w-2.5 h-2.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                                    98% ATS Pass
+                                    Example layout
                                 </span>
                                 <span class="fn-mt-tag">Modern CV</span>
                             </div>
@@ -646,7 +646,7 @@
                                 <div class="fn-doc-avatar bg-[#c8f3dc] text-[#184f3a]">SA</div>
                                 <div class="min-w-0">
                                     <span class="fn-doc-name">Studio Apex</span>
-                                    <span class="fn-doc-role text-emerald-800">#INV-2026-084</span>
+                                    <span class="fn-doc-role text-emerald-800">#INV-2026-084 &bull; Example</span>
                                 </div>
                             </div>
                             <div class="fn-doc-body">
@@ -745,7 +745,7 @@
                                 <svg class="w-3 h-3 text-[#184f3a]" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                 </svg>
-                                Lossless Vector PDF
+                                Crisp Vector PDF
                             </span>
                         </div>
                     </div>
@@ -803,16 +803,16 @@
             </p>
             <div class="fn-impact-stats">
                 <div>
-                    <strong>50K+</strong>
-                    <span>documents created</span>
+                    <strong>100%</strong>
+                    <span>Free to use</span>
                 </div>
                 <div>
-                    <strong>4.9/5</strong>
-                    <span>average user rating</span>
+                    <strong>Zero</strong>
+                    <span>Watermark</span>
                 </div>
                 <div>
-                    <strong>120+</strong>
-                    <span>countries reached</span>
+                    <strong>Instant</strong>
+                    <span>No sign-up needed</span>
                 </div>
             </div>
             <div class="pt-2">
@@ -825,8 +825,10 @@
 
         <div class="fn-people-collage" aria-label="People working with Formnexa">
             <figure class="fn-photo-main">
-                <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=85"
+                <img src="/images/workspace-team.webp"
                      alt="Creative team collaborating around a table"
+                     width="520"
+                     height="360"
                      loading="lazy"
                      decoding="async">
                 <figcaption>
@@ -835,8 +837,10 @@
                 </figcaption>
             </figure>
             <figure class="fn-photo-detail">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=85"
-                     alt="Professional smiling confidently"
+                <img src="/images/workspace-user.webp"
+                     alt="Professional working with documents"
+                     width="280"
+                     height="340"
                      loading="lazy"
                      decoding="async">
             </figure>
@@ -883,33 +887,18 @@
         </div>
     </section>
 
-    {{-- 6. TESTIMONIAL BAND (FIGMA MAKE WITH VERIFIED PORTRAIT) --}}
-    <section class="fn-testimonial">
-        <div class="fn-testimonial-inner">
-            <div class="fn-testimonial-photo">
-                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=85"
-                     alt="Sarah Khan, Marketing Specialist"
-                     loading="lazy"
-                     decoding="async">
-                <span>
-                    <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                    <span>Verified user</span>
-                </span>
-            </div>
-            <div class="fn-testimonial-copy">
-                <div class="fn-quote-mark" aria-hidden="true">&ldquo;</div>
-                <blockquote>
-                    Formnexa cut the time I spend on client proposals, invoices, and CVs in half. Everything looks like I hired a designer &mdash; and I had it ready in under 15 minutes.
+    {{-- 6. VALUE PROMISE --}}
+    <section class="fn-testimonial" aria-label="Our promise">
+        <div class="fn-testimonial-inner" style="grid-template-columns: 1fr; max-width: 820px; text-align: center;">
+            <div class="fn-testimonial-copy" style="text-align: center;">
+                <div class="fn-quote-mark" aria-hidden="true" style="text-align: center; margin-bottom: 8px;">&ldquo;</div>
+                <blockquote style="font-size: clamp(20px, 2.5vw, 26px); margin: 0 auto 20px; line-height: 1.45; font-weight: 600;">
+                    Formnexa is built to provide clean, professional document tools without paywalls, sign-up gates, or watermarks.
                 </blockquote>
-                <div class="fn-customer">
-                    <div>
-                        <strong>Sarah Khan</strong>
-                        <span>Marketing Specialist</span>
-                    </div>
-                    <div class="fn-stars" aria-label="Rated 5 out of 5 stars">
-                        @for($s = 0; $s < 5; $s++)
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        @endfor
+                <div class="fn-customer" style="justify-content: center;">
+                    <div style="text-align: center;">
+                        <strong style="color: #ffffff; font-size: 15px;">Free &amp; Open Document Tools</strong>
+                        <span style="color: var(--mint); font-size: 13px; display: block; margin-top: 2px;">12 Business Generators &bull; 10 PDF Converters &bull; ATS Resume Builder</span>
                     </div>
                 </div>
             </div>

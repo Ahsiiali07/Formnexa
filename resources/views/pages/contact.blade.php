@@ -294,7 +294,7 @@
                                 </svg>
                             </button>
                             <div x-show="open" x-cloak class="mt-2 text-xs text-[#536058] leading-relaxed pr-2">
-                                Formnexa builds single-column, parse-tested layouts using semantic standard section headers (Experience, Skills, Education). They pass Greenhouse, Workday, and Taleo ATS algorithms with zero layout distortion.
+                                Formnexa builds single-column layouts using standard section headers (Experience, Skills, Education) and selectable vector typography to allow screening systems to extract candidate details cleanly.
                             </div>
                         </div>
 

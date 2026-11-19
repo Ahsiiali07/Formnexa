@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<x-schema.tool name="Free ATS Resume Builder" description="Build an ATS-friendly resume with 15+ templates or import your existing PDF or DOCX CV." />
+<x-schema.tool name="Free ATS Resume Builder" description="Build an ATS-friendly resume with 17 templates or import your existing PDF or DOCX CV." />
 
 <div x-data="resumeStudio(
         @js($loadedResume),
@@ -433,7 +433,7 @@
                     <div class="flex items-center gap-2">
                         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-bold text-[11px]">
                             <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
-                            <span>ATS CV Checker: 98% Pass Rate</span>
+                            <span>ATS CV Checker: Structure Verified</span>
                         </span>
                         <span class="text-slate-500 font-medium hidden sm:inline">&bull; <strong class="text-slate-800" x-text="styles[template_style]?.name"></strong></span>
                     </div>
@@ -823,7 +823,7 @@
                     An <strong>ATS-based resume</strong> is a curriculum vitae engineered specifically for Applicant Tracking System software (such as Workday, Greenhouse, Taleo, and Lever) to extract your work experience, job titles, and core competencies accurately before human recruiter review. Formnexa outputs clean vector A4 PDFs with 100% selectable text, standard heading hierarchy, and zero unreadable design artifacts so your resume ranks at the top of candidate applicant pools.
                 </p>
                 <div class="pt-1 flex flex-wrap gap-2">
-                    <a href="{{ route('resume.templates') }}" class="px-3.5 py-2 rounded-xl bg-[#f0ebff] text-[#6142be] text-xs font-bold hover:bg-[#e3d9ff] transition">Browse 17+ CV Templates &rarr;</a>
+                    <a href="{{ route('resume.templates') }}" class="px-3.5 py-2 rounded-xl bg-[#f0ebff] text-[#6142be] text-xs font-bold hover:bg-[#e3d9ff] transition">Browse 17 CV Templates &rarr;</a>
                     <a href="{{ route('blog.show', 'how-to-start-an-ats-cv-online-free-guide') }}" class="px-3.5 py-2 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-[#17211b] text-xs font-bold hover:border-[#184f3a] transition">Read ATS CV Online Guide &rarr;</a>
                 </div>
             </div>
@@ -848,12 +848,12 @@
         <div class="bg-white rounded-[26px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm">
             <x-faq :items="[
                 ['q' => 'What is an ATS-based resume?', 'a' => 'An ATS-based resume is a curriculum vitae designed with clear headings, linear reading flow, and standard typography so Applicant Tracking Systems can parse candidate details and match keywords accurately without parsing errors.'],
-                ['q' => 'What is the ATS CV scale and how does scoring work?', 'a' => 'The ATS CV scale is a relevance score from 0% to 100% used by automated screening software (such as Workday, Taleo, Greenhouse, and Lever) to evaluate candidate qualification against job requisitions. Scores above 80% generally pass to human recruiter review. Formnexa templates are engineered to achieve 95%+ on the ATS scale with clean parsing and zero unreadable layout blocks.'],
+                ['q' => 'What is the ATS CV scale and how does scoring work?', 'a' => 'The ATS CV scale is a relevance score from 0% to 100% used by automated screening software (such as Workday, Taleo, Greenhouse, and Lever) to evaluate candidate qualification against job requisitions. Scores above 80% generally pass to human recruiter review. Formnexa templates are engineered with clean parsing, standard headings, and machine-readable text.'],
                 ['q' => 'How do I convert my CV to an ATS format for free?', 'a' => 'Click \'Convert CV to ATS / Import\' in the top bar. You can upload an existing Word (.docx) or PDF resume, or paste raw text. Formnexa automatically parses your work experience, education, and skills into standard ATS-compliant sections in under 60 seconds.'],
-                ['q' => 'Can I download an ATS CV template in Word (DOCX) or PDF?', 'a' => 'Yes. You can export an ATS CV template directly as a crisp vector PDF, or convert it to an editable Word (.docx) file for free with Formnexa\'s built-in PDF to Word tool without losing text flow or typography.'],
-                ['q' => 'What is the best ATS CV template for high applicant rankings?', 'a' => 'The best ATS CV template uses a clean single-column or linear layout with standard headings (Summary, Experience, Education, Skills), 100% selectable fonts, and no complex graphical rating bars. On Formnexa, our \'Linear Founding Engineer\', \'Wall Street ATS Classic\', and \'Atlantic Flow\' templates score 98%+ on ATS screeners.'],
+                ['q' => 'Can I download an ATS CV template in Word (DOCX) or PDF?', 'a' => 'Yes. You can export an ATS CV template directly as a crisp vector PDF, or convert it to an editable Word (.docx) file for free with Formnexa\'s built-in PDF to Word tool that keeps layout as closely as possible.'],
+                ['q' => 'What is the best ATS CV template for high applicant rankings?', 'a' => 'The best ATS CV template uses a clean single-column or linear layout with standard headings (Summary, Experience, Education, Skills), 100% selectable fonts, and no complex graphical rating bars. On Formnexa, our \'Linear Founding Engineer\', \'Wall Street ATS Classic\', and \'Atlantic Flow\' templates provide clean, parse-ready layouts.'],
                 ['q' => 'Does Formnexa have a built-in ATS CV checker?', 'a' => 'Yes. Formnexa\'s live builder validates heading structure, chronological date formats, bullet readability, and keyword density in real time so your CV passes screening software like Greenhouse, Workday, Taleo, and Lever.'],
-                ['q' => 'How can I start an ATS CV online for free?', 'a' => 'Open Formnexa\'s free ATS Resume Builder, choose any of our 17+ recruiter-tested templates, enter your job experience, and export a clean, watermark-free vector PDF with zero sign-up required.'],
+                ['q' => 'How can I start an ATS CV online for free?', 'a' => 'Open Formnexa\'s free ATS Resume Builder, choose any of our 17 curated templates, enter your job experience, and export a clean, watermark-free vector PDF with zero sign-up required.'],
                 ['q' => 'Can I import an existing PDF or Word resume?', 'a' => 'Yes. Click Import CV / Paste Text above to parse your current PDF, DOCX, TXT, or LinkedIn copy directly into editable Formnexa fields.'],
                 ['q' => 'Are all ATS CV templates free to download without watermarks?', 'a' => 'Yes, 100%. Every ATS CV template download on Formnexa is completely free and watermark-free.'],
             ]" heading="Resume Builder — Frequently Asked Questions" />

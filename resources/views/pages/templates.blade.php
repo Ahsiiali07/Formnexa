@@ -21,7 +21,7 @@
                 <!-- Left Copy -->
                 <div class="lg:col-span-6 space-y-5 text-center lg:text-left">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-border-subtle text-[#184f3a] font-mono text-[11px] font-semibold uppercase tracking-wider shadow-sm">
-                        100% Free &bull; 6 Visual Layouts &bull; 20+ Industry Templates
+                        100% Free &bull; 6 Visual Layouts &bull; 24 Industry Templates
                     </div>
                     <h1 class="font-display text-3xl sm:text-5xl font-extrabold text-[#17211b] tracking-[-0.03em] leading-[1.08]">
                         Invoice Templates

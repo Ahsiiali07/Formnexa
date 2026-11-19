@@ -1,4 +1,4 @@
-@props(['name', 'description', 'category' => 'BusinessApplication', 'url' => null, 'rating' => '4.9', 'ratingCount' => 128])
+@props(['name', 'description', 'category' => 'BusinessApplication', 'url' => null])
 @php
     // Ensure brand name is explicitly associated with application entity for AI & Google Knowledge Graph
     $toolName = str_starts_with($name, 'Formnexa') ? $name : "Formnexa {$name}";
@@ -22,13 +22,6 @@
         '@type' => 'Offer',
         'price' => '0',
         'priceCurrency' => 'USD',
-    ],
-    'aggregateRating' => [
-        '@type' => 'AggregateRating',
-        'ratingValue' => (string) $rating,
-        'bestRating' => '5',
-        'worstRating' => '1',
-        'ratingCount' => (int) $ratingCount,
     ],
     'publisher' => [
         '@type' => 'Organization',
