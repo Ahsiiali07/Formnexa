@@ -575,6 +575,7 @@
                                         Live Preview
                                     </button>
                                     <a href="{{ route('resume.builder', ['template' => $tpl['slug']]) }}"
+                                       rel="nofollow"
                                        @click.stop
                                        class="px-3.5 py-2 rounded-xl bg-[#184f3a] text-white text-xs font-extrabold shadow-lg hover:bg-[#123e2d] transition">
                                         Use Template
@@ -614,6 +615,7 @@
 
                             <div class="flex items-center gap-2 pt-1">
                                 <a href="{{ route('resume.builder', ['template' => $tpl['slug']]) }}"
+                                   rel="nofollow"
                                    class="flex-1 text-center py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-[#184f3a] transition">
                                     Customize This CV
                                 </a>

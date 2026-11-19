@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /api/
 Disallow: /history
 Disallow: /blog-studio
 Disallow: /admin

@@ -48,6 +48,13 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/category/{category}', [BlogController::class, 'category'])
     ->where('category', '[a-z0-9\-]+')
     ->name('blog.category');
+
+// 301 Permanent Redirects for legacy/renamed blog slugs to resolve GSC 404 errors
+Route::redirect('/blog/how-to-write-an-ats-friendly-resume-guide', '/blog/how-to-write-ats-friendly-resume-guide', 301);
+Route::redirect('/blog/international-invoice-format-cross-border-currency-guide', '/blog/international-invoice-format-asia-usa-europe-guide', 301);
+Route::redirect('/blog/weekly-timesheet-break-hours-freelance-contractor-guide', '/blog/weekly-timesheets-and-work-orders-contractor-guide', 301);
+Route::redirect('/blog/invoice-format-pakistan-pkr-guide', '/blog/international-invoice-format-asia-usa-europe-guide', 301);
+
 Route::get('/blog/{slug}', [BlogController::class, 'show'])
     ->where('slug', '[a-z0-9\-]+')
     ->name('blog.show');

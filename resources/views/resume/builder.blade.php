@@ -1093,13 +1093,13 @@ Certified Scrum Product Owner (CSPO) - 2021`;
                 if (this.importMode === 'file') {
                     const fd = new FormData();
                     fd.append('cv_file', this.importFile);
-                    response = await fetch("{{ route('resume.import') }}", {
+                    response = await fetch('/api/resumes/import', {
                         method: 'POST',
                         headers: { 'Accept': 'application/json', 'X-CSRF-TOKEN': csrf },
                         body: fd,
                     });
                 } else {
-                    response = await fetch("{{ route('resume.import') }}", {
+                    response = await fetch('/api/resumes/import', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': csrf },
                         body: JSON.stringify({ cv_text: this.importText }),
@@ -1204,7 +1204,7 @@ Certified Scrum Product Owner (CSPO) - 2021`;
             this.saving = true;
             this.content.density = this.density;
             try {
-                const response = await fetch("{{ route('resume.store') }}", {
+                const response = await fetch('/api/resumes', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -1377,7 +1377,7 @@ document.addEventListener('alpine:init', () => {
         async saveInvoice(callback = null) {
             this.saving = true;
             try {
-                const response = await fetch("{{ route('invoice.store') }}", {
+                const response = await fetch('/api/invoices', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

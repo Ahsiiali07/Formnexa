@@ -748,7 +748,7 @@ function pdfConverterTool(meta) {
 
                 this.statusText = 'Converting document...';
                 const csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                const endpoint = @js(url('/api/convert')) + '/' + this.meta.slug;
+                const endpoint = '/api/convert/' + this.meta.slug;
 
                 const resp = await fetch(endpoint, {
                     method: 'POST',

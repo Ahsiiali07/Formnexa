@@ -36,6 +36,56 @@ class MobileApiTest extends TestCase
         $this->get('/signup')->assertStatus(200);
     }
 
+    public function test_search_engine_robots_headers_and_noindex_protection(): void
+    {
+        // 405 on GET /api/invoices must send X-Robots-Tag: noindex
+        $apiGet = $this->get('/api/invoices');
+        $this->assertSame('noindex, nofollow', $apiGet->headers->get('X-Robots-Tag'));
+
+        // API v1 routes must send X-Robots-Tag: noindex
+        $v1Bootstrap = $this->get('/api/v1/bootstrap');
+        $this->assertSame('noindex, nofollow', $v1Bootstrap->headers->get('X-Robots-Tag'));
+
+        // 404 pages must send X-Robots-Tag: noindex
+        $notFound = $this->get('/non-existent-page-xyz');
+        $this->assertSame('noindex, nofollow', $notFound->headers->get('X-Robots-Tag'));
+
+        // Legacy blog slugs must 301 redirect to active slugs
+        $this->get('/blog/how-to-write-an-ats-friendly-resume-guide')
+            ->assertStatus(301)
+            ->assertRedirect('/blog/how-to-write-ats-friendly-resume-guide');
+
+        $this->get('/blog/international-invoice-format-cross-border-currency-guide')
+            ->assertStatus(301)
+            ->assertRedirect('/blog/international-invoice-format-asia-usa-europe-guide');
+
+        $this->get('/blog/weekly-timesheet-break-hours-freelance-contractor-guide')
+            ->assertStatus(301)
+            ->assertRedirect('/blog/weekly-timesheets-and-work-orders-contractor-guide');
+
+        // Legacy Pakistani PKR guide redirect
+        $this->get('/blog/invoice-format-pakistan-pkr-guide')
+            ->assertStatus(301)
+            ->assertRedirect('/blog/international-invoice-format-asia-usa-europe-guide');
+    }
+
+    public function test_all_sitemap_urls_return_http_200(): void
+    {
+        $this->seed(\Database\Seeders\BlogPostSeeder::class);
+
+        $sitemapPath = public_path('sitemap.xml');
+        $this->assertFileExists($sitemapPath);
+
+        $xml = simplexml_load_file($sitemapPath);
+        $this->assertNotEmpty($xml->url);
+
+        foreach ($xml->url as $entry) {
+            $path = parse_url((string) $entry->loc, PHP_URL_PATH) ?: '/';
+            $resp = $this->get($path);
+            $this->assertSame(200, $resp->getStatusCode(), "Sitemap URL [{$entry->loc}] failed with {$resp->getStatusCode()}");
+        }
+    }
+
     public function test_catalog_and_bootstrap_endpoints(): void
     {
         $bootstrap = $this->getJson('/api/v1/bootstrap');
