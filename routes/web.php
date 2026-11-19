@@ -18,11 +18,28 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Dynamic / Cached XML Sitemap fallback
 Route::get('/sitemap.xml', function () {
     $path = public_path('sitemap.xml');
-    if (!file_exists($path)) {
-        Artisan::call('seo:sitemap');
+    if (!file_exists($path) || str_contains((string) @file_get_contents($path), 'localhost') || str_contains((string) @file_get_contents($path), '127.0.0.1')) {
+        Artisan::call('seo:sitemap', ['--url' => 'https://formnexa.dcpakpattan.gov.pk']);
     }
-    return response(file_get_contents($path), 200, [
+
+    $content = file_exists($path) ? (string) file_get_contents($path) : '';
+    if ($content === '' || str_contains($content, 'localhost') || str_contains($content, '127.0.0.1')) {
+        Artisan::call('seo:sitemap', ['--url' => 'https://formnexa.dcpakpattan.gov.pk']);
+        $content = file_exists($path) ? (string) file_get_contents($path) : '';
+    }
+
+    // Safety scrub: replace any residual localhost or 127.0.0.1 occurrences
+    $content = str_replace(
+        ['http://localhost', 'https://localhost', 'http://127.0.0.1', 'https://127.0.0.1'],
+        'https://formnexa.dcpakpattan.gov.pk',
+        $content
+    );
+
+    return response($content, 200, [
         'Content-Type' => 'application/xml; charset=UTF-8',
+        'Cache-Control' => 'no-cache, no-store, must-revalidate',
+        'Pragma' => 'no-cache',
+        'Expires' => '0',
     ]);
 })->name('sitemap');
 

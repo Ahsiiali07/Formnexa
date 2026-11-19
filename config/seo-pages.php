@@ -95,8 +95,8 @@ return [
         'updated' => $d,
     ],
     'convert/jpg-to-pdf' => [
-        'title' => 'JPG to PDF Converter – Free & Online | Formnexa',
-        'description' => 'Convert JPG and PNG images into one PDF in seconds. Free download, no watermark and no sign-up required.',
+        'title' => 'JPG to PDF Converter – Online JPG to PDF Free | Formnexa',
+        'description' => 'Online converter JPG to PDF free. Combine JPG, PNG, and WebP images into one crisp PDF in seconds with zero watermark and no sign-up required.',
         'updated' => $d,
     ],
     'convert/word-to-pdf' => [
@@ -115,8 +115,8 @@ return [
         'updated' => $d,
     ],
     'convert/html-to-pdf' => [
-        'title' => 'HTML to PDF Converter – Free Online Tool | Formnexa',
-        'description' => 'Convert HTML code or web pages to a clean PDF online. Keeps layout and styles. Free, fast and watermark-free.',
+        'title' => 'Free HTML to PDF Converter – Convert Web Page to PDF | Formnexa',
+        'description' => 'Free HTML to PDF converter. Convert HTML code, files, or convert a web page URL into a clean vector PDF. Preserves styles, layout, and fonts with zero watermark.',
         'updated' => $d,
     ],
     'convert/pdf-to-jpg' => [

@@ -229,7 +229,7 @@ class BlogAndSeoTest extends TestCase
         $this->assertFalse($post->fresh()->is_published);
         auth()->logout();
         $this->get('/blog/' . $post->slug)->assertStatus(404);
-        $this->get('/sitemap.xml')->assertDontSee('http://localhost/blog/global-tax-id-guide-usa-europe', false);
+        $this->get('/sitemap.xml')->assertDontSee('https://formnexa.dcpakpattan.gov.pk/blog/global-tax-id-guide-usa-europe', false);
 
         // Toggle Inactive -> Active restores it cleanly
         $this->actingAs($admin)
@@ -243,9 +243,11 @@ class BlogAndSeoTest extends TestCase
         $this->actingAs($admin)->post('/admin/seo/sitemap')->assertRedirect('/admin?tab=seo');
         $this->get('/sitemap.xml')
             ->assertStatus(200)
-            ->assertSee('http://localhost/blog/global-tax-id-guide-usa-europe', false)
-            ->assertDontSee('http://localhost/admin', false)
-            ->assertDontSee('http://localhost/login', false);
+            ->assertSee('https://formnexa.dcpakpattan.gov.pk/blog/global-tax-id-guide-usa-europe', false)
+            ->assertDontSee('localhost', false)
+            ->assertDontSee('127.0.0.1', false)
+            ->assertDontSee('/admin', false)
+            ->assertDontSee('/login', false);
 
         // Delete Blog via Admin
         $this->actingAs($admin)

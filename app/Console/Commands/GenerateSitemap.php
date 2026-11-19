@@ -19,7 +19,8 @@ class GenerateSitemap extends Command
     {
         $baseUrl = rtrim((string) $this->option('url'), '/');
 
-        if ($baseUrl === '') {
+        // Never allow localhost or loopback IPs in canonical sitemap URLs
+        if ($baseUrl === '' || str_contains($baseUrl, 'localhost') || str_contains($baseUrl, '127.0.0.1')) {
             // Check X-Forwarded-Host from reverse proxy
             if (request()->hasHeader('x-forwarded-host')) {
                 $fHost = explode(',', request()->header('x-forwarded-host'))[0];
@@ -30,14 +31,15 @@ class GenerateSitemap extends Command
             }
         }
 
-        if ($baseUrl === '' && request()->hasHeader('Host')) {
+        if (($baseUrl === '' || str_contains($baseUrl, 'localhost') || str_contains($baseUrl, '127.0.0.1')) && request()->hasHeader('Host')) {
             $h = request()->getHost();
             if (!str_contains($h, 'localhost') && !str_contains($h, '127.0.0.1')) {
-                $baseUrl = rtrim(request()->getSchemeAndHttpHost(), '/');
+                $proto = request()->isSecure() ? 'https' : (request()->header('x-forwarded-proto') ?: 'https');
+                $baseUrl = rtrim($proto . '://' . $h, '/');
             }
         }
 
-        if ($baseUrl === '' && !app()->environment('testing')) {
+        if ($baseUrl === '' || str_contains($baseUrl, 'localhost') || str_contains($baseUrl, '127.0.0.1')) {
             $cfg = rtrim((string) config('app.url'), '/');
             if ($cfg !== '' && !str_contains($cfg, 'localhost') && !str_contains($cfg, '127.0.0.1')) {
                 $baseUrl = $cfg;
@@ -46,16 +48,13 @@ class GenerateSitemap extends Command
             }
         }
 
-        if ($baseUrl === '') {
-            $baseUrl = rtrim((string) config('app.url', 'http://localhost'), '/');
+        // Hard guarantee: baseUrl is strictly the canonical production HTTPS domain
+        if ($baseUrl === '' || str_contains($baseUrl, 'localhost') || str_contains($baseUrl, '127.0.0.1')) {
+            $baseUrl = 'https://formnexa.dcpakpattan.gov.pk';
         }
 
-        if ($baseUrl !== '') {
-            URL::forceRootUrl($baseUrl);
-            if (str_starts_with($baseUrl, 'https://')) {
-                URL::forceScheme('https');
-            }
-        }
+        URL::forceRootUrl($baseUrl);
+        URL::forceScheme('https');
 
         $entries = [];
 
@@ -64,8 +63,8 @@ class GenerateSitemap extends Command
                 continue;
             }
 
-            $loc = $path === '/' ? url('/') : url($path);
-            $lastmod = Carbon::parse($page['updated'] ?? '2026-11-12')->toAtomString();
+            $loc = $path === '/' ? $baseUrl : $baseUrl . '/' . ltrim($path, '/');
+            $lastmod = Carbon::parse($page['updated'] ?? '2026-11-19')->toAtomString();
             $entries[$loc] = $lastmod;
         }
 
@@ -74,13 +73,14 @@ class GenerateSitemap extends Command
                 BlogPost::published()
                     ->orderByDesc('published_at')
                     ->get(['slug', 'updated_at', 'published_at'])
-                    ->each(function (BlogPost $post) use (&$entries): void {
-                        $loc = route('blog.show', $post->slug);
+                    ->each(function (BlogPost $post) use (&$entries, $baseUrl): void {
+                        $loc = $baseUrl . '/blog/' . ltrim($post->slug, '/');
                         $entries[$loc] = ($post->updated_at ?? $post->published_at ?? now())->toAtomString();
                     });
 
                 foreach (array_keys(BlogPost::categories()) as $category) {
-                    $entries[route('blog.category', $category)] = now()->toAtomString();
+                    $loc = $baseUrl . '/blog/category/' . ltrim($category, '/');
+                    $entries[$loc] = now()->toAtomString();
                 }
             }
         } catch (Throwable $e) {
@@ -88,9 +88,32 @@ class GenerateSitemap extends Command
         }
 
         $xml = $this->buildXml($entries);
-        file_put_contents(public_path('sitemap.xml'), $xml);
 
-        $this->info('Sitemap written to public/sitemap.xml with ' . count($entries) . ' URLs.');
+        // Ultimate safety: scrub any loopback string if it ever crept in
+        $xml = str_replace(
+            ['http://localhost', 'https://localhost', 'http://127.0.0.1', 'https://127.0.0.1'],
+            'https://formnexa.dcpakpattan.gov.pk',
+            $xml
+        );
+
+        $targets = array_unique([
+            public_path('sitemap.xml'),
+            base_path('../public_html/sitemap.xml'),
+            base_path('public_html/sitemap.xml'),
+        ]);
+
+        $writtenCount = 0;
+        foreach ($targets as $target) {
+            $dir = dirname($target);
+            if (is_dir($dir)) {
+                if (@file_put_contents($target, $xml) !== false) {
+                    @chmod($target, 0666);
+                    $writtenCount++;
+                }
+            }
+        }
+
+        $this->info('Sitemap written to public/sitemap.xml with ' . count($entries) . ' URLs (synced across ' . $writtenCount . ' locations).');
 
         return self::SUCCESS;
     }

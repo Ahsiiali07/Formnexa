@@ -336,7 +336,7 @@ class BlogController extends Controller
     protected function refreshSitemapSafely(): void
     {
         try {
-            Artisan::call('seo:sitemap');
+            Artisan::call('seo:sitemap', ['--url' => 'https://formnexa.dcpakpattan.gov.pk']);
         } catch (\Throwable) {
             // Non-blocking if filesystem is read-only
         }

@@ -452,22 +452,18 @@ class AdminController extends Controller
             // 3. Check regular Host header if not localhost
             $host = $request->header('host');
             if ($host && !str_contains($host, 'localhost') && !str_contains($host, '127.0.0.1')) {
-                return rtrim($request->getScheme() . '://' . $host, '/');
+                $proto = $request->isSecure() ? 'https' : 'https';
+                return rtrim($proto . '://' . $host, '/');
             }
         }
 
-        // 4. In automated testing environment, keep localhost for test assertions
-        if (app()->environment('testing')) {
-            return rtrim((string) config('app.url', 'http://localhost'), '/');
-        }
-
-        // 5. Check config('app.url') if real domain
+        // 4. Check config('app.url') if real domain
         $configUrl = rtrim((string) config('app.url'), '/');
         if ($configUrl !== '' && !str_contains($configUrl, 'localhost') && !str_contains($configUrl, '127.0.0.1')) {
             return $configUrl;
         }
 
-        // 6. Hard fallback to live production domain
+        // 5. Strict canonical production domain
         return 'https://formnexa.dcpakpattan.gov.pk';
     }
 }
