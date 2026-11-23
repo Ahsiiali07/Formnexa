@@ -47,7 +47,7 @@
                     ['Resume Templates', route('resume.templates')],
                     ['ATS Resume Builder', route('resume.builder')],
                 ]" />
-                <h1 class="font-display text-xs sm:text-sm font-extrabold text-[#17211b] tracking-tight">Start ATS CV Online Free &bull; ATS-Based Resume Builder</h1>
+                <h1 class="font-display text-xs sm:text-sm font-extrabold text-[#17211b] tracking-tight">Free CV Maker &amp; ATS Resume Builder</h1>
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
@@ -878,50 +878,57 @@
         </div>
     </div>
 
-    {{-- ATS Resume Formatting Guide, FAQ & Internal Cross-Links --}}
+    {{-- CV Maker Editorial Guide, H2 Sections, FAQ & Internal Cross-Links --}}
     <section class="no-print max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-14 space-y-8">
-        <div class="bg-white rounded-[26px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-[26px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm space-y-10">
+            {{-- H2 1: Create a CV free online and download as PDF --}}
             <div class="space-y-3">
-                <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6142be]">ATS Compliance</span>
-                <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b]">What is an ATS-based resume?</h2>
+                <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Free Online CV Maker</span>
+                <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b]">Create a CV free online and download as PDF</h2>
                 <p class="text-xs sm:text-sm text-[#46534b] leading-relaxed">
-                    An <strong>ATS-based resume</strong> is a curriculum vitae engineered specifically for Applicant Tracking System software (such as Workday, Greenhouse, Taleo, and Lever) to extract your work experience, job titles, and core competencies accurately before human recruiter review. Formnexa outputs clean vector A4 PDFs with 100% selectable text, standard heading hierarchy, and zero unreadable design artifacts so your resume ranks at the top of candidate applicant pools.
+                    Building a professional curriculum vitae should not require getting trapped behind a surprise subscription paywall or paying a recurring fee just to export your document. Formnexa's free online CV maker enables you to select an executive layout, enter your career milestones, and download a crisp vector PDF directly from your browser in minutes. Every exported CV is 100% watermark-free with selectable text, allowing you to submit your job application immediately. If a recruiter or hiring manager specifically requests an editable Word document, you can also convert your finished resume with our <a href="{{ route('convert.tool', 'pdf-to-word') }}" class="text-[#184f3a] font-bold hover:underline">PDF to Word Converter</a> without losing formatting.
                 </p>
-                <div class="pt-1 flex flex-wrap gap-2">
-                    <a href="{{ route('resume.templates') }}" class="px-3.5 py-2 rounded-xl bg-[#f0ebff] text-[#6142be] text-xs font-bold hover:bg-[#e3d9ff] transition">Browse 17 CV Templates &rarr;</a>
-                    <a href="{{ route('blog.show', 'how-to-start-an-ats-cv-online-free-guide') }}" class="px-3.5 py-2 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-[#17211b] text-xs font-bold hover:border-[#184f3a] transition">Read ATS CV Online Guide &rarr;</a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-[#dfe4df]">
+                {{-- H2 2: Make a CV on your phone --}}
+                <div class="space-y-3">
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6142be]">Mobile-First Editing</span>
+                    <h2 class="font-display text-lg sm:text-xl font-extrabold text-[#17211b]">Make a CV on your phone</h2>
+                    <p class="text-xs sm:text-sm text-[#46534b] leading-relaxed">
+                        Many professionals and students write and update their resumes directly on a smartphone. Formnexa is engineered with a mobile-responsive interface that works seamlessly in mobile Google Chrome and Apple Safari on Android and iPhone devices. You can draft your summary, paste bullet points from your phone notes or LinkedIn, switch color palettes, and download the vector PDF straight to your device's Downloads folder without installing third-party apps. For a walkthrough with mobile tips, check out our guide on <a href="{{ route('blog.show', 'how-to-make-cv-on-phone-free-guide') }}" class="text-[#184f3a] font-bold hover:underline">how to make a CV on your phone for free</a>.
+                    </p>
+                </div>
+
+                {{-- H2 3: Edit your existing CV online --}}
+                <div class="space-y-3">
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Instant Import &amp; Rebuild</span>
+                    <h2 class="font-display text-lg sm:text-xl font-extrabold text-[#17211b]">Edit your existing CV online</h2>
+                    <p class="text-xs sm:text-sm text-[#46534b] leading-relaxed">
+                        If you already have a saved resume in PDF or Word format, you do not have to start from scratch. Click <strong>Convert CV to ATS / Import</strong> in the top toolbar or visit our dedicated <a href="{{ route('resume.ats_converter') }}" class="text-[#184f3a] font-bold hover:underline">ATS Resume Converter</a>. Our parser reads your work experience, education history, and technical competencies into editable builder fields in under 60 seconds, letting you refresh bullet points and update contact information effortlessly. For tips on adjusting older files, read <a href="{{ route('blog.show', 'how-to-edit-pdf-cv-online-free-guide') }}" class="text-[#184f3a] font-bold hover:underline">how to edit a PDF CV online for free</a>.
+                    </p>
                 </div>
             </div>
-            <div class="space-y-3">
-                <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Formatting Rules</span>
-                <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b]">5 rules for higher shortlist rates</h2>
-                <ul class="space-y-2 text-xs sm:text-sm text-[#46534b]">
-                    <li>&check; Use standard headings (Experience, Education, Skills).</li>
-                    <li>&check; Lead bullets with measurable outcomes and numbers.</li>
-                    <li>&check; Match skills wording to the job description honestly.</li>
-                    <li>&check; Export as crisp vector PDF unless DOCX is explicitly required.</li>
-                    <li>&check; Import an existing PDF or DOCX CV anytime using the button above.</li>
-                </ul>
-                <div class="pt-1 flex flex-wrap gap-2">
-                    <a href="{{ route('convert.tool', 'pdf-to-word') }}" class="text-xs font-bold text-[#184f3a] hover:underline">PDF to Word &rarr;</a>
-                    <span class="text-[#c6d1ca]">&bull;</span>
-                    <a href="{{ route('convert.tool', 'word-to-pdf') }}" class="text-xs font-bold text-[#184f3a] hover:underline">Word to PDF &rarr;</a>
-                </div>
+
+            {{-- H2 4: ATS-friendly CV templates --}}
+            <div class="space-y-3 pt-4 border-t border-[#dfe4df]">
+                <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6142be]">Screening Software Standards</span>
+                <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b]">ATS-friendly CV templates</h2>
+                <p class="text-xs sm:text-sm text-[#46534b] leading-relaxed">
+                    Applicant Tracking Systems evaluate CVs line by line from left to right and top to bottom. Decorative multi-column grids, complex graphic skill meters, and text placed inside images frequently trigger parsing errors in automated hiring software like Workday, Greenhouse, Taleo, and Lever. Formnexa's <a href="{{ route('resume.templates') }}" class="text-[#184f3a] font-bold hover:underline">17 ATS CV templates</a> use single-column and clean linear hierarchies with recognized headings so your qualifications reach hiring managers accurately. Wondering how traditional visual designs stack up against automated filters? Read our side-by-side analysis on <a href="{{ route('blog.show', 'canva-cv-vs-ats-friendly-resume-guide') }}" class="text-[#184f3a] font-bold hover:underline">Canva CV vs ATS-Friendly CV</a>. If you are applying for corporate roles locally, see the <a href="{{ route('blog.show', 'cv-format-for-jobs-in-pakistan-guide') }}" class="text-[#184f3a] font-bold hover:underline">standard CV format for jobs in Pakistan</a>, or our entry-level <a href="{{ route('blog.show', 'cv-format-for-freshers-free-template-guide') }}" class="text-[#184f3a] font-bold hover:underline">CV format for freshers and recent graduates</a>.
+                </p>
             </div>
         </div>
 
         <div class="bg-white rounded-[26px] border border-[#dfe4df] p-6 sm:p-10 shadow-sm">
             <x-faq :items="[
-                ['q' => 'What is an ATS-based resume?', 'a' => 'An ATS-based resume is a curriculum vitae designed with clear headings, linear reading flow, and standard typography so Applicant Tracking Systems can parse candidate details and match keywords accurately without parsing errors.'],
-                ['q' => 'What is the ATS CV scale and how does scoring work?', 'a' => 'The ATS CV scale is a relevance score from 0% to 100% used by automated screening software (such as Workday, Taleo, Greenhouse, and Lever) to evaluate candidate qualification against job requisitions. Scores above 80% generally pass to human recruiter review. Formnexa templates are engineered with clean parsing, standard headings, and machine-readable text.'],
-                ['q' => 'How do I convert my CV to an ATS format for free?', 'a' => 'Click \'Convert CV to ATS / Import\' in the top bar. You can upload an existing Word (.docx) or PDF resume, or paste raw text. Formnexa automatically parses your work experience, education, and skills into standard ATS-compliant sections in under 60 seconds.'],
-                ['q' => 'Can I download an ATS CV template in Word (DOCX) or PDF?', 'a' => 'Yes. You can export an ATS CV template directly as a crisp vector PDF, or convert it to an editable Word (.docx) file for free with Formnexa\'s built-in PDF to Word tool that keeps layout as closely as possible.'],
-                ['q' => 'What is the best ATS CV template for high applicant rankings?', 'a' => 'The best ATS CV template uses a clean single-column or linear layout with standard headings (Summary, Experience, Education, Skills), 100% selectable fonts, and no complex graphical rating bars. On Formnexa, our \'Linear Founding Engineer\', \'Wall Street ATS Classic\', and \'Atlantic Flow\' templates provide clean, parse-ready layouts.'],
-                ['q' => 'Does Formnexa have a built-in ATS CV checker?', 'a' => 'Yes. Formnexa\'s live builder validates heading structure, chronological date formats, bullet readability, and keyword density in real time so your CV passes screening software like Greenhouse, Workday, Taleo, and Lever.'],
-                ['q' => 'How can I start an ATS CV online for free?', 'a' => 'Open Formnexa\'s free ATS Resume Builder, choose any of our 17 curated templates, enter your job experience, and export a clean, watermark-free vector PDF with zero sign-up required.'],
-                ['q' => 'Can I import an existing PDF or Word resume?', 'a' => 'Yes. Click Import CV / Paste Text above to parse your current PDF, DOCX, TXT, or LinkedIn copy directly into editable Formnexa fields.'],
-                ['q' => 'Are all ATS CV templates free to download without watermarks?', 'a' => 'Yes, 100%. Every ATS CV template download on Formnexa is completely free and watermark-free.'],
-            ]" heading="Resume Builder — Frequently Asked Questions" />
+                ['q' => 'Can I create a CV free online and download it as a PDF?', 'a' => 'Yes. Formnexa allows you to create your CV online and download a watermark-free vector PDF with zero cost. You can pick any template, customize typography and colors, enter your career milestones, and export your PDF instantly with no hidden trial fees or subscription traps.'],
+                ['q' => 'Can I make a CV on my phone?', 'a' => 'Yes. Formnexa is fully responsive and runs smoothly in mobile web browsers on Android and iPhone (Chrome, Safari, Edge). You can enter details, switch styles, and download the finished PDF directly to your mobile device without installing an app.'],
+                ['q' => 'Can I edit my existing CV online?', 'a' => 'Yes. Click \'Convert CV to ATS / Import\' in the top bar or use our ATS Resume Converter. Upload your current PDF or Word (.docx) file, or paste your text. Formnexa extracts your experience, education, and skills into editable form fields so you can update dates, change wording, and export a clean PDF.'],
+                ['q' => 'Is the CV download really free with no watermark?', 'a' => 'Yes, 100%. Every PDF generated by Formnexa is completely watermark-free and uses crisp vector text. We do not place trial banners, logo stamps, or locked download walls on your document.'],
+                ['q' => 'Do I need an account to create and download my CV?', 'a' => 'No. You can build, edit, and download your CV entirely in guest mode without creating an account or providing an email address. Your draft is automatically saved in your browser\'s private local storage. Account registration is optional if you wish to sync drafts across multiple devices.'],
+                ['q' => 'What is an ATS-friendly CV?', 'a' => 'An ATS-friendly CV is formatted with machine-readable typography, linear reading hierarchy, and recognized section headers (such as Professional Summary, Work Experience, Education, and Skills). It avoids multi-layer tables and graphical rating meters so Applicant Tracking Systems (like Workday, Taleo, Greenhouse, and Lever) parse your qualifications accurately without dropped text.'],
+            ]" heading="Free CV Maker & Resume Builder — Frequently Asked Questions" />
         </div>
     </section>
 

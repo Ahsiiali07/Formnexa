@@ -92,9 +92,9 @@ return [
 
     // ---------- Resume ----------
     'resume-builder' => [
-        'title' => 'Start ATS CV Online Free – ATS-Based Resume Builder | Formnexa',
-        'description' => 'Start an ATS CV online free or convert CV to ATS format. 17 ATS templates, built-in ATS CV checker, and instant Word (.docx) & PDF download. Zero watermark.',
-        'keywords' => 'ats cv online, ats resume builder, convert cv to ats format for free, ats cv scale, free resume maker, cv to pdf, ats friendly resume, resume builder docx',
+        'title' => 'Free CV Maker & Resume Builder – Download PDF | Formnexa',
+        'description' => 'Create a CV free online in minutes. Pick a template, edit on your phone or computer, and download a PDF. ATS-friendly, no watermark.',
+        'keywords' => 'create cv free online, free cv maker, create cv free pdf, cv maker online free download, edit cv online free, ats cv online, ats resume builder, free resume maker, cv to pdf, ats friendly resume',
         'updated' => $d,
     ],
     'ats-resume-converter' => [

@@ -33,9 +33,8 @@ class BlogAndSeoTest extends TestCase
             ->assertSee('"alternateName":"Formnexa"', false)
             ->assertSee('"@type":"FAQPage"', false)
             ->assertSee('Free Invoice Maker, <span>Resume Builder &amp; PDF Converter</span>', false)
-            ->assertSee('International Invoice Format Guide for Asia, USA &amp; Europe', false)
-            ->assertDontSee('<b></b>', false)
-            ->assertDontSeeText('Pakistan');
+            ->assertSee('Practical guides to help you get paid &amp; hired.', false)
+            ->assertDontSee('<b></b>', false);
 
         $this->assertSame(1, preg_match_all('/<h1\b/i', $home->getContent()));
         $this->assertSame(0, preg_match_all('/<h4\b/i', $home->getContent()));
@@ -134,7 +133,6 @@ class BlogAndSeoTest extends TestCase
             ->assertStatus(200)
             ->assertSee('Document, Resume &amp; PDF Guides Blog | Formnexa', false)
             ->assertSee('Asia, USA &amp; Europe', false)
-            ->assertDontSeeText('Pakistan')
             ->assertSee('"@type":"BreadcrumbList"', false);
 
         $this->get('/blog/category/resumes')

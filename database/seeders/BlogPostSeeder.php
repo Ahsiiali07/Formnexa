@@ -649,6 +649,400 @@ You can build or convert your CV right now in Formnexa without paywalls or subsc
 4. **Instant Download:** Export your print-ready, watermark-free vector PDF or convert it to an editable Word DOCX file in one click.
 MD,
             ],
+            [
+                'title' => 'How to Make a CV on Your Phone for Free (Android and iPhone)',
+                'slug' => 'how-to-make-cv-on-phone-free-guide',
+                'category' => 'resumes',
+                'category_label' => 'Resumes & ATS',
+                'focus_keyword' => 'make cv on phone free',
+                'meta_title' => 'How to Make a CV on Your Phone Free (Android & iPhone) | Formnexa',
+                'meta_description' => 'Step-by-step tutorial on making a professional CV on your phone for free. Create, format, and download an ATS-friendly PDF in mobile Chrome or Safari without an app.',
+                'featured_tool_route' => 'resume.builder',
+                'featured_tool_label' => 'Open Mobile CV Maker',
+                'reading_time_minutes' => 5,
+                'excerpt' => 'A complete, practical guide to creating an executive, ATS-ready CV on your Android phone or iPhone for free — with zero app downloads and instant PDF export.',
+                'published_at' => now(),
+                'content' => <<<'MD'
+*By Ahsan Ali, Lead Document Engineer at Formnexa*
+
+Over 65% of job seekers browse job openings, message recruiters on LinkedIn, and apply for roles directly from their smartphones. However, many online resume makers are clunky on mobile devices or force you to download an ad-heavy mobile app that demands a subscription before letting you download your file.
+
+With Formnexa's mobile-optimized [Free CV Maker](/resume-builder), you can create, format, and download a print-ready vector PDF CV directly inside **mobile Google Chrome** or **Apple Safari** on Android and iPhone in under 10 minutes.
+
+---
+
+## Why Building a CV on Your Phone Works Well
+
+Modern smartphones provide several unique productivity advantages for job seekers:
+
+1. **Voice-to-Text Dictation:** You can tap the microphone button on your mobile keyboard (Gboard on Android or Apple Dictation on iPhone) to dictate your work experience bullets and summary quickly.
+2. **Easy Copy-Pasting:** If you have work history in Google Keep, Apple Notes, WhatsApp drafts, or the LinkedIn app, you can copy and paste details directly into form fields.
+3. **Instant Cloud & Email Sharing:** Once downloaded, your PDF is stored in your phone's *Files* or *Downloads* folder, ready to attach to an email, WhatsApp message, or job portal application.
+
+---
+
+## Step-by-Step: How to Make a CV on Android or iPhone
+
+Follow these five practical steps on your mobile browser:
+
+### Step 1: Open the Mobile CV Maker
+Open your mobile browser (Chrome on Android or Safari on iOS) and navigate to Formnexa's [Free Online CV Maker](/resume-builder). You will see a clean mobile interface with tabs for **Edit**, **Design**, and **Export**.
+
+### Step 2: Choose Your Starting Method
+You have two fast options:
+- **Start Fresh:** Tap **Browse Templates** to pick a layout, or tap **Reset to Blank** to begin with clean fields.
+- **Import Existing CV:** If you already have an older CV in PDF or Word on your phone, tap **Convert CV to ATS / Import**. Select the file from your phone storage. Formnexa's parser extracts your details into the editor automatically.
+
+### Step 3: Enter Your Career Information
+Tap into each section on the **Edit** screen:
+- **Personal Details:** Enter your full name, professional email, phone number with international country code, location (City, Country), and your LinkedIn URL.
+- **Professional Summary:** Write a 2–3 sentence overview highlighting your core expertise and key achievements.
+- **Work Experience:** Add your most recent roles in reverse chronological order. Use bullet points that lead with active verbs and measurable outcomes (e.g., *"Increased team sprint velocity by 25%"*).
+- **Education:** List your degree, university name, and graduation year.
+- **Skills:** Add your key technical proficiencies and domain tools.
+
+### Step 4: Pick an ATS-Friendly Layout
+Tap the **Design** icon in the bottom mobile bar. We recommend clean single-column layouts such as **Wall Street ATS Classic** or **Zurich Swiss Grid**. These layouts display cleanly on both mobile screens and A4 printouts, and automated Applicant Tracking Systems read them with 100% accuracy.
+
+### Step 5: Download Your Free Vector PDF
+Tap the green **Download PDF** button in the mobile header:
+- **On Android:** Your browser will notify you that your PDF has downloaded. Open it via the Notification shade or your *Files / Downloads* app.
+- **On iPhone:** Safari will prompt *"Do you want to download [Name] Resume.pdf?"*. Tap **Download**, then access it from the blue download arrow in Safari's address bar or the iOS *Files* app under *Downloads*.
+
+---
+
+## Mobile CV Best Practices & Quick Checklist
+
+- **Keep It to One Page:** On mobile, it is easy to keep typing. Stick to your top 3–4 recent positions and 3–5 bullets per role to ensure your CV exports cleanly to 1 or 2 printed pages.
+- **Review Before Submitting:** Open the downloaded PDF in your phone's PDF viewer to confirm spacing and verify that there are no accidental autocorrect typos.
+- **No Watermarks, No Paywall:** Formnexa exports clean, vector-rendered PDFs with selectable text. You do not need to enter credit card details or sign up for a trial.
+
+Need to customize an existing resume layout? You can also explore our [17 ATS CV Templates](/resume-templates) or learn [how to edit a PDF CV online for free](/blog/how-to-edit-pdf-cv-online-free-guide).
+MD,
+            ],
+            [
+                'title' => 'How to Edit a PDF CV Online for Free (Without Losing Formatting)',
+                'slug' => 'how-to-edit-pdf-cv-online-free-guide',
+                'category' => 'resumes',
+                'category_label' => 'Resumes & ATS',
+                'focus_keyword' => 'edit pdf cv online free',
+                'meta_title' => 'How to Edit a PDF CV Online for Free (Step-by-Step) | Formnexa',
+                'meta_description' => 'Learn how to edit an existing PDF CV online for free without expensive Adobe subscriptions or font errors. Parse, update text, and re-export a clean vector PDF.',
+                'featured_tool_route' => 'resume.ats_converter',
+                'featured_tool_label' => 'Import & Edit PDF CV Online',
+                'reading_time_minutes' => 5,
+                'excerpt' => 'Why editing raw PDF resumes in traditional editors corrupts formatting, and how to import, edit, and re-export your CV into a clean ATS layout for free.',
+                'published_at' => now(),
+                'content' => <<<'MD'
+*By Ahsan Ali, Lead Document Engineer at Formnexa*
+
+Updating an older curriculum vitae is often frustrating when your only copy is in PDF format. Opening a PDF in standard image editors or free online PDF "draw" tools usually breaks line breaks, shifts bullet points out of alignment, or substitutes system fonts with awkward mismatched typefaces.
+
+If you need to change a job title, update your dates, or add recent certifications to an existing resume, here is how to edit your PDF CV cleanly without paying for expensive desktop software.
+
+---
+
+## Why Direct PDF Text Editing Usually Fails
+
+PDF (Portable Document Format) was engineered in the 1990s as a digital printing standard, not a word processing format. Inside a PDF:
+- Words and letters are often stored as fixed X/Y positional coordinates rather than continuous flowing text.
+- Adding a single new sentence pushes existing text off the page or overlaps with the next section.
+- Scanned PDFs contain flat raster images of text rather than selectable characters, making automated ATS parsers reject them entirely.
+
+To edit a PDF CV properly, the document must be **parsed into structured data** (Name, Experience, Education, Skills) and re-rendered into a fresh, crisp layout.
+
+---
+
+## Method 1: Use Formnexa's Free ATS Resume Converter (Recommended)
+
+Formnexa provides a purpose-built [ATS Resume Converter](/ats-resume-converter) that extracts your text and loads it directly into a live online editor:
+
+1. **Upload Your PDF:** Navigate to the [ATS Resume Converter](/ats-resume-converter) and drag and drop your existing PDF CV.
+2. **Automated Content Extraction:** Formnexa extracts your contact info, career timeline, degree history, and bullet points.
+3. **Edit in the Live Studio:** Your information automatically loads into our [Online CV Builder](/resume-builder). Here you can edit text boxes, fix typos, add new achievements, or delete outdated roles.
+4. **Switch to an ATS Layout:** Select an executive theme (such as *Wall Street ATS Classic* or *Silicon Valley Stack*). The builder automatically aligns your text into clean, machine-readable sections.
+5. **Download a Fresh Vector PDF:** Click **Download PDF**. You receive a brand new, high-resolution vector PDF with 100% selectable text and zero watermarks.
+
+---
+
+## Method 2: Convert PDF to Word (DOCX) for Manual Adjustments
+
+If your prospective employer or recruiter specifically requires an editable Microsoft Word document:
+
+1. Go to Formnexa's [PDF to Word Converter](/convert/pdf-to-word).
+2. Upload your PDF file.
+3. Click **Convert to Word**. Formnexa processes the document and generates a `.docx` file preserving your font sizing and margins as closely as possible.
+4. Open the DOCX file in Microsoft Word, Google Docs, or LibreOffice, make your edits, and save.
+5. When ready, convert it back to a clean PDF using our [Word to PDF Converter](/convert/word-to-pdf).
+
+---
+
+## What to Check After Editing Your CV
+
+Before sending your updated CV to employers, complete this 60-second audit:
+
+- **Check Dates for Consistency:** Ensure all dates follow the same format throughout (e.g., `Jan 2024 – Present` rather than mixing `01/24` with `January 2024`).
+- **Verify Active Phone & Email:** Confirm your phone number includes your country calling code (e.g., `+1` or `+92`) and your email address is clickable.
+- **Selectable Text Check:** Open your final PDF, press `Ctrl + A` (or `Cmd + A` on Mac), and check that all text highlights. If text cannot be selected, automated screening bots will not be able to read it.
+
+For guidance on creating a CV directly on your smartphone, read our guide on [how to make a CV on your phone for free](/blog/how-to-make-cv-on-phone-free-guide).
+MD,
+            ],
+            [
+                'title' => 'Canva CV vs ATS-Friendly CV: Which Should You Use?',
+                'slug' => 'canva-cv-vs-ats-friendly-resume-guide',
+                'category' => 'resumes',
+                'category_label' => 'Resumes & ATS',
+                'focus_keyword' => 'Canva CV vs ATS resume',
+                'meta_title' => 'Canva CV vs ATS-Friendly CV: Which Should You Choose? | Formnexa',
+                'meta_description' => 'An objective comparison of Canva CV templates vs ATS-friendly single-column layouts. Learn when visual design wins, when ATS screening fails, and the right choice for your career.',
+                'featured_tool_route' => 'resume.builder',
+                'featured_tool_label' => 'Build an ATS-Friendly CV for Free',
+                'reading_time_minutes' => 6,
+                'excerpt' => 'An honest, objective side-by-side comparison between Canva visual resumes and ATS-friendly text layouts. Discover when each format succeeds and which one to send for corporate job portals.',
+                'published_at' => now(),
+                'content' => <<<'MD'
+*By Ahsan Ali, Lead Document Engineer at Formnexa*
+
+Canva is one of the world's most popular design tools, and its resume library offers thousands of vibrant, creative templates featuring modern color blocks, headshots, and graphical rating sliders.
+
+However, many job seekers who send beautifully designed Canva resumes to corporate job openings report receiving instant automated rejections without ever speaking to a recruiter. Why does this happen, and when should you choose a visual Canva CV versus a structured ATS-friendly layout?
+
+---
+
+## Where Canva CVs Excel
+
+Canva templates are visually stunning and highly effective in specific hiring scenarios:
+
+- **Direct Email Outreach to Founders or Creative Directors:** When you email your PDF directly to a decision-maker at a design studio, advertising agency, or boutique startup, visual aesthetics help capture attention.
+- **Creative Industries:** Roles in Graphic Design, Fashion, Video Production, Architecture, and Social Media Marketing expect candidates to demonstrate creative flair.
+- **In-Person Job Fairs & Interviews:** A printed Canva resume on high-quality paper stands out when handed directly to a human hiring manager across a table.
+
+---
+
+## Why Canva CVs Often Fail in Corporate Job Portals
+
+When you apply to jobs on corporate portals (such as LinkedIn Easy Apply, Workday, Taleo, Greenhouse, or Lever), a human does not read your resume first. An **Applicant Tracking System (ATS)** parses the document into text fields before any recruiter opens it.
+
+Here is why Canva templates frequently encounter parsing issues:
+
+1. **Complex Multi-Column Tables:** Canva resumes typically use 2 or 3 parallel columns with independent text boxes. Parsers read horizontally from left to right across the page, frequently merging your contact info with job titles from the adjacent column into scrambled text.
+2. **Graphical Skill Meters:** Canva often visualizes competencies with progress bars, 5-star icons, or pie circles. Automated screening software cannot decode graphics, meaning skills like *"JavaScript — 4/5 stars"* are completely ignored.
+3. **Text Stored as Graphics or Canvas Elements:** Certain Canva exports flatten text into raster imagery rather than vector fonts, resulting in 0% selectable text.
+4. **Headshots and Icons:** In the US, UK, and Canada, corporate hiring policies discourage photos to comply with anti-bias hiring regulations.
+
+---
+
+## Side-by-Side Comparison: Canva vs ATS-Friendly CV
+
+| Evaluation Factor | Canva Visual CV | ATS-Friendly CV (Formnexa) |
+|---|---|---|
+| **ATS Parsing Accuracy** | ⚠️ Low (Risk of column & skill parsing errors) | ✅ 100% (Linear single-column hierarchy) |
+| **Corporate Job Portals (Workday, Taleo)** | ❌ Often scrambled | ✅ Fully compliant |
+| **Creative Portfolios / Agencies** | ✅ Excellent visual presentation | ⚠️ Functional, minimal design |
+| **In-Person Interviews** | ✅ Eye-catching printout | ✅ Clean, executive readability |
+| **Cost & Paywalls** | ⚠️ Some templates require Canva Pro or paid elements | ✅ 100% Free vector PDF download, zero watermark |
+| **Mobile Editing** | ⚠️ Complex drag-and-drop on small screens | ✅ Clean mobile form inputs in browser |
+
+---
+
+## The Winning Hybrid Strategy
+
+You don't have to choose exclusively between visual aesthetics and automated compliance. The most effective approach used by successful candidates is a **two-resume strategy**:
+
+1. **Your Primary ATS CV:** Build a clean, single-column resume on Formnexa's [Free CV Maker](/resume-builder) using templates like *Wall Street ATS Classic* or *Atlantic Flow*. Use this document for all corporate website applications, job boards, and automated portals.
+2. **Your Visual Showcase CV:** Create a styled visual resume or portfolio on Canva to attach when emailing a hiring manager directly, or to bring physically to an in-person interview.
+
+To start building your compliant ATS resume right now, browse our [17 Free Resume Templates](/resume-templates). If you already have a visual resume you want to test and rebuild, try our [ATS Resume Converter](/ats-resume-converter).
+MD,
+            ],
+            [
+                'title' => 'Standard CV Format for Jobs in Pakistan (With Free Example & Template)',
+                'slug' => 'cv-format-for-jobs-in-pakistan-guide',
+                'category' => 'resumes',
+                'category_label' => 'Resumes & ATS',
+                'focus_keyword' => 'CV format for jobs in Pakistan',
+                'meta_title' => 'Standard CV Format for Jobs in Pakistan (With Free Example) | Formnexa',
+                'meta_description' => 'The standard CV format for corporate, IT, banking, and multinational jobs in Pakistan. Understand CNIC rules, photo requirements, degree formatting, and download free PDF.',
+                'featured_tool_route' => 'resume.builder',
+                'featured_tool_label' => 'Create CV Free Online',
+                'reading_time_minutes' => 6,
+                'excerpt' => 'A localized guide to the standard CV format expected by multinational corporations, software houses, and banking institutions across Karachi, Lahore, and Islamabad.',
+                'published_at' => now(),
+                'content' => <<<'MD'
+*By Ahsan Ali, Lead Document Engineer at Formnexa*
+
+The hiring landscape in Pakistan has evolved rapidly. While traditional government departments historically required elaborate multi-page bio-data sheets with father's names, religion, and national ID cards, modern employers in Pakistan—including leading tech software houses (Systems Ltd, NetSol, 10Pearls), commercial banks (HBL, Meezan, Bank Alfalah), FMCGs (Unilever, Engro), and multinational subsidiaries—now mandate international, ATS-compliant curriculum vitaes.
+
+Here is the exact standard CV format that hiring managers in Pakistan expect in 2026.
+
+---
+
+## Modern Pakistani CV Conventions: What to Include and What to Omit
+
+### 1. What to Omit (Outdated Practices)
+- **CNIC Number:** Never include your 13-digit Computerized National Identity Card number on a public CV. It creates an identity theft risk and is only required after an official job offer during background checks.
+- **Religion, Marital Status & Father's Name:** Modern private employers, software houses, and MNCs in Karachi, Lahore, and Islamabad evaluate merit and technical competencies. Omit personal demographic fields.
+- **Full Street Address:** A simple City and Country (e.g., *Lahore, Pakistan* or *Karachi, Pakistan*) is sufficient and professional.
+
+### 2. What to Include
+- **Full Legal Name & Professional Headline:** E.g., *"Muhammad Bilal — Senior Full-Stack Engineer"*.
+- **Direct Contact Info:** Professional email (`name@gmail.com`), active WhatsApp/mobile phone with `+92` country code, and a customized LinkedIn profile link.
+- **HEC-Recognized Degrees:** Clearly label your degree title (BS Computer Science, BBA, MS Project Management), university name, and graduation year. Include your CGPA only if it is 3.0 or higher.
+- **Technical & Soft Skills Breakdown:** Group skills logically (e.g., *Languages: Python, JavaScript; Frameworks: Laravel, React; Tools: Git, Docker, Postman*).
+
+---
+
+## Recommended Section Order for Pakistani Job Applications
+
+1. **Header:** Name, Contact details, City, LinkedIn URL.
+2. **Professional Summary:** A concise 3-line overview of your core expertise and notable achievements.
+3. **Work Experience:** Listed reverse-chronologically with measurable bullets.
+4. **Education:** University degrees and academic background.
+5. **Key Skills & Tools:** Bulleted competencies matching the job description.
+6. **Certifications & Trainings:** PM, AWS, HEC, or industry credentials.
+
+---
+
+## Complete Real-World Example (Software Engineer in Lahore)
+
+```text
+MUHAMMAD BILAL
+Full-Stack Software Engineer
+Lahore, Pakistan | +92 300 1234567 | m.bilal.dev@gmail.com | linkedin.com/in/mbilal-dev
+
+PROFESSIONAL SUMMARY
+Full-Stack Software Engineer with 4+ years of experience designing and deploying scalable web applications using PHP (Laravel), Vue.js, and MySQL. Proven track record delivering fintech and e-commerce solutions for UK and Middle East clients.
+
+WORK EXPERIENCE
+Software Engineer | Systems Limited | Lahore, Pakistan | 2023 – Present
+• Architected RESTful microservices supporting 120,000+ daily active users on an enterprise banking portal.
+• Reduced database query latency by 32% via Redis caching and optimized PostgreSQL index schemas.
+• Collaborated with cross-functional agile squads across Dubai and Lahore to ship weekly CI/CD releases.
+
+Associate Software Engineer | Techlogix | Lahore, Pakistan | 2021 – 2023
+• Developed responsive client dashboards using Laravel and Vue.js with Stripe and PayFast payment integrations.
+• Automated test suites achieving 85%+ code coverage, decreasing production bug tickets by 19%.
+
+EDUCATION
+BS in Computer Science | FAST-NUCES, Lahore | 2017 – 2021 | CGPA: 3.42 / 4.00
+
+CORE COMPETENCIES
+• Programming: PHP, JavaScript (ES6+), Python, SQL
+• Frameworks: Laravel, Vue.js, Node.js, Tailwind CSS
+• Databases & Cloud: MySQL, PostgreSQL, Redis, Docker, AWS (EC2, S3), Git
+
+LANGUAGES
+English (Fluent / Professional), Urdu (Native)
+```
+
+---
+
+## How to Build and Download This CV for Free
+
+You can format this exact Pakistani CV template in under 5 minutes using Formnexa:
+
+1. Open the [Free Online CV Maker](/resume-builder).
+2. Choose a clean layout like **Wall Street ATS Classic** or **Zurich Swiss Grid**.
+3. Fill in your experience, education, and skills.
+4. Click **Download PDF** for an instant vector PDF with zero watermarks and no registration fee.
+
+If you are a recent university graduate applying for your first role, read our companion guide on the [CV format for freshers and recent graduates](/blog/cv-format-for-freshers-free-template-guide).
+MD,
+            ],
+            [
+                'title' => 'CV for Freshers: Free Template, Layout and Practical Example',
+                'slug' => 'cv-format-for-freshers-free-template-guide',
+                'category' => 'resumes',
+                'category_label' => 'Resumes & ATS',
+                'focus_keyword' => 'CV for freshers free template',
+                'meta_title' => 'CV for Freshers: Free Template & Guide for Recent Graduates | Formnexa',
+                'meta_description' => 'How recent university graduates, freshers, and students with no formal work experience can build a winning CV. Education-first layout, academic projects, and free PDF download.',
+                'featured_tool_route' => 'resume.builder',
+                'featured_tool_label' => 'Build a Fresher CV Online Free',
+                'reading_time_minutes' => 5,
+                'excerpt' => 'A complete guide for students and fresh graduates with zero formal work experience. Learn how to convert academic semester projects, internships, and university coursework into job offers.',
+                'published_at' => now(),
+                'content' => <<<'MD'
+*By Ahsan Ali, Lead Document Engineer at Formnexa*
+
+The biggest obstacle facing recent university graduates and freshers is the classic hiring catch-22: *"You need experience to get a job, but you need a job to get experience."*
+
+When you don't have years of corporate experience, your CV should emphasize **relevant coursework, academic semester projects, internships, and demonstrable technical skills**. With the right layout, a fresher CV can outshine candidates with generic experience.
+
+---
+
+## The Education-First CV Structure for Freshers
+
+Experienced professionals place work history above education. For freshers, you should flip the hierarchy:
+
+1. **Header:** Your full name, clean email, mobile number, city, and GitHub / LinkedIn links.
+2. **Objective or Summary:** A forward-looking 2-line statement highlighting your degree, key technical proficiencies, and enthusiasm for the target role.
+3. **Education (Top Position):** Your degree, major, university, graduation date, and CGPA (if 3.0+).
+4. **Academic & Semester Projects:** Treat your Final Year Project (FYP) and major course deliverables as real work experience!
+5. **Technical & Domain Skills:** Tools, software, and languages you have worked with in labs or personal projects.
+6. **Internships & Extracurricular Leadership:** Student societies, hackathons, open-source contributions, or volunteer work.
+
+---
+
+## Turning Academic Projects into Experience Bullets
+
+Instead of writing *"Made a website for final project"*, write like an engineer or business analyst by stating the **problem, tools used, and outcome**:
+
+- ❌ *Weak:* "Created a library management system in Java."
+- ✅ *Strong:* "Engineered a desktop library management system using Java and MySQL, implementing barcode scanning and automated overdue fine calculations for 500+ simulated users."
+- ❌ *Weak:* "Did marketing research in final semester."
+- ✅ *Strong:* "Conducted competitive market analysis across 12 local FMCG brands, surveying 250 consumers and presenting data-driven pricing recommendations to faculty panel."
+
+---
+
+## Complete Fresher CV Example
+
+```text
+AYESHA TARIQ
+Junior Frontend Developer / UI Engineer
+Islamabad, Pakistan | +92 312 9876543 | ayesha.tariq.cs@gmail.com | github.com/ayesha-dev | linkedin.com/in/ayeshatariq
+
+CAREER OBJECTIVE
+Recent Computer Science graduate with strong foundations in modern JavaScript, React, and responsive CSS. Passionate about building accessible, performant web applications and eager to contribute to an agile product engineering team.
+
+EDUCATION
+BS in Computer Science | NUST, Islamabad | 2022 – 2026 | CGPA: 3.58 / 4.00
+Relevant Coursework: Data Structures & Algorithms, Web Engineering, Database Systems, Software Design & Architecture
+
+ACADEMIC PROJECTS
+HealthTrack Telemedicine Web App (Final Year Project) | React, Node.js, MongoDB | 2025 – 2026
+• Built responsive patient-doctor consultation portal using React, Tailwind CSS, and WebRTC video integration.
+• Implemented JWT role-based authentication and appointment scheduling with automated email reminders.
+• Conducted usability testing with 40 university peers, scoring 92% on system usability scale.
+
+E-Commerce Product Catalog | JavaScript, REST API, HTML5/CSS3 | 2024
+• Developed search, dynamic category filtering, and client-side shopping cart with localStorage persistence.
+• Integrated public FakeStore REST API with asynchronous fetch handling and loading skeleton states.
+
+TECHNICAL SKILLS
+• Programming: JavaScript (ES6+), HTML5, CSS3, Python, C++
+• Frameworks & Libraries: React, Tailwind CSS, Bootstrap, Node.js basics
+• Tools & Methodologies: Git/GitHub, VS Code, Figma, REST APIs, Agile Scrum basics
+
+EXTRACURRICULAR LEADERSHIP
+Lead Organizer | NUST ACM Student Chapter | 2024 – 2025
+• Organized annual inter-university coding competition hosting 180+ participants from 12 universities.
+• Moderated technical workshops on web development and Git version control for freshman students.
+```
+
+---
+
+## Build Your Fresher CV with Formnexa in 5 Minutes
+
+1. Open Formnexa's [Free Online CV Maker](/resume-builder).
+2. Choose a clean, modern layout such as **Silicon Valley Stack** or **Zurich Swiss Grid**.
+3. Enter your contact details, education, semester projects, and skills.
+4. Click **Download PDF** to export a watermark-free vector PDF immediately — no sign-up or credit card required.
+
+Need help building your resume directly on your smartphone? Check out our step-by-step tutorial on [how to make a CV on your phone for free](/blog/how-to-make-cv-on-phone-free-guide).
+MD,
+            ],
         ];
 
         foreach ($posts as $post) {
