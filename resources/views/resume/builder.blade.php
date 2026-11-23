@@ -78,10 +78,14 @@
                     <svg class="w-3.5 h-3.5 text-black/45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </button>
 
-                <a href="{{ route('resume.templates') }}"
-                   class="hidden sm:inline-flex items-center gap-1 px-3.5 py-2 rounded-lg text-xs font-semibold bg-[#f8f8f3] hover:bg-black/10 text-[#111111] transition whitespace-nowrap">
-                    Browse Templates
-                </a>
+                <!-- Highlighted Browse Templates Button -->
+                <button type="button" @click="designDrawerOpen = true; designTab = 'presets'"
+                        class="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-lg text-xs font-bold bg-[#f0ebff] hover:bg-[#e3d9ff] text-[#5d3ec4] border border-[#ddd2fb] transition whitespace-nowrap cursor-pointer shadow-xs"
+                        title="Browse 17 ATS resume templates">
+                    <svg class="w-3.5 h-3.5 text-[#5d3ec4]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+                    <span>Browse Templates</span>
+                    <span class="px-1.5 py-0.5 rounded-full bg-[#5d3ec4] text-white text-[10px] font-mono font-bold leading-none">17</span>
+                </button>
 
                 <button type="button" @click="resetToBlank()"
                         class="px-3 py-2 rounded-lg text-xs font-semibold text-black/50 hover:text-rose-600 hover:bg-rose-50 transition whitespace-nowrap cursor-pointer">
@@ -108,7 +112,68 @@
     </section>
 
     <!-- Main Split-Screen Resume Studio -->
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-6">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-5">
+
+        <!-- Jobscan-Style ATS Templates Carousel & Quick Switcher -->
+        <div class="no-print mb-5 p-3.5 sm:p-4 rounded-2xl bg-white border border-[#dfe4df] shadow-xs">
+            <div class="flex items-center justify-between gap-3 mb-2.5 px-1">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-[#184f3a] animate-pulse"></span>
+                    <h2 class="text-xs sm:text-sm font-extrabold text-[#17211b]">Choose ATS Resume Template:</h2>
+                    <span class="text-[11px] text-[#68736d] hidden md:inline">Click any layout to preview your CV in that theme instantly</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="{{ route('resume.templates') }}" target="_blank"
+                       class="text-[11px] font-bold text-[#68736d] hover:text-[#184f3a] hidden sm:inline-flex items-center gap-1 transition">
+                        <span>Open Gallery</span>
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+                    </a>
+                    <button type="button" @click="designDrawerOpen = true; designTab = 'presets'"
+                            class="text-xs font-bold text-[#5d3ec4] hover:text-[#452c96] inline-flex items-center gap-1 transition cursor-pointer">
+                        <span>All 17 Templates</span>
+                        <span>&rarr;</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Horizontal Scrollable Template Cards -->
+            <div class="flex items-center gap-3 overflow-x-auto pb-1.5 pt-0.5 scrollbar-thin">
+                <template x-for="tpl in allTemplates" :key="tpl.slug">
+                    <button type="button" @click="applyTemplatePreset(tpl, false)"
+                            class="shrink-0 text-left p-2.5 rounded-xl border-2 transition flex items-center gap-3 cursor-pointer group"
+                            :class="(template_style === (tpl.template_style || tpl.style))
+                                ? 'border-[#184f3a] bg-[#e8f7ed]/70 shadow-xs ring-1 ring-[#184f3a]'
+                                : 'border-[#dfe4df] hover:border-slate-300 bg-[#fbfbf7] hover:bg-white'">
+                        {{-- Mini Template Mockup --}}
+                        <div class="w-8 h-11 rounded-sm bg-white border border-slate-200/90 flex flex-col justify-between p-1 shrink-0 overflow-hidden shadow-2xs group-hover:scale-105 transition-transform"
+                             :class="(tpl.style === 'editorial_figma' || tpl.template_style === 'editorial_figma') ? 'bg-[#FAF8F4]' : 'bg-white'">
+                            <div class="h-1.5 w-full rounded-xs" :style="'background-color:' + (tpl.accent_color || '#1B3142')"></div>
+                            <div class="space-y-0.5 my-auto">
+                                <div class="h-0.5 w-3/4 bg-slate-300 rounded-xs"></div>
+                                <div class="h-0.5 w-full bg-slate-200 rounded-xs"></div>
+                                <div class="h-0.5 w-5/6 bg-slate-200 rounded-xs"></div>
+                            </div>
+                            <div class="h-0.5 w-1/2 bg-slate-300 rounded-xs"></div>
+                        </div>
+
+                        {{-- Template Meta --}}
+                        <div class="min-w-[110px] max-w-[145px]">
+                            <div class="text-[11.5px] font-bold text-[#17211b] truncate group-hover:text-[#184f3a]" x-text="tpl.name"></div>
+                            <div class="flex items-center gap-1 mt-0.5">
+                                <span class="text-[9.5px] font-bold px-1.5 py-0.2 rounded bg-white border border-slate-200 text-slate-600 truncate" x-text="tpl.badge || tpl.category_label"></span>
+                            </div>
+                        </div>
+
+                        {{-- Active Indicator --}}
+                        <span x-show="template_style === (tpl.template_style || tpl.style)"
+                              class="w-5 h-5 rounded-full bg-[#184f3a] text-white flex items-center justify-center text-[10px] font-bold shrink-0 shadow-xs">
+                            &check;
+                        </span>
+                    </button>
+                </template>
+            </div>
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
 
             <!-- LEFT COLUMN: Structured Resume Editor Accordion -->

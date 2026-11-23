@@ -157,7 +157,7 @@
                             <div class="fn-side-item done">Work experience</div>
                             <div class="fn-side-item current">Skills &amp; ATS</div>
                             <div class="fn-side-item">Education</div>
-                            <a href="{{ route('resume.builder', ['import' => 1]) }}"
+                            <a href="{{ route('resume.ats_converter') }}"
                                class="mt-auto inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#f0ebff] hover:bg-[#e3d9ff] text-[#5d3ec4] text-xs font-bold transition">
                                 <x-icon name="upload" class="w-[15px] h-[15px]" />
                                 Import Existing CV
@@ -1013,6 +1013,7 @@
             '@id' => url('/') . '#website',
             'url' => url('/'),
             'name' => 'Formnexa',
+            'alternateName' => 'Formnexa',
             'publisher' => ['@id' => url('/') . '#org'],
         ],
         [

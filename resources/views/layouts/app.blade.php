@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full scroll-smooth bg-[#ffffff]">
 <head>
+    @php
+        $gtmId = config('services.gtm.id', 'GTM-53575H77');
+    @endphp
+    @if(!empty($gtmId) && !app()->environment('testing'))
+        <!-- Google Tag Manager / Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtm.js?id={{ $gtmId }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+        </script>
+    @endif
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -23,6 +35,10 @@
     @stack('head')
 </head>
 <body class="min-h-full bg-white text-[#17211b] antialiased flex flex-col selection:bg-[#184f3a] selection:text-white">
+    @if(!empty($gtmId) && !app()->environment('testing'))
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ $gtmId }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    @endif
 
     @php
         $converterGroups = \App\Support\ConverterCatalog::grouped();
@@ -83,13 +99,13 @@
                                         <div class="text-[11px] text-[#68736d] mt-0.5">ATS-ready &amp; modern layouts</div>
                                     </div>
                                 </a>
-                                <a href="{{ route('resume.builder', ['import' => 1]) }}" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#e8f7ed]/70 transition group">
+                                <a href="{{ route('resume.ats_converter') }}" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#e8f7ed]/70 transition group">
                                     <span class="w-8 h-8 rounded-lg bg-[#e8f7ed] text-[#184f3a] border border-[#c8f3dc] flex items-center justify-center shrink-0">
                                         <x-icon name="upload" class="w-[17px] h-[17px]" />
                                     </span>
                                     <div>
-                                        <div class="text-xs font-bold text-[#17211b] group-hover:text-[#184f3a]">Import Existing CV</div>
-                                        <div class="text-[11px] text-[#68736d] mt-0.5">Upload PDF/DOCX or paste text</div>
+                                        <div class="text-xs font-bold text-[#17211b] group-hover:text-[#184f3a]">ATS Resume Converter</div>
+                                        <div class="text-[11px] text-[#68736d] mt-0.5">Upload PDF/DOCX to ATS format</div>
                                     </div>
                                 </a>
                                 <a href="{{ route('resume.templates') }}" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#f8f8f3] transition group border-t border-[#dfe4df] pt-2.5">
@@ -484,6 +500,7 @@
                     <h3 class="text-[14px] font-semibold text-white mb-4">Products</h3>
                     <ul class="space-y-2.5 text-[14px]">
                         <li><a href="{{ route('resume.builder') }}" class="hover:text-white transition-colors">Resume Builder</a></li>
+                        <li><a href="{{ route('resume.ats_converter') }}" class="hover:text-white transition-colors">ATS Resume Converter</a></li>
                         <li><a href="{{ route('invoice.studio') }}" class="hover:text-white transition-colors">Invoice Maker</a></li>
                         <li><a href="{{ route('convert.hub') }}" class="hover:text-white transition-colors">PDF Converter</a></li>
                         <li><a href="{{ route('resume.templates') }}" class="hover:text-white transition-colors">Resume Templates</a></li>

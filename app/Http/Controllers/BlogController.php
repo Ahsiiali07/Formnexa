@@ -102,13 +102,47 @@ class BlogController extends Controller
             ->pluck('total', 'category')
             ->all();
 
-        $catDesc = 'Read step-by-step tutorials, formats, and checklists on ' . strtolower($categoryLabel) . ' using Formnexa free PDF tools.';
+        $categoryDetails = [
+            'invoicing' => [
+                'title' => 'Invoicing & Billing Guides – Formats, Payment Terms & Tips | Formnexa Blog',
+                'description' => 'Master client billing with step-by-step invoice guides, payment term strategies, itemized tax breakdowns, and automated invoice templates for freelancers and agencies.',
+                'intro' => 'Clear, professional invoicing is the foundation of dependable cash flow. Whether you are freelancing, running a digital agency, or managing a trade business, our invoicing guides cover essential billing practices—from structuring standard itemized invoices and setting fair net-30 payment terms to handling overdue balances with polite reminder schedules. Learn how to calculate local sales taxes, add direct payment links, and choose the right billing frequency for your projects. Pair each walkthrough with Formnexa\'s free invoice generator to produce polished, watermark-free PDF bills that help you get paid faster.',
+            ],
+            'resumes' => [
+                'title' => 'ATS Resume & CV Guides – Formatting Rules & Layouts | Formnexa Blog',
+                'description' => 'Learn how to write an ATS-friendly resume that passes automated recruiter screening. Practical formatting checklists, keyword optimization tips, and free templates.',
+                'intro' => 'Modern hiring relies heavily on Applicant Tracking Systems (ATS) like Workday, Greenhouse, and Taleo to screen candidates before human eyes ever see an application. Our resume guides provide straightforward, evidence-based advice on passing automated parsers without sacrificing visual elegance. Learn how to structure single-column layouts, organize standard sections (Experience, Education, and Skills), write outcome-driven bullet points with measurable metrics, and tailor keywords to specific job postings. Use these guides alongside Formnexa\'s ATS CV Converter and live resume builder to create clean, recruiter-ready resumes in PDF and DOCX.',
+            ],
+            'pdf-tools' => [
+                'title' => 'PDF & Document Conversion Guides – PDF to Word, JPG & Archival | Formnexa Blog',
+                'description' => 'Step-by-step guides for converting PDF to editable Word, JPG to PDF, and PDF/A archival standards without losing typography or layout integrity.',
+                'intro' => 'Working with digital documents shouldn\'t mean wrestling with broken layouts, lost fonts, or scrambled tables. Our PDF and file conversion guides explain the mechanics of document transformation—how vector text differs from scanned imagery, how to convert PDFs into editable Microsoft Word (.docx) files while preserving column structure, and when to use ISO-standardized PDF/A formats for long-term legal archival. Whether you need to turn smartphone photos into crisp multi-page PDFs or export lightweight files for email attachments, explore our tutorials and companion converter tools built for speed and security.',
+            ],
+            'business-docs' => [
+                'title' => 'Business Operations & Commercial Document Guides | Formnexa Blog',
+                'description' => 'Understand the difference between quotes, purchase orders, work orders, receipts, and packing slips with clear workflows and free document generators.',
+                'intro' => 'Every commercial transaction relies on a chain of operational documents—from initial quotations and formal estimates to purchase orders, work orders, packing slips, and final payment receipts. Our business operations guides clarify the legal and administrative roles of each document in commerce, helping you avoid costly miscommunications with vendors and clients. Discover when to issue an estimate versus a binding quote, how to verify goods received against purchase orders, and how to maintain audit-ready digital paperwork using Formnexa\'s free commercial document generators.',
+            ],
+            'global-billing' => [
+                'title' => 'International Billing Guides – Multi-Currency, Cross-Border & Tax | Formnexa Blog',
+                'description' => 'Practical guides for invoicing international clients across the US, Europe, Asia, and the Middle East. Multi-currency conversions, VAT/GST rules, and SWIFT/IBAN setups.',
+                'intro' => 'Billing international clients requires navigating diverse currency conventions, foreign exchange margins, cross-border payment rails, and distinct regional tax obligations. Our global billing guides offer practical roadmaps for remote professionals, exporters, and international contractors working across North America, Europe, Asia, and the Middle East. Learn how to specify correct SWIFT/BIC codes and IBAN details, account for reverse-charge VAT or GST rules, lock in agreed exchange rates, and select lower-cost payment gateways. Streamline your global invoicing with Formnexa\'s multi-currency PDF billing tools.',
+            ],
+        ];
+
+        $detail = $categoryDetails[$category] ?? null;
+        $categoryIntro = $detail['intro'] ?? null;
+
+        $catTitle = $detail['title'] ?? ($categoryLabel . ' Guides & Templates | Formnexa Blog');
+        $catDesc = $detail['description'] ?? ('Read step-by-step tutorials, formats, and checklists on ' . strtolower($categoryLabel) . ' using Formnexa free PDF tools.');
+
         if ($posts->currentPage() > 1) {
+            $catTitle = $categoryLabel . ' Guides – Page ' . $posts->currentPage() . ' | Formnexa Blog';
             $catDesc = 'Explore page ' . $posts->currentPage() . ' of ' . strtolower($categoryLabel) . ' guides, formats, and checklists on Formnexa.';
         }
 
         $seo = [
-            'title' => ($posts->currentPage() > 1 ? $categoryLabel . ' Guides – Page ' . $posts->currentPage() . ' | Formnexa Blog' : $categoryLabel . ' Guides & Templates | Formnexa Blog'),
+            'title' => $catTitle,
             'description' => $catDesc,
             'canonical' => $posts->currentPage() > 1
                 ? $posts->url($posts->currentPage())
@@ -122,6 +156,7 @@ class BlogController extends Controller
             'categoryCounts' => $categoryCounts,
             'activeCategory' => $category,
             'activeCategoryLabel' => $categoryLabel,
+            'categoryIntro' => $categoryIntro,
             'search' => '',
             'seo' => $seo,
         ]);
@@ -158,11 +193,22 @@ class BlogController extends Controller
             $seo['robots'] = 'noindex,nofollow';
         }
 
+        $resumeTemplates = [];
+        if ($post->category === 'resumes') {
+            $all = \App\Support\ResumeCatalog::templates();
+            $curatedSlugs = ['harvard-wallstreet', 'zurich-swiss', 'linear-founding-engineer', 'atlantic-flow'];
+            $resumeTemplates = array_values(array_filter($all, fn ($t) => in_array($t['slug'], $curatedSlugs, true)));
+            if (empty($resumeTemplates)) {
+                $resumeTemplates = array_slice($all, 0, 4);
+            }
+        }
+
         return view('blog.show', [
             'post' => $post,
             'toc' => $post->tableOfContents(),
             'renderedHtml' => $post->renderedContent(),
             'relatedPosts' => $relatedPosts,
+            'resumeTemplates' => $resumeTemplates,
             'seo' => $seo,
         ]);
     }

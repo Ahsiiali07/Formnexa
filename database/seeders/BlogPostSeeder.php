@@ -510,12 +510,14 @@ MD,
                 'focus_keyword' => 'convert cv to ats format for free',
                 'meta_title' => 'Convert CV to ATS Format for Free – Word & PDF Guide | Formnexa',
                 'meta_description' => 'Learn how to convert any CV to ATS format for free. Download the best ATS CV templates in Word (DOCX) and PDF, check scores with a free ATS checker, and get hired faster.',
-                'featured_tool_route' => 'resume.templates',
-                'featured_tool_label' => 'Browse Free ATS CV Templates',
+                'featured_tool_route' => 'resume.ats_converter',
+                'featured_tool_label' => 'Convert CV to ATS Format Free',
                 'reading_time_minutes' => 6,
                 'excerpt' => 'Many job applications are screened out by automated applicant tracking software before reaching a recruiter. Learn how to convert any CV to an ATS format for free, pick a clean ATS CV template, and export Word and PDF files.',
                 'published_at' => now()->subDays(3),
                 'content' => <<<'MD'
+> ⚡ **Convert your CV now:** Upload your existing Word or PDF resume to Formnexa's free [ATS Resume Converter](/ats-resume-converter) to automatically parse and restructure your sections into a clean, single-column ATS layout in seconds. No sign-up required.
+
 If you have applied to dozens of jobs online without getting interview callbacks, your CV might be failing the initial **Applicant Tracking System (ATS)** screen. Software like Workday, Greenhouse, Taleo, and Lever scans hundreds of applicants in seconds, filtering out resumes with unreadable tables, nested graphics, or broken fonts.
 
 The good news: you do not need to rewrite your career history from scratch. Here is how to **convert your CV to an ATS format for free**, select the **best ATS CV template**, and download clean, formatted files in both **Word (.docx)** and **PDF**.

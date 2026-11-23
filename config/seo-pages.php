@@ -97,6 +97,12 @@ return [
         'keywords' => 'ats cv online, ats resume builder, convert cv to ats format for free, ats cv scale, free resume maker, cv to pdf, ats friendly resume, resume builder docx',
         'updated' => $d,
     ],
+    'ats-resume-converter' => [
+        'title' => 'Convert CV to ATS Format Free – Upload PDF or Word | Formnexa',
+        'description' => 'Upload your PDF or Word CV and rebuild it in a clean, ATS-friendly layout. Edit online and download a free PDF. No watermark.',
+        'keywords' => 'convert cv to ats format for free, ats resume converter, pdf to ats converter, word to ats converter free, convert resume to ats format, ats cv free',
+        'updated' => $d,
+    ],
     'resume-templates' => [
         'title' => 'Free ATS CV Template Word & PDF – Best ATS Resume Templates | Formnexa',
         'description' => 'Download 17 free ATS CV templates in Word (DOCX) & PDF. Convert CV to ATS format for free, score high on the ATS CV scale, and download with zero watermark.',

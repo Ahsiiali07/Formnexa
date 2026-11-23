@@ -68,6 +68,7 @@ Route::get('/templates', [InvoiceController::class, 'templates'])->name('templat
 // Resume Builder & Templates (No Login Required)
 Route::get('/resume-builder', [ResumeController::class, 'builder'])->name('resume.builder');
 Route::get('/resume-templates', [ResumeController::class, 'templates'])->name('resume.templates');
+Route::get('/ats-resume-converter', [ResumeController::class, 'atsConverter'])->name('resume.ats_converter');
 Route::post('/api/resumes/import', [ResumeController::class, 'import'])->name('resume.import');
 Route::post('/api/resumes', [ResumeController::class, 'store'])->name('resume.store');
 

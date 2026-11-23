@@ -30,6 +30,7 @@ class BlogAndSeoTest extends TestCase
             ->assertSee('{"@context":"https://schema.org"', false)
             ->assertSee('"@type":"Organization"', false)
             ->assertSee('"@type":"WebSite"', false)
+            ->assertSee('"alternateName":"Formnexa"', false)
             ->assertSee('"@type":"FAQPage"', false)
             ->assertSee('Free Invoice Maker, <span>Resume Builder &amp; PDF Converter</span>', false)
             ->assertSee('International Invoice Format Guide for Asia, USA &amp; Europe', false)
@@ -52,6 +53,19 @@ class BlogAndSeoTest extends TestCase
         $templates = $this->get('/resume-templates');
         $templates->assertStatus(200);
         $this->assertSame(1, preg_match_all('/<h1\b/i', $templates->getContent()));
+
+        // Dedicated ATS Resume Converter landing page
+        $atsConv = $this->get('/ats-resume-converter');
+        $atsConv->assertStatus(200)
+            ->assertSee('<title>Convert CV to ATS Format Free – Upload PDF or Word | Formnexa</title>', false)
+            ->assertSee('Convert Your CV to ATS Format for Free', false)
+            ->assertSee('Convert a PDF resume or Word resume to ATS format in a few minutes.', false)
+            ->assertSee('Most CVs convert cleanly, but always review the result in the editor before you download:', false)
+            ->assertSee('Single-column layouts such as Wall Street ATS Classic are generally the safest choice for automated screening.', false)
+            ->assertSee('Is my CV stored?', false)
+            ->assertSee('{"@context":"https://schema.org","@type":"WebApplication"', false)
+            ->assertSee('{"@context":"https://schema.org","@type":"BreadcrumbList"', false);
+        $this->assertSame(1, preg_match_all('/<h1\b/i', $atsConv->getContent()));
 
         // Unique SEO copy + schema on document generator and converter tool
         $quote = $this->get('/quote-generator');
@@ -125,7 +139,8 @@ class BlogAndSeoTest extends TestCase
 
         $this->get('/blog/category/resumes')
             ->assertStatus(200)
-            ->assertSee('Resumes &amp; ATS Guides', false)
+            ->assertSee('ATS Resume &amp; CV Guides – Formatting Rules &amp; Layouts | Formnexa Blog', false)
+            ->assertSee('Modern hiring relies heavily on Applicant Tracking Systems (ATS)')
             ->assertSee('ATS-Friendly Resume');
 
         $this->get('/blog?q=Europe')

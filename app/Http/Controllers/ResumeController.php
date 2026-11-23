@@ -30,6 +30,17 @@ class ResumeController extends Controller
     }
 
     /**
+     * Dedicated ATS Resume Converter Landing & Tool Page.
+     */
+    public function atsConverter(): View
+    {
+        $styles = ResumeCatalog::styles();
+        $templates = ResumeCatalog::templates();
+
+        return view('resume.converter', compact('styles', 'templates'));
+    }
+
+    /**
      * Live Interactive Resume Builder Studio (No Login Required).
      */
     public function builder(Request $request): View

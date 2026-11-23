@@ -31,9 +31,15 @@
                             Practical guides for invoices, resumes &amp; PDFs.
                         @endif
                     </h1>
-                    <p class="text-sm sm:text-[17px] text-[#536058] leading-relaxed">
-                        Clear tutorials, formatting checklists, and document templates built for freelancers, small businesses, and job seekers.
-                    </p>
+                    @if(!empty($categoryIntro))
+                        <p class="text-sm sm:text-[15px] text-[#536058] leading-relaxed max-w-3xl">
+                            {{ $categoryIntro }}
+                        </p>
+                    @else
+                        <p class="text-sm sm:text-[17px] text-[#536058] leading-relaxed">
+                            Clear tutorials, formatting checklists, and document templates built for freelancers, small businesses, and job seekers.
+                        </p>
+                    @endif
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 shrink-0">
