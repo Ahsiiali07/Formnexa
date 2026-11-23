@@ -962,6 +962,16 @@ document.addEventListener('alpine:init', () => {
         saving: false,
         downloading: false,
         toast: { visible: false, message: '', type: 'success' },
+        toolStartedTracked: false,
+
+        markStarted() {
+            if (!this.toolStartedTracked) {
+                this.toolStartedTracked = true;
+                if (typeof window.track === 'function') {
+                    window.track('tool_started', { tool_name: 'resume_builder' });
+                }
+            }
+        },
 
         init() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -1021,8 +1031,8 @@ document.addEventListener('alpine:init', () => {
             this.$watch('template_style', (val) => {
                 if (val) this.importTargetStyle = val;
             });
-            this.$watch('content', () => this.autoSave(), { deep: true });
-            this.$watch('title', () => this.autoSave());
+            this.$watch('content', () => { this.markStarted(); this.autoSave(); }, { deep: true });
+            this.$watch('title', () => { this.markStarted(); this.autoSave(); });
         },
 
         initials() {
@@ -1103,12 +1113,19 @@ document.addEventListener('alpine:init', () => {
         onImportFileSelect(event) {
             const file = event.target.files[0];
             if (!file) return;
+            this.markStarted();
             this.importFile = file;
             this.importFileName = file.name;
             this.importError = '';
+
+            const ext = (file.name.split('.').pop() || 'pdf').toLowerCase();
+            if (typeof window.track === 'function') {
+                window.track('file_uploaded', { tool_name: 'resume_builder', file_type: ext });
+            }
         },
 
         fillSampleImportText() {
+            this.markStarted();
             this.importMode = 'text';
             this.importText = `Jordan Michaels
 Senior Product Manager
@@ -1203,6 +1220,9 @@ Certified Scrum Product Owner (CSPO) - 2021`;
                 this.importModalOpen = false;
                 this.openSection = 'personal';
                 this.autoSave();
+                if (typeof window.track === 'function') {
+                    window.track('conversion_completed', { tool_name: 'resume_builder' });
+                }
                 this.showToast(`Applied CV to ${this.styles[targetStyle]?.name || 'template'} (${data.stats.experience} roles, ${data.stats.skills} skills)!`);
             } catch (e) {
                 console.error(e);
@@ -1214,6 +1234,10 @@ Certified Scrum Product Owner (CSPO) - 2021`;
 
         applyTemplatePreset(tpl, forceResetSample = false) {
             if (!tpl) return;
+            this.markStarted();
+            if (typeof window.track === 'function') {
+                window.track('template_selected', { template_name: tpl.name || tpl.slug || tpl.style || 'template' });
+            }
             const nextStyle = tpl.template_style || tpl.style || 'flow_sidebar';
             this.template_style = nextStyle;
             this.importTargetStyle = nextStyle;
@@ -1308,6 +1332,9 @@ Certified Scrum Product Owner (CSPO) - 2021`;
             try {
                 const data = await this.saveResume();
                 if (data && data.pdf_url) {
+                    if (typeof window.track === 'function') {
+                        window.track('document_downloaded', { tool_name: 'resume_builder', format: 'pdf' });
+                    }
                     window.location.href = data.pdf_url;
                 }
             } finally {

@@ -13,6 +13,23 @@
             gtag('js', new Date());
         </script>
     @endif
+    <!-- Global GTM dataLayer Event Helper -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function track(event, params = {}) {
+            window.dataLayer.push(Object.assign({ event: event }, params));
+        }
+        window.track = track;
+    </script>
+    @if(session('signup_completed'))
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                if (typeof window.track === 'function') {
+                    window.track('signup_completed');
+                }
+            });
+        </script>
+    @endif
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">

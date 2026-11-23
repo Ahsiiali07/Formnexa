@@ -77,7 +77,7 @@
                         Insert Sample CV Text
                     </button>
                 </div>
-                <textarea x-model="rawText" rows="8"
+                <textarea x-model="rawText" @input="markStarted()" rows="8"
                           placeholder="Paste your resume content here (Name, Contact Details, Summary, Work History, Education, Skills)..."
                           class="w-full p-4 rounded-2xl bg-[#fbfbf7] border border-[#dfe4df] text-xs sm:text-sm text-[#17211b] leading-relaxed focus:bg-white focus:border-[#184f3a] focus:ring-1 focus:ring-[#184f3a] focus:outline-none"></textarea>
             </div>
@@ -88,7 +88,7 @@
                     <label for="targetStyleSelect" class="text-xs font-bold text-[#17211b] block">Target ATS Layout Theme</label>
                     <span class="text-[11px] text-[#68736d]">Rebuilds your parsed information into this structure:</span>
                 </div>
-                <select id="targetStyleSelect" x-model="targetStyle" class="px-3.5 py-2 rounded-xl bg-white border border-[#c6d1ca] font-semibold text-xs text-[#17211b] focus:border-[#184f3a] focus:outline-none">
+                <select id="targetStyleSelect" x-model="targetStyle" @change="onStyleChange($event)" class="px-3.5 py-2 rounded-xl bg-white border border-[#c6d1ca] font-semibold text-xs text-[#17211b] focus:border-[#184f3a] focus:outline-none">
                     <option value="ats_classic">Wall Street ATS Classic (100% Linear Single-Column)</option>
                     <option value="minimal_swiss">Zurich Swiss Grid (Linear Hierarchy)</option>
                     <option value="tech_stack">Silicon Valley Stack (Engineering Monospace)</option>
@@ -323,6 +323,24 @@ function atsConverter() {
         targetStyle: 'ats_classic',
         converting: false,
         errorMessage: '',
+        toolStartedTracked: false,
+
+        markStarted() {
+            if (!this.toolStartedTracked) {
+                this.toolStartedTracked = true;
+                if (typeof window.track === 'function') {
+                    window.track('tool_started', { tool_name: 'ats_resume_converter' });
+                }
+            }
+        },
+
+        onStyleChange(event) {
+            const sel = event.target;
+            const styleName = sel?.options[sel.selectedIndex]?.text || this.targetStyle;
+            if (typeof window.track === 'function') {
+                window.track('template_selected', { template_name: styleName });
+            }
+        },
 
         onFileSelect(event) {
             const f = event.target.files[0];
@@ -331,13 +349,20 @@ function atsConverter() {
                 this.errorMessage = 'File exceeds the 5MB limit. Please choose a smaller file or paste plain text.';
                 return;
             }
+            this.markStarted();
             this.file = f;
             this.fileName = f.name;
             this.fileSize = (f.size / 1024).toFixed(1) + ' KB';
             this.errorMessage = '';
+
+            const fileExt = (f.name.split('.').pop() || 'pdf').toLowerCase();
+            if (typeof window.track === 'function') {
+                window.track('file_uploaded', { tool_name: 'ats_resume_converter', file_type: fileExt });
+            }
         },
 
         fillSample() {
+            this.markStarted();
             this.mode = 'text';
             this.rawText = `Jordan Michaels
 Senior Product Manager
@@ -407,6 +432,10 @@ Certified Scrum Product Owner (CSPO) - 2021`;
                     this.errorMessage = data.message || 'Could not extract text from this CV. If this is a scanned image PDF, please paste your CV text instead.';
                     this.converting = false;
                     return;
+                }
+
+                if (typeof window.track === 'function') {
+                    window.track('conversion_completed', { tool_name: 'ats_resume_converter' });
                 }
 
                 const parsed = data.parsed;

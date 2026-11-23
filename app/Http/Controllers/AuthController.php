@@ -87,7 +87,8 @@ class AuthController extends Controller
 
         return redirect()
             ->intended(route('invoice.history.page'))
-            ->with('success', 'Account created! Your document history is now synced to your account.');
+            ->with('success', 'Account created! Your document history is now synced to your account.')
+            ->with('signup_completed', true);
     }
 
     /**

@@ -186,14 +186,17 @@
                     </ul>
                 </div>
 
-                <!-- 9. Cookies & Tracking -->
+                <!-- 9. Cookies & Analytics Tracking -->
                 <div>
                     <h2 class="text-lg sm:text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
                         <span class="w-6 h-6 rounded-lg bg-teal-100 text-teal-800 text-xs font-extrabold inline-flex items-center justify-center">9</span>
-                        Cookies & Local Storage
+                        Cookies, Local Storage &amp; Analytics
                     </h2>
                     <p class="text-slate-600 mb-3">
-                        Formnexa uses essential session cookies required for website operation and CSRF security verification. We do not use third-party invasive behavioral tracking or advertising cookies.
+                        Formnexa uses essential session cookies required for website operation, user session continuity, and CSRF security verification. In addition, we utilize <strong>Google Tag Manager (GTM)</strong> and <strong>Google Analytics 4 (GA4)</strong> to gather aggregated, anonymized usage telemetry (such as page visits, tool usage steps, file conversion counts, and technical performance metrics) to evaluate platform reliability and enhance our tools.
+                    </p>
+                    <p class="text-slate-600 mb-3">
+                        <strong>Zero Personal Data in Telemetry:</strong> In accordance with our privacy commitments, we strictly forbid and enforce that no personally identifiable information (PII)—including names, email addresses, resume or CV text, invoice balances, recipient details, or original personal file names—is ever sent to Google Tag Manager, Google Analytics, or third-party analytical services. We do not use third-party invasive behavioral advertising cookies or cross-site remarketing pixels.
                     </p>
                 </div>
 

@@ -1078,6 +1078,17 @@ document.addEventListener('alpine:init', () => {
             message: '',
             type: 'success',
         },
+        toolStartedTracked: false,
+
+        markStarted() {
+            if (!this.toolStartedTracked) {
+                this.toolStartedTracked = true;
+                const toolName = config?.slug || 'invoice_studio';
+                if (typeof window.track === 'function') {
+                    window.track('tool_started', { tool_name: toolName });
+                }
+            }
+        },
 
         init() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -1126,14 +1137,22 @@ document.addEventListener('alpine:init', () => {
         },
 
         selectTemplateStyle(styleKey) {
+            this.markStarted();
             this.template_style = styleKey;
             this.autoSaveLocalStorage();
             const label = this.templateStyles[styleKey]?.name || styleKey;
+            if (typeof window.track === 'function') {
+                window.track('template_selected', { template_name: label });
+            }
             this.showToast(`Switched layout to ${label}`);
         },
 
         applyIndustryTemplate(tpl) {
             if (!tpl) return;
+            this.markStarted();
+            if (typeof window.track === 'function') {
+                window.track('template_selected', { template_name: tpl.name || tpl.slug || 'template' });
+            }
             this.template_style = tpl.template_style || 'modern';
             this.accent_color = tpl.accent_color || '#0d9488';
             this.invoice_title = tpl.invoice_title || 'INVOICE';
@@ -1238,6 +1257,11 @@ document.addEventListener('alpine:init', () => {
         handleCoverUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
+            this.markStarted();
+            const ext = (file.name.split('.').pop() || 'png').toLowerCase();
+            if (typeof window.track === 'function') {
+                window.track('file_uploaded', { tool_name: config?.slug || 'invoice_studio', file_type: ext });
+            }
             const reader = new FileReader();
             reader.onload = (e) => {
                 this.cover_image = e.target.result;
@@ -1249,6 +1273,11 @@ document.addEventListener('alpine:init', () => {
         handleLogoUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
+            this.markStarted();
+            const ext = (file.name.split('.').pop() || 'png').toLowerCase();
+            if (typeof window.track === 'function') {
+                window.track('file_uploaded', { tool_name: config?.slug || 'invoice_studio', file_type: ext });
+            }
             const reader = new FileReader();
             reader.onload = (e) => {
                 this.logo_data = e.target.result;
@@ -1411,6 +1440,9 @@ document.addEventListener('alpine:init', () => {
             try {
                 const data = await this.saveInvoice();
                 if (data && data.pdf_url) {
+                    if (typeof window.track === 'function') {
+                        window.track('document_downloaded', { tool_name: config?.slug || 'invoice_studio', format: 'pdf' });
+                    }
                     window.location.href = data.pdf_url;
                 }
             } finally {
@@ -1476,6 +1508,7 @@ document.addEventListener('alpine:init', () => {
         },
 
         autoSaveLocalStorage() {
+            this.markStarted();
             try {
                 const key = 'formnexa_draft_' + (config?.slug || 'invoice-generator');
                 localStorage.setItem(key, JSON.stringify(this.getPayload()));

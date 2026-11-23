@@ -107,7 +107,7 @@
 
                         <div class="p-5 space-y-4">
                             <div x-show="htmlMode === 'code'" class="space-y-3">
-                                <textarea x-model="htmlCode" rows="12"
+                                <textarea x-model="htmlCode" @input="markStarted()" rows="12"
                                           placeholder="Paste your clean <!DOCTYPE html> ... </html> or HTML snippet here..."
                                           class="w-full p-4 rounded-xl bg-slate-50 border border-slate-200 font-mono text-xs text-slate-800 focus:bg-white focus:border-[#184f3a] focus:outline-none"></textarea>
                                 <div class="flex items-center justify-between text-[11px] text-slate-500">
@@ -136,7 +136,7 @@
 
                             <div x-show="htmlMode === 'url'" class="space-y-2">
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Public Webpage URL</label>
-                                <input type="url" x-model="htmlUrl" placeholder="https://example.com/article"
+                                <input type="url" x-model="htmlUrl" @input="markStarted()" placeholder="https://example.com/article"
                                        class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-[#184f3a] focus:outline-none">
                                 <p class="text-[11px] text-slate-500">Fetches public HTTPS pages safely and converts the document into printable PDF format.</p>
                             </div>
@@ -505,6 +505,16 @@ function pdfConverterTool(meta) {
         errorMsg: '',
         downloadResult: null,
         renderedJpgPages: [],
+        toolStartedTracked: false,
+
+        markStarted() {
+            if (!this.toolStartedTracked) {
+                this.toolStartedTracked = true;
+                if (typeof window.track === 'function') {
+                    window.track('tool_started', { tool_name: this.meta.slug });
+                }
+            }
+        },
 
         htmlMode: 'code',
         htmlCode: `<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: Arial, sans-serif; color: #0f172a; padding: 32px; }\n  .card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; }\n  h2 { color: #184f3a; margin-top: 0; }\n</style>\n</head>\n<body>\n  <div class="card">\n    <h2>Project Status Summary</h2>\n    <p>Converted cleanly to crisp vector PDF using Formnexa HTML to PDF.</p>\n  </div>\n</body>\n</html>`,
@@ -535,8 +545,16 @@ function pdfConverterTool(meta) {
 
         addFiles(list) {
             if (!list.length) return;
+            this.markStarted();
             this.errorMsg = '';
             this.downloadResult = null;
+
+            for (const f of list) {
+                const ext = (f.name.split('.').pop() || '').toLowerCase();
+                if (typeof window.track === 'function') {
+                    window.track('file_uploaded', { tool_name: this.meta.slug, file_type: ext });
+                }
+            }
 
             if (this.meta.multiple) {
                 for (const f of list) {
@@ -593,6 +611,7 @@ function pdfConverterTool(meta) {
         },
 
         insertSampleHtml() {
+            this.markStarted();
             this.htmlCode = `<!DOCTYPE html>
 <html>
 <head>
@@ -644,6 +663,9 @@ function pdfConverterTool(meta) {
         },
 
         downloadSingleJpg(pg) {
+            if (typeof window.track === 'function') {
+                window.track('document_downloaded', { tool_name: this.meta.slug, format: 'jpg' });
+            }
             const base = (this.selectedFiles[0]?.name || 'document').replace(/\.pdf$/i, '');
             const padded = String(pg.pageNumber).padStart(2, '0');
             window.FormnexaPdf.downloadBlob(pg.blob, `${base}-page-${padded}.jpg`);
@@ -651,6 +673,9 @@ function pdfConverterTool(meta) {
 
         async downloadAllJpgs() {
             if (!this.renderedJpgPages.length) return;
+            if (typeof window.track === 'function') {
+                window.track('document_downloaded', { tool_name: this.meta.slug, format: 'zip' });
+            }
             const base = this.selectedFiles[0]?.name || 'pdf-pages';
             if (this.renderedJpgPages.length === 1) {
                 this.downloadSingleJpg(this.renderedJpgPages[0]);
@@ -670,6 +695,9 @@ function pdfConverterTool(meta) {
                 if (window.FormnexaPdf) {
                     if (!this.renderedJpgPages.length) {
                         await this.renderPdfPreview();
+                    }
+                    if (typeof window.track === 'function') {
+                        window.track('conversion_completed', { tool_name: this.meta.slug });
                     }
                     await this.downloadAllJpgs();
                     return;
@@ -768,6 +796,10 @@ function pdfConverterTool(meta) {
                 const fallbackBase = (this.selectedFiles[0]?.name || 'converted').replace(/\.[^.]+$/, '');
                 const filename = headerName || `${fallbackBase}.${this.meta.output_ext}`;
 
+                if (typeof window.track === 'function') {
+                    window.track('conversion_completed', { tool_name: this.meta.slug });
+                }
+
                 this.downloadResult = { blob, filename, size: blob.size };
                 this.triggerSavedDownload();
             } catch (e) {
@@ -781,6 +813,9 @@ function pdfConverterTool(meta) {
 
         triggerSavedDownload() {
             if (!this.downloadResult?.blob) return;
+            if (typeof window.track === 'function') {
+                window.track('document_downloaded', { tool_name: this.meta.slug, format: this.meta.output_ext || 'file' });
+            }
             if (window.FormnexaPdf?.downloadBlob) {
                 window.FormnexaPdf.downloadBlob(this.downloadResult.blob, this.downloadResult.filename);
                 return;
