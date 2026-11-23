@@ -60,6 +60,8 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])
     ->name('blog.show');
 
 // Live Invoice Studio (No Login Required)
+Route::redirect('/invoice', '/invoice-generator', 301);
+Route::redirect('/email', '/invoice-generator', 301);
 Route::get('/invoice-generator', [InvoiceController::class, 'index'])->name('invoice.studio');
 
 // Invoice Templates Gallery
