@@ -56,7 +56,7 @@
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 @foreach($groups['to_pdf'] as $tool)
-                    <a href="{{ route('convert.tool', $tool['slug']) }}"
+                    <a href="{{ $tool['direct_url'] ?? route('convert.tool', $tool['slug']) }}"
                        class="group bg-white rounded-xl border border-border-subtle p-5 shadow-sm hover:shadow-md hover:border-[#184f3a] transition-all duration-200 flex flex-col justify-between gap-4">
                         <div class="space-y-3.5">
                             <div class="flex items-center justify-between">
@@ -88,7 +88,7 @@
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 @foreach($groups['from_pdf'] as $tool)
-                    <a href="{{ route('convert.tool', $tool['slug']) }}"
+                    <a href="{{ $tool['direct_url'] ?? route('convert.tool', $tool['slug']) }}"
                        class="group bg-white rounded-xl border border-border-subtle p-5 shadow-sm hover:shadow-md hover:border-[#184f3a] transition-all duration-200 flex flex-col justify-between gap-4">
                         <div class="space-y-3.5">
                             <div class="flex items-center justify-between">

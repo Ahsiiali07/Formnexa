@@ -937,6 +937,18 @@
     <!-- Unique Document-Specific SEO Guide, Checklist, Comparison, FAQ & Related Tools -->
     <section class="no-print mt-14 sm:mt-20 max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
         <div class="bg-white rounded-[28px] border border-[#dfe4df] p-6 sm:p-10 space-y-8 shadow-sm">
+            @if(!empty($docSeoData['overview']))
+                <div class="space-y-3 pb-6 border-b border-[#dfe4df]">
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">{{ $docSeoData['overview_badge'] ?? 'In-Depth Guide' }}</span>
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        {{ $docSeoData['overview_title'] ?? 'Overview & Core Concepts' }}
+                    </h2>
+                    <div class="text-xs sm:text-sm text-[#46534b] leading-relaxed space-y-3">
+                        {!! $docSeoData['overview'] !!}
+                    </div>
+                </div>
+            @endif
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="space-y-4">
                     <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Step-by-Step Guide</span>
@@ -979,6 +991,18 @@
                     </p>
                 </div>
             </div>
+
+            @if(!empty($docSeoData['example']))
+                <div class="pt-6 border-t border-[#dfe4df] space-y-3">
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Real-World Scenario</span>
+                    <h3 class="font-display text-base sm:text-lg font-extrabold text-[#17211b]">
+                        {{ $docSeoData['example_title'] ?? 'Practical Example Scenario' }}
+                    </h3>
+                    <div class="p-5 rounded-2xl bg-[#f8f9fa] border border-[#e2e8f0] text-xs sm:text-sm text-[#46534b] leading-relaxed space-y-2">
+                        {!! $docSeoData['example'] !!}
+                    </div>
+                </div>
+            @endif
         </div>
 
         {{-- FAQ with Schema.org FAQPage --}}

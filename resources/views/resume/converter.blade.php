@@ -23,7 +23,7 @@
                 Free Online CV Parser &amp; Rebuilder
             </span>
             <h1 class="font-display text-3xl sm:text-5xl font-extrabold text-[#17211b] tracking-[-0.04em] leading-[1.08]">
-                Convert Your CV to ATS Format for Free
+                {{ request()->is('convert/pdf-to-ats') ? 'PDF to ATS Converter' : 'Convert Your CV to ATS Format for Free' }}
             </h1>
             <p class="text-sm sm:text-base text-[#536058] leading-relaxed max-w-2xl mx-auto">
                 Upload your existing PDF or Word CV—or paste plain text—to automatically parse your sections into a clean, single-column ATS layout you can edit online and download with zero watermark. Convert a PDF resume or Word resume to ATS format in a few minutes.

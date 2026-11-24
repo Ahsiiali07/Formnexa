@@ -36,9 +36,13 @@ class SeoComposer
             }
         }
 
-        if (str_starts_with($view->name(), 'errors.')) {
+        if (str_starts_with($view->name(), 'errors.') || str_starts_with($path, 'api/')) {
             $seo['title'] = $seo['title'] ?: 'Page Not Found | Formnexa';
             $seo['robots'] = 'noindex,follow';
+        }
+
+        if (str_starts_with($view->name(), 'resume.show') || str_starts_with($view->name(), 'invoice.show')) {
+            $seo['robots'] = 'noindex,nofollow';
         }
 
         // Strip query strings (?import=1, ?utm_*, ?q=...) from canonical URLs by default

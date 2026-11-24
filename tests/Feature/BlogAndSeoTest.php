@@ -76,7 +76,7 @@ class BlogAndSeoTest extends TestCase
 
         $pdfToWord = $this->get('/convert/pdf-to-word');
         $pdfToWord->assertStatus(200)
-            ->assertSee('PDF to Word Converter – PDF to DOCX Without Losing Format | Formnexa', false)
+            ->assertSee('PDF to Word Converter: Free, Keeps Formatting | Formnexa', false)
             ->assertSee('Word to PDF Converter', false)
             ->assertSee('UtilitiesApplication', false);
         $this->assertSame(1, preg_match_all('/<h1\b/i', $pdfToWord->getContent()));

@@ -12,8 +12,8 @@ return [
 
     // ---------- Invoices and business documents ----------
     'invoice-generator' => [
-        'title' => 'Free Invoice Generator – Free Online Invoice Maker PDF | Formnexa',
-        'description' => 'Free invoice generator & online invoice maker. Create, email, and download PDF invoices with taxes, payment links, and 24 currencies with zero watermark.',
+        'title' => 'Free Invoice Generator: Create PDF Invoices Online | Formnexa',
+        'description' => 'Create and download professional invoices for free. Add your logo, taxes and payment details. No signup required.',
         'keywords' => 'free invoice generator, invoice maker, online invoice maker, invoice pdf, free invoice template, billing generator, make invoice online free, mail invoice to foreign customers',
         'updated' => $d,
     ],
@@ -72,8 +72,8 @@ return [
         'updated' => $d,
     ],
     'work-order-generator' => [
-        'title' => 'Work Order Generator Free – Create Work Order PDF Online | Formnexa',
-        'description' => 'Free work order generator for maintenance, contractors & service teams. Add labor tasks, replacement parts & sign-off. Instant printable PDF, no watermark.',
+        'title' => 'Free Work Order Generator: Create and Download PDF | Formnexa',
+        'description' => 'Create professional work orders online for free. Add tasks, costs and signatures, then download as PDF.',
         'keywords' => 'work order generator, work order generator free, maintenance work order, service work order template, contractor work order pdf',
         'updated' => $d,
     ],
@@ -92,8 +92,8 @@ return [
 
     // ---------- Resume ----------
     'resume-builder' => [
-        'title' => 'Free CV Maker & Resume Builder – Download PDF | Formnexa',
-        'description' => 'Create a CV free online in minutes. Pick a template, edit on your phone or computer, and download a PDF. ATS-friendly, no watermark.',
+        'title' => 'Free ATS Resume Builder: Create a CV Online | Formnexa',
+        'description' => 'Build an ATS-friendly resume online for free. Pick a template, fill in your details, download as PDF or Word.',
         'keywords' => 'create cv free online, free cv maker, create cv free pdf, cv maker online free download, edit cv online free, ats cv online, ats resume builder, free resume maker, cv to pdf, ats friendly resume',
         'updated' => $d,
     ],
@@ -104,8 +104,8 @@ return [
         'updated' => $d,
     ],
     'resume-templates' => [
-        'title' => 'Free ATS CV Template Word & PDF – Best ATS Resume Templates | Formnexa',
-        'description' => 'Download 17 free ATS CV templates in Word (DOCX) & PDF. Convert CV to ATS format for free, score high on the ATS CV scale, and download with zero watermark.',
+        'title' => 'Free ATS Resume Templates (Word and PDF) | Formnexa',
+        'description' => 'Download free ATS-friendly resume templates. Clean layouts that pass applicant tracking systems.',
         'keywords' => 'free ats cv template word, best ats resume templates, ats resume template pdf, free resume templates, clean cv format, cv to ats format',
         'updated' => $d,
     ],
@@ -115,6 +115,12 @@ return [
         'title' => 'Free Online PDF Converter – 10 Tools | Formnexa',
         'description' => 'Convert JPG, Word, Excel, PowerPoint and HTML to PDF, or turn PDFs into Word, Excel, JPG and more. Free online file converters with zero watermark.',
         'keywords' => 'online pdf converter, free pdf tools, convert to pdf, pdf converter online, document converter, pdf merge',
+        'updated' => $d,
+    ],
+    'convert/pdf-to-ats' => [
+        'title' => 'PDF to ATS Converter: Free ATS-Friendly Resume Format | Formnexa',
+        'description' => 'Convert your PDF resume or CV to an ATS-friendly format in seconds. Free, no signup. Check headings, fonts and keywords before you apply.',
+        'keywords' => 'pdf to ats converter, pdf to ats converter free, ats converter, word to ats converter free, pdf to ats, convert pdf cv to ats format free',
         'updated' => $d,
     ],
     'convert/jpg-to-pdf' => [
@@ -154,8 +160,8 @@ return [
         'updated' => $d,
     ],
     'convert/pdf-to-word' => [
-        'title' => 'PDF to Word Converter – PDF to DOCX Without Losing Format | Formnexa',
-        'description' => 'Convert PDF to DOCX that keeps layout as closely as possible. Free online PDF to Word converter, instant DOCX download, zero watermark, no sign-up.',
+        'title' => 'PDF to Word Converter: Free, Keeps Formatting | Formnexa',
+        'description' => 'Turn any PDF into an editable Word document in seconds. Free, no signup, layout preserved.',
         'keywords' => 'pdf convert to word, pdf to docx without losing format, convert pdf to word, editable word docx, free pdf to word',
         'updated' => $d,
     ],

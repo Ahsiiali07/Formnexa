@@ -50,6 +50,7 @@ Route::get('/blog/category/{category}', [BlogController::class, 'category'])
     ->name('blog.category');
 
 // 301 Permanent Redirects for legacy/renamed blog slugs to resolve GSC 404 errors
+Route::redirect('/blog/convert-pdf-to-docx-without-losing-formatting-guide', '/blog/convert-pdf-to-editable-word-without-losing-formatting', 301);
 Route::redirect('/blog/how-to-write-an-ats-friendly-resume-guide', '/blog/how-to-write-ats-friendly-resume-guide', 301);
 Route::redirect('/blog/international-invoice-format-cross-border-currency-guide', '/blog/international-invoice-format-asia-usa-europe-guide', 301);
 Route::redirect('/blog/weekly-timesheet-break-hours-freelance-contractor-guide', '/blog/weekly-timesheets-and-work-orders-contractor-guide', 301);
@@ -135,6 +136,7 @@ Route::view('/privacy', 'pages.privacy')->name('privacy');
 
 // PDF Conversion Suite (10 Tools: Convert TO PDF & Convert FROM PDF — No Login Required)
 Route::get('/convert', [ConverterController::class, 'hub'])->name('convert.hub');
+Route::get('/convert/pdf-to-ats', [ResumeController::class, 'atsConverter'])->name('convert.pdf_to_ats');
 Route::get('/convert/{tool}', [ConverterController::class, 'tool'])
     ->where('tool', ConverterCatalog::slugsRegex())
     ->name('convert.tool');

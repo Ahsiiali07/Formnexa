@@ -93,7 +93,7 @@ class MobileApiTest extends TestCase
             ->assertJsonPath('success', true)
             ->assertJsonCount(12, 'invoice.generators')
             ->assertJsonCount(24, 'invoice.currencies')
-            ->assertJsonCount(10, 'converter.tools');
+            ->assertJsonCount(11, 'converter.tools');
 
         $invConfig = $this->getJson('/api/v1/invoices/config');
         $invConfig->assertOk()
@@ -121,7 +121,7 @@ class MobileApiTest extends TestCase
         $converters->assertOk()
             ->assertJsonPath('success', true)
             ->assertJsonCount(5, 'groups.to_pdf')
-            ->assertJsonCount(5, 'groups.from_pdf');
+            ->assertJsonCount(6, 'groups.from_pdf');
 
         $this->getJson('/api/v1/converters/pdf-to-jpg')
             ->assertOk()
