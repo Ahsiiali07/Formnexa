@@ -551,10 +551,19 @@ Formnexa makes it easy to modernize your CV with zero manual retyping:
 
 Not all resume layouts perform equally on automated screening algorithms. The **best ATS CV template** follows these proven criteria:
 
-- **Single-Column or Clean Linear Hierarchy:** Guarantees that parsers read your latest job before earlier roles without skipping text. Formnexa's *Linear Founding Engineer* and *Wall Street Classic ATS* layouts provide clean linear structure for enterprise screening systems.
+- **Single-Column or Clean Linear Hierarchy:** Guarantees that parsers read your latest job before earlier roles without skipping text. Formnexa's *Linear Founding Engineer* and *Wall Street Classic ATS* layouts follow the acclaimed [Haas single-column ATS resume standard](/blog/haas-resume-template-ats-format-guide) used across top MBA programs, technology giants, and Fortune 500 recruiters.
 - **Standard Headings:** Always label sections with standard keywords: `Professional Summary`, `Work Experience`, `Education`, and `Skills`.
 - **System Fonts:** Clean sans-serif and serif typefaces like Inter, Arial, Calibri, or Georgia ensure all letters and symbols parse without Unicode errors.
 - **Measurable Impact:** Quantify achievements with metrics and percentages (*"Increased customer retention by 34%"* rather than *"Responsible for client satisfaction"*).
+
+---
+
+## Fast-Track: Convert an Existing PDF or Word File Directly to ATS Format
+
+If you already have an existing resume saved as a PDF or DOCX file, you do not need to retype your career history manually. Use Formnexa's dedicated [ATS Resume Converter](/ats-resume-converter):
+1. **Upload your file** (supports PDF, DOCX, and TXT).
+2. The AI parser extracts your work history, dates, degrees, and core competencies into machine-readable ATS sections.
+3. Choose any single-column ATS template and download your free, watermark-free vector PDF or convert it to Word.
 
 ---
 
@@ -1041,6 +1050,813 @@ Lead Organizer | NUST ACM Student Chapter | 2024 – 2025
 4. Click **Download PDF** to export a watermark-free vector PDF immediately — no sign-up or credit card required.
 
 Need help building your resume directly on your smartphone? Check out our step-by-step tutorial on [how to make a CV on your phone for free](/blog/how-to-make-cv-on-phone-free-guide).
+MD,
+            ],
+            [
+                'title' => 'How to Convert HTML or Web Page to PDF for Free (Without Broken CSS)',
+                'slug' => 'how-to-convert-html-or-webpage-to-pdf-guide',
+                'category' => 'pdf-tools',
+                'category_label' => 'PDF & File Conversion',
+                'focus_keyword' => 'free html to pdf converter',
+                'meta_title' => 'Free HTML to PDF Converter Guide – Convert Web Page to PDF | Formnexa',
+                'meta_description' => 'Learn how to convert raw HTML code, web pages, and URLs into print-ready PDF documents for free. Fix broken CSS page breaks, print margins, and font scaling.',
+                'featured_tool_route' => 'convert.tool:html-to-pdf',
+                'featured_tool_label' => 'Open Free HTML to PDF Converter',
+                'reading_time_minutes' => 6,
+                'excerpt' => 'Converting HTML or live web pages into crisp, printable PDF documents often results in broken layouts, cut-off tables, and missing fonts. Here is how to convert HTML to PDF cleanly for free.',
+                'published_at' => now()->subHours(1),
+                'content' => <<<'MD'
+> ⚡ **Convert HTML to PDF now:** Paste your raw HTML markup or upload your `.html` file into Formnexa's free [HTML to PDF Converter](/convert/html-to-pdf) to generate a crisp, vector A4 PDF with intact CSS styles and zero watermarks.
+
+Whether you are archiving online receipts, saving dynamic invoices from an internal dashboard, or creating offline reports from web applications, converting HTML into a clean PDF document is a fundamental business requirement.
+
+However, standard browser "Print to PDF" dialogs frequently introduce frustrating formatting bugs: header images overlap text, multi-column grids collapse unexpectedly, background colors vanish, and multi-page tables get sliced awkwardly across page boundaries.
+
+Here is a comprehensive guide on how to **convert HTML or a web page to PDF for free**, eliminate common CSS layout errors, and achieve pixel-perfect document rendering.
+
+---
+
+## Why HTML-to-PDF Conversion Often Breaks Styles
+
+Web browsers render HTML for dynamic, fluid viewports, whereas PDFs have rigid, physical page dimensions (typically standard A4 or US Letter). When converting web code to a printable document, three common pitfalls arise:
+
+1. **Missing `@media print` Styles:** Web CSS often relies on dark backgrounds or transparent cards. Without proper print media declarations, browsers strip background fills by default to save printer ink.
+2. **Missing Page-Break Controls:** Elements like signatures, invoice total summaries, or contact cards often get split in half across page margins.
+3. **Responsive Breakpoint Collapses:** If the PDF conversion engine evaluates the HTML in mobile viewport mode, your desktop layout will collapse into a stacked single column.
+
+---
+
+## How to Convert HTML Code or a Web Page to PDF in 3 Steps
+
+Formnexa provides a zero-install, browser-based conversion pipeline designed specifically for developers, accountants, and freelancers:
+
+1. **Open the Converter:** Navigate to Formnexa's [Free HTML to PDF Converter](/convert/html-to-pdf).
+2. **Paste or Upload HTML:** Paste your raw HTML source code, including inline CSS `<style>` blocks, or upload your `.html` file.
+3. **Download PDF:** Click **Convert to PDF**. The engine compiles the DOM, calculates typography and margins, and generates a downloadable vector PDF in seconds.
+
+---
+
+## CSS Rules for Flawless PDF Layouts
+
+If you write or customize HTML documents before conversion, incorporating these straightforward CSS properties ensures clean page divisions:
+
+### 1. Control Page Breaks with `break-inside`
+Avoid awkward splitting across data tables and signature blocks:
+```css
+.invoice-card, .table-row-group, .signature-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+```
+
+### 2. Force Explicit Page Breaks
+When building multi-page contracts, proposals, or annual reports:
+```css
+.page-break {
+    break-after: page;
+    page-break-after: always;
+}
+```
+
+### 3. Retain Exact Colors and Backgrounds
+Ensure invoice header banners and status badges render with their true background colors:
+```css
+body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+```
+
+### 4. Lock Fixed Page Dimensions
+Specify exact A4 or Letter dimensions in CSS:
+```css
+@page {
+    size: A4 portrait;
+    margin: 15mm 20mm;
+}
+```
+
+---
+
+## HTML to PDF vs. Browser Print to PDF: Key Differences
+
+| Feature | Browser "Print to PDF" (Ctrl+P) | Formnexa Free HTML to PDF Converter |
+|---|---|---|
+| **Header/Footer Timestamps** | Forces browser URL and date stamps on page edges | Clean, professional output with zero browser timestamps |
+| **Watermarks** | None | 100% Watermark-free |
+| **Color Fidelity** | Often strips background colors unless manually checked | Preserves full CSS color palettes and gradients |
+| **Speed & Automation** | Requires manual browser dialogue navigation | Instant file conversion ready for download or sharing |
+
+---
+
+## Converting Web Invoices & Receipts
+
+If your main goal is creating business invoices, quotes, or sales receipts, you don't even need to write manual HTML. Formnexa provides dedicated online generators that handle layout, PDF compiling, and currency formatting automatically:
+
+- [Free Invoice Maker](/invoice-generator)
+- [Online Receipt Generator](/receipt-generator)
+- [Proforma Invoice Generator](/proforma-invoice-generator)
+- [Quote & Estimate Maker](/quote-generator)
+
+For existing PDF files that need to be edited in Microsoft Word, you can also use our free [PDF to Word Converter](/convert/pdf-to-word) with zero loss of formatting.
+MD,
+            ],
+            [
+                'title' => 'Haas Resume Template: Free ATS Format, Word & PDF Example',
+                'slug' => 'haas-resume-template-ats-format-guide',
+                'category' => 'resumes',
+                'category_label' => 'Resumes & ATS',
+                'focus_keyword' => 'haas resume template',
+                'meta_title' => 'Haas Resume Template: Free ATS Format for Word & PDF | Formnexa',
+                'meta_description' => 'Download and format the UC Berkeley Haas business school single-column resume template. 100% ATS-friendly layout for finance, consulting, and tech applications.',
+                'featured_tool_route' => 'resume.ats_converter',
+                'featured_tool_label' => 'Convert CV to Haas ATS Format',
+                'reading_time_minutes' => 7,
+                'excerpt' => 'The Haas single-column resume format is regarded as the gold standard for corporate hiring, investment banking, and tech recruiters. Here is how it works, why ATS parsers love it, and how to use it for free.',
+                'published_at' => now()->subHours(2),
+                'content' => <<<'MD'
+> ⚡ **Convert your CV to Haas ATS format:** Upload your existing resume to Formnexa's free [ATS Resume Converter](/ats-resume-converter) to automatically parse your career history into a verified single-column ATS layout in seconds.
+
+When applying for competitive roles in technology, management consulting, venture capital, or Fortune 500 corporate strategy, visual "creative" resumes with multi-column sidebars, skill rating bars, and photo headshots frequently hurt candidate shortlist rates.
+
+Instead, top tier business schools—most notably the **UC Berkeley Haas School of Business**—teach a rigorous, standardized **single-column resume architecture**. Known widely across hiring teams as the **Haas Resume Template**, this layout has become an industry benchmark because it balances human readability with 100% Applicant Tracking System (ATS) parsing accuracy.
+
+Here is an in-depth breakdown of the Haas resume structure, the proven bullet formula, a free copy-paste example, and how you can export your own Haas-style resume in Word (.docx) or vector PDF for free.
+
+---
+
+## What is the Haas Resume Format & Why Do Top Employers Love It?
+
+The Haas format is built upon one foundational principle: **clarity over decoration**. 
+
+Hiring managers at firms like Google, McKinsey, Goldman Sachs, and Amazon spend an average of 6 to 8 seconds scanning a candidate's resume. The Haas format succeeds because:
+1. **Predictable Linear Hierarchy:** Recruiter eyes track naturally from top-left to bottom-right without bouncing across distracting sidebar columns.
+2. **Zero Parsing Failure in ATS Engines:** Automated scanners like Greenhouse, Workday, Taleo, and Lever extract job titles, company names, and employment dates flawlessly because there are no nested tables, graphical rating meters, or unreadable text boxes.
+3. **Rigorous Space Optimization:** Standard 0.5 to 0.75-inch margins and disciplined section spacing allow experienced professionals and MBA graduates to fit 5 to 10 years of high-impact experience cleanly onto a single page.
+
+---
+
+## The Anatomy of a Haas Single-Column ATS Resume
+
+A compliant Haas resume template consists of five standardized sections in strict descending order:
+
+### 1. Contact Header (Centered or Left-Aligned)
+- **Full Legal Name:** 16–18pt bold font.
+- **Contact Line:** Location (City, State/Country) • Phone Number • Professional Email • LinkedIn URL • GitHub/Portfolio (if applicable).
+- *Never include:* Full street address, photo, marital status, or date of birth.
+
+### 2. Education (Placed at the Top for Students/MBAs, or Bottom for Experienced Pros)
+- University Name, City, Country • Graduation Date (Right-aligned).
+- Degree earned (e.g., *Bachelor of Science in Computer Science*, *Master of Business Administration*).
+- Optional highlights: GPA (if 3.5+), Honors, Relevant Coursework, Leadership Fellowships.
+
+### 3. Professional Experience (The Core Section)
+- Company Name & Location (Left-aligned) • Employment Dates (Right-aligned).
+- Job Title (Italicized on the second line).
+- 3 to 5 bullet points per role constructed using the strict Haas Action Formula.
+
+### 4. Leadership & Extracurricular Activities
+- Demonstrates initiative, board roles, university clubs, or open-source community contributions.
+
+### 5. Skills & Additional Interests
+- Categorized cleanly into `Technical Skills`, `Tools & Platforms`, `Languages`, and `Interests`.
+
+---
+
+## The Haas Action-Verb Bullet Formula
+
+The defining characteristic of a Haas-style resume is how accomplishments are framed. Haas career coaches instruct candidates to use the **Action + Context + Quantified Impact** formula:
+
+$$\text{Strong Action Verb} + \text{Specific Business Context} + \text{Measurable Quantified Result}$$
+
+### Before vs. After Example:
+- ❌ **Weak (Passive):** *"Responsible for managing sales team and improving customer retention."*
+- &check; **Haas Standard (Active & Quantified):** *"Directed a cross-functional team of 8 account executives, reducing customer churn by 22% and generating $1.4M in incremental annual recurring revenue (ARR)."*
+
+- ❌ **Weak (Passive):** *"Worked on website performance and database optimization."*
+- &check; **Haas Standard (Active & Quantified):** *"Architected automated caching layer across 14 microservices, decreasing 95th-percentile API response latency from 450ms to 85ms."*
+
+---
+
+## Free Haas Resume Template Text Example (Copy & Paste)
+
+```text
+ALEX MORGAN
+San Francisco, CA • (555) 234-5678 • alex.morgan@email.com • linkedin.com/in/alexmorgan
+
+EDUCATION
+UNIVERSITY OF CALIFORNIA, BERKELEY, HAAS SCHOOL OF BUSINESS
+Master of Business Administration (MBA) | Class of 2024
+• Concentrations: Technology Management & Corporate Finance
+• Leadership: VP of Technology Club, Haas Consulting Fellow
+
+UNIVERSITY OF MICHIGAN
+Bachelor of Science in Industrial & Operations Engineering | May 2019
+• Summa Cum Laude (GPA: 3.89/4.00), Tau Beta Pi Engineering Honor Society
+
+PROFESSIONAL EXPERIENCE
+STRIPE | San Francisco, CA
+Senior Product Operations Manager | 2021 – Present
+• Spearheaded merchant onboarding optimization across 12 European markets, increasing payment activation conversion by 18% within 90 days.
+• Led sprint prioritization for a dedicated squad of 6 software engineers and 2 UX designers, delivering automated identity verification workflow.
+• Built SQL data monitoring pipeline tracking $45M in weekly transaction volume, identifying settlement bottlenecks and reducing reconciliation delays by 35%.
+
+DELOITTE CONSULTING LLP | Chicago, IL
+Management Consultant – Strategy & Operations | 2019 – 2021
+• Advised Fortune 100 logistics enterprise on supply chain digitisation, identifying $8.2M in annual procurement cost redundancies.
+• Developed financial valuation models evaluating 3 potential M&A acquisition targets ranging from $50M to $220M enterprise value.
+• Authored comprehensive executive deliverables and presented weekly steering committee updates to C-suite client leadership.
+
+SKILLS & INTERESTS
+• Technical Tools: SQL, Python (Pandas), Tableau, Google Analytics, Figma, JIRA, Excel (Financial Modeling)
+• Core Competencies: Product Lifecycle Management, Cross-Functional Leadership, A/B Testing, Go-to-Market Strategy
+• Interests: Marathon Running (Boston 2023 Qualifier), Wilderness Backpacking, Specialty Coffee Roasting
+```
+
+---
+
+## How to Convert Your Resume into Haas Format for Free
+
+1. Go to Formnexa's [ATS Resume Converter](/ats-resume-converter).
+2. Upload your current resume in PDF or Word format, or paste your LinkedIn copy.
+3. Formnexa automatically extracts your experience, education, and bullet points into standard ATS fields.
+4. Select the **Wall Street ATS Classic** or **Linear Founding Engineer** template (our 100% compliant Haas-style layouts).
+5. Download your polished, watermark-free vector PDF immediately, or convert it to Word DOCX via our [PDF to Word Converter](/convert/pdf-to-word).
+MD,
+            ],
+            [
+                'title' => 'Invoice Requirements for Germany & the UK: VAT, Reverse Charge & Mandatory Fields',
+                'slug' => 'uk-germany-invoice-requirements-vat-guide',
+                'category' => 'global-billing',
+                'category_label' => 'Asia, USA & Europe Billing',
+                'focus_keyword' => 'what details does an invoice need to include for a client in germany or the uk?',
+                'meta_title' => 'Invoice Requirements for Germany & UK: Mandatory VAT Fields | Formnexa',
+                'meta_description' => 'What details does an invoice need to include for a client in Germany or the UK? Learn mandatory VAT rules, reverse charge clauses, Steuernummer, and GBP/EUR invoicing.',
+                'featured_tool_route' => 'invoice.studio',
+                'featured_tool_label' => 'Create Free Multi-Currency Invoice',
+                'reading_time_minutes' => 8,
+                'excerpt' => 'Billing clients in Germany or the United Kingdom requires strict compliance with statutory invoice fields, European VAT directives, and HMRC rules. Here is the exact checklist of mandatory invoice details.',
+                'published_at' => now()->subHours(3),
+                'content' => <<<'MD'
+> ⚡ **Generate a compliant European invoice now:** Use Formnexa's free [Multi-Currency Invoice Maker](/invoice-generator) to generate EUR and GBP invoices with dual tax fields, VAT numbers, IBAN/BIC banking, and zero watermarks.
+
+When providing freelance services, software engineering, or consulting to corporate clients located in **Germany** or the **United Kingdom**, sending an informal or incomplete invoice can result in delayed payment, rejection by company accounting departments, or tax audits.
+
+Both jurisdictions have strict legal definitions for what constitutes a valid tax invoice. In Germany, invoices must comply with Section 14 of the German VAT Act (*§14 UStG*). In the UK, businesses are governed by HM Revenue and Customs (*HMRC*) regulations.
+
+Here is the exact checklist of what details your invoice must include when billing clients in Germany or the UK.
+
+---
+
+## What Mandatory Details Must an Invoice Include for UK & German Clients?
+
+Every cross-border commercial invoice sent to a German or British business must feature these universal core fields:
+
+| Field | Requirement Details |
+|---|---|
+| **Document Title** | Must explicitly say `Invoice` (or `Rechnung` for Germany, though English is widely accepted in B2B). |
+| **Unique Invoice Number** | Sequential, unbroken numbering system (e.g., `INV-2026-042`). Never duplicate numbers. |
+| **Invoice Date** | The date the invoice is officially issued to the client. |
+| **Supply Date (Leistungsdatum)** | Crucial in Germany: the date or period during which the services were actually delivered. |
+| **Supplier Full Details** | Your full legal name (or registered trade name), physical business address, email, and tax ID. |
+| **Client Full Details** | Client’s full legal corporate name and registered business address (not a P.O. box). |
+| **Line Item Breakdown** | Clear description of services rendered, hours/quantity, unit price, and subtotal. |
+| **Currency Symbol** | Explicit currency: `EUR (€)` or `GBP (£)`. |
+| **Payment Details** | International Bank Account Number (`IBAN`) and Bank Identifier Code (`BIC / SWIFT`). |
+
+---
+
+## Invoicing a German Client: Steuernummer, USt-IdNr & B2B Rules (§14 UStG)
+
+German tax authorities (*Finanzamt*) are famous for regulatory rigor. If you bill a German company, pay attention to these specific fields:
+
+### 1. Tax Identifiers
+- **If you are based in Germany / EU:** You must state your German Tax Number (*Steuernummer*) or EU VAT Identification Number (*USt-IdNr.*).
+- **If you are an international non-EU freelancer:** State your local country tax registration number (or national business ID) and include your client's valid German VAT ID (which starts with `DE`, e.g., `DE123456789`).
+
+### 2. The Leistungsdatum (Date of Service Delivery)
+Under §14 Abs. 4 Nr. 6 UStG, an invoice is legally incomplete without the date or month of service provision. Always add a line:
+```text
+Date of supply: October 1, 2026 – October 31, 2026
+```
+
+---
+
+## Invoicing a UK Client: VAT Number, Companies House & Post-Brexit Rules
+
+When invoicing a UK business client:
+
+1. **Client Company Registration Number:** While not strictly mandatory for non-UK suppliers, adding the UK client’s 8-digit Companies House number ensures fast matching in enterprise accounts payable systems.
+2. **UK VAT Details:** If you are VAT-registered in the UK, your 9-digit VAT number (prefixed with `GB`) must appear prominently alongside the applicable VAT rate (standard rate is 20%).
+3. **If You Are an Overseas (Non-UK) Supplier:** You do not charge UK VAT. Instead, you invoice the net amount and apply the Reverse Charge note explained below.
+
+---
+
+## Cross-Border Reverse Charge: Exact Legal Clause Wording to Include
+
+If you are billing a business client in Germany or the UK from abroad (for example, as a freelancer or software agency based in Asia, the Americas, or elsewhere), **do not add local VAT or sales tax**. 
+
+Under international B2B service provisions, tax liability shifts to the recipient business under the **Reverse Charge Mechanism**.
+
+To protect both you and your client during tax audits, you **must include this exact clause** in your invoice footer:
+
+> **For German / EU B2B Clients:**  
+> *"VAT reverse-charged. Supply of services subject to the reverse charge mechanism under Article 196 of EU VAT Directive 2006/112/EC. Customer to account for VAT."*  
+> *(Optional German translation: "Steuerschuldnerschaft des Leistungsempfängers / Reverse Charge.")*
+
+> **For UK B2B Clients:**  
+> *"Zero-rated cross-border supply of business services. Subject to reverse charge in the United Kingdom under Section 8 of the Value Added Tax Act 1994. Customer accounts for UK VAT."*
+
+---
+
+## Currency, Multi-Currency Exchange Rates & Payment Terms (IBAN / BIC)
+
+When sending invoices across international borders, payment friction often causes delays. Prevent banking issues by specifying:
+
+1. **Clear Currency Code:** State `EUR` or `GBP` next to every total to prevent currency conversion disputes.
+2. **Banking Coordinates:**
+   - **Bank Name & Physical City:** e.g., *Wise Payments Europe SA, Brussels, Belgium*
+   - **IBAN:** Ensure standard international format with zero spaces or dashes.
+   - **BIC / SWIFT Code:** 8 or 11 characters.
+   - **Account Holder Name:** Must exactly match the name on your invoice.
+3. **Payment Due Date:** Specify an exact calendar date rather than vague text like *"Payment on receipt"*. e.g., `Payment Terms: Net 30 (Due: November 30, 2026)`.
+
+---
+
+## How to Create a Compliant UK / German Invoice on Formnexa for Free
+
+1. Open Formnexa's [Free Invoice Maker](/invoice-generator).
+2. Set the document currency to **EUR (€)** or **GBP (£)**.
+3. Enter your business details and your client's registered European address.
+4. In the Tax settings, set the tax rate to `0%` and enter your client's VAT ID.
+5. In the **Notes / Terms** section, paste the standard reverse charge statement provided above.
+6. Click **Download PDF** to generate an executive vector invoice with zero watermarks.
+MD,
+            ],
+            [
+                'title' => 'USD Invoice Format: How International Freelancers Bill US Clients (With W-8BEN & Wire Info)',
+                'slug' => 'usd-invoice-format-us-clients-freelancer-guide',
+                'category' => 'global-billing',
+                'category_label' => 'Asia, USA & Europe Billing',
+                'focus_keyword' => 'invoice in usa',
+                'meta_title' => 'USD Invoice Format: How to Bill US Clients as a Freelancer | Formnexa',
+                'meta_description' => 'How international freelancers format USD invoices for US companies. Learn ACH routing, wire routing, W-8BEN compliance, and get paid with zero US tax withholding.',
+                'featured_tool_route' => 'invoice.studio',
+                'featured_tool_label' => 'Generate Free USD Invoice',
+                'reading_time_minutes' => 7,
+                'excerpt' => 'Billing clients in the United States in US Dollars requires specific banking formatting, routing numbers, and IRS tax compliance. Here is how international contractors invoice US companies cleanly.',
+                'published_at' => now()->subHours(4),
+                'content' => <<<'MD'
+> ⚡ **Create a free USD invoice now:** Use Formnexa's [Free Online Invoice Maker](/invoice-generator) to generate clean USD ($) invoices with ACH/SWIFT banking fields, payment terms, and instant PDF download.
+
+For international freelancers, software developers, and independent agencies in Asia, Europe, and Latin America, landing clients in the United States represents one of the highest-paying revenue streams.
+
+However, billing an American business in US Dollars (`USD`) involves distinct requirements compared to domestic invoicing. US corporate accounting teams must adhere to Internal Revenue Service (IRS) regulations, 1099 reporting guidelines, and specific banking transfer protocols (ACH vs. Domestic Wire vs. International SWIFT).
+
+Here is the complete guide to the **standard USD invoice format**, how to handle **Form W-8BEN** to eliminate US tax withholding, and how to get paid on time.
+
+---
+
+## Essential Fields on a US Business Invoice
+
+American corporate accounts payable departments require specific identifiers before releasing payouts. Every USD invoice should contain:
+
+1. **Header & Invoice Number:** The word `INVOICE` at the top, along with a sequential reference number (e.g., `INV-1084`).
+2. **Date of Issue & Due Date:** In the US, dates are typically written as **MM/DD/YYYY** (e.g., `11/24/2026`). To avoid confusion with international clients, write out the month explicitly: `November 24, 2026`.
+3. **Your Professional Details:** Legal Name, Business Entity (if any), Country of Residence, and Professional Email.
+4. **US Client Details:** Full Company Name, Department / Attention Person, and US Office Address.
+5. **Project / Purchase Order (PO) Number:** Many US enterprises require a PO number provided by the hiring manager. Always include this line if provided.
+6. **Itemized Deliverables:** Clear, milestone-based or hourly descriptions. Never submit vague entries like *"Contract work"*; use *"React Frontend Development – Sprint 4 deliverables (40 hrs @ $65/hr)"*.
+7. **Total Due in USD ($):** Explicitly display the `USD` currency code to prevent foreign exchange ambiguity.
+
+---
+
+## Understanding W-8BEN: How to Avoid 30% US Withholding Tax Legally
+
+When a US company hires an overseas independent contractor, the IRS requires the US company to verify that the contractor is not a US citizen or tax resident.
+
+Without this proof, US tax law requires companies to withhold **30% of your earnings** as foreign withholding tax!
+
+### The Solution: IRS Form W-8BEN
+- **What it is:** *Certificate of Foreign Status of Beneficial Owner for United States Tax Withholding*.
+- **Who fills it out:** Non-US individuals performing services entirely **outside** the United States.
+- **Why it matters:** By submitting Form W-8BEN, you certify under penalties of perjury that you are a foreign resident and that the income earned is from services performed outside US borders.
+- **Result:** The US client does **zero withholding tax (0%)** and pays your full 100% invoice balance.
+
+> **Pro-Tip:** Keep a signed, dated copy of your Form W-8BEN saved in PDF. Whenever you sign a contract with a new US client, attach your W-8BEN alongside your first invoice.
+
+---
+
+## Banking & Payment Details for US Clients: ACH Routing vs. SWIFT Wire
+
+American businesses prefer domestic automated clearing house (`ACH`) transfers over international wire transfers because ACH is free and instant for them.
+
+Depending on your receiving account, list your banking details cleanly at the bottom of your USD invoice:
+
+### Option A: If You Use a US Virtual Receiving Account (Wise, Payoneer, Mercury)
+US clients love this option because they treat you like a domestic vendor:
+```text
+Payment Method: US Domestic ACH / Direct Deposit
+Bank Name: Evolve Bank & Trust / Community Federal Savings Bank
+Account Holder: [Your Full Legal Name]
+Account Number: [Your 9–12 digit US Account Number]
+Routing Number (ABA / ACH): [Your 9-digit Routing Number]
+Account Type: Checking
+```
+
+### Option B: Direct International SWIFT Wire to Your Local Bank
+If you receive USD straight into a foreign currency account in your home country:
+```text
+Payment Method: International Wire Transfer (USD)
+Beneficiary Bank: [Your Bank's Legal Name]
+Bank Address: [City, Country of Your Bank]
+SWIFT / BIC Code: [8 or 11 Character SWIFT Code]
+Beneficiary Name: [Your Full Name as registered at your bank]
+IBAN / Account Number: [Your Full Account Number]
+Intermediary Bank (if applicable): [Intermediary Bank Name & SWIFT]
+```
+
+---
+
+## Payment Terms & Net 30 Expectations in the United States
+
+In the US corporate landscape, **Net 30** is the standard default payment term (payment due 30 calendar days from invoice receipt). 
+
+To ensure healthy cash flow as an independent contractor:
+- **Negotiate Shorter Terms:** For ongoing retainer or freelance agreements, request `Net 14` or `Due Upon Receipt`.
+- **Early Payment Discounts:** Adding `2/10 Net 30` (meaning: client gets a 2% discount if paid within 10 days, otherwise full balance due in 30 days) can dramatically accelerate payouts.
+- **Late Payment Clause:** Specify a clear late fee: *"Overdue balances subject to a late fee of 1.5% per month."*
+
+---
+
+## Create a Free USD Invoice with Formnexa in 2 Minutes
+
+1. Open Formnexa's [Free Invoice Studio](/invoice-generator).
+2. Choose **USD ($)** from the currency selector.
+3. Fill in your professional milestones and your client's US corporate address.
+4. Add your ACH routing details or wire instructions in the dedicated payment fields.
+5. Download your clean, professional vector PDF with zero watermarks or subscription walls.
+MD,
+            ],
+            [
+                'title' => 'Proforma Invoice vs Commercial Invoice: When to Use & Free PDF Generator',
+                'slug' => 'proforma-invoice-vs-commercial-invoice-guide',
+                'category' => 'business-docs',
+                'category_label' => 'Business Operations',
+                'focus_keyword' => 'free proforma invoice generator',
+                'meta_title' => 'Proforma Invoice vs Commercial Invoice: Differences & Free Generator | Formnexa',
+                'meta_description' => 'Understand the difference between a proforma invoice and a commercial invoice. Learn international trade uses, customs clearance, and make free proforma PDFs.',
+                'featured_tool_route' => 'invoice.generator:proforma-invoice-generator',
+                'featured_tool_label' => 'Create Free Proforma Invoice',
+                'reading_time_minutes' => 6,
+                'excerpt' => 'A proforma invoice acts as a binding preliminary quotation before goods are manufactured or delivered, whereas a commercial invoice is a formal demand for payment. Here is how and when to issue each.',
+                'published_at' => now()->subHours(5),
+                'content' => <<<'MD'
+> ⚡ **Generate a proforma invoice now:** Use Formnexa's [Free Proforma Invoice Generator](/proforma-invoice-generator) to create, customize, and export professional proforma invoices in PDF format with zero watermarks.
+
+In business transactions—particularly within global trade, manufacturing, professional services, and high-value wholesale—sending a standard invoice prematurely can create major legal and accounting complications.
+
+If your client needs formal pre-approval, requires advance financing from their bank, or needs customs clearance documentation before committing to payment, you issue a **Proforma Invoice**.
+
+Here is a clear guide on the fundamental differences between a **Proforma Invoice** and a **Commercial Invoice**, when to use each document, and how to create compliant proforma invoices for free.
+
+---
+
+## What is a Proforma Invoice & How Does It Differ from a Commercial Invoice?
+
+A **Proforma Invoice** is a preliminary bill of sale delivered to a buyer prior to the shipment of products or the performance of services. It details the committed pricing, itemized descriptions, delivery timelines, and estimated shipping terms.
+
+However, unlike a standard commercial invoice:
+- A proforma invoice is **not recorded as accounts receivable** in your accounting books.
+- The buyer cannot use a proforma invoice to claim tax deductions or VAT refunds.
+- It represents a commitment to sell goods under specified terms, but does not legally mandate immediate payment until confirmed.
+
+By contrast, a **Commercial Invoice** is the final, legally binding accounting instrument issued once goods have shipped or services are delivered, requesting definitive payment.
+
+---
+
+## Side-by-Side Comparison: Proforma vs. Commercial Invoice
+
+| Feature | Proforma Invoice | Commercial Invoice |
+|---|---|---|
+| **Timing** | Issued *before* production, delivery, or shipment | Issued *after* delivery or upon completion of milestones |
+| **Purpose** | Quote, pre-payment request, customs pre-declaration | Official demand for payment and tax reporting |
+| **Accounting Impact** | Does NOT affect accounts receivable or ledger | Recorded in general ledger as accounts receivable |
+| **VAT / Tax Reclaim** | Cannot be used by buyers to reclaim input VAT | Mandatory document for input VAT and expense deductions |
+| **Binding Status** | Committed estimate; quantities can be adjusted | Final, binding financial obligation |
+| **Free Tool** | [Proforma Invoice Generator](/proforma-invoice-generator) | [Standard Invoice Maker](/invoice-generator) |
+
+---
+
+## When Should You Issue a Proforma Invoice?
+
+Issuing a proforma invoice is best practice in four common business scenarios:
+
+### 1. International Shipping & Customs Pre-Clearance
+Before goods cross international borders, customs border authorities require advance declaration of shipment contents, value, and country of origin to calculate import duties and tariffs.
+
+### 2. Requesting Advance Deposits or Milestones
+If your business requires a 50% upfront deposit before beginning custom manufacturing, software development, or wholesale assembly, a proforma invoice gives the client an official document to route through corporate procurement.
+
+### 3. Letter of Credit (LC) Financing
+In global export trade, commercial banks require a verified proforma invoice to approve credit lines or open letters of credit for international buyers.
+
+### 4. Preventing Pricing Disputes
+A proforma invoice locks in prices, currency exchange expectations, and estimated delivery dates, protecting both buyer and seller from unexpected scope changes.
+
+---
+
+## Key Information Required on a Proforma Invoice
+
+To ensure your proforma invoice is accepted by customs officers, banks, and enterprise accounting teams, ensure it contains:
+
+1. **Explicit Title:** Must clearly state `PROFORMA INVOICE` across the top.
+2. **Proforma Number & Expiration Date:** e.g., `PRO-9041` with a notice stating: *"Terms and pricing valid until December 31, 2026"*.
+3. **Buyer and Seller Information:** Complete legal names, registered addresses, tax IDs, and primary contacts.
+4. **Detailed Item Description:** Accurate HS (Harmonized System) tariff codes, unit weights, quantities, and individual prices.
+5. **Incoterms (for physical shipments):** Standard delivery terms such as `FOB` (Free on Board), `CIF` (Cost, Insurance & Freight), or `DDP` (Delivered Duty Paid).
+6. **Payment & Banking Instructions:** Currency code (`USD`, `EUR`, `GBP`), bank name, SWIFT code, and IBAN.
+
+---
+
+## How to Create a Free Proforma Invoice PDF on Formnexa
+
+1. Navigate to Formnexa's [Free Proforma Invoice Generator](/proforma-invoice-generator).
+2. Choose your business currency and fill in supplier and customer details.
+3. Add your itemized products or services with pricing, discounts, and estimated taxes.
+4. Include any validity expiration dates and delivery terms in the notes section.
+5. Click **Download PDF** to generate an instant, executive-grade PDF with zero watermarks.
+MD,
+            ],
+            [
+                'title' => 'How to Make a Business Receipt: Format, Free Template & PDF Generator',
+                'slug' => 'how-to-make-receipt-for-small-business-guide',
+                'category' => 'invoicing',
+                'category_label' => 'Invoicing & Billing',
+                'focus_keyword' => 'make receipt',
+                'meta_title' => 'How to Make a Business Receipt: Free Format & PDF Generator | Formnexa',
+                'meta_description' => 'Learn how to make a professional payment receipt for clients, customers, and cash sales. Free PDF receipt maker with instant download, no watermark, and no account.',
+                'featured_tool_route' => 'invoice.generator:receipt-generator',
+                'featured_tool_label' => 'Create Free Business Receipt',
+                'reading_time_minutes' => 5,
+                'excerpt' => 'A payment receipt is proof that a financial transaction took place. Here is how to create a compliant business receipt for cash, bank, or card payments in under two minutes.',
+                'published_at' => now()->subHours(6),
+                'content' => <<<'MD'
+> ⚡ **Make a receipt now:** Use Formnexa's [Free Receipt Generator](/receipt-generator) to customize, preview, and download official payment receipts as crisp A4 PDFs with zero watermarks and no registration.
+
+Whether you operate a retail shop, provide independent consulting, rent commercial property, or collect cash deposits, issuing a prompt and accurate **receipt** is essential for bookkeeping, tax audits, and customer trust.
+
+Yet many small business owners scramble with handwritten notes, unformatted text messages, or clunky Word templates that look unprofessional.
+
+Here is an essential guide on **how to make a professional business receipt**, what details it must include to be legally valid, and how to generate instant PDF receipts for free.
+
+---
+
+## What is a Payment Receipt & Why is It Legally Important?
+
+A **payment receipt** is an acknowledgement in writing that goods, services, or cash have been received from a customer or client. 
+
+From an accounting and legal perspective, receipts serve three critical purposes:
+1. **Proof of Ownership:** Proves that the buyer has paid in full and legally owns the acquired product.
+2. **Tax Deductibility:** Enables the customer to claim business expense deductions or corporate reimbursements.
+3. **Dispute Prevention:** Eliminates disputes over whether an invoice was paid, what payment method was used, or if a remaining balance exists.
+
+---
+
+## Invoice vs. Receipt: What is the Difference?
+
+While the terms are often confused by first-time entrepreneurs, an invoice and a receipt are two opposite ends of the same transaction:
+
+- An **Invoice** is a *request for payment* issued before money changes hands.
+- A **Receipt** is *proof of payment* issued after the customer has paid.
+
+| Characteristic | Invoice | Receipt |
+|---|---|---|
+| **Issued By** | Seller | Seller |
+| **Timing** | Before payment is received | Immediately after payment is received |
+| **Purpose** | Request payment from buyer | Confirm payment received from buyer |
+| **Balance Due** | Shows outstanding amount owed | Shows amount paid and remaining balance (usually $0.00) |
+| **Free Tool** | [Invoice Generator](/invoice-generator) | [Receipt Generator](/receipt-generator) |
+
+---
+
+## Essential Elements Every Valid Business Receipt Must Include
+
+To guarantee your receipts satisfy tax auditor standards, ensure every receipt features these core fields:
+
+1. **Title:** Must clearly state `RECEIPT` or `PAYMENT RECEIPT` at the top.
+2. **Unique Receipt Number:** Sequential tracking number (e.g., `REC-2026-089`).
+3. **Payment Date:** The exact calendar day the payment was received.
+4. **Business Information:** Your business legal name, address, contact telephone, and tax identification number.
+5. **Customer Information:** Name of the individual or company who made the payment.
+6. **Description of Purchased Items:** Clear line items showing products or services delivered.
+7. **Total Amount Paid:** Breakdown showing Subtotal, Applied Discounts, Sales Tax / VAT, and the Final Total Paid.
+8. **Payment Method:** How the money was received (e.g., *Cash, Credit Card, Bank Wire, PayPal, Stripe*).
+9. **Remaining Balance:** If partially paid, show the outstanding balance; if fully settled, clearly display: `Balance Due: $0.00`.
+
+---
+
+## Different Types of Business Receipts
+
+Depending on your industry, your receipt format adapts to specific transaction types:
+
+- **Cash Sales Receipt:** For over-the-counter physical transactions and retail sales.
+- **Service Receipt:** Used by consultants, therapists, tutors, and freelancers acknowledging project milestone fees.
+- **Deposit Receipt:** Issued when a client pays a non-refundable retainer or initial commitment fee before work begins.
+- **Rent Receipt:** Critical for landlords and tenants to verify monthly commercial or residential rental payments.
+
+---
+
+## How to Generate a Professional PDF Receipt in 60 Seconds with Formnexa
+
+1. Open Formnexa's [Online Receipt Generator](/receipt-generator).
+2. Enter your business details, customer name, and date.
+3. Add itemized charges and select the customer's payment method (*Cash, Wire Transfer, Credit Card*).
+4. Review the live preview to verify that the balance due shows as paid.
+5. Click **Download PDF** to export a clean, watermark-free vector receipt ready to email or print.
+MD,
+            ],
+            [
+                'title' => 'What is a Credit Note? When to Issue One & Free PDF Template',
+                'slug' => 'credit-note-format-when-to-issue-guide',
+                'category' => 'invoicing',
+                'category_label' => 'Invoicing & Billing',
+                'focus_keyword' => 'credit note generator',
+                'meta_title' => 'What is a Credit Note? When to Issue One & Free PDF Template | Formnexa',
+                'meta_description' => 'Learn what a credit note is, when businesses must legally issue one, and how to format it. Free PDF credit note maker for returns, refunds, and invoice errors.',
+                'featured_tool_route' => 'invoice.generator:credit-note-generator',
+                'featured_tool_label' => 'Create Free Credit Note',
+                'reading_time_minutes' => 6,
+                'excerpt' => 'When an invoice has already been issued, accounting laws prohibit deleting or editing it. Instead, you issue a credit note to legally cancel or reduce the balance. Here is how it works.',
+                'published_at' => now()->subHours(7),
+                'content' => <<<'MD'
+> ⚡ **Issue a credit note now:** Use Formnexa's [Free Credit Note Generator](/credit-note-generator) to issue legally compliant credit notes in PDF format with proper invoice cross-references and zero watermarks.
+
+In business accounting, once a commercial invoice has been issued and sent to a customer, **you cannot simply delete or alter it**. 
+
+Doing so breaks sequential invoice audit trails, disrupts VAT/tax reporting, and violates statutory bookkeeping standards across nearly all tax jurisdictions.
+
+If a customer returns damaged merchandise, an overcharge occurred, or an invoice needs to be cancelled entirely, the correct legal mechanism is to issue a **Credit Note** (also known as a *Credit Memo*).
+
+Here is a practical guide on what a credit note is, the common business scenarios requiring one, and how to generate an official credit note PDF for free.
+
+---
+
+## What is a Credit Note & Why Do Businesses Issue Them?
+
+A **Credit Note** is a formal commercial document issued by a seller to a buyer to notify them that a credit has been applied to their account. 
+
+It acts as a "negative invoice", offsetting an existing invoice balance partially or completely. A credit note can be used to:
+- Settle an unpaid invoice that was billed incorrectly.
+- Provide store credit toward future orders.
+- Authorize a cash refund back to the customer's payment method.
+
+---
+
+## Common Scenarios Requiring a Credit Note
+
+Businesses issue credit notes in five primary operational situations:
+
+1. **Invoicing Errors:** An incorrect price, quantity, or tax rate was applied to the original invoice.
+2. **Returned or Damaged Goods:** The customer returned physical merchandise due to defects, shipping damage, or cancellation within the return policy window.
+3. **Service Dissatisfaction:** A client negotiated a discount or partial fee reduction on billed consulting, design, or engineering work.
+4. **Post-Sale Volume Rebates:** A client exceeded a contractual volume threshold, earning a promised retrospective cash rebate.
+5. **Complete Order Cancellation:** The customer cancelled the order after the invoice was already registered in your accounting system.
+
+---
+
+## Credit Note vs. Debit Note vs. Refund: Understanding the Differences
+
+| Document | Issued By | Purpose |
+|---|---|---|
+| **Credit Note** | **Seller** | Informs buyer that their balance has been reduced or credited |
+| **Debit Note** | **Buyer** | Requests that the seller issue a credit note for damaged goods or overcharges |
+| **Cash Refund** | **Seller** | The actual transfer of cash/funds back to the customer's bank or card |
+
+A credit note is the accounting foundation that justifies a refund. You should never transfer cash back to a customer without generating a matching credit note in your financial records.
+
+---
+
+## Mandatory Fields on an Accounting Credit Note
+
+Tax authorities require credit notes to link directly back to the original transaction. Ensure your credit note includes:
+
+1. **Header:** Prominently labelled `CREDIT NOTE` or `CREDIT MEMO`.
+2. **Unique Credit Note Number:** Sequential reference (e.g., `CN-0042`).
+3. **Date of Issue:** The calendar day the credit is granted.
+4. **Original Invoice Reference Number:** Mandatory field: e.g., *"Referencing Invoice #INV-2026-104"*.
+5. **Seller and Buyer Information:** Full legal names, business addresses, and tax/VAT numbers.
+6. **Detailed Explanation / Reason:** e.g., *"Return of 5 damaged units of Product SKU-410"*.
+7. **Credit Amount Breakdown:** Net credited subtotal, credited VAT/sales tax amount, and the total credit sum.
+
+---
+
+## How to Generate a Credit Note PDF with Formnexa for Free
+
+1. Open Formnexa's [Free Credit Note Generator](/credit-note-generator).
+2. Enter your business details and your client's billing information.
+3. In the reference field, type the original invoice number being credited.
+4. Add the items being refunded or the negotiated discount amount.
+5. Click **Download PDF** to generate an official credit note with zero watermarks.
+MD,
+            ],
+            [
+                'title' => 'How to Create a Customer Statement of Account (With Free PDF Generator)',
+                'slug' => 'how-to-create-statement-of-account-guide',
+                'category' => 'business-docs',
+                'category_label' => 'Business Operations',
+                'focus_keyword' => 'pdf statement',
+                'meta_title' => 'How to Create a Customer Account Statement: Free PDF Guide | Formnexa',
+                'meta_description' => 'Learn how to generate a statement of account showing overdue balances, payments, and open invoices. Free PDF account statement generator for small businesses.',
+                'featured_tool_route' => 'invoice.generator:account-statement-generator',
+                'featured_tool_label' => 'Generate Free Account Statement',
+                'reading_time_minutes' => 6,
+                'excerpt' => 'When clients have multiple open invoices, partial payments, and overdue balances, sending individual bills causes confusion. A Statement of Account provides a clean financial summary.',
+                'published_at' => now()->subHours(8),
+                'content' => <<<'MD'
+> ⚡ **Generate an account statement now:** Use Formnexa's [Free Account Statement Generator](/account-statement-generator) to create comprehensive customer statements showing all billed invoices, payments received, and aging balances with zero watermarks.
+
+When managing ongoing B2B client relationships, wholesale orders, or recurring retainer agreements, clients frequently carry multiple active invoices at the same time.
+
+Sending repeated individual invoice reminders often leads to administrative friction, duplicate payments, or missed deadlines. 
+
+The professional solution used by enterprise credit control departments is to deliver a periodic **Statement of Account** (also known as a *Customer Statement*).
+
+Here is a practical guide on how a statement of account works, how to categorize aging debt, and how to generate clean PDF statements for free.
+
+---
+
+## What is a Statement of Account & Why Do Clients Need It?
+
+A **Statement of Account** is an itemized financial summary detailing all commercial activity between your business and a specific customer over a given date range (usually monthly or quarterly).
+
+It shows:
+- Every invoice issued to the client during the period.
+- Every payment or credit received from the client.
+- The net outstanding balance currently due.
+
+Rather than acting as a new bill, an account statement serves as an objective reconciliation tool that helps the client's finance team align their internal records with yours.
+
+---
+
+## Statement of Account vs. Invoice: Key Differences
+
+| Feature | Commercial Invoice | Statement of Account |
+|---|---|---|
+| **Focus** | A single transaction or specific project milestone | All transactions over a continuous time period |
+| **Purpose** | Request payment for newly delivered goods or services | Summarize open balances, past payments, and total debt |
+| **Tax Impact** | Legal tax document used to declare revenue and claim VAT | Informational summary; does not represent taxable event |
+| **Timing** | Issued upon delivery or milestone completion | Issued regularly (e.g., end of month) or upon request |
+| **Free Tool** | [Invoice Maker](/invoice-generator) | [Account Statement Generator](/account-statement-generator) |
+
+---
+
+## What Must a Professional Statement of Account Contain?
+
+A complete, audit-proof statement of account must include:
+
+1. **Document Header:** Clearly titled `STATEMENT OF ACCOUNT` with date of issuance.
+2. **Statement Period:** The covered timeframe, e.g., `Statement Period: October 1, 2026 – October 31, 2026`.
+3. **Your Business & Customer Details:** Legal business names, billing addresses, and accounts receivable contact emails.
+4. **Opening Balance:** The net balance carried over from prior months before the statement period began.
+5. **Itemized Transaction Ledger:** A chronological table showing:
+   - Date of transaction
+   - Transaction type (*Invoice, Payment, Credit Note*)
+   - Reference Number (*INV-102, REC-401, CN-12*)
+   - Billed Amount (Debit)
+   - Paid Amount (Credit)
+   - Running Balance
+6. **Closing Balance Due:** The final amount the client owes you as of the statement date.
+
+---
+
+## How to Handle Aging Buckets (Current, 30 Days, 60 Days, 90+ Days)
+
+Enterprise finance departments prioritize payments based on **aging schedules**. Adding an aging breakdown to your statement accelerates collections dramatically:
+
+- **Current (0–30 Days):** Invoices billed recently and still within standard credit terms.
+- **31–60 Days Overdue:** Payments that have exceeded agreed deadlines; requires a polite follow-up.
+- **61–90 Days Overdue:** High-priority accounts; often requires phone calls and suspension of new work.
+- **90+ Days Overdue:** Severely delinquent accounts requiring formal demand letters or collections action.
+
+---
+
+## Best Practices for Sending Account Statements to Get Paid Faster
+
+1. **Send on a Consistent Schedule:** Deliver statements on the 1st or 2nd day of each month so your document lands before your client's accounts payable batch run.
+2. **Attach All Unpaid Invoices:** When emailing the statement PDF, attach PDF copies of any overdue invoices so the client has zero excuses for delays.
+3. **Include Clickable Payment Links:** Enable clients to pay instantly via card or bank transfer directly from the statement email.
+
+---
+
+## How to Generate a Free Account Statement PDF on Formnexa
+
+1. Open Formnexa's [Free Account Statement Generator](/account-statement-generator).
+2. Enter your business details and your client's account profile.
+3. Input the statement start and end dates.
+4. Add invoices and recorded payments to build the chronological ledger.
+5. Review the auto-calculated closing balance and aging summary.
+6. Click **Download PDF** to export a clean, watermark-free vector statement.
 MD,
             ],
         ];
