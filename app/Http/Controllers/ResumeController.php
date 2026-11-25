@@ -60,6 +60,7 @@ class ResumeController extends Controller
 
         $styles = ResumeCatalog::styles();
         $colors = ResumeCatalog::colors();
+        $categories = ResumeCatalog::categories();
         $allTemplates = ResumeCatalog::templates();
         $defaultContent = ResumeCatalog::defaultContent();
         $blankContent = ResumeCatalog::blankContent();
@@ -87,6 +88,7 @@ class ResumeController extends Controller
             'recentResumes',
             'styles',
             'colors',
+            'categories',
             'allTemplates',
             'defaultContent',
             'blankContent',

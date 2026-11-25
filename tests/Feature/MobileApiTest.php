@@ -110,7 +110,7 @@ class MobileApiTest extends TestCase
         $resConfig = $this->getJson('/api/v1/resumes/config');
         $resConfig->assertOk()
             ->assertJsonPath('success', true)
-            ->assertJsonCount(10, 'styles')
+            ->assertJsonCount(16, 'styles')
             ->assertJsonStructure(['default_content', 'blank_content']);
 
         $resTemplates = $this->getJson('/api/v1/resumes/templates?category=tech');

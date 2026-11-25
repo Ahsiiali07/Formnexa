@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<x-schema.tool name="Free ATS Resume Builder" description="Build an ATS-friendly resume with 17 templates or import your existing PDF or DOCX CV." />
+<x-schema.tool name="Free ATS Resume Builder" description="Build an ATS-friendly resume with {{ count($allTemplates) }} modern templates or import your existing PDF or DOCX CV." />
 
 <div x-data="resumeStudio(
         @js($loadedResume),
@@ -81,10 +81,10 @@
                 <!-- Highlighted Browse Templates Button -->
                 <button type="button" @click="designDrawerOpen = true; designTab = 'presets'"
                         class="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-lg text-xs font-bold bg-[#f0ebff] hover:bg-[#e3d9ff] text-[#5d3ec4] border border-[#ddd2fb] transition whitespace-nowrap cursor-pointer shadow-xs"
-                        title="Browse 17 ATS resume templates">
+                        title="Browse {{ count($allTemplates) }} modern &amp; ATS resume templates">
                     <svg class="w-3.5 h-3.5 text-[#5d3ec4]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
                     <span>Browse Templates</span>
-                    <span class="px-1.5 py-0.5 rounded-full bg-[#5d3ec4] text-white text-[10px] font-mono font-bold leading-none">17</span>
+                    <span class="px-1.5 py-0.5 rounded-full bg-[#5d3ec4] text-white text-[10px] font-mono font-bold leading-none">{{ count($allTemplates) }}</span>
                 </button>
 
                 <button type="button" @click="resetToBlank()"
@@ -114,63 +114,106 @@
     <!-- Main Split-Screen Resume Studio -->
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-5">
 
-        <!-- Jobscan-Style ATS Templates Carousel & Quick Switcher -->
-        <div class="no-print mb-5 p-3.5 sm:p-4 rounded-2xl bg-white border border-[#dfe4df] shadow-xs">
-            <div class="flex items-center justify-between gap-3 mb-2.5 px-1">
-                <div class="flex items-center gap-2">
+        <!-- ResumeBuilder-Style Visual A4 4-Card Carousel Showcase -->
+        <div x-data="{
+                 railCat: 'all',
+                 railPage: 0,
+                 slideRail(dir) {
+                     const el = this.$refs.tplRail;
+                     if (!el) return;
+                     const step = Math.max(el.clientWidth, 300) + 16;
+                     el.scrollBy({ left: dir * step, behavior: 'smooth' });
+                 },
+                 syncRailPage() {
+                     const el = this.$refs.tplRail;
+                     if (!el || !el.clientWidth) return;
+                     this.railPage = Math.round(el.scrollLeft / el.clientWidth);
+                 }
+             }"
+             class="no-print mb-6 rounded-3xl border border-[#dfe4df] bg-gradient-to-br from-[#f6f2ff] via-[#fff8f6] to-[#effaf3] p-4 sm:p-5 shadow-xs">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 mb-4 px-1">
+                <div class="flex flex-wrap items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-[#184f3a] animate-pulse"></span>
-                    <h2 class="text-xs sm:text-sm font-extrabold text-[#17211b]">Choose ATS Resume Template:</h2>
-                    <span class="text-[11px] text-[#68736d] hidden md:inline">Click any layout to preview your CV in that theme instantly</span>
+                    <h2 class="text-xs sm:text-sm font-extrabold text-[#17211b]">Choose a Resume Template:</h2>
+                    <span class="text-[11px] text-[#536058] hidden xl:inline">Click any full A4 template card below to edit your CV</span>
                 </div>
-                <div class="flex items-center gap-3">
-                    <a href="{{ route('resume.templates') }}" target="_blank"
-                       class="text-[11px] font-bold text-[#68736d] hover:text-[#184f3a] hidden sm:inline-flex items-center gap-1 transition">
-                        <span>Open Gallery</span>
-                        <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
-                    </a>
-                    <button type="button" @click="designDrawerOpen = true; designTab = 'presets'"
-                            class="text-xs font-bold text-[#5d3ec4] hover:text-[#452c96] inline-flex items-center gap-1 transition cursor-pointer">
-                        <span>All 17 Templates</span>
-                        <span>&rarr;</span>
-                    </button>
+
+                <div class="flex flex-wrap items-center justify-between lg:justify-end gap-2">
+                    {{-- Quick Category Filters --}}
+                    <div class="flex items-center gap-1 overflow-x-auto scrollbar-hide max-w-full">
+                        @foreach(($categories ?? \App\Support\ResumeCatalog::categories()) as $cKey => $cLabel)
+                            <button type="button" @click="railCat = '{{ $cKey }}'; railPage = 0; $nextTick(() => $refs.tplRail?.scrollTo({ left: 0, behavior: 'smooth' }))"
+                                    class="px-2.5 py-1 rounded-full text-[10.5px] font-bold whitespace-nowrap transition cursor-pointer border"
+                                    :class="railCat === '{{ $cKey }}'
+                                        ? 'bg-[#17211b] text-white border-[#17211b] shadow-2xs'
+                                        : 'bg-white/90 text-[#536058] border-[#dfe4df] hover:border-[#184f3a] hover:text-[#17211b]'">
+                                {{ $cLabel }}
+                            </button>
+                        @endforeach
+                    </div>
+
+                    {{-- Carousel Navigation + Full Gallery Link --}}
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button type="button"
+                                @click="slideRail(-1)"
+                                class="w-8 h-8 rounded-full bg-white border border-[#dfe4df] hover:border-[#184f3a] text-[#17211b] flex items-center justify-center font-bold text-base shadow-2xs cursor-pointer transition"
+                                aria-label="Previous templates">&lsaquo;</button>
+                        <button type="button"
+                                @click="slideRail(1)"
+                                class="w-8 h-8 rounded-full bg-white border border-[#dfe4df] hover:border-[#184f3a] text-[#17211b] flex items-center justify-center font-bold text-base shadow-2xs cursor-pointer transition"
+                                aria-label="Next templates">&rsaquo;</button>
+                        <a href="{{ route('resume.templates') }}"
+                           class="ml-1 px-3 py-1.5 rounded-full bg-white border border-[#dfe4df] hover:border-[#5d3ec4] text-[11px] font-bold text-[#5d3ec4] transition whitespace-nowrap">
+                            See All {{ count($allTemplates) }} Templates &rarr;
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Horizontal Scrollable Template Cards -->
-            <div class="flex items-center gap-3 overflow-x-auto pb-1.5 pt-0.5 scrollbar-thin">
-                <template x-for="tpl in allTemplates" :key="tpl.slug">
-                    <button type="button" @click="applyTemplatePreset(tpl, false)"
-                            class="shrink-0 text-left p-2.5 rounded-xl border-2 transition flex items-center gap-3 cursor-pointer group"
-                            :class="(template_style === (tpl.template_style || tpl.style))
-                                ? 'border-[#184f3a] bg-[#e8f7ed]/70 shadow-xs ring-1 ring-[#184f3a]'
-                                : 'border-[#dfe4df] hover:border-slate-300 bg-[#fbfbf7] hover:bg-white'">
-                        {{-- Mini Template Mockup --}}
-                        <div class="w-8 h-11 rounded-sm bg-white border border-slate-200/90 flex flex-col justify-between p-1 shrink-0 overflow-hidden shadow-2xs group-hover:scale-105 transition-transform"
-                             :class="(tpl.style === 'editorial_figma' || tpl.template_style === 'editorial_figma') ? 'bg-[#FAF8F4]' : 'bg-white'">
-                            <div class="h-1.5 w-full rounded-xs" :style="'background-color:' + (tpl.accent_color || '#1B3142')"></div>
-                            <div class="space-y-0.5 my-auto">
-                                <div class="h-0.5 w-3/4 bg-slate-300 rounded-xs"></div>
-                                <div class="h-0.5 w-full bg-slate-200 rounded-xs"></div>
-                                <div class="h-0.5 w-5/6 bg-slate-200 rounded-xs"></div>
+            <!-- Horizontal 4-Card Visual Slider (Desktop: 4 cards visible, Tablet: 2-3, Mobile: 1.2) -->
+            <div x-ref="tplRail"
+                 @scroll.debounce.80ms="syncRailPage()"
+                 class="flex items-stretch gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide scroll-smooth pb-1 pt-0.5 px-0.5">
+                @foreach($allTemplates as $tplIndex => $tpl)
+                    <div x-show="railCat === 'all' || railCat === '{{ $tpl['category'] }}'"
+                         x-on:click="applyTemplatePreset(allTemplates[{{ $tplIndex }}], false)"
+                         role="button"
+                         tabindex="0"
+                         class="w-[78%] sm:w-[calc((100%-16px)/2)] md:w-[calc((100%-32px)/3)] lg:w-[calc((100%-48px)/4)] shrink-0 snap-start rounded-2xl bg-white border-2 p-2.5 flex flex-col justify-between gap-2.5 cursor-pointer group transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl"
+                         :class="activeTemplateSlug === '{{ $tpl['slug'] }}'
+                             ? 'border-[#184f3a] ring-2 ring-[#184f3a]/25 shadow-md'
+                             : 'border-slate-200/90 shadow-sm hover:border-[#184f3a]/60'">
+
+                        {{-- Full Portrait A4 Miniature Preview --}}
+                        <div class="relative aspect-[1/1.41] w-full rounded-lg overflow-hidden border border-slate-200/90 bg-white select-none shadow-xs"
+                             style="aspect-ratio: 1 / 1.41;">
+                            @include('resume._template_miniature', ['tpl' => $tpl])
+
+                            {{-- Active Checkmark Pill --}}
+                            <div x-show="activeTemplateSlug === '{{ $tpl['slug'] }}'"
+                                 class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-[#184f3a] text-white text-[10px] font-extrabold shadow-md flex items-center gap-1">
+                                <span>&check;</span>
+                                <span>Active</span>
                             </div>
-                            <div class="h-0.5 w-1/2 bg-slate-300 rounded-xs"></div>
+
+                            {{-- Hover Action Overlay --}}
+                            <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/40 transition-all duration-200 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                <span class="px-3.5 py-2 rounded-full bg-[#184f3a] text-white text-xs font-extrabold shadow-lg">
+                                    Use Template
+                                </span>
+                            </div>
                         </div>
 
-                        {{-- Template Meta --}}
-                        <div class="min-w-[110px] max-w-[145px]">
-                            <div class="text-[11.5px] font-bold text-[#17211b] truncate group-hover:text-[#184f3a]" x-text="tpl.name"></div>
-                            <div class="flex items-center gap-1 mt-0.5">
-                                <span class="text-[9.5px] font-bold px-1.5 py-0.2 rounded bg-white border border-slate-200 text-slate-600 truncate" x-text="tpl.badge || tpl.category_label"></span>
+                        {{-- Card Label & Accent Dot --}}
+                        <div class="px-0.5 flex items-start justify-between gap-2">
+                            <div class="min-w-0">
+                                <div class="text-xs font-extrabold text-[#17211b] truncate group-hover:text-[#184f3a]">{{ $tpl['name'] }}</div>
+                                <div class="text-[10.5px] text-[#68736d] truncate">{{ $tpl['role'] }}</div>
                             </div>
+                            <span class="w-3 h-3 rounded-full shrink-0 mt-1 border border-slate-200" style="background-color: {{ $tpl['accent_color'] }}"></span>
                         </div>
-
-                        {{-- Active Indicator --}}
-                        <span x-show="template_style === (tpl.template_style || tpl.style)"
-                              class="w-5 h-5 rounded-full bg-[#184f3a] text-white flex items-center justify-center text-[10px] font-bold shrink-0 shadow-xs">
-                            &check;
-                        </span>
-                    </button>
-                </template>
+                    </div>
+                @endforeach
             </div>
         </div>
 
@@ -702,17 +745,58 @@
                             </div>
                         </div>
 
-                        <!-- 10 Visual Layout Engines with Mini Wireframes -->
+                        <!-- {{ count($styles) }} Visual Layout Engines with Mini Wireframes -->
                         <div>
-                            <label class="block font-bold uppercase tracking-wider text-slate-500 mb-2.5">10 Designer Layout Engines</label>
+                            <label class="block font-bold uppercase tracking-wider text-slate-500 mb-2.5">{{ count($styles) }} Modern Layout Engines</label>
                             <div class="grid grid-cols-2 gap-3">
                                 <template x-for="(st, key) in styles" :key="key">
-                                    <button type="button" @click="template_style = key; autoSave(); showToast('Switched layout to ' + st.name);"
+                                    <button type="button" @click="template_style = key; activeTemplateSlug = ''; autoSave(); showToast('Switched layout to ' + st.name);"
                                             class="text-left p-2.5 rounded-2xl border-2 transition flex flex-col justify-between gap-2"
                                             :class="template_style === key ? 'border-[#184f3a] bg-[#e8f7ed]/60' : 'border-slate-200 hover:border-slate-300 bg-white'">
                                         {{-- Mini Visual Wireframe Preview --}}
                                         <div class="w-full h-14 rounded-lg border border-slate-200/80 overflow-hidden bg-white p-1.5 flex flex-col justify-between"
-                                             :class="key === 'editorial_figma' ? 'bg-[#FAF8F4]' : 'bg-white'">
+                                             :class="{
+                                                 'bg-[#FAF8F4]': key === 'editorial_figma',
+                                                 'bg-[#F8FAFC]': key === 'bento_modern',
+                                                 'bg-white': key !== 'editorial_figma' && key !== 'bento_modern'
+                                             }">
+                                            <template x-if="key === 'banner_split_date'">
+                                                <div class="space-y-1 h-full">
+                                                    <div class="h-3.5 w-full rounded-xs p-0.5 flex justify-between items-center" :style="'background:' + accent_color"><span class="h-1 w-8 bg-white rounded"></span><span class="w-2 h-2 rounded-full bg-white/80"></span></div>
+                                                    <div class="grid grid-cols-12 gap-1"><div class="col-span-3 h-3 bg-slate-200 rounded-xs"></div><div class="col-span-9 h-3 bg-slate-100 rounded-xs"></div></div>
+                                                </div>
+                                            </template>
+                                            <template x-if="key === 'ribbon_centered'">
+                                                <div class="space-y-1 h-full">
+                                                    <div class="h-2.5 w-full rounded-xs flex items-center justify-center" :style="'background:' + accent_color"><span class="h-1 w-8 bg-white rounded"></span></div>
+                                                    <div class="grid grid-cols-2 gap-1"><div class="h-1 bg-slate-200 rounded"></div><div class="h-1 bg-slate-200 rounded"></div></div>
+                                                    <div class="h-2.5 bg-slate-100 rounded"></div>
+                                                </div>
+                                            </template>
+                                            <template x-if="key === 'bento_modern'">
+                                                <div class="space-y-1 h-full">
+                                                    <div class="h-2.5 w-full rounded bg-white border border-slate-200 flex items-center px-1 gap-1"><span class="w-1.5 h-1.5 rounded-full" :style="'background:' + accent_color"></span><span class="h-1 w-8 bg-slate-700 rounded"></span></div>
+                                                    <div class="grid grid-cols-12 gap-1"><div class="col-span-8 h-4 rounded bg-white border border-slate-200"></div><div class="col-span-4 h-4 rounded bg-white border border-slate-200"></div></div>
+                                                </div>
+                                            </template>
+                                            <template x-if="key === 'stripe_clean'">
+                                                <div class="border-t-2 pt-1 space-y-1 h-full" :style="'border-color:' + accent_color">
+                                                    <div class="flex justify-between items-center"><span class="h-1.5 w-10 bg-slate-800 rounded"></span><span class="h-1 w-4 bg-slate-300 rounded"></span></div>
+                                                    <div class="grid grid-cols-12 gap-1"><div class="col-span-8 h-3 bg-slate-100 rounded"></div><div class="col-span-4 h-3 bg-slate-200 rounded"></div></div>
+                                                </div>
+                                            </template>
+                                            <template x-if="key === 'aurora_pill'">
+                                                <div class="space-y-1 h-full">
+                                                    <div class="h-3.5 w-full rounded p-0.5 flex items-center gap-1" :style="'background:' + accent_color + '18'"><span class="w-2 h-2 rounded-full" :style="'background:' + accent_color"></span><span class="h-1 w-8 bg-slate-700 rounded"></span></div>
+                                                    <div class="grid grid-cols-12 gap-1"><div class="col-span-8 h-3 border-l-2 pl-1 bg-slate-50" :style="'border-color:' + accent_color"></div><div class="col-span-4 h-3 bg-slate-100 rounded"></div></div>
+                                                </div>
+                                            </template>
+                                            <template x-if="key === 'obsidian_header'">
+                                                <div class="space-y-1 h-full">
+                                                    <div class="h-3.5 w-full rounded-sm bg-[#0F172A] border-t-2 flex items-center px-1" :style="'border-color:' + accent_color"><span class="h-1 w-8 bg-white rounded"></span></div>
+                                                    <div class="grid grid-cols-12 gap-1"><div class="col-span-8 h-3 bg-slate-100 rounded"></div><div class="col-span-4 h-3 bg-slate-200 rounded"></div></div>
+                                                </div>
+                                            </template>
                                             <template x-if="key === 'flow_sidebar'">
                                                 <div class="grid grid-cols-12 gap-1 h-full">
                                                     <div class="col-span-4 rounded-sm" :style="'background:' + accent_color"></div>
@@ -915,7 +999,7 @@
                 <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6142be]">Screening Software Standards</span>
                 <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b]">ATS-friendly CV templates</h2>
                 <p class="text-xs sm:text-sm text-[#46534b] leading-relaxed">
-                    Applicant Tracking Systems evaluate CVs line by line from left to right and top to bottom. Decorative multi-column grids, complex graphic skill meters, and text placed inside images frequently trigger parsing errors in automated hiring software like Workday, Greenhouse, Taleo, and Lever. Formnexa's <a href="{{ route('resume.templates') }}" class="text-[#184f3a] font-bold hover:underline">17 ATS CV templates</a> use single-column and clean linear hierarchies with recognized headings so your qualifications reach hiring managers accurately. Wondering how traditional visual designs stack up against automated filters? Read our side-by-side analysis on <a href="{{ route('blog.show', 'canva-cv-vs-ats-friendly-resume-guide') }}" class="text-[#184f3a] font-bold hover:underline">Canva CV vs ATS-Friendly CV</a>. If you are applying for corporate roles locally, see the <a href="{{ route('blog.show', 'cv-format-for-jobs-in-pakistan-guide') }}" class="text-[#184f3a] font-bold hover:underline">standard CV format for jobs in Pakistan</a>, or our entry-level <a href="{{ route('blog.show', 'cv-format-for-freshers-free-template-guide') }}" class="text-[#184f3a] font-bold hover:underline">CV format for freshers and recent graduates</a>.
+                    Applicant Tracking Systems evaluate CVs line by line from left to right and top to bottom. Decorative multi-column grids, complex graphic skill meters, and text placed inside images frequently trigger parsing errors in automated hiring software like Workday, Greenhouse, Taleo, and Lever. Formnexa's <a href="{{ route('resume.templates') }}" class="text-[#184f3a] font-bold hover:underline">{{ count($allTemplates) }} modern &amp; ATS CV templates</a> use single-column and clean linear hierarchies with recognized headings so your qualifications reach hiring managers accurately. Wondering how traditional visual designs stack up against automated filters? Read our side-by-side analysis on <a href="{{ route('blog.show', 'canva-cv-vs-ats-friendly-resume-guide') }}" class="text-[#184f3a] font-bold hover:underline">Canva CV vs ATS-Friendly CV</a>. If you are applying for corporate roles locally, see the <a href="{{ route('blog.show', 'cv-format-for-jobs-in-pakistan-guide') }}" class="text-[#184f3a] font-bold hover:underline">standard CV format for jobs in Pakistan</a>, or our entry-level <a href="{{ route('blog.show', 'cv-format-for-freshers-free-template-guide') }}" class="text-[#184f3a] font-bold hover:underline">CV format for freshers and recent graduates</a>.
                 </p>
             </div>
         </div>
@@ -957,6 +1041,7 @@ document.addEventListener('alpine:init', () => {
         hasCustomCv: false,
 
         uuid: loadedResume?.uuid || '',
+        activeTemplateSlug: loadedTemplate?.slug || (loadedResume ? '' : 'atlantic-flow'),
         title: loadedResume?.title || loadedTemplate?.name || 'Business Development Resume',
         template_style: loadedResume?.template_style || loadedTemplate?.template_style || loadedTemplate?.style || 'flow_sidebar',
         accent_color: loadedResume?.accent_color || loadedTemplate?.accent_color || '#1B3142',
@@ -1008,6 +1093,7 @@ document.addEventListener('alpine:init', () => {
                             this.photo_data = p.photo_data || '';
                             this.hasCustomCv = !!p.hasCustomCv;
                             this.content = p.content;
+                            this.activeTemplateSlug = p.activeTemplateSlug || this.findMatchingSlug(this.template_style, this.accent_color);
                         } else if (loadedTemplate && p && p.hasCustomCv && p.content && (p.content.personal?.full_name || '').trim() !== '') {
                             // Preserve the user's imported CV content while switching onto the newly selected template theme
                             this.hasCustomCv = true;
@@ -1040,6 +1126,13 @@ document.addEventListener('alpine:init', () => {
             });
             this.$watch('content', () => { this.markStarted(); this.autoSave(); }, { deep: true });
             this.$watch('title', () => { this.markStarted(); this.autoSave(); });
+        },
+
+        findMatchingSlug(style, accent) {
+            const exact = this.allTemplates.find(t => (t.template_style || t.style) === style && (t.accent_color || '').toLowerCase() === (accent || '').toLowerCase());
+            if (exact) return exact.slug;
+            const byStyle = this.allTemplates.find(t => (t.template_style || t.style) === style);
+            return byStyle ? byStyle.slug : '';
         },
 
         initials() {
@@ -1246,6 +1339,7 @@ Certified Scrum Product Owner (CSPO) - 2021`;
                 window.track('template_selected', { template_name: tpl.name || tpl.slug || tpl.style || 'template' });
             }
             const nextStyle = tpl.template_style || tpl.style || 'flow_sidebar';
+            this.activeTemplateSlug = tpl.slug || '';
             this.template_style = nextStyle;
             this.importTargetStyle = nextStyle;
             this.accent_color = tpl.accent_color || '#1B3142';
@@ -1284,6 +1378,7 @@ Certified Scrum Product Owner (CSPO) - 2021`;
         autoSave() {
             try {
                 localStorage.setItem('formnexa_resume_draft', JSON.stringify({
+                    activeTemplateSlug: this.activeTemplateSlug,
                     title: this.title,
                     template_style: this.template_style,
                     accent_color: this.accent_color,

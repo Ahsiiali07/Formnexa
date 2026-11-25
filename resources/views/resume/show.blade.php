@@ -54,7 +54,11 @@
         default => 'font-sans',
     };
     $densityClass = $density === 'compact' ? 'text-[11px] leading-[1.48]' : 'text-[12px] leading-[1.55]';
-    $sheetBg = $tStyle === 'editorial_figma' ? 'bg-[#FAF8F4] text-[#1F1C18]' : 'bg-white text-slate-800';
+    $sheetBg = match ($tStyle) {
+        'editorial_figma' => 'bg-[#FAF8F4] text-[#1F1C18]',
+        'bento_modern' => 'bg-[#F8FAFC] text-slate-800',
+        default => 'bg-white text-slate-800',
+    };
 @endphp
 
 @section('title', ($fullName ?: $resume->title) . ' — Resume | Formnexa')
@@ -95,8 +99,409 @@
             <div class="w-full max-w-[794px] mx-auto shadow-2xl rounded-sm overflow-hidden border border-slate-200/80 print:shadow-none print:border-0 {{ $sheetBg }} {{ $fontClass }} {{ $densityClass }}"
                  style="min-height: 1122px;">
 
+                {{-- RB-1. BANNER SPLIT DATE --}}
+                @if($tStyle === 'banner_split_date')
+                    <div class="min-h-[1122px] bg-white text-slate-800">
+                        <header class="px-8 py-6 text-white flex items-center justify-between gap-6" style="background-color: {{ $accent }};">
+                            <div class="min-w-0 space-y-1.5">
+                                <h1 class="text-[28px] font-bold tracking-tight leading-tight text-white {{ $font === 'serif' ? 'font-editorial' : '' }}">{{ $fullName }}</h1>
+                                @if(!empty($p['job_title']))<p class="text-[12px] font-semibold text-white/90">{{ $p['job_title'] }}</p>@endif
+                                <div class="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[10.5px] text-white/85 pt-0.5">{{ implode(' • ', array_filter([$p['location'] ?? '', $p['phone'] ?? '', $p['email'] ?? ''])) }}</div>
+                            </div>
+                            @if($showPhoto)
+                                <div class="w-20 h-20 rounded-full border-[3px] border-white/80 bg-white/15 shrink-0 overflow-hidden flex items-center justify-center font-black text-xl text-white shadow-md">
+                                    @if($photo)<img src="{{ $photo }}" alt="{{ $fullName }}" class="w-full h-full object-cover">@else{{ $initials }}@endif
+                                </div>
+                            @endif
+                        </header>
+                        <div class="{{ $density === 'compact' ? 'px-8 py-6 space-y-4' : 'px-9 py-7 space-y-5' }}">
+                            @if(!empty($vis['summary']) && !empty($c['summary']))
+                                <section class="pb-3 border-b border-slate-200"><p class="text-[11.5px] leading-relaxed text-slate-700 whitespace-pre-line">{{ $c['summary'] }}</p></section>
+                            @endif
+                            @if(!empty($vis['skills']) && !empty($skills))
+                                <section><h2 class="text-[13px] font-bold tracking-tight mb-2" style="color: {{ $accent }}">Skills</h2><ul class="grid grid-cols-2 gap-x-6 gap-y-1 text-[11px] text-slate-700 pl-4 list-disc">@foreach($skills as $sk)<li>{{ $sk }}</li>@endforeach</ul></section>
+                            @endif
+                            @if(!empty($vis['experience']) && !empty($exps))
+                                <section>
+                                    <h2 class="text-[13px] font-bold tracking-tight mb-3 pb-1 border-b border-slate-200" style="color: {{ $accent }}">Professional Experience</h2>
+                                    <div class="space-y-4">@foreach($exps as $exp)@continue(empty($exp['role']) && empty($exp['company']))<div class="grid grid-cols-12 gap-4 items-start"><div class="col-span-3 text-[10px] text-slate-500 pt-0.5 space-y-0.5"><div class="font-semibold text-slate-700">{{ implode(' – ', array_filter([$exp['start_date'] ?? '', $exp['end_date'] ?? ''])) }}</div>@if(!empty($exp['location']))<div>{{ $exp['location'] }}</div>@endif</div><div class="col-span-9"><h3 class="font-bold text-[12.5px] text-slate-900">{{ $exp['role'] ?: ($exp['company'] ?? '') }}</h3><div class="text-[11px] font-semibold mb-1.5" style="color: {{ $accent }}">{{ $exp['company'] ?? '' }}</div><ul class="space-y-1 text-[11px] text-slate-700 pl-4 list-disc">@foreach($parseBullets($exp['bullets_text'] ?? '') as $line)<li>{{ $line }}</li>@endforeach</ul></div></div>@endforeach</div>
+                                </section>
+                            @endif
+                            @if(!empty($vis['education']) && !empty($edus))
+                                <section>
+                                    <h2 class="text-[13px] font-bold tracking-tight mb-2.5 pb-1 border-b border-slate-200" style="color: {{ $accent }}">Education</h2>
+                                    <div class="space-y-2.5">@foreach($edus as $edu)@continue(empty($edu['degree']) && empty($edu['school']))<div class="grid grid-cols-12 gap-4 items-start"><div class="col-span-3 text-[10px] text-slate-500 font-semibold">{{ implode(' – ', array_filter([$edu['start_date'] ?? '', $edu['end_date'] ?? ''])) }}</div><div class="col-span-9"><div class="font-bold text-[11.5px] text-slate-900">{{ $edu['degree'] ?? '' }}</div><div class="text-[11px] text-slate-600">{{ implode(', ', array_filter([$edu['school'] ?? '', $edu['location'] ?? ''])) }}</div></div></div>@endforeach</div>
+                                </section>
+                            @endif
+                            @if(!empty($vis['awards']) && !empty($awards))
+                                <section><h2 class="text-[13px] font-bold tracking-tight mb-2 pb-1 border-b border-slate-200" style="color: {{ $accent }}">Certifications &amp; Honors</h2><ul class="space-y-1 text-[11px] text-slate-700 pl-4 list-disc">@foreach($awards as $aw)@continue(empty($aw['title']))<li><strong>{{ $aw['title'] }}</strong> <span class="text-slate-500">{{ implode(' • ', array_filter([$aw['issuer'] ?? '', $aw['date'] ?? ''])) }}</span></li>@endforeach</ul></section>
+                            @endif
+                        </div>
+                    </div>
+
+                {{-- RB-2. RIBBON CENTERED --}}
+                @elseif($tStyle === 'ribbon_centered')
+                    <div class="min-h-[1122px] bg-white text-slate-800 {{ $density === 'compact' ? 'p-7 space-y-4' : 'p-9 space-y-5' }}">
+                        <header class="space-y-2.5">
+                            <div class="py-3 px-6 text-center rounded-xs" style="background-color: {{ $accent }};"><h1 class="text-[24px] font-bold tracking-tight text-white leading-tight {{ $font === 'serif' ? 'font-editorial' : '' }}">{{ $fullName }}</h1></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2 text-[10.5px] text-slate-600 pb-3 border-b border-slate-200">
+                                <div>{{ implode(' • ', array_filter([$p['location'] ?? '', $p['phone'] ?? ''])) }}</div>
+                                <div class="font-semibold text-slate-800">{{ implode(' • ', array_filter([$p['email'] ?? '', $p['linkedin'] ?? ''])) }}</div>
+                            </div>
+                        </header>
+                        @if(!empty($vis['summary']) && !empty($c['summary']))
+                            <section><p class="text-[11.5px] leading-relaxed text-slate-700 whitespace-pre-line">{{ $c['summary'] }}</p></section>
+                        @endif
+                        @if(!empty($vis['skills']) && !empty($skills))
+                            <section><h2 class="text-[13px] font-bold pb-1 mb-2 border-b border-slate-300" style="color: {{ $accent }}">Skills</h2><ul class="grid grid-cols-2 gap-x-6 gap-y-1 text-[11px] text-slate-700 pl-4 list-disc">@foreach($skills as $sk)<li>{{ $sk }}</li>@endforeach</ul></section>
+                        @endif
+                        @if(!empty($vis['experience']) && !empty($exps))
+                            <section>
+                                <h2 class="text-[13px] font-bold pb-1 mb-3 border-b border-slate-300" style="color: {{ $accent }}">Professional Experience</h2>
+                                <div class="space-y-4">@foreach($exps as $exp)@continue(empty($exp['role']) && empty($exp['company']))<div><h3 class="font-bold text-[12.5px] text-slate-900">{{ $exp['role'] ?: ($exp['company'] ?? '') }}</h3><div class="flex items-baseline justify-between gap-2 text-[11px] text-slate-600 mb-1.5"><span class="font-semibold">{{ implode(', ', array_filter([$exp['company'] ?? '', $exp['location'] ?? ''])) }}</span><span class="font-semibold">{{ implode(' – ', array_filter([$exp['start_date'] ?? '', $exp['end_date'] ?? ''])) }}</span></div><ul class="space-y-1 text-[11px] text-slate-700 pl-4 list-disc">@foreach($parseBullets($exp['bullets_text'] ?? '') as $line)<li>{{ $line }}</li>@endforeach</ul></div>@endforeach</div>
+                            </section>
+                        @endif
+                        @if(!empty($vis['education']) && !empty($edus))
+                            <section>
+                                <h2 class="text-[13px] font-bold pb-1 mb-2.5 border-b border-slate-300" style="color: {{ $accent }}">Education</h2>
+                                <div class="space-y-2">@foreach($edus as $edu)@continue(empty($edu['degree']) && empty($edu['school']))<div class="flex items-baseline justify-between gap-2"><div><div class="font-bold text-[11.5px] text-slate-900">{{ $edu['degree'] ?? '' }}</div><div class="text-[11px] text-slate-600">{{ implode(', ', array_filter([$edu['school'] ?? '', $edu['location'] ?? ''])) }}</div></div><span class="text-[10.5px] font-semibold text-slate-500">{{ implode(' – ', array_filter([$edu['start_date'] ?? '', $edu['end_date'] ?? ''])) }}</span></div>@endforeach</div>
+                            </section>
+                        @endif
+                    </div>
+
+                {{-- A. BENTO MODERN (2026 Modular Grid) --}}
+                @elseif($tStyle === 'bento_modern')
+                    <div class="min-h-[1122px] bg-[#F8FAFC] {{ $density === 'compact' ? 'p-6 space-y-3.5' : 'p-7 space-y-4' }}">
+                        <header class="bg-white rounded-2xl border border-slate-200/90 p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div class="flex items-center gap-4 min-w-0">
+                                @if($showPhoto)
+                                    <div class="w-16 h-16 rounded-2xl shrink-0 flex items-center justify-center text-white font-black text-lg shadow-sm overflow-hidden border-2"
+                                         style="background-color: {{ $accent }}; border-color: {{ $accent }}30;">
+                                        @if($photo)
+                                            <img src="{{ $photo }}" alt="{{ $fullName }}" class="w-full h-full object-cover">
+                                        @else
+                                            {{ $initials }}
+                                        @endif
+                                    </div>
+                                @endif
+                                <div class="min-w-0">
+                                    <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider mb-1.5"
+                                         style="background-color: {{ $accent }}14; color: {{ $accent }}">
+                                        <span class="w-1.5 h-1.5 rounded-full" style="background-color: {{ $accent }}"></span>
+                                        <span>{{ $p['job_title'] ?? '' }}</span>
+                                    </div>
+                                    <h1 class="text-[24px] font-black tracking-tight leading-none text-slate-900 {{ $font === 'serif' ? 'font-editorial' : '' }}">{{ $fullName }}</h1>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap sm:justify-end gap-1.5 text-[9.5px] font-medium text-slate-600 max-w-[290px]">
+                                @if(!empty($p['email']))<span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 font-semibold">{{ $p['email'] }}</span>@endif
+                                @if(!empty($p['phone']))<span class="px-2.5 py-1 rounded-lg bg-slate-100">{{ $p['phone'] }}</span>@endif
+                                @if(!empty($p['location']))<span class="px-2.5 py-1 rounded-lg bg-slate-100">{{ $p['location'] }}</span>@endif
+                                @if(!empty($p['website']))<span class="px-2.5 py-1 rounded-lg border font-semibold" style="border-color: {{ $accent }}35; color: {{ $accent }}">{{ $p['website'] }}</span>@endif
+                                @if(!empty($p['linkedin']))<span class="px-2.5 py-1 rounded-lg bg-slate-100">{{ $p['linkedin'] }}</span>@endif
+                            </div>
+                        </header>
+
+                        @if(!empty($vis['summary']) && !empty($c['summary']))
+                            <section class="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-xs flex items-start gap-3">
+                                <div class="w-1 self-stretch rounded-full shrink-0" style="background-color: {{ $accent }}"></div>
+                                <div>
+                                    <div class="text-[9px] font-extrabold uppercase tracking-[0.18em] mb-1" style="color: {{ $accent }}">Profile Overview</div>
+                                    <p class="text-[11.5px] leading-relaxed text-slate-700 whitespace-pre-line">{{ $c['summary'] }}</p>
+                                </div>
+                            </section>
+                        @endif
+
+                        <div class="grid grid-cols-12 gap-4 items-start">
+                            <div class="col-span-8 space-y-4">
+                                @if(!empty($vis['experience']) && !empty($exps))
+                                    <section class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs">
+                                        <h2 class="text-[9.5px] font-extrabold uppercase tracking-[0.18em] mb-3.5" style="color: {{ $accent }}">Career Impact</h2>
+                                        <div class="space-y-4">
+                                            @foreach($exps as $exp)
+                                                @continue(empty($exp['role']) && empty($exp['company']))
+                                                <div class="relative pl-4 border-l-2" style="border-color: {{ $accent }}30">
+                                                    <span class="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full" style="background-color: {{ $accent }}"></span>
+                                                    <div class="flex flex-wrap items-baseline justify-between gap-2">
+                                                        <h3 class="font-extrabold text-[12.5px] text-slate-900">{{ $exp['role'] ?: ($exp['company'] ?? '') }}</h3>
+                                                        <span class="px-2 py-0.5 rounded-md bg-slate-100 text-[9.5px] font-bold text-slate-600">{{ implode(' – ', array_filter([$exp['start_date'] ?? '', $exp['end_date'] ?? ''])) }}</span>
+                                                    </div>
+                                                    <div class="text-[11px] font-bold mb-1.5" style="color: {{ $accent }}">{{ implode(' • ', array_filter([$exp['company'] ?? '', $exp['location'] ?? ''])) }}</div>
+                                                    <ul class="space-y-1 text-slate-700 pl-3.5 list-disc">
+                                                        @foreach($parseBullets($exp['bullets_text'] ?? '') as $line)<li>{{ $line }}</li>@endforeach
+                                                    </ul>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </section>
+                                @endif
+
+                                @if(!empty($vis['projects']) && !empty($projects))
+                                    <section class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs">
+                                        <h2 class="text-[9.5px] font-extrabold uppercase tracking-[0.18em] mb-3" style="color: {{ $accent }}">Featured Projects</h2>
+                                        <div class="grid grid-cols-2 gap-2.5">
+                                            @foreach($projects as $proj)
+                                                @continue(empty($proj['name']))
+                                                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                                                    <div class="font-bold text-[11.5px] text-slate-900 truncate">{{ $proj['name'] }}</div>
+                                                    @if(!empty($proj['link']))<div class="text-[9.5px] font-semibold truncate mb-1" style="color: {{ $accent }}">{{ $proj['link'] }}</div>@endif
+                                                    @if(!empty($proj['description']))<p class="text-[10.5px] text-slate-600 leading-snug">{{ $proj['description'] }}</p>@endif
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </section>
+                                @endif
+                            </div>
+
+                            <aside class="col-span-4 space-y-4">
+                                @if(!empty($vis['skills']) && !empty($skills))
+                                    <section class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-xs">
+                                        <h2 class="text-[9.5px] font-extrabold uppercase tracking-[0.18em] mb-2.5" style="color: {{ $accent }}">Core Stack</h2>
+                                        <div class="flex flex-wrap gap-1.5">
+                                            @foreach($skills as $sk)
+                                                <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold border" style="background-color: {{ $accent }}0D; border-color: {{ $accent }}25; color: #1E293B;">{{ $sk }}</span>
+                                            @endforeach
+                                        </div>
+                                    </section>
+                                @endif
+
+                                @if(!empty($vis['education']) && !empty($edus))
+                                    <section class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-xs">
+                                        <h2 class="text-[9.5px] font-extrabold uppercase tracking-[0.18em] mb-2.5" style="color: {{ $accent }}">Education</h2>
+                                        <div class="space-y-2.5">
+                                            @foreach($edus as $edu)
+                                                @continue(empty($edu['degree']) && empty($edu['school']))
+                                                <div>
+                                                    <div class="font-bold text-[11px] text-slate-900">{{ $edu['degree'] ?? '' }}</div>
+                                                    <div class="text-[10.5px] font-medium text-slate-600">{{ $edu['school'] ?? '' }}</div>
+                                                    <div class="text-[9.5px] text-slate-400">{{ implode(' – ', array_filter([$edu['start_date'] ?? '', $edu['end_date'] ?? ''])) }}</div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </section>
+                                @endif
+
+                                @if(!empty($vis['languages']) && !empty($langs))
+                                    <section class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-xs">
+                                        <h2 class="text-[9.5px] font-extrabold uppercase tracking-[0.18em] mb-2" style="color: {{ $accent }}">Languages</h2>
+                                        <div class="space-y-1.5 text-[10.5px]">
+                                            @foreach($langs as $lg)
+                                                @continue(empty($lg['name']))
+                                                <div class="flex justify-between items-center">
+                                                    <span class="font-bold text-slate-800">{{ $lg['name'] }}</span>
+                                                    <span class="px-1.5 py-0.5 rounded bg-slate-100 text-[9px] font-semibold text-slate-600">{{ $lg['level'] ?? '' }}</span>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </section>
+                                @endif
+
+                                @if(!empty($vis['awards']) && !empty($awards))
+                                    <section class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-xs">
+                                        <h2 class="text-[9.5px] font-extrabold uppercase tracking-[0.18em] mb-2" style="color: {{ $accent }}">Honors</h2>
+                                        <div class="space-y-1.5 text-[10.5px]">
+                                            @foreach($awards as $aw)
+                                                @continue(empty($aw['title']))
+                                                <div>
+                                                    <div class="font-bold text-slate-900">{{ $aw['title'] }}</div>
+                                                    <div class="text-[9.5px] text-slate-500">{{ implode(' • ', array_filter([$aw['issuer'] ?? '', $aw['date'] ?? ''])) }}</div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </section>
+                                @endif
+                            </aside>
+                        </div>
+                    </div>
+
+                {{-- B. STRIPE CLEAN (Precision Top-Band Minimal) --}}
+                @elseif($tStyle === 'stripe_clean')
+                    <div class="min-h-[1122px] bg-white border-t-[5px] {{ $density === 'compact' ? 'p-7 space-y-4' : 'p-9 space-y-5' }}" style="border-top-color: {{ $accent }}">
+                        <header class="flex items-start justify-between gap-6 pb-5 border-b border-slate-200">
+                            <div class="min-w-0">
+                                <h1 class="text-[28px] font-black tracking-tight text-slate-900 leading-none {{ $font === 'serif' ? 'font-editorial' : '' }}">{{ $fullName }}</h1>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <span class="w-4 h-0.5 rounded-full" style="background-color: {{ $accent }}"></span>
+                                    <p class="text-[12.5px] font-bold tracking-tight" style="color: {{ $accent }}">{{ $p['job_title'] ?? '' }}</p>
+                                </div>
+                            </div>
+                            <div class="text-right text-[10px] text-slate-600 space-y-0.5 shrink-0">
+                                @if(!empty($p['email']))<div class="font-bold text-slate-900">{{ $p['email'] }}</div>@endif
+                                @if(!empty($p['phone']))<div>{{ $p['phone'] }}</div>@endif
+                                @if(!empty($p['location']))<div>{{ $p['location'] }}</div>@endif
+                                @if(!empty($p['website']) || !empty($p['linkedin']))<div class="font-semibold" style="color: {{ $accent }}">{{ implode(' • ', array_filter([$p['website'] ?? '', $p['linkedin'] ?? ''])) }}</div>@endif
+                            </div>
+                        </header>
+                        @if(!empty($vis['summary']) && !empty($c['summary']))
+                            <section class="pb-4 border-b border-slate-100"><p class="text-[11.5px] leading-relaxed text-slate-700 whitespace-pre-line font-medium">{{ $c['summary'] }}</p></section>
+                        @endif
+                        <div class="grid grid-cols-12 gap-7 items-start">
+                            <div class="col-span-8 space-y-5">
+                                @if(!empty($vis['experience']) && !empty($exps))
+                                    <section>
+                                        <h2 class="text-[10px] font-black uppercase tracking-[0.2em] pb-1.5 mb-3.5 border-b" style="color: {{ $accent }}; border-color: {{ $accent }}30;">Experience</h2>
+                                        <div class="space-y-4">
+                                            @foreach($exps as $exp)
+                                                @continue(empty($exp['role']) && empty($exp['company']))
+                                                <div>
+                                                    <div class="flex items-baseline justify-between gap-2"><h3 class="font-extrabold text-[13px] text-slate-900">{{ $exp['role'] ?: ($exp['company'] ?? '') }}</h3><span class="text-[10px] font-semibold text-slate-500">{{ implode(' – ', array_filter([$exp['start_date'] ?? '', $exp['end_date'] ?? ''])) }}</span></div>
+                                                    <div class="text-[11px] font-semibold mb-1.5" style="color: {{ $accent }}">{{ implode(' · ', array_filter([$exp['company'] ?? '', $exp['location'] ?? ''])) }}</div>
+                                                    <ul class="space-y-1 text-slate-700 pl-4 list-disc">@foreach($parseBullets($exp['bullets_text'] ?? '') as $line)<li>{{ $line }}</li>@endforeach</ul>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </section>
+                                @endif
+                                @if(!empty($vis['projects']) && !empty($projects))
+                                    <section>
+                                        <h2 class="text-[10px] font-black uppercase tracking-[0.2em] pb-1.5 mb-3 border-b" style="color: {{ $accent }}; border-color: {{ $accent }}30;">Selected Projects</h2>
+                                        <div class="space-y-2.5">
+                                            @foreach($projects as $proj)
+                                                @continue(empty($proj['name']))
+                                                <div class="p-3 rounded-lg bg-slate-50 border border-slate-200/70">
+                                                    <div class="flex justify-between items-baseline"><span class="font-bold text-slate-900">{{ $proj['name'] }}</span><span class="text-[10px] font-semibold" style="color: {{ $accent }}">{{ $proj['link'] ?? '' }}</span></div>
+                                                    @if(!empty($proj['description']))<p class="text-[10.5px] text-slate-600 mt-0.5">{{ $proj['description'] }}</p>@endif
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </section>
+                                @endif
+                            </div>
+                            <aside class="col-span-4 space-y-5">
+                                @if(!empty($vis['skills']) && !empty($skills))
+                                    <section><h2 class="text-[10px] font-black uppercase tracking-[0.2em] pb-1.5 mb-2.5 border-b" style="color: {{ $accent }}; border-color: {{ $accent }}30;">Core Skills</h2><div class="flex flex-wrap gap-1.5">@foreach($skills as $sk)<span class="px-2 py-0.5 rounded bg-slate-100 text-[10px] font-semibold text-slate-800">{{ $sk }}</span>@endforeach</div></section>
+                                @endif
+                                @if(!empty($vis['education']) && !empty($edus))
+                                    <section><h2 class="text-[10px] font-black uppercase tracking-[0.2em] pb-1.5 mb-2.5 border-b" style="color: {{ $accent }}; border-color: {{ $accent }}30;">Education</h2><div class="space-y-2.5">@foreach($edus as $edu)@continue(empty($edu['degree']) && empty($edu['school']))<div><div class="font-bold text-[11px] text-slate-900">{{ $edu['degree'] ?? '' }}</div><div class="text-[10.5px] text-slate-600">{{ $edu['school'] ?? '' }}</div><div class="text-[9.5px] text-slate-400">{{ implode(' – ', array_filter([$edu['start_date'] ?? '', $edu['end_date'] ?? ''])) }}</div></div>@endforeach</div></section>
+                                @endif
+                                @if(!empty($vis['languages']) && !empty($langs))
+                                    <section><h2 class="text-[10px] font-black uppercase tracking-[0.2em] pb-1.5 mb-2 border-b" style="color: {{ $accent }}; border-color: {{ $accent }}30;">Languages</h2><div class="space-y-1 text-[10.5px]">@foreach($langs as $lg)@continue(empty($lg['name']))<div class="flex justify-between"><span class="font-semibold text-slate-800">{{ $lg['name'] }}</span><span class="text-slate-500">{{ $lg['level'] ?? '' }}</span></div>@endforeach</div></section>
+                                @endif
+                            </aside>
+                        </div>
+                    </div>
+
+                {{-- C. AURORA PILL (Modern Tinted Hero Card) --}}
+                @elseif($tStyle === 'aurora_pill')
+                    <div class="min-h-[1122px] bg-white {{ $density === 'compact' ? 'p-6 space-y-4' : 'p-8 space-y-5' }}">
+                        <header class="rounded-2xl border p-5 sm:p-6 space-y-3.5" style="background: linear-gradient(135deg, {{ $accent }}12 0%, {{ $accent }}04 100%); border-color: {{ $accent }}28;">
+                            <div class="flex items-center gap-4 min-w-0">
+                                @if($showPhoto)
+                                    <div class="w-16 h-16 rounded-full shrink-0 border-2 overflow-hidden flex items-center justify-center font-black text-white shadow-sm" style="background-color: {{ $accent }}; border-color: #FFFFFF;">
+                                        @if($photo)<img src="{{ $photo }}" alt="{{ $fullName }}" class="w-full h-full object-cover">@else{{ $initials }}@endif
+                                    </div>
+                                @endif
+                                <div class="min-w-0">
+                                    <h1 class="text-[25px] font-black tracking-tight text-slate-900 leading-none {{ $font === 'serif' ? 'font-editorial' : '' }}">{{ $fullName }}</h1>
+                                    <span class="inline-block mt-2 px-3 py-0.5 rounded-full text-white text-[10.5px] font-bold" style="background-color: {{ $accent }}">{{ $p['job_title'] ?? '' }}</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-[10px] font-semibold text-slate-700 pt-1">
+                                @if(!empty($p['email']))<span class="px-2.5 py-1 rounded-full bg-white border border-slate-200/80">{{ $p['email'] }}</span>@endif
+                                @if(!empty($p['phone']))<span class="px-2.5 py-1 rounded-full bg-white border border-slate-200/80">{{ $p['phone'] }}</span>@endif
+                                @if(!empty($p['location']))<span class="px-2.5 py-1 rounded-full bg-white border border-slate-200/80">{{ $p['location'] }}</span>@endif
+                                @if(!empty($p['website']))<span class="px-2.5 py-1 rounded-full bg-white border border-slate-200/80" style="color: {{ $accent }}">{{ $p['website'] }}</span>@endif
+                                @if(!empty($p['linkedin']))<span class="px-2.5 py-1 rounded-full bg-white border border-slate-200/80">{{ $p['linkedin'] }}</span>@endif
+                            </div>
+                        </header>
+                        @if(!empty($vis['summary']) && !empty($c['summary']))
+                            <section class="px-1"><p class="text-[11.5px] leading-relaxed text-slate-700 whitespace-pre-line">{{ $c['summary'] }}</p></section>
+                        @endif
+                        <div class="grid grid-cols-12 gap-7 items-start">
+                            <div class="col-span-8 space-y-5">
+                                @if(!empty($vis['experience']) && !empty($exps))
+                                    <section>
+                                        <h2 class="text-[10.5px] font-black uppercase tracking-[0.18em] mb-3.5" style="color: {{ $accent }}">Work Experience</h2>
+                                        <div class="space-y-4">
+                                            @foreach($exps as $exp)
+                                                @continue(empty($exp['role']) && empty($exp['company']))
+                                                <div class="pl-3.5 border-l-2" style="border-color: {{ $accent }}">
+                                                    <div class="flex items-baseline justify-between gap-2"><h3 class="font-extrabold text-[13px] text-slate-900">{{ $exp['role'] ?: ($exp['company'] ?? '') }}</h3><span class="px-2 py-0.5 rounded-full text-[9.5px] font-bold" style="background-color: {{ $accent }}12; color: {{ $accent }}">{{ implode(' – ', array_filter([$exp['start_date'] ?? '', $exp['end_date'] ?? ''])) }}</span></div>
+                                                    <div class="text-[11px] font-bold text-slate-600 mb-1.5">{{ implode(' • ', array_filter([$exp['company'] ?? '', $exp['location'] ?? ''])) }}</div>
+                                                    <ul class="space-y-1 text-slate-700 pl-3.5 list-disc">@foreach($parseBullets($exp['bullets_text'] ?? '') as $line)<li>{{ $line }}</li>@endforeach</ul>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </section>
+                                @endif
+                                @if(!empty($vis['projects']) && !empty($projects))
+                                    <section>
+                                        <h2 class="text-[10.5px] font-black uppercase tracking-[0.18em] mb-2.5" style="color: {{ $accent }}">Key Projects</h2>
+                                        <div class="space-y-2.5">@foreach($projects as $proj)@continue(empty($proj['name']))<div class="p-3 rounded-xl border border-slate-200 bg-slate-50/70"><div class="flex justify-between items-baseline"><span class="font-bold text-slate-900">{{ $proj['name'] }}</span><span class="text-[10px] font-semibold" style="color: {{ $accent }}">{{ $proj['link'] ?? '' }}</span></div>@if(!empty($proj['description']))<p class="text-[10.5px] text-slate-600 mt-0.5">{{ $proj['description'] }}</p>@endif</div>@endforeach</div>
+                                    </section>
+                                @endif
+                            </div>
+                            <aside class="col-span-4 space-y-5">
+                                @if(!empty($vis['skills']) && !empty($skills))
+                                    <section class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80"><h2 class="text-[10px] font-black uppercase tracking-[0.18em] mb-2.5" style="color: {{ $accent }}">Skills &amp; Craft</h2><div class="flex flex-wrap gap-1.5">@foreach($skills as $sk)<span class="px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-[10px] font-bold text-slate-800">{{ $sk }}</span>@endforeach</div></section>
+                                @endif
+                                @if(!empty($vis['education']) && !empty($edus))
+                                    <section class="px-1"><h2 class="text-[10px] font-black uppercase tracking-[0.18em] mb-2.5" style="color: {{ $accent }}">Education</h2><div class="space-y-2.5">@foreach($edus as $edu)@continue(empty($edu['degree']) && empty($edu['school']))<div><div class="font-bold text-[11px] text-slate-900">{{ $edu['degree'] ?? '' }}</div><div class="text-[10.5px] text-slate-600">{{ $edu['school'] ?? '' }}</div><div class="text-[9.5px] text-slate-400">{{ implode(' – ', array_filter([$edu['start_date'] ?? '', $edu['end_date'] ?? ''])) }}</div></div>@endforeach</div></section>
+                                @endif
+                                @if(!empty($vis['languages']) && !empty($langs))
+                                    <section class="px-1"><h2 class="text-[10px] font-black uppercase tracking-[0.18em] mb-2" style="color: {{ $accent }}">Languages</h2><div class="space-y-1.5 text-[10.5px]">@foreach($langs as $lg)@continue(empty($lg['name']))<div class="flex justify-between"><span class="font-bold text-slate-800">{{ $lg['name'] }}</span><span class="text-slate-500">{{ $lg['level'] ?? '' }}</span></div>@endforeach</div></section>
+                                @endif
+                            </aside>
+                        </div>
+                    </div>
+
+                {{-- D. OBSIDIAN HEADER (Dark Masthead + Crisp White Matrix) --}}
+                @elseif($tStyle === 'obsidian_header')
+                    <div class="min-h-[1122px] bg-white">
+                        <header class="bg-[#0F172A] text-white px-8 py-6 border-t-[4px] space-y-4" style="border-top-color: {{ $accent }}">
+                            <div class="flex items-center justify-between gap-5">
+                                <div class="flex items-center gap-4 min-w-0">
+                                    @if($showPhoto)
+                                        <div class="w-16 h-16 rounded-2xl border-2 shrink-0 overflow-hidden flex items-center justify-center font-black text-white" style="border-color: {{ $accent }}; background-color: {{ $accent }}30;">
+                                            @if($photo)<img src="{{ $photo }}" alt="{{ $fullName }}" class="w-full h-full object-cover">@else{{ $initials }}@endif
+                                        </div>
+                                    @endif
+                                    <div class="min-w-0">
+                                        <h1 class="text-[26px] font-black tracking-tight leading-none text-white {{ $font === 'serif' ? 'font-editorial' : '' }}">{{ $fullName }}</h1>
+                                        <div class="mt-2 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[10.5px] font-bold text-white" style="background-color: {{ $accent }}">{{ $p['job_title'] ?? '' }}</div>
+                                    </div>
+                                </div>
+                                <div class="text-right text-[10px] text-slate-300 space-y-0.5 shrink-0">
+                                    @if(!empty($p['email']))<div class="font-bold text-white">{{ $p['email'] }}</div>@endif
+                                    @if(!empty($p['phone']))<div>{{ $p['phone'] }}</div>@endif
+                                    @if(!empty($p['location']))<div>{{ $p['location'] }}</div>@endif
+                                    @if(!empty($p['website']) || !empty($p['linkedin']))<div class="text-slate-400">{{ implode(' • ', array_filter([$p['website'] ?? '', $p['linkedin'] ?? ''])) }}</div>@endif
+                                </div>
+                            </div>
+                        </header>
+                        <div class="{{ $density === 'compact' ? 'p-7 space-y-4' : 'p-8 space-y-5' }}">
+                            @if(!empty($vis['summary']) && !empty($c['summary']))
+                                <section class="p-4 rounded-xl bg-slate-50 border border-slate-200/80"><p class="text-[11.5px] leading-relaxed text-slate-700 whitespace-pre-line font-medium">{{ $c['summary'] }}</p></section>
+                            @endif
+                            <div class="grid grid-cols-12 gap-7 items-start">
+                                <div class="col-span-8 space-y-5">
+                                    @if(!empty($vis['experience']) && !empty($exps))
+                                        <section>
+                                            <h2 class="text-[10.5px] font-black uppercase tracking-[0.18em] pb-1.5 mb-3.5 border-b border-slate-200 text-slate-900">Professional Experience</h2>
+                                            <div class="space-y-4">@foreach($exps as $exp)@continue(empty($exp['role']) && empty($exp['company']))<div><div class="flex items-baseline justify-between gap-2"><h3 class="font-extrabold text-[13px] text-slate-900">{{ $exp['role'] ?: ($exp['company'] ?? '') }}</h3><span class="text-[10px] font-bold text-slate-500">{{ implode(' – ', array_filter([$exp['start_date'] ?? '', $exp['end_date'] ?? ''])) }}</span></div><div class="text-[11px] font-bold mb-1.5" style="color: {{ $accent }}">{{ implode(' • ', array_filter([$exp['company'] ?? '', $exp['location'] ?? ''])) }}</div><ul class="space-y-1 text-slate-700 pl-4 list-disc">@foreach($parseBullets($exp['bullets_text'] ?? '') as $line)<li>{{ $line }}</li>@endforeach</ul></div>@endforeach</div>
+                                        </section>
+                                    @endif
+                                    @if(!empty($vis['projects']) && !empty($projects))
+                                        <section>
+                                            <h2 class="text-[10.5px] font-black uppercase tracking-[0.18em] pb-1.5 mb-3 border-b border-slate-200 text-slate-900">Key Initiatives &amp; Systems</h2>
+                                            <div class="space-y-2.5">@foreach($projects as $proj)@continue(empty($proj['name']))<div class="p-3 rounded-lg bg-slate-50 border border-slate-200/80"><div class="flex justify-between items-baseline"><span class="font-bold text-slate-900">{{ $proj['name'] }}</span><span class="text-[10px] font-semibold" style="color: {{ $accent }}">{{ $proj['link'] ?? '' }}</span></div>@if(!empty($proj['description']))<p class="text-[10.5px] text-slate-600 mt-0.5">{{ $proj['description'] }}</p>@endif</div>@endforeach</div>
+                                        </section>
+                                    @endif
+                                </div>
+                                <aside class="col-span-4 space-y-5">
+                                    @if(!empty($vis['skills']) && !empty($skills))
+                                        <section><h2 class="text-[10px] font-black uppercase tracking-[0.18em] pb-1.5 mb-2.5 border-b border-slate-200 text-slate-900">Core Stack</h2><div class="flex flex-wrap gap-1.5">@foreach($skills as $sk)<span class="px-2 py-0.5 rounded bg-slate-900 text-white text-[10px] font-semibold">{{ $sk }}</span>@endforeach</div></section>
+                                    @endif
+                                    @if(!empty($vis['education']) && !empty($edus))
+                                        <section><h2 class="text-[10px] font-black uppercase tracking-[0.18em] pb-1.5 mb-2.5 border-b border-slate-200 text-slate-900">Education</h2><div class="space-y-2.5">@foreach($edus as $edu)@continue(empty($edu['degree']) && empty($edu['school']))<div><div class="font-bold text-[11px] text-slate-900">{{ $edu['degree'] ?? '' }}</div><div class="text-[10.5px] text-slate-600">{{ $edu['school'] ?? '' }}</div><div class="text-[9.5px] text-slate-400">{{ implode(' – ', array_filter([$edu['start_date'] ?? '', $edu['end_date'] ?? ''])) }}</div></div>@endforeach</div></section>
+                                    @endif
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+
                 {{-- 1. FLOW SIDEBAR --}}
-                @if($tStyle === 'flow_sidebar')
+                @elseif($tStyle === 'flow_sidebar')
                     <div class="grid grid-cols-12 min-h-[1122px]">
                         <aside class="col-span-4 text-white flex flex-col justify-between {{ $density === 'compact' ? 'p-6 space-y-4' : 'p-7 space-y-5' }}"
                                style="background-color: {{ $accent }};">

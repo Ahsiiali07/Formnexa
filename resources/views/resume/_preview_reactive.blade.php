@@ -3,7 +3,8 @@
      class="w-full max-w-[794px] mx-auto shadow-2xl rounded-sm overflow-hidden transition-all duration-300 border border-slate-200/80 text-slate-800 print:shadow-none print:border-0"
      :class="{
          'bg-[#FAF8F4] text-[#1F1C18]': template_style === 'editorial_figma',
-         'bg-white': template_style !== 'editorial_figma',
+         'bg-[#F8FAFC]': template_style === 'bento_modern',
+         'bg-white': template_style !== 'editorial_figma' && template_style !== 'bento_modern',
          'font-sans': font_family === 'sans',
          'font-serif': font_family === 'serif',
          'font-tech-mono': font_family === 'mono',
@@ -11,6 +12,741 @@
          'text-[12px] leading-[1.55]': density !== 'compact'
      }"
      style="min-height: 1122px;">
+
+    {{-- =======================================================================
+         RB-1. BANNER SPLIT DATE (ResumeBuilder Casey Clark / Pat Morgan)
+         ======================================================================= --}}
+    <template x-if="template_style === 'banner_split_date'">
+        <div class="min-h-[1122px] bg-white text-slate-800">
+            <header class="px-8 py-6 text-white flex items-center justify-between gap-6"
+                    :style="`background-color: ${accent_color};`">
+                <div class="min-w-0 space-y-1.5">
+                    <div class="text-[28px] font-bold tracking-tight leading-tight text-white"
+                         :class="font_family === 'serif' ? 'font-editorial' : ''"
+                         x-text="content.personal?.full_name || 'Your Name'"></div>
+                    <p x-show="content.personal?.job_title" class="text-[12px] font-semibold text-white/90"
+                       x-text="content.personal.job_title"></p>
+                    <div class="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[10.5px] text-white/85 pt-0.5">
+                        <span x-show="content.personal?.location" x-text="content.personal.location"></span>
+                        <span x-show="content.personal?.phone">&bull; <span x-text="content.personal.phone"></span></span>
+                        <span x-show="content.personal?.email">&bull; <span x-text="content.personal.email"></span></span>
+                    </div>
+                </div>
+                <template x-if="content.personal?.show_photo">
+                    <div class="w-20 h-20 rounded-full border-[3px] border-white/80 bg-white/15 shrink-0 overflow-hidden flex items-center justify-center font-black text-xl text-white shadow-md">
+                        <img x-show="avatarUrl()" :src="avatarUrl()" alt="Portrait" class="w-full h-full object-cover">
+                        <span x-show="!avatarUrl()" x-text="initials()"></span>
+                    </div>
+                </template>
+            </header>
+
+            <div :class="density === 'compact' ? 'px-8 py-6 space-y-4' : 'px-9 py-7 space-y-5'">
+                <section x-show="content.section_visibility?.summary && content.summary" class="pb-3 border-b border-slate-200">
+                    <p class="text-[11.5px] leading-relaxed text-slate-700 whitespace-pre-line" x-text="content.summary"></p>
+                </section>
+
+                <section x-show="content.section_visibility?.skills && (content.skills?.length || 0) > 0">
+                    <h2 class="text-[13px] font-bold tracking-tight mb-2" :style="`color: ${accent_color}`">Skills</h2>
+                    <ul class="grid grid-cols-2 gap-x-6 gap-y-1 text-[11px] text-slate-700 pl-4 list-disc">
+                        <template x-for="(sk, idx) in content.skills" :key="'bsd-sk-' + idx">
+                            <li x-text="sk"></li>
+                        </template>
+                    </ul>
+                </section>
+
+                <section x-show="content.section_visibility?.experience && (content.experience?.length || 0) > 0">
+                    <h2 class="text-[13px] font-bold tracking-tight mb-3 pb-1 border-b border-slate-200" :style="`color: ${accent_color}`">Professional Experience</h2>
+                    <div class="space-y-4">
+                        <template x-for="(exp, idx) in content.experience" :key="'bsd-exp-' + idx">
+                            <div class="grid grid-cols-12 gap-4 items-start" x-show="exp.role || exp.company">
+                                <div class="col-span-3 text-[10px] text-slate-500 pt-0.5 space-y-0.5">
+                                    <div class="font-semibold text-slate-700" x-text="[exp.start_date, exp.end_date].filter(Boolean).join(' – ')"></div>
+                                    <div x-show="exp.location" x-text="exp.location"></div>
+                                </div>
+                                <div class="col-span-9">
+                                    <h3 class="font-bold text-[12.5px] text-slate-900" x-text="exp.role || exp.company"></h3>
+                                    <div class="text-[11px] font-semibold mb-1.5" :style="`color: ${accent_color}`" x-text="exp.company"></div>
+                                    <ul class="space-y-1 text-[11px] text-slate-700 pl-4 list-disc">
+                                        <template x-for="(line, bIdx) in parseBullets(exp.bullets_text)" :key="bIdx">
+                                            <li x-text="line"></li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </section>
+
+                <section x-show="content.section_visibility?.education && (content.education?.length || 0) > 0">
+                    <h2 class="text-[13px] font-bold tracking-tight mb-2.5 pb-1 border-b border-slate-200" :style="`color: ${accent_color}`">Education</h2>
+                    <div class="space-y-2.5">
+                        <template x-for="(edu, idx) in content.education" :key="'bsd-ed-' + idx">
+                            <div class="grid grid-cols-12 gap-4 items-start" x-show="edu.degree || edu.school">
+                                <div class="col-span-3 text-[10px] text-slate-500 font-semibold" x-text="[edu.start_date, edu.end_date].filter(Boolean).join(' – ')"></div>
+                                <div class="col-span-9">
+                                    <div class="font-bold text-[11.5px] text-slate-900" x-text="edu.degree"></div>
+                                    <div class="text-[11px] text-slate-600" x-text="[edu.school, edu.location].filter(Boolean).join(', ')"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </section>
+
+                <section x-show="content.section_visibility?.awards && (content.awards?.length || 0) > 0">
+                    <h2 class="text-[13px] font-bold tracking-tight mb-2 pb-1 border-b border-slate-200" :style="`color: ${accent_color}`">Certifications &amp; Honors</h2>
+                    <ul class="space-y-1 text-[11px] text-slate-700 pl-4 list-disc">
+                        <template x-for="(aw, idx) in content.awards" :key="'bsd-aw-' + idx">
+                            <li x-show="aw.title"><strong x-text="aw.title"></strong> <span class="text-slate-500" x-text="[aw.issuer, aw.date].filter(Boolean).join(' • ')"></span></li>
+                        </template>
+                    </ul>
+                </section>
+
+                <section x-show="content.section_visibility?.projects && (content.projects?.length || 0) > 0">
+                    <h2 class="text-[13px] font-bold tracking-tight mb-2 pb-1 border-b border-slate-200" :style="`color: ${accent_color}`">Projects</h2>
+                    <div class="space-y-2">
+                        <template x-for="(proj, idx) in content.projects" :key="'bsd-pr-' + idx">
+                            <div x-show="proj.name" class="text-[11px]">
+                                <strong class="text-slate-900" x-text="proj.name"></strong>
+                                <span x-show="proj.link" class="ml-1 text-[10px]" :style="`color: ${accent_color}`" x-text="proj.link"></span>
+                                <p x-show="proj.description" class="text-slate-600 mt-0.5" x-text="proj.description"></p>
+                            </div>
+                        </template>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </template>
+
+    {{-- =======================================================================
+         RB-2. RIBBON CENTERED (ResumeBuilder Chris Taylor Top-Band)
+         ======================================================================= --}}
+    <template x-if="template_style === 'ribbon_centered'">
+        <div class="min-h-[1122px] bg-white text-slate-800" :class="density === 'compact' ? 'p-7 space-y-4' : 'p-9 space-y-5'">
+            <header class="space-y-2.5">
+                <div class="py-3 px-6 text-center rounded-xs" :style="`background-color: ${accent_color};`">
+                    <div class="text-[24px] font-bold tracking-tight text-white leading-tight"
+                         :class="font_family === 'serif' ? 'font-editorial' : ''"
+                         x-text="content.personal?.full_name || 'Your Name'"></div>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-2 text-[10.5px] text-slate-600 pb-3 border-b border-slate-200">
+                    <div x-text="[content.personal?.location, content.personal?.phone].filter(Boolean).join(' • ')"></div>
+                    <div class="font-semibold text-slate-800" x-text="[content.personal?.email, content.personal?.linkedin].filter(Boolean).join(' • ')"></div>
+                </div>
+            </header>
+
+            <section x-show="content.section_visibility?.summary && content.summary">
+                <p class="text-[11.5px] leading-relaxed text-slate-700 whitespace-pre-line" x-text="content.summary"></p>
+            </section>
+
+            <section x-show="content.section_visibility?.skills && (content.skills?.length || 0) > 0">
+                <h2 class="text-[13px] font-bold pb-1 mb-2 border-b border-slate-300" :style="`color: ${accent_color}`">Skills</h2>
+                <ul class="grid grid-cols-2 gap-x-6 gap-y-1 text-[11px] text-slate-700 pl-4 list-disc">
+                    <template x-for="(sk, idx) in content.skills" :key="'rc-sk-' + idx">
+                        <li x-text="sk"></li>
+                    </template>
+                </ul>
+            </section>
+
+            <section x-show="content.section_visibility?.experience && (content.experience?.length || 0) > 0">
+                <h2 class="text-[13px] font-bold pb-1 mb-3 border-b border-slate-300" :style="`color: ${accent_color}`">Professional Experience</h2>
+                <div class="space-y-4">
+                    <template x-for="(exp, idx) in content.experience" :key="'rc-exp-' + idx">
+                        <div x-show="exp.role || exp.company">
+                            <h3 class="font-bold text-[12.5px] text-slate-900" x-text="exp.role || exp.company"></h3>
+                            <div class="flex items-baseline justify-between gap-2 text-[11px] text-slate-600 mb-1.5">
+                                <span class="font-semibold" x-text="[exp.company, exp.location].filter(Boolean).join(', ')"></span>
+                                <span class="font-semibold shrink-0" x-text="[exp.start_date, exp.end_date].filter(Boolean).join(' – ')"></span>
+                            </div>
+                            <ul class="space-y-1 text-[11px] text-slate-700 pl-4 list-disc">
+                                <template x-for="(line, bIdx) in parseBullets(exp.bullets_text)" :key="bIdx">
+                                    <li x-text="line"></li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+                </div>
+            </section>
+
+            <section x-show="content.section_visibility?.education && (content.education?.length || 0) > 0">
+                <h2 class="text-[13px] font-bold pb-1 mb-2.5 border-b border-slate-300" :style="`color: ${accent_color}`">Education</h2>
+                <div class="space-y-2">
+                    <template x-for="(edu, idx) in content.education" :key="'rc-ed-' + idx">
+                        <div class="flex items-baseline justify-between gap-2" x-show="edu.degree || edu.school">
+                            <div>
+                                <div class="font-bold text-[11.5px] text-slate-900" x-text="edu.degree"></div>
+                                <div class="text-[11px] text-slate-600" x-text="[edu.school, edu.location].filter(Boolean).join(', ')"></div>
+                            </div>
+                            <span class="text-[10.5px] font-semibold text-slate-500 shrink-0" x-text="[edu.start_date, edu.end_date].filter(Boolean).join(' – ')"></span>
+                        </div>
+                    </template>
+                </div>
+            </section>
+
+            <section x-show="content.section_visibility?.awards && (content.awards?.length || 0) > 0">
+                <h2 class="text-[13px] font-bold pb-1 mb-2 border-b border-slate-300" :style="`color: ${accent_color}`">Certifications &amp; Honors</h2>
+                <ul class="space-y-1 text-[11px] text-slate-700 pl-4 list-disc">
+                    <template x-for="(aw, idx) in content.awards" :key="'rc-aw-' + idx">
+                        <li x-show="aw.title"><strong x-text="aw.title"></strong> <span class="text-slate-500" x-text="[aw.issuer, aw.date].filter(Boolean).join(' • ')"></span></li>
+                    </template>
+                </ul>
+            </section>
+
+            <section x-show="content.section_visibility?.projects && (content.projects?.length || 0) > 0">
+                <h2 class="text-[13px] font-bold pb-1 mb-2 border-b border-slate-300" :style="`color: ${accent_color}`">Projects</h2>
+                <div class="space-y-1.5 text-[11px]">
+                    <template x-for="(proj, idx) in content.projects" :key="'rc-pr-' + idx">
+                        <div x-show="proj.name"><strong x-text="proj.name"></strong> <span x-show="proj.description" class="text-slate-600" x-text="'— ' + proj.description"></span></div>
+                    </template>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    {{-- =======================================================================
+         A. BENTO MODERN (2026 Modular Grid — Surface Cards & Contact Pills)
+         ======================================================================= --}}
+    <template x-if="template_style === 'bento_modern'">
+        <div class="min-h-[1122px] bg-[#F8FAFC]" :class="density === 'compact' ? 'p-6 space-y-3.5' : 'p-7 space-y-4'">
+            {{-- Top Bento Identity Card --}}
+            <header class="bg-white rounded-2xl border border-slate-200/90 p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="flex items-center gap-4 min-w-0">
+                    <template x-if="content.personal?.show_photo">
+                        <div class="w-16 h-16 rounded-2xl shrink-0 flex items-center justify-center text-white font-black text-lg shadow-sm overflow-hidden border-2"
+                             :style="`background-color: ${accent_color}; border-color: ${accent_color}30;`">
+                            <img x-show="avatarUrl()" :src="avatarUrl()" alt="Portrait" class="w-full h-full object-cover">
+                            <span x-show="!avatarUrl()" x-text="initials()"></span>
+                        </div>
+                    </template>
+                    <div class="min-w-0">
+                        <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider mb-1.5"
+                             :style="`background-color: ${accent_color}14; color: ${accent_color}`">
+                            <span class="w-1.5 h-1.5 rounded-full" :style="`background-color: ${accent_color}`"></span>
+                            <span x-text="content.personal?.job_title || 'Modern Professional'"></span>
+                        </div>
+                        <div class="text-[24px] font-black tracking-tight leading-none text-slate-900"
+                             :class="font_family === 'serif' ? 'font-editorial' : ''"
+                             x-text="content.personal?.full_name || 'Your Name'"></div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap sm:justify-end gap-1.5 text-[9.5px] font-medium text-slate-600 max-w-[290px]">
+                    <span x-show="content.personal?.email" class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 font-semibold" x-text="content.personal.email"></span>
+                    <span x-show="content.personal?.phone" class="px-2.5 py-1 rounded-lg bg-slate-100" x-text="content.personal.phone"></span>
+                    <span x-show="content.personal?.location" class="px-2.5 py-1 rounded-lg bg-slate-100" x-text="content.personal.location"></span>
+                    <span x-show="content.personal?.website" class="px-2.5 py-1 rounded-lg border font-semibold" :style="`border-color: ${accent_color}35; color: ${accent_color}`" x-text="content.personal.website"></span>
+                    <span x-show="content.personal?.linkedin" class="px-2.5 py-1 rounded-lg bg-slate-100" x-text="content.personal.linkedin"></span>
+                </div>
+            </header>
+
+            {{-- Summary Bento Module --}}
+            <section x-show="content.section_visibility?.summary && content.summary"
+                     class="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-xs flex items-start gap-3">
+                <div class="w-1 self-stretch rounded-full shrink-0" :style="`background-color: ${accent_color}`"></div>
+                <div>
+                    <div class="text-[9px] font-extrabold uppercase tracking-[0.18em] mb-1" :style="`color: ${accent_color}`">Profile Overview</div>
+                    <p class="text-[11.5px] leading-relaxed text-slate-700 whitespace-pre-line" x-text="content.summary"></p>
+                </div>
+            </section>
+
+            {{-- Modular 12-Col Bento Grid --}}
+            <div class="grid grid-cols-12 gap-4 items-start">
+                <div class="col-span-8 space-y-4">
+                    <section x-show="content.section_visibility?.experience && (content.experience?.length || 0) > 0"
+                             class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs">
+                        <div class="text-[9.5px] font-extrabold uppercase tracking-[0.18em] mb-3.5 flex items-center justify-between" :style="`color: ${accent_color}`">
+                            <span>Career Impact</span>
+                            <span class="h-px flex-1 ml-3 bg-slate-200"></span>
+                        </div>
+                        <div class="space-y-4">
+                            <template x-for="(exp, idx) in content.experience" :key="'bn-exp-' + idx">
+                                <div class="relative pl-4 border-l-2" :style="`border-color: ${accent_color}30`" x-show="exp.role || exp.company">
+                                    <span class="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full" :style="`background-color: ${accent_color}`"></span>
+                                    <div class="flex flex-wrap items-baseline justify-between gap-2">
+                                        <h3 class="font-extrabold text-[12.5px] text-slate-900" x-text="exp.role || exp.company"></h3>
+                                        <span class="px-2 py-0.5 rounded-md bg-slate-100 text-[9.5px] font-bold text-slate-600"
+                                              x-text="[exp.start_date, exp.end_date].filter(Boolean).join(' – ')"></span>
+                                    </div>
+                                    <div class="text-[11px] font-bold mb-1.5" :style="`color: ${accent_color}`"
+                                         x-text="[exp.company, exp.location].filter(Boolean).join(' • ')"></div>
+                                    <ul class="space-y-1 text-slate-700 pl-3.5 list-disc">
+                                        <template x-for="(line, bIdx) in parseBullets(exp.bullets_text)" :key="bIdx">
+                                            <li x-text="line"></li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+
+                    <section x-show="content.section_visibility?.projects && (content.projects?.length || 0) > 0"
+                             class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs">
+                        <div class="text-[9.5px] font-extrabold uppercase tracking-[0.18em] mb-3 flex items-center justify-between" :style="`color: ${accent_color}`">
+                            <span>Featured Projects</span>
+                            <span class="h-px flex-1 ml-3 bg-slate-200"></span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <template x-for="(proj, idx) in content.projects" :key="'bn-pr-' + idx">
+                                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80" x-show="proj.name">
+                                    <div class="font-bold text-[11.5px] text-slate-900 truncate" x-text="proj.name"></div>
+                                    <div x-show="proj.link" class="text-[9.5px] font-semibold truncate mb-1" :style="`color: ${accent_color}`" x-text="proj.link"></div>
+                                    <p x-show="proj.description" class="text-[10.5px] text-slate-600 leading-snug" x-text="proj.description"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+                </div>
+
+                <aside class="col-span-4 space-y-4">
+                    <section x-show="content.section_visibility?.skills && (content.skills?.length || 0) > 0"
+                             class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-xs">
+                        <div class="text-[9.5px] font-extrabold uppercase tracking-[0.18em] mb-2.5" :style="`color: ${accent_color}`">Core Stack</div>
+                        <div class="flex flex-wrap gap-1.5">
+                            <template x-for="(sk, idx) in content.skills" :key="'bn-sk-' + idx">
+                                <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold border"
+                                      :style="`background-color: ${accent_color}0D; border-color: ${accent_color}25; color: #1E293B;`" x-text="sk"></span>
+                            </template>
+                        </div>
+                    </section>
+
+                    <section x-show="content.section_visibility?.education && (content.education?.length || 0) > 0"
+                             class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-xs">
+                        <div class="text-[9.5px] font-extrabold uppercase tracking-[0.18em] mb-2.5" :style="`color: ${accent_color}`">Education</div>
+                        <div class="space-y-2.5">
+                            <template x-for="(edu, idx) in content.education" :key="'bn-ed-' + idx">
+                                <div x-show="edu.degree || edu.school">
+                                    <div class="font-bold text-[11px] text-slate-900" x-text="edu.degree"></div>
+                                    <div class="text-[10.5px] font-medium text-slate-600" x-text="edu.school"></div>
+                                    <div class="text-[9.5px] text-slate-400" x-text="[edu.start_date, edu.end_date].filter(Boolean).join(' – ')"></div>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+
+                    <section x-show="content.section_visibility?.languages && (content.languages?.length || 0) > 0"
+                             class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-xs">
+                        <div class="text-[9.5px] font-extrabold uppercase tracking-[0.18em] mb-2" :style="`color: ${accent_color}`">Languages</div>
+                        <div class="space-y-1.5 text-[10.5px]">
+                            <template x-for="(lang, idx) in content.languages" :key="'bn-lg-' + idx">
+                                <div class="flex justify-between items-center" x-show="lang.name">
+                                    <span class="font-bold text-slate-800" x-text="lang.name"></span>
+                                    <span class="px-1.5 py-0.5 rounded bg-slate-100 text-[9px] font-semibold text-slate-600" x-text="lang.level"></span>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+
+                    <section x-show="content.section_visibility?.awards && (content.awards?.length || 0) > 0"
+                             class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-xs">
+                        <div class="text-[9.5px] font-extrabold uppercase tracking-[0.18em] mb-2" :style="`color: ${accent_color}`">Honors</div>
+                        <div class="space-y-1.5 text-[10.5px]">
+                            <template x-for="(aw, idx) in content.awards" :key="'bn-aw-' + idx">
+                                <div x-show="aw.title">
+                                    <div class="font-bold text-slate-900" x-text="aw.title"></div>
+                                    <div class="text-[9.5px] text-slate-500" x-text="[aw.issuer, aw.date].filter(Boolean).join(' • ')"></div>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </template>
+
+    {{-- =======================================================================
+         B. STRIPE CLEAN (Precision Top-Band Minimal)
+         ======================================================================= --}}
+    <template x-if="template_style === 'stripe_clean'">
+        <div class="min-h-[1122px] bg-white border-t-[5px]" :style="`border-top-color: ${accent_color}`" :class="density === 'compact' ? 'p-7 space-y-4' : 'p-9 space-y-5'">
+            <header class="flex items-start justify-between gap-6 pb-5 border-b border-slate-200">
+                <div class="min-w-0">
+                    <div class="text-[28px] font-black tracking-tight text-slate-900 leading-none"
+                         :class="font_family === 'serif' ? 'font-editorial' : ''"
+                         x-text="content.personal?.full_name || 'Your Name'"></div>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="w-4 h-0.5 rounded-full" :style="`background-color: ${accent_color}`"></span>
+                        <p class="text-[12.5px] font-bold tracking-tight" :style="`color: ${accent_color}`"
+                           x-text="content.personal?.job_title || 'Title'"></p>
+                    </div>
+                </div>
+                <div class="text-right text-[10px] text-slate-600 space-y-0.5 shrink-0">
+                    <div x-show="content.personal?.email" class="font-bold text-slate-900" x-text="content.personal.email"></div>
+                    <div x-show="content.personal?.phone" x-text="content.personal.phone"></div>
+                    <div x-show="content.personal?.location" x-text="content.personal.location"></div>
+                    <div x-show="content.personal?.website || content.personal?.linkedin" class="font-semibold" :style="`color: ${accent_color}`"
+                         x-text="[content.personal.website, content.personal.linkedin].filter(Boolean).join(' • ')"></div>
+                </div>
+            </header>
+
+            <section x-show="content.section_visibility?.summary && content.summary" class="pb-4 border-b border-slate-100">
+                <p class="text-[11.5px] leading-relaxed text-slate-700 whitespace-pre-line font-medium" x-text="content.summary"></p>
+            </section>
+
+            <div class="grid grid-cols-12 gap-7 items-start">
+                <div class="col-span-8 space-y-5">
+                    <section x-show="content.section_visibility?.experience && (content.experience?.length || 0) > 0">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.2em] pb-1.5 mb-3.5 border-b"
+                            :style="`color: ${accent_color}; border-color: ${accent_color}30;`">Experience</h2>
+                        <div class="space-y-4">
+                            <template x-for="(exp, idx) in content.experience" :key="'st-exp-' + idx">
+                                <div x-show="exp.role || exp.company">
+                                    <div class="flex items-baseline justify-between gap-2">
+                                        <h3 class="font-extrabold text-[13px] text-slate-900" x-text="exp.role || exp.company"></h3>
+                                        <span class="text-[10px] font-semibold text-slate-500 shrink-0"
+                                              x-text="[exp.start_date, exp.end_date].filter(Boolean).join(' – ')"></span>
+                                    </div>
+                                    <div class="text-[11px] font-semibold mb-1.5" :style="`color: ${accent_color}`"
+                                         x-text="[exp.company, exp.location].filter(Boolean).join(' · ')"></div>
+                                    <ul class="space-y-1 text-slate-700 pl-4 list-disc">
+                                        <template x-for="(line, bIdx) in parseBullets(exp.bullets_text)" :key="bIdx">
+                                            <li x-text="line"></li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+
+                    <section x-show="content.section_visibility?.projects && (content.projects?.length || 0) > 0">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.2em] pb-1.5 mb-3 border-b"
+                            :style="`color: ${accent_color}; border-color: ${accent_color}30;`">Selected Projects</h2>
+                        <div class="space-y-2.5">
+                            <template x-for="(proj, idx) in content.projects" :key="'st-pr-' + idx">
+                                <div class="p-3 rounded-lg bg-slate-50 border border-slate-200/70" x-show="proj.name">
+                                    <div class="flex justify-between items-baseline gap-2">
+                                        <span class="font-bold text-slate-900" x-text="proj.name"></span>
+                                        <span class="text-[10px] font-semibold" :style="`color: ${accent_color}`" x-text="proj.link"></span>
+                                    </div>
+                                    <p x-show="proj.description" class="text-[10.5px] text-slate-600 mt-0.5" x-text="proj.description"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+                </div>
+
+                <aside class="col-span-4 space-y-5">
+                    <section x-show="content.section_visibility?.skills && (content.skills?.length || 0) > 0">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.2em] pb-1.5 mb-2.5 border-b"
+                            :style="`color: ${accent_color}; border-color: ${accent_color}30;`">Core Skills</h2>
+                        <div class="flex flex-wrap gap-1.5">
+                            <template x-for="(sk, idx) in content.skills" :key="'st-sk-' + idx">
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-[10px] font-semibold text-slate-800" x-text="sk"></span>
+                            </template>
+                        </div>
+                    </section>
+
+                    <section x-show="content.section_visibility?.education && (content.education?.length || 0) > 0">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.2em] pb-1.5 mb-2.5 border-b"
+                            :style="`color: ${accent_color}; border-color: ${accent_color}30;`">Education</h2>
+                        <div class="space-y-2.5">
+                            <template x-for="(edu, idx) in content.education" :key="'st-ed-' + idx">
+                                <div x-show="edu.degree || edu.school">
+                                    <div class="font-bold text-[11px] text-slate-900" x-text="edu.degree"></div>
+                                    <div class="text-[10.5px] text-slate-600" x-text="edu.school"></div>
+                                    <div class="text-[9.5px] text-slate-400" x-text="[edu.start_date, edu.end_date].filter(Boolean).join(' – ')"></div>
+                                    <p x-show="edu.details" class="text-[9.5px] text-slate-500 mt-0.5" x-text="edu.details"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+
+                    <section x-show="content.section_visibility?.languages && (content.languages?.length || 0) > 0">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.2em] pb-1.5 mb-2 border-b"
+                            :style="`color: ${accent_color}; border-color: ${accent_color}30;`">Languages</h2>
+                        <div class="space-y-1 text-[10.5px]">
+                            <template x-for="(lang, idx) in content.languages" :key="'st-lg-' + idx">
+                                <div class="flex justify-between" x-show="lang.name">
+                                    <span class="font-semibold text-slate-800" x-text="lang.name"></span>
+                                    <span class="text-slate-500" x-text="lang.level"></span>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+
+                    <section x-show="content.section_visibility?.awards && (content.awards?.length || 0) > 0">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.2em] pb-1.5 mb-2 border-b"
+                            :style="`color: ${accent_color}; border-color: ${accent_color}30;`">Awards</h2>
+                        <div class="space-y-1.5 text-[10.5px]">
+                            <template x-for="(aw, idx) in content.awards" :key="'st-aw-' + idx">
+                                <div x-show="aw.title">
+                                    <div class="font-bold text-slate-800" x-text="aw.title"></div>
+                                    <div class="text-[9.5px] text-slate-500" x-text="[aw.issuer, aw.date].filter(Boolean).join(' • ')"></div>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </template>
+
+    {{-- =======================================================================
+         C. AURORA PILL (Modern Tinted Hero Card & Pill Chips)
+         ======================================================================= --}}
+    <template x-if="template_style === 'aurora_pill'">
+        <div class="min-h-[1122px] bg-white" :class="density === 'compact' ? 'p-6 space-y-4' : 'p-8 space-y-5'">
+            <header class="rounded-2xl border p-5 sm:p-6 space-y-3.5"
+                    :style="`background: linear-gradient(135deg, ${accent_color}12 0%, ${accent_color}04 100%); border-color: ${accent_color}28;`">
+                <div class="flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-4 min-w-0">
+                        <template x-if="content.personal?.show_photo">
+                            <div class="w-16 h-16 rounded-full shrink-0 border-2 overflow-hidden flex items-center justify-center font-black text-white shadow-sm"
+                                 :style="`background-color: ${accent_color}; border-color: #FFFFFF;`">
+                                <img x-show="avatarUrl()" :src="avatarUrl()" alt="Portrait" class="w-full h-full object-cover">
+                                <span x-show="!avatarUrl()" x-text="initials()"></span>
+                            </div>
+                        </template>
+                        <div class="min-w-0">
+                            <div class="text-[25px] font-black tracking-tight text-slate-900 leading-none"
+                                 :class="font_family === 'serif' ? 'font-editorial' : ''"
+                                 x-text="content.personal?.full_name || 'Your Name'"></div>
+                            <span class="inline-block mt-2 px-3 py-0.5 rounded-full text-white text-[10.5px] font-bold"
+                                  :style="`background-color: ${accent_color}`"
+                                  x-text="content.personal?.job_title || 'Title'"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2 text-[10px] font-semibold text-slate-700 pt-1">
+                    <span x-show="content.personal?.email" class="px-2.5 py-1 rounded-full bg-white border border-slate-200/80" x-text="content.personal.email"></span>
+                    <span x-show="content.personal?.phone" class="px-2.5 py-1 rounded-full bg-white border border-slate-200/80" x-text="content.personal.phone"></span>
+                    <span x-show="content.personal?.location" class="px-2.5 py-1 rounded-full bg-white border border-slate-200/80" x-text="content.personal.location"></span>
+                    <span x-show="content.personal?.website" class="px-2.5 py-1 rounded-full bg-white border border-slate-200/80" :style="`color: ${accent_color}`" x-text="content.personal.website"></span>
+                    <span x-show="content.personal?.linkedin" class="px-2.5 py-1 rounded-full bg-white border border-slate-200/80" x-text="content.personal.linkedin"></span>
+                </div>
+            </header>
+
+            <section x-show="content.section_visibility?.summary && content.summary" class="px-1">
+                <p class="text-[11.5px] leading-relaxed text-slate-700 whitespace-pre-line" x-text="content.summary"></p>
+            </section>
+
+            <div class="grid grid-cols-12 gap-7 items-start">
+                <div class="col-span-8 space-y-5">
+                    <section x-show="content.section_visibility?.experience && (content.experience?.length || 0) > 0">
+                        <h2 class="text-[10.5px] font-black uppercase tracking-[0.18em] mb-3.5" :style="`color: ${accent_color}`">Work Experience</h2>
+                        <div class="space-y-4">
+                            <template x-for="(exp, idx) in content.experience" :key="'au-exp-' + idx">
+                                <div class="pl-3.5 border-l-2" :style="`border-color: ${accent_color}`" x-show="exp.role || exp.company">
+                                    <div class="flex items-baseline justify-between gap-2">
+                                        <h3 class="font-extrabold text-[13px] text-slate-900" x-text="exp.role || exp.company"></h3>
+                                        <span class="px-2 py-0.5 rounded-full text-[9.5px] font-bold"
+                                              :style="`background-color: ${accent_color}12; color: ${accent_color}`"
+                                              x-text="[exp.start_date, exp.end_date].filter(Boolean).join(' – ')"></span>
+                                    </div>
+                                    <div class="text-[11px] font-bold text-slate-600 mb-1.5"
+                                         x-text="[exp.company, exp.location].filter(Boolean).join(' • ')"></div>
+                                    <ul class="space-y-1 text-slate-700 pl-3.5 list-disc">
+                                        <template x-for="(line, bIdx) in parseBullets(exp.bullets_text)" :key="bIdx">
+                                            <li x-text="line"></li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+
+                    <section x-show="content.section_visibility?.projects && (content.projects?.length || 0) > 0">
+                        <h2 class="text-[10.5px] font-black uppercase tracking-[0.18em] mb-2.5" :style="`color: ${accent_color}`">Key Projects &amp; Case Studies</h2>
+                        <div class="space-y-2.5">
+                            <template x-for="(proj, idx) in content.projects" :key="'au-pr-' + idx">
+                                <div class="p-3 rounded-xl border border-slate-200 bg-slate-50/70" x-show="proj.name">
+                                    <div class="flex justify-between items-baseline">
+                                        <span class="font-bold text-slate-900" x-text="proj.name"></span>
+                                        <span class="text-[10px] font-semibold" :style="`color: ${accent_color}`" x-text="proj.link"></span>
+                                    </div>
+                                    <p x-show="proj.description" class="text-[10.5px] text-slate-600 mt-0.5" x-text="proj.description"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+                </div>
+
+                <aside class="col-span-4 space-y-5">
+                    <section x-show="content.section_visibility?.skills && (content.skills?.length || 0) > 0"
+                             class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.18em] mb-2.5" :style="`color: ${accent_color}`">Skills &amp; Craft</h2>
+                        <div class="flex flex-wrap gap-1.5">
+                            <template x-for="(sk, idx) in content.skills" :key="'au-sk-' + idx">
+                                <span class="px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-[10px] font-bold text-slate-800" x-text="sk"></span>
+                            </template>
+                        </div>
+                    </section>
+
+                    <section x-show="content.section_visibility?.education && (content.education?.length || 0) > 0" class="px-1">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.18em] mb-2.5" :style="`color: ${accent_color}`">Education</h2>
+                        <div class="space-y-2.5">
+                            <template x-for="(edu, idx) in content.education" :key="'au-ed-' + idx">
+                                <div x-show="edu.degree || edu.school">
+                                    <div class="font-bold text-[11px] text-slate-900" x-text="edu.degree"></div>
+                                    <div class="text-[10.5px] text-slate-600" x-text="edu.school"></div>
+                                    <div class="text-[9.5px] text-slate-400" x-text="[edu.start_date, edu.end_date].filter(Boolean).join(' – ')"></div>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+
+                    <section x-show="content.section_visibility?.languages && (content.languages?.length || 0) > 0" class="px-1">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.18em] mb-2" :style="`color: ${accent_color}`">Languages</h2>
+                        <div class="space-y-1.5 text-[10.5px]">
+                            <template x-for="(lang, idx) in content.languages" :key="'au-lg-' + idx">
+                                <div class="flex justify-between" x-show="lang.name">
+                                    <span class="font-bold text-slate-800" x-text="lang.name"></span>
+                                    <span class="text-slate-500" x-text="lang.level"></span>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+
+                    <section x-show="content.section_visibility?.awards && (content.awards?.length || 0) > 0" class="px-1">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.18em] mb-2" :style="`color: ${accent_color}`">Awards</h2>
+                        <div class="space-y-1.5 text-[10.5px]">
+                            <template x-for="(aw, idx) in content.awards" :key="'au-aw-' + idx">
+                                <div x-show="aw.title">
+                                    <div class="font-bold text-slate-800" x-text="aw.title"></div>
+                                    <div class="text-[9.5px] text-slate-500" x-text="[aw.issuer, aw.date].filter(Boolean).join(' • ')"></div>
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </template>
+
+    {{-- =======================================================================
+         D. OBSIDIAN HEADER (Full-Bleed Dark Masthead + Crisp White Matrix)
+         ======================================================================= --}}
+    <template x-if="template_style === 'obsidian_header'">
+        <div class="min-h-[1122px] bg-white">
+            <header class="bg-[#0F172A] text-white px-8 py-6 border-t-[4px] space-y-4" :style="`border-top-color: ${accent_color}`">
+                <div class="flex items-center justify-between gap-5">
+                    <div class="flex items-center gap-4 min-w-0">
+                        <template x-if="content.personal?.show_photo">
+                            <div class="w-16 h-16 rounded-2xl border-2 shrink-0 overflow-hidden flex items-center justify-center font-black text-white"
+                                 :style="`border-color: ${accent_color}; background-color: ${accent_color}30;`">
+                                <img x-show="avatarUrl()" :src="avatarUrl()" alt="Portrait" class="w-full h-full object-cover">
+                                <span x-show="!avatarUrl()" x-text="initials()"></span>
+                            </div>
+                        </template>
+                        <div class="min-w-0">
+                            <div class="text-[26px] font-black tracking-tight leading-none text-white"
+                                 :class="font_family === 'serif' ? 'font-editorial' : ''"
+                                 x-text="content.personal?.full_name || 'Your Name'"></div>
+                            <div class="mt-2 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[10.5px] font-bold text-white"
+                                 :style="`background-color: ${accent_color}`"
+                                 x-text="content.personal?.job_title || 'Title'"></div>
+                        </div>
+                    </div>
+                    <div class="text-right text-[10px] text-slate-300 space-y-0.5 shrink-0">
+                        <div x-show="content.personal?.email" class="font-bold text-white" x-text="content.personal.email"></div>
+                        <div x-show="content.personal?.phone" x-text="content.personal.phone"></div>
+                        <div x-show="content.personal?.location" x-text="content.personal.location"></div>
+                        <div x-show="content.personal?.website || content.personal?.linkedin" class="text-slate-400"
+                             x-text="[content.personal.website, content.personal.linkedin].filter(Boolean).join(' • ')"></div>
+                    </div>
+                </div>
+            </header>
+
+            <div :class="density === 'compact' ? 'p-7 space-y-4' : 'p-8 space-y-5'">
+                <section x-show="content.section_visibility?.summary && content.summary"
+                         class="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+                    <p class="text-[11.5px] leading-relaxed text-slate-700 whitespace-pre-line font-medium" x-text="content.summary"></p>
+                </section>
+
+                <div class="grid grid-cols-12 gap-7 items-start">
+                    <div class="col-span-8 space-y-5">
+                        <section x-show="content.section_visibility?.experience && (content.experience?.length || 0) > 0">
+                            <h2 class="text-[10.5px] font-black uppercase tracking-[0.18em] pb-1.5 mb-3.5 border-b border-slate-200 flex items-center gap-2 text-slate-900">
+                                <span class="w-2 h-2 rounded-xs" :style="`background-color: ${accent_color}`"></span>
+                                <span>Professional Experience</span>
+                            </h2>
+                            <div class="space-y-4">
+                                <template x-for="(exp, idx) in content.experience" :key="'ob-exp-' + idx">
+                                    <div x-show="exp.role || exp.company">
+                                        <div class="flex items-baseline justify-between gap-2">
+                                            <h3 class="font-extrabold text-[13px] text-slate-900" x-text="exp.role || exp.company"></h3>
+                                            <span class="text-[10px] font-bold text-slate-500 shrink-0"
+                                                  x-text="[exp.start_date, exp.end_date].filter(Boolean).join(' – ')"></span>
+                                        </div>
+                                        <div class="text-[11px] font-bold mb-1.5" :style="`color: ${accent_color}`"
+                                             x-text="[exp.company, exp.location].filter(Boolean).join(' • ')"></div>
+                                        <ul class="space-y-1 text-slate-700 pl-4 list-disc">
+                                            <template x-for="(line, bIdx) in parseBullets(exp.bullets_text)" :key="bIdx">
+                                                <li x-text="line"></li>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                </template>
+                            </div>
+                        </section>
+
+                        <section x-show="content.section_visibility?.projects && (content.projects?.length || 0) > 0">
+                            <h2 class="text-[10.5px] font-black uppercase tracking-[0.18em] pb-1.5 mb-3 border-b border-slate-200 flex items-center gap-2 text-slate-900">
+                                <span class="w-2 h-2 rounded-xs" :style="`background-color: ${accent_color}`"></span>
+                                <span>Key Initiatives &amp; Systems</span>
+                            </h2>
+                            <div class="grid grid-cols-1 gap-2.5">
+                                <template x-for="(proj, idx) in content.projects" :key="'ob-pr-' + idx">
+                                    <div class="p-3 rounded-lg bg-slate-50 border border-slate-200/80" x-show="proj.name">
+                                        <div class="flex justify-between items-baseline">
+                                            <span class="font-bold text-slate-900" x-text="proj.name"></span>
+                                            <span class="text-[10px] font-semibold" :style="`color: ${accent_color}`" x-text="proj.link"></span>
+                                        </div>
+                                        <p x-show="proj.description" class="text-[10.5px] text-slate-600 mt-0.5" x-text="proj.description"></p>
+                                    </div>
+                                </template>
+                            </div>
+                        </section>
+                    </div>
+
+                    <aside class="col-span-4 space-y-5">
+                        <section x-show="content.section_visibility?.skills && (content.skills?.length || 0) > 0">
+                            <h2 class="text-[10px] font-black uppercase tracking-[0.18em] pb-1.5 mb-2.5 border-b border-slate-200 text-slate-900">Core Stack</h2>
+                            <div class="flex flex-wrap gap-1.5">
+                                <template x-for="(sk, idx) in content.skills" :key="'ob-sk-' + idx">
+                                    <span class="px-2 py-0.5 rounded bg-slate-900 text-white text-[10px] font-semibold" x-text="sk"></span>
+                                </template>
+                            </div>
+                        </section>
+
+                        <section x-show="content.section_visibility?.education && (content.education?.length || 0) > 0">
+                            <h2 class="text-[10px] font-black uppercase tracking-[0.18em] pb-1.5 mb-2.5 border-b border-slate-200 text-slate-900">Education</h2>
+                            <div class="space-y-2.5">
+                                <template x-for="(edu, idx) in content.education" :key="'ob-ed-' + idx">
+                                    <div x-show="edu.degree || edu.school">
+                                        <div class="font-bold text-[11px] text-slate-900" x-text="edu.degree"></div>
+                                        <div class="text-[10.5px] text-slate-600" x-text="edu.school"></div>
+                                        <div class="text-[9.5px] text-slate-400" x-text="[edu.start_date, edu.end_date].filter(Boolean).join(' – ')"></div>
+                                    </div>
+                                </template>
+                            </div>
+                        </section>
+
+                        <section x-show="content.section_visibility?.languages && (content.languages?.length || 0) > 0">
+                            <h2 class="text-[10px] font-black uppercase tracking-[0.18em] pb-1.5 mb-2 border-b border-slate-200 text-slate-900">Languages</h2>
+                            <div class="space-y-1 text-[10.5px]">
+                                <template x-for="(lang, idx) in content.languages" :key="'ob-lg-' + idx">
+                                    <div class="flex justify-between" x-show="lang.name">
+                                        <span class="font-bold text-slate-800" x-text="lang.name"></span>
+                                        <span class="text-slate-500" x-text="lang.level"></span>
+                                    </div>
+                                </template>
+                            </div>
+                        </section>
+
+                        <section x-show="content.section_visibility?.awards && (content.awards?.length || 0) > 0">
+                            <h2 class="text-[10px] font-black uppercase tracking-[0.18em] pb-1.5 mb-2 border-b border-slate-200 text-slate-900">Certifications</h2>
+                            <div class="space-y-1.5 text-[10.5px]">
+                                <template x-for="(aw, idx) in content.awards" :key="'ob-aw-' + idx">
+                                    <div x-show="aw.title">
+                                        <div class="font-bold text-slate-800" x-text="aw.title"></div>
+                                        <div class="text-[9.5px] text-slate-500" x-text="[aw.issuer, aw.date].filter(Boolean).join(' • ')"></div>
+                                    </div>
+                                </template>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </template>
 
     {{-- =======================================================================
          1. FLOW SIDEBAR (FlowCV Flagship — Dark Portrait Sidebar + Icon Pill Bars)
@@ -1008,6 +1744,18 @@
                 <div class="col-span-9 text-slate-800 font-medium leading-relaxed" x-text="(content.skills || []).join('   •   ')"></div>
             </section>
 
+            <section x-show="content.section_visibility?.projects && (content.projects?.length || 0) > 0" class="grid grid-cols-12 gap-5 border-b border-slate-100 pb-4">
+                <div class="col-span-3 text-[9.5px] font-extrabold uppercase tracking-[0.2em] pt-0.5" :style="`color: ${accent_color}`">Projects</div>
+                <div class="col-span-9 space-y-2">
+                    <template x-for="(proj, idx) in content.projects" :key="'sw-pr-' + idx">
+                        <div x-show="proj.name">
+                            <div class="font-bold text-slate-900"><span x-text="proj.name"></span> <span x-show="proj.link" class="text-[10px] font-normal text-slate-500" x-text="'(' + proj.link + ')'"></span></div>
+                            <p x-show="proj.description" class="text-[11px] text-slate-600" x-text="proj.description"></p>
+                        </div>
+                    </template>
+                </div>
+            </section>
+
             <section x-show="content.section_visibility?.languages && (content.languages?.length || 0) > 0" class="grid grid-cols-12 gap-5">
                 <div class="col-span-3 text-[9.5px] font-extrabold uppercase tracking-[0.2em] pt-0.5" :style="`color: ${accent_color}`">Languages</div>
                 <div class="col-span-9 flex flex-wrap gap-x-6 gap-y-1">
@@ -1080,9 +1828,20 @@
                 </div>
             </section>
 
-            <section x-show="content.section_visibility?.skills && (content.skills?.length || 0) > 0">
+            <section x-show="content.section_visibility?.projects && (content.projects?.length || 0) > 0">
+                <h2 class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-900 border-b border-slate-400 pb-0.5 mb-1.5">Key Projects</h2>
+                <div class="space-y-1.5">
+                    <template x-for="(proj, idx) in content.projects" :key="'ats-pr-' + idx">
+                        <div x-show="proj.name" class="text-[11px] text-slate-800">
+                            <strong x-text="proj.name"></strong><span x-show="proj.link" x-text="' (' + proj.link + ')'"></span><span x-show="proj.description" x-text="' — ' + proj.description"></span>
+                        </div>
+                    </template>
+                </div>
+            </section>
+
+            <section x-show="(content.section_visibility?.skills && (content.skills?.length || 0) > 0) || (content.section_visibility?.awards && (content.awards?.length || 0) > 0)">
                 <h2 class="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-900 border-b border-slate-400 pb-0.5 mb-1.5">Skills &amp; Additional Information</h2>
-                <p class="text-[11px] text-slate-800">
+                <p x-show="content.section_visibility?.skills && (content.skills?.length || 0) > 0" class="text-[11px] text-slate-800">
                     <strong>Technical &amp; Core Competencies:</strong>
                     <span x-text="(content.skills || []).join(', ')"></span>
                 </p>
@@ -1090,6 +1849,12 @@
                     <strong>Certifications &amp; Honors:</strong>
                     <template x-for="(aw, idx) in content.awards" :key="'ats-aw-' + idx">
                         <span x-text="(idx > 0 ? '; ' : '') + aw.title + (aw.date ? ' (' + aw.date + ')' : '')"></span>
+                    </template>
+                </p>
+                <p x-show="content.section_visibility?.languages && (content.languages?.length || 0) > 0" class="text-[11px] text-slate-800 mt-1">
+                    <strong>Languages:</strong>
+                    <template x-for="(lg, idx) in content.languages" :key="'ats-lg-' + idx">
+                        <span x-text="(idx > 0 ? ', ' : '') + lg.name + (lg.level ? ' (' + lg.level + ')' : '')"></span>
                     </template>
                 </p>
             </section>
@@ -1146,6 +1911,18 @@
                 </div>
             </section>
 
+            <section x-show="content.section_visibility?.projects && (content.projects?.length || 0) > 0">
+                <h2 class="text-[10px] font-extrabold uppercase tracking-[0.16em] mb-1.5" :style="`color: ${accent_color}`">Key Projects</h2>
+                <div class="grid grid-cols-2 gap-2.5">
+                    <template x-for="(proj, idx) in content.projects" :key="'cp-pr-' + idx">
+                        <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50/60 text-[10.5px]" x-show="proj.name">
+                            <div class="font-bold text-slate-900" x-text="proj.name"></div>
+                            <p x-show="proj.description" class="text-slate-600 mt-0.5" x-text="proj.description"></p>
+                        </div>
+                    </template>
+                </div>
+            </section>
+
             <div class="grid grid-cols-12 gap-5 pt-2 border-t border-slate-200">
                 <section class="col-span-6" x-show="content.section_visibility?.skills && (content.skills?.length || 0) > 0">
                     <h2 class="text-[10px] font-extrabold uppercase tracking-[0.16em] mb-2" :style="`color: ${accent_color}`">Skills &amp; Domain Expertise</h2>
@@ -1156,15 +1933,25 @@
                     </div>
                 </section>
 
-                <section class="col-span-6" x-show="content.section_visibility?.education && (content.education?.length || 0) > 0">
-                    <h2 class="text-[10px] font-extrabold uppercase tracking-[0.16em] mb-2" :style="`color: ${accent_color}`">Education &amp; Credentials</h2>
-                    <div class="space-y-1.5">
-                        <template x-for="(edu, idx) in content.education" :key="'cp-ed-' + idx">
-                            <div x-show="edu.degree || edu.school" class="text-[10.5px]">
-                                <div class="font-bold text-slate-900" x-text="edu.degree"></div>
-                                <div class="text-slate-600" x-text="[edu.school, edu.end_date].filter(Boolean).join(' • ')"></div>
-                            </div>
-                        </template>
+                <section class="col-span-6 space-y-2" x-show="(content.section_visibility?.education && (content.education?.length || 0) > 0) || (content.section_visibility?.awards && (content.awards?.length || 0) > 0)">
+                    <div x-show="content.section_visibility?.education && (content.education?.length || 0) > 0">
+                        <h2 class="text-[10px] font-extrabold uppercase tracking-[0.16em] mb-1.5" :style="`color: ${accent_color}`">Education &amp; Credentials</h2>
+                        <div class="space-y-1">
+                            <template x-for="(edu, idx) in content.education" :key="'cp-ed-' + idx">
+                                <div x-show="edu.degree || edu.school" class="text-[10.5px]">
+                                    <div class="font-bold text-slate-900" x-text="edu.degree"></div>
+                                    <div class="text-slate-600" x-text="[edu.school, edu.end_date].filter(Boolean).join(' • ')"></div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <div x-show="content.section_visibility?.awards && (content.awards?.length || 0) > 0" class="pt-1">
+                        <div class="text-[10px] text-slate-700">
+                            <strong :style="`color: ${accent_color}`">Honors:</strong>
+                            <template x-for="(aw, idx) in content.awards" :key="'cp-aw-' + idx">
+                                <span x-text="(idx > 0 ? ' • ' : ' ') + aw.title"></span>
+                            </template>
+                        </div>
                     </div>
                 </section>
             </div>

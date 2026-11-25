@@ -90,6 +90,12 @@
                 </div>
                 <select id="targetStyleSelect" x-model="targetStyle" @change="onStyleChange($event)" class="px-3.5 py-2 rounded-xl bg-white border border-[#c6d1ca] font-semibold text-xs text-[#17211b] focus:border-[#184f3a] focus:outline-none">
                     <option value="ats_classic">Wall Street ATS Classic (100% Linear Single-Column)</option>
+                    <option value="ribbon_centered">Classic Top-Band Centered (ResumeBuilder Pro)</option>
+                    <option value="banner_split_date">Colored Banner &amp; Split Dates (ResumeBuilder Pro)</option>
+                    <option value="bento_modern">Bento Modular Grid (2026 Modern)</option>
+                    <option value="stripe_clean">Precision Top-Band (Modern Minimal)</option>
+                    <option value="aurora_pill">Aurora Pill &amp; Bar (Modern Pro)</option>
+                    <option value="obsidian_header">Obsidian Header Grid (Dark Masthead)</option>
                     <option value="minimal_swiss">Zurich Swiss Grid (Linear Hierarchy)</option>
                     <option value="tech_stack">Silicon Valley Stack (Engineering Monospace)</option>
                     <option value="compact_onepage">Hyper-Compact One-Pager (High Density)</option>
@@ -290,7 +296,7 @@
             </div>
             <div class="flex flex-wrap items-center justify-center gap-2.5 shrink-0">
                 <a href="{{ route('resume.templates') }}" class="px-4 py-2 rounded-xl bg-white border border-[#dfe4df] hover:border-[#184f3a] text-xs font-bold text-[#17211b] transition">
-                    Browse 17 CV Templates &rarr;
+                    Browse {{ count($templates) }} CV Templates &rarr;
                 </a>
                 <a href="{{ route('resume.builder') }}" class="px-4 py-2 rounded-xl bg-white border border-[#dfe4df] hover:border-[#184f3a] text-xs font-bold text-[#17211b] transition">
                     Live Resume Studio &rarr;

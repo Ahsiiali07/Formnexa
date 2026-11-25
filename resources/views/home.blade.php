@@ -14,7 +14,7 @@
         ],
         [
             'q' => 'How do I start an ATS CV online for free?',
-            'a' => 'Open the ATS Resume Builder to pick from 17 curated templates, enter your job experience and skills, or upload an existing PDF/DOCX resume to auto-fill sections in seconds with zero watermarks.',
+            'a' => 'Open the ATS Resume Builder to pick from ' . count(\App\Support\ResumeCatalog::templates()) . ' modern & ATS templates, enter your job experience and skills, or upload an existing PDF/DOCX resume to auto-fill sections in seconds with zero watermarks.',
         ],
         [
             'q' => 'Can I convert PDF to Word DOCX without losing formatting?',
@@ -193,7 +193,7 @@
                                 <b>92</b>
                                 <div>
                                     <strong>Example score</strong>
-                                    <span>17 curated CV templates</span>
+                                    <span>{{ count(\App\Support\ResumeCatalog::templates()) }} curated CV templates</span>
                                 </div>
                             </div>
                         </div>
@@ -295,7 +295,7 @@
                         <x-icon name="document-text" class="w-5 h-5" />
                     </div>
                     <div>
-                        <strong>17 ATS CV Templates</strong>
+                        <strong>{{ count(\App\Support\ResumeCatalog::templates()) }} Modern &amp; ATS Templates</strong>
                         <span>Clean linear layouts built for standard screening systems</span>
                     </div>
                 </div>
@@ -394,7 +394,7 @@
                         </div>
                         <div class="fn-ats-text">
                             <strong>Example Score</strong>
-                            <span>17 Curated Themes</span>
+                            <span>{{ count(\App\Support\ResumeCatalog::templates()) }} Curated Themes</span>
                         </div>
                     </div>
                 </div>
@@ -566,7 +566,7 @@
                 <a href="{{ route('resume.templates') }}"
                    class="group flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#dfe4df] hover:border-[#7655d7] transition">
                     <div class="flex items-center gap-3.5 min-w-0">
-                        <span class="w-11 h-11 rounded-xl bg-[#f0ebff] text-[#6142be] flex items-center justify-center font-display font-extrabold text-sm shrink-0">17</span>
+                        <span class="w-11 h-11 rounded-xl bg-[#f0ebff] text-[#6142be] flex items-center justify-center font-display font-extrabold text-sm shrink-0">{{ count(\App\Support\ResumeCatalog::templates()) }}</span>
                         <div class="min-w-0">
                             <div class="text-sm font-bold text-[#17211b] group-hover:text-[#6142be] truncate">Resume Templates Gallery</div>
                             <div class="text-xs text-[#68736d] truncate">Minimal, Editorial, Technical &amp; ATS CV layouts</div>

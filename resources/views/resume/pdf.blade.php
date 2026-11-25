@@ -75,7 +75,11 @@
     };
     $bodySize = $density === 'compact' ? '9.2pt' : '9.8pt';
     $lineHeight = $density === 'compact' ? '1.38' : '1.46';
-    $pageBg = $tStyle === 'editorial_figma' ? '#FAF8F4' : '#FFFFFF';
+    $pageBg = match ($tStyle) {
+        'editorial_figma' => '#FAF8F4',
+        'bento_modern' => '#F8FAFC',
+        default => '#FFFFFF',
+    };
 @endphp
 <style>
     @page {
@@ -120,9 +124,443 @@
 <body>
 
 {{-- =======================================================================
+     RB-1. BANNER SPLIT DATE (ResumeBuilder Casey Clark / Pat Morgan)
+     ======================================================================= --}}
+@if($tStyle === 'banner_split_date')
+    <div>
+        <div style="background-color: {{ $accent }}; color: #FFFFFF; padding: 20px 28px;">
+            <table>
+                <tr>
+                    <td valign="middle" style="width: 80%;">
+                        <div class="{{ $font === 'serif' ? 'serif' : '' }}" style="font-size: 20pt; font-weight: bold; color: #FFFFFF; line-height: 1.1;">{{ $fullName }}</div>
+                        @if(!empty($p['job_title']))<div style="font-size: 9.5pt; font-weight: bold; color: #F1F5F9; margin-top: 3px;">{{ $p['job_title'] }}</div>@endif
+                        <div style="font-size: 8.5pt; color: #E2E8F0; margin-top: 5px;">{{ implode(' • ', array_filter([$p['location'] ?? '', $p['phone'] ?? '', $p['email'] ?? ''])) }}</div>
+                    </td>
+                    @if($showPhoto)
+                        <td align="right" valign="middle" style="width: 20%;">
+                            @if($photo)<img src="{{ $photo }}" style="width: 56px; height: 56px; border-radius: 28px; border: 2px solid #FFFFFF;" alt="Portrait">@else<div style="width: 56px; height: 56px; border-radius: 28px; background-color: #FFFFFF; color: {{ $accent }}; line-height: 56px; text-align: center; font-weight: bold; font-size: 14pt; margin-left: auto;">{{ $initials }}</div>@endif
+                        </td>
+                    @endif
+                </tr>
+            </table>
+        </div>
+        <div style="padding: 20px 28px;">
+            @if(!empty($vis['summary']) && !empty($c['summary']))
+                <div style="border-bottom: 1px solid #E2E8F0; padding-bottom: 10px; margin-bottom: 12px; color: #334155;">{{ $c['summary'] }}</div>
+            @endif
+            @if(!empty($vis['skills']) && !empty($skills))
+                <div style="font-size: 10pt; font-weight: bold; color: {{ $accent }}; margin-bottom: 6px;">Skills</div>
+                <table style="margin-bottom: 14px;">
+                    @foreach(array_chunk($skills, 2) as $pair)
+                        <tr>
+                            <td style="width: 50%; font-size: 8.8pt; color: #334155; padding-bottom: 2px;">• {{ $pair[0] }}</td>
+                            <td style="width: 50%; font-size: 8.8pt; color: #334155; padding-bottom: 2px;">@if(isset($pair[1]))• {{ $pair[1] }}@endif</td>
+                        </tr>
+                    @endforeach
+                </table>
+            @endif
+            @if(!empty($vis['experience']) && !empty($exps))
+                <div style="font-size: 10pt; font-weight: bold; color: {{ $accent }}; border-bottom: 1px solid #CBD5E1; padding-bottom: 3px; margin-bottom: 10px;">Professional Experience</div>
+                @foreach($exps as $exp)
+                    @continue(empty($exp['role']) && empty($exp['company']))
+                    <table style="margin-bottom: 10px;">
+                        <tr>
+                            <td valign="top" style="width: 24%; padding-right: 10px; font-size: 8.3pt; color: #64748B;">
+                                <div style="font-weight: bold; color: #334155;">{{ implode(' – ', array_filter([$exp['start_date'] ?? '', $exp['end_date'] ?? ''])) }}</div>
+                                @if(!empty($exp['location']))<div>{{ $exp['location'] }}</div>@endif
+                            </td>
+                            <td valign="top" style="width: 76%;">
+                                <div style="font-weight: bold; font-size: 9.8pt; color: #0F172A;">{{ $exp['role'] ?: ($exp['company'] ?? '') }}</div>
+                                <div style="font-size: 8.8pt; font-weight: bold; color: {{ $accent }}; margin-bottom: 2px;">{{ $exp['company'] ?? '' }}</div>
+                                <ul>@foreach($parseBullets($exp['bullets_text'] ?? '') as $line)<li>{{ $line }}</li>@endforeach</ul>
+                            </td>
+                        </tr>
+                    </table>
+                @endforeach
+            @endif
+            @if(!empty($vis['education']) && !empty($edus))
+                <div style="font-size: 10pt; font-weight: bold; color: {{ $accent }}; border-bottom: 1px solid #CBD5E1; padding-bottom: 3px; margin: 10px 0 8px 0;">Education</div>
+                @foreach($edus as $edu)
+                    @continue(empty($edu['degree']) && empty($edu['school']))
+                    <table style="margin-bottom: 6px;"><tr><td style="width: 24%; font-size: 8.3pt; font-weight: bold; color: #64748B;">{{ implode(' – ', array_filter([$edu['start_date'] ?? '', $edu['end_date'] ?? ''])) }}</td><td style="width: 76%;"><strong>{{ $edu['degree'] ?? '' }}</strong><div style="font-size: 8.6pt; color: #475569;">{{ implode(', ', array_filter([$edu['school'] ?? '', $edu['location'] ?? ''])) }}</div></td></tr></table>
+                @endforeach
+            @endif
+            @if(!empty($vis['awards']) && !empty($awards))
+                <div style="font-size: 10pt; font-weight: bold; color: {{ $accent }}; border-bottom: 1px solid #CBD5E1; padding-bottom: 3px; margin: 10px 0 6px 0;">Certifications &amp; Honors</div>
+                <ul>@foreach($awards as $aw)@continue(empty($aw['title']))<li><strong>{{ $aw['title'] }}</strong> {{ implode(' • ', array_filter([$aw['issuer'] ?? '', $aw['date'] ?? ''])) }}</li>@endforeach</ul>
+            @endif
+        </div>
+    </div>
+
+{{-- =======================================================================
+     RB-2. RIBBON CENTERED (ResumeBuilder Chris Taylor)
+     ======================================================================= --}}
+@elseif($tStyle === 'ribbon_centered')
+    <div style="padding: 24px 30px;">
+        <div style="background-color: {{ $accent }}; color: #FFFFFF; text-align: center; padding: 10px 16px; margin-bottom: 8px;">
+            <div class="{{ $font === 'serif' ? 'serif' : '' }}" style="font-size: 18pt; font-weight: bold; color: #FFFFFF;">{{ $fullName }}</div>
+        </div>
+        <table style="border-bottom: 1px solid #CBD5E1; margin-bottom: 12px; font-size: 8.5pt; color: #475569;">
+            <tr>
+                <td style="padding-bottom: 6px;">{{ implode(' • ', array_filter([$p['location'] ?? '', $p['phone'] ?? ''])) }}</td>
+                <td align="right" style="padding-bottom: 6px; font-weight: bold; color: #0F172A;">{{ implode(' • ', array_filter([$p['email'] ?? '', $p['linkedin'] ?? ''])) }}</td>
+            </tr>
+        </table>
+        @if(!empty($vis['summary']) && !empty($c['summary']))
+            <p style="margin: 0 0 12px 0; color: #334155;">{{ $c['summary'] }}</p>
+        @endif
+        @if(!empty($vis['skills']) && !empty($skills))
+            <div style="font-size: 9.8pt; font-weight: bold; color: {{ $accent }}; border-bottom: 1px solid #94A3B8; padding-bottom: 2px; margin-bottom: 6px;">Skills</div>
+            <table style="margin-bottom: 12px;">
+                @foreach(array_chunk($skills, 2) as $pair)
+                    <tr><td style="width: 50%; font-size: 8.8pt; padding-bottom: 2px;">• {{ $pair[0] }}</td><td style="width: 50%; font-size: 8.8pt; padding-bottom: 2px;">@if(isset($pair[1]))• {{ $pair[1] }}@endif</td></tr>
+                @endforeach
+            </table>
+        @endif
+        @if(!empty($vis['experience']) && !empty($exps))
+            <div style="font-size: 9.8pt; font-weight: bold; color: {{ $accent }}; border-bottom: 1px solid #94A3B8; padding-bottom: 2px; margin-bottom: 8px;">Professional Experience</div>
+            @foreach($exps as $exp)
+                @continue(empty($exp['role']) && empty($exp['company']))
+                <div style="margin-bottom: 10px;">
+                    <div style="font-weight: bold; font-size: 9.8pt; color: #0F172A;">{{ $exp['role'] ?: ($exp['company'] ?? '') }}</div>
+                    <table style="font-size: 8.6pt; color: #475569; margin-bottom: 2px;"><tr><td style="font-weight: bold;">{{ implode(', ', array_filter([$exp['company'] ?? '', $exp['location'] ?? ''])) }}</td><td align="right" style="font-weight: bold;">{{ implode(' – ', array_filter([$exp['start_date'] ?? '', $exp['end_date'] ?? ''])) }}</td></tr></table>
+                    <ul>@foreach($parseBullets($exp['bullets_text'] ?? '') as $line)<li>{{ $line }}</li>@endforeach</ul>
+                </div>
+            @endforeach
+        @endif
+        @if(!empty($vis['education']) && !empty($edus))
+            <div style="font-size: 9.8pt; font-weight: bold; color: {{ $accent }}; border-bottom: 1px solid #94A3B8; padding-bottom: 2px; margin: 10px 0 7px 0;">Education</div>
+            @foreach($edus as $edu)@continue(empty($edu['degree']) && empty($edu['school']))<table style="margin-bottom: 5px;"><tr><td><strong>{{ $edu['degree'] ?? '' }}</strong><div style="font-size: 8.6pt; color: #475569;">{{ implode(', ', array_filter([$edu['school'] ?? '', $edu['location'] ?? ''])) }}</div></td><td align="right" style="font-size: 8.5pt; color: #64748B;">{{ implode(' – ', array_filter([$edu['start_date'] ?? '', $edu['end_date'] ?? ''])) }}</td></tr></table>@endforeach
+        @endif
+    </div>
+
+{{-- =======================================================================
+     A. BENTO MODERN (2026 Modular Grid)
+     ======================================================================= --}}
+@elseif($tStyle === 'bento_modern')
+    <div style="padding: 20px 24px; background-color: #F8FAFC;">
+        {{-- Top Bento Header Card --}}
+        <div style="background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;">
+            <table>
+                <tr>
+                    <td valign="middle" style="width: 60%;">
+                        <table>
+                            <tr>
+                                @if($showPhoto)
+                                    <td valign="middle" style="width: 54px; padding-right: 12px;">
+                                        @if($photo)
+                                            <img src="{{ $photo }}" style="width: 48px; height: 48px; border-radius: 8px; border: 2px solid {{ $accentMid }};" alt="Portrait">
+                                        @else
+                                            <div style="width: 48px; height: 48px; border-radius: 8px; background-color: {{ $accent }}; color: #FFFFFF; line-height: 48px; text-align: center; font-weight: bold; font-size: 13pt;">{{ $initials }}</div>
+                                        @endif
+                                    </td>
+                                @endif
+                                <td valign="middle">
+                                    @if(!empty($p['job_title']))
+                                        <span style="display: inline-block; background-color: {{ $accentLight }}; color: {{ $accent }}; padding: 2px 8px; border-radius: 10px; font-size: 7.5pt; font-weight: bold; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px;">{{ $p['job_title'] }}</span>
+                                    @endif
+                                    <div class="{{ $font === 'serif' ? 'serif' : '' }}" style="font-size: 17pt; font-weight: bold; color: #0F172A; line-height: 1.1;">{{ $fullName }}</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td align="right" valign="middle" style="width: 40%; font-size: 8pt; color: #475569;">
+                        @if(!empty($p['email']))<div style="font-weight: bold; color: #0F172A; margin-bottom: 2px;">{{ $p['email'] }}</div>@endif
+                        @if(!empty($p['phone']))<div style="margin-bottom: 2px;">{{ $p['phone'] }}</div>@endif
+                        @if(!empty($p['location']))<div style="margin-bottom: 2px;">{{ $p['location'] }}</div>@endif
+                        @if(!empty($p['website']))<div style="color: {{ $accent }}; font-weight: bold;">{{ $p['website'] }}</div>@endif
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        @if(!empty($vis['summary']) && !empty($c['summary']))
+            <div style="background-color: #FFFFFF; border: 1px solid #CBD5E1; border-left: 4px solid {{ $accent }}; border-radius: 8px; padding: 11px 14px; margin-bottom: 12px;">
+                <div style="font-size: 7.5pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.4px; color: {{ $accent }}; margin-bottom: 3px;">Profile Overview</div>
+                <p style="margin: 0; color: #334155;">{{ $c['summary'] }}</p>
+            </div>
+        @endif
+
+        <table>
+            <tr>
+                <td valign="top" style="width: 65%; padding-right: 8px;">
+                    @if(!empty($vis['experience']) && !empty($exps))
+                        <div style="background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px;">
+                            <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.4px; color: {{ $accent }}; border-bottom: 1px solid #E2E8F0; padding-bottom: 4px; margin-bottom: 10px;">Career Impact</div>
+                            @foreach($exps as $exp)
+                                @continue(empty($exp['role']) && empty($exp['company']))
+                                <div style="border-left: 2px solid {{ $accentMid }}; padding-left: 10px; margin-bottom: 11px;">
+                                    <table><tr><td style="font-weight: bold; font-size: 9.8pt; color: #0F172A;">{{ $exp['role'] ?: ($exp['company'] ?? '') }}</td><td align="right" style="font-size: 8pt; color: #64748B; font-weight: bold;">{{ implode(' – ', array_filter([$exp['start_date'] ?? '', $exp['end_date'] ?? ''])) }}</td></tr></table>
+                                    <div style="font-size: 8.8pt; font-weight: bold; color: {{ $accent }}; margin-bottom: 3px;">{{ implode(' • ', array_filter([$exp['company'] ?? '', $exp['location'] ?? ''])) }}</div>
+                                    <ul>@foreach($parseBullets($exp['bullets_text'] ?? '') as $line)<li>{{ $line }}</li>@endforeach</ul>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if(!empty($vis['projects']) && !empty($projects))
+                        <div style="background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 10px; padding: 14px 16px;">
+                            <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.4px; color: {{ $accent }}; border-bottom: 1px solid #E2E8F0; padding-bottom: 4px; margin-bottom: 8px;">Featured Projects</div>
+                            @foreach($projects as $proj)
+                                @continue(empty($proj['name']))
+                                <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 8px 10px; margin-bottom: 6px;">
+                                    <strong style="font-size: 9.2pt;">{{ $proj['name'] }}</strong>
+                                    @if(!empty($proj['link'])) <span style="font-size: 8pt; color: {{ $accent }};">{{ $proj['link'] }}</span>@endif
+                                    @if(!empty($proj['description']))<div style="font-size: 8.5pt; color: #475569; margin-top: 2px;">{{ $proj['description'] }}</div>@endif
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </td>
+                <td valign="top" style="width: 35%; padding-left: 6px;">
+                    @if(!empty($vis['skills']) && !empty($skills))
+                        <div style="background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 10px; padding: 12px 14px; margin-bottom: 10px;">
+                            <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.4px; color: {{ $accent }}; margin-bottom: 7px;">Core Stack</div>
+                            <div style="line-height: 1.9;">@foreach($skills as $sk)<span style="display: inline-block; background-color: {{ $accentLight }}; border: 1px solid {{ $accentMid }}; border-radius: 5px; padding: 2px 6px; font-size: 8pt; font-weight: bold; color: #1E293B; margin: 0 3px 4px 0;">{{ $sk }}</span>@endforeach</div>
+                        </div>
+                    @endif
+
+                    @if(!empty($vis['education']) && !empty($edus))
+                        <div style="background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 10px; padding: 12px 14px; margin-bottom: 10px;">
+                            <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.4px; color: {{ $accent }}; margin-bottom: 7px;">Education</div>
+                            @foreach($edus as $edu)
+                                @continue(empty($edu['degree']) && empty($edu['school']))
+                                <div style="margin-bottom: 7px; font-size: 8.6pt;">
+                                    <div style="font-weight: bold; color: #0F172A;">{{ $edu['degree'] ?? '' }}</div>
+                                    <div style="color: #475569;">{{ $edu['school'] ?? '' }}</div>
+                                    <div style="font-size: 7.8pt; color: #64748B;">{{ implode(' – ', array_filter([$edu['start_date'] ?? '', $edu['end_date'] ?? ''])) }}</div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if(!empty($vis['languages']) && !empty($langs))
+                        <div style="background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 10px; padding: 12px 14px; margin-bottom: 10px;">
+                            <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.4px; color: {{ $accent }}; margin-bottom: 6px;">Languages</div>
+                            @foreach($langs as $lg)
+                                @continue(empty($lg['name']))
+                                <table style="font-size: 8.5pt; margin-bottom: 3px;"><tr><td style="font-weight: bold;">{{ $lg['name'] }}</td><td align="right" style="color: #64748B;">{{ $lg['level'] ?? '' }}</td></tr></table>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if(!empty($vis['awards']) && !empty($awards))
+                        <div style="background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 10px; padding: 12px 14px;">
+                            <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.4px; color: {{ $accent }}; margin-bottom: 6px;">Honors</div>
+                            @foreach($awards as $aw)
+                                @continue(empty($aw['title']))
+                                <div style="font-size: 8.5pt; margin-bottom: 4px;"><strong style="color: #0F172A;">{{ $aw['title'] }}</strong><div style="font-size: 7.8pt; color: #64748B;">{{ implode(' • ', array_filter([$aw['issuer'] ?? '', $aw['date'] ?? ''])) }}</div></div>
+                            @endforeach
+                        </div>
+                    @endif
+                </td>
+            </tr>
+        </table>
+    </div>
+
+{{-- =======================================================================
+     B. STRIPE CLEAN (Precision Top-Band Minimal)
+     ======================================================================= --}}
+@elseif($tStyle === 'stripe_clean')
+    <div style="border-top: 5px solid {{ $accent }}; padding: 26px 32px;">
+        <table style="border-bottom: 1px solid #CBD5E1; margin-bottom: 14px;">
+            <tr>
+                <td valign="bottom" style="padding-bottom: 12px;">
+                    <div class="{{ $font === 'serif' ? 'serif' : '' }}" style="font-size: 20pt; font-weight: bold; color: #0F172A; line-height: 1.05;">{{ $fullName }}</div>
+                    <div style="font-size: 10pt; font-weight: bold; color: {{ $accent }}; margin-top: 4px;">— {{ $p['job_title'] ?? '' }}</div>
+                </td>
+                <td align="right" valign="bottom" style="padding-bottom: 12px; font-size: 8.4pt; color: #475569;">
+                    @if(!empty($p['email']))<div style="font-weight: bold; color: #0F172A;">{{ $p['email'] }}</div>@endif
+                    @if(!empty($p['phone']))<div>{{ $p['phone'] }}</div>@endif
+                    @if(!empty($p['location']))<div>{{ $p['location'] }}</div>@endif
+                    @if(!empty($p['website']) || !empty($p['linkedin']))<div style="color: {{ $accent }}; font-weight: bold;">{{ implode(' • ', array_filter([$p['website'] ?? '', $p['linkedin'] ?? ''])) }}</div>@endif
+                </td>
+            </tr>
+        </table>
+        @if(!empty($vis['summary']) && !empty($c['summary']))
+            <div style="border-bottom: 1px solid #F1F5F9; padding-bottom: 10px; margin-bottom: 14px; font-weight: bold; color: #334155;">{{ $c['summary'] }}</div>
+        @endif
+        <table>
+            <tr>
+                <td valign="top" style="width: 65%; padding-right: 16px;">
+                    @if(!empty($vis['experience']) && !empty($exps))
+                        <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.6px; color: {{ $accent }}; border-bottom: 1px solid {{ $accentMid }}; padding-bottom: 3px; margin-bottom: 10px;">Experience</div>
+                        @foreach($exps as $exp)
+                            @continue(empty($exp['role']) && empty($exp['company']))
+                            <div style="margin-bottom: 11px;">
+                                <table><tr><td style="font-weight: bold; font-size: 10pt; color: #0F172A;">{{ $exp['role'] ?: ($exp['company'] ?? '') }}</td><td align="right" style="font-size: 8.2pt; color: #64748B; font-weight: bold;">{{ implode(' – ', array_filter([$exp['start_date'] ?? '', $exp['end_date'] ?? ''])) }}</td></tr></table>
+                                <div style="font-size: 8.8pt; font-weight: bold; color: {{ $accent }}; margin-bottom: 3px;">{{ implode(' · ', array_filter([$exp['company'] ?? '', $exp['location'] ?? ''])) }}</div>
+                                <ul>@foreach($parseBullets($exp['bullets_text'] ?? '') as $line)<li>{{ $line }}</li>@endforeach</ul>
+                            </div>
+                        @endforeach
+                    @endif
+                    @if(!empty($vis['projects']) && !empty($projects))
+                        <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.6px; color: {{ $accent }}; border-bottom: 1px solid {{ $accentMid }}; padding-bottom: 3px; margin: 12px 0 8px 0;">Selected Projects</div>
+                        @foreach($projects as $proj)
+                            @continue(empty($proj['name']))
+                            <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 5px; padding: 8px 10px; margin-bottom: 6px;">
+                                <strong>{{ $proj['name'] }}</strong> <span style="font-size: 8pt; color: {{ $accent }};">{{ $proj['link'] ?? '' }}</span>
+                                @if(!empty($proj['description']))<div style="font-size: 8.5pt; color: #475569; margin-top: 2px;">{{ $proj['description'] }}</div>@endif
+                            </div>
+                        @endforeach
+                    @endif
+                </td>
+                <td valign="top" style="width: 35%; padding-left: 8px;">
+                    @if(!empty($vis['skills']) && !empty($skills))
+                        <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.6px; color: {{ $accent }}; border-bottom: 1px solid {{ $accentMid }}; padding-bottom: 3px; margin-bottom: 8px;">Core Skills</div>
+                        <div style="line-height: 1.9; margin-bottom: 14px;">@foreach($skills as $sk)<span style="display: inline-block; background-color: #F1F5F9; padding: 2px 6px; border-radius: 4px; font-size: 8pt; font-weight: bold; margin: 0 3px 4px 0;">{{ $sk }}</span>@endforeach</div>
+                    @endif
+                    @if(!empty($vis['education']) && !empty($edus))
+                        <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.6px; color: {{ $accent }}; border-bottom: 1px solid {{ $accentMid }}; padding-bottom: 3px; margin-bottom: 8px;">Education</div>
+                        @foreach($edus as $edu)@continue(empty($edu['degree']) && empty($edu['school']))<div style="margin-bottom: 8px; font-size: 8.8pt;"><strong>{{ $edu['degree'] ?? '' }}</strong><div style="color: #475569;">{{ $edu['school'] ?? '' }}</div><div style="font-size: 7.8pt; color: #64748B;">{{ implode(' – ', array_filter([$edu['start_date'] ?? '', $edu['end_date'] ?? ''])) }}</div></div>@endforeach
+                    @endif
+                    @if(!empty($vis['languages']) && !empty($langs))
+                        <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.6px; color: {{ $accent }}; border-bottom: 1px solid {{ $accentMid }}; padding-bottom: 3px; margin: 12px 0 7px 0;">Languages</div>
+                        @foreach($langs as $lg)@continue(empty($lg['name']))<table style="font-size: 8.6pt; margin-bottom: 3px;"><tr><td style="font-weight: bold;">{{ $lg['name'] }}</td><td align="right" style="color: #64748B;">{{ $lg['level'] ?? '' }}</td></tr></table>@endforeach
+                    @endif
+                </td>
+            </tr>
+        </table>
+    </div>
+
+{{-- =======================================================================
+     C. AURORA PILL (Tinted Hero + Pill Tags)
+     ======================================================================= --}}
+@elseif($tStyle === 'aurora_pill')
+    <div style="padding: 24px 28px;">
+        <div style="background-color: {{ $accentLight }}; border: 1px solid {{ $accentMid }}; border-radius: 10px; padding: 16px 20px; margin-bottom: 14px;">
+            <table>
+                <tr>
+                    @if($showPhoto)
+                        <td valign="middle" style="width: 58px; padding-right: 12px;">
+                            @if($photo)<img src="{{ $photo }}" style="width: 50px; height: 50px; border-radius: 25px; border: 2px solid #FFFFFF;" alt="Portrait">@else<div style="width: 50px; height: 50px; border-radius: 25px; background-color: {{ $accent }}; color: #FFFFFF; line-height: 50px; text-align: center; font-weight: bold; font-size: 14pt;">{{ $initials }}</div>@endif
+                        </td>
+                    @endif
+                    <td valign="middle">
+                        <div class="{{ $font === 'serif' ? 'serif' : '' }}" style="font-size: 18pt; font-weight: bold; color: #0F172A; line-height: 1.1;">{{ $fullName }}</div>
+                        @if(!empty($p['job_title']))<span style="display: inline-block; background-color: {{ $accent }}; color: #FFFFFF; padding: 2px 10px; border-radius: 12px; font-size: 8.5pt; font-weight: bold; margin-top: 5px;">{{ $p['job_title'] }}</span>@endif
+                    </td>
+                </tr>
+            </table>
+            <div style="margin-top: 10px; font-size: 8.2pt; color: #334155;">
+                @if(!empty($p['email']))<span style="display: inline-block; background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 10px; padding: 2px 8px; margin-right: 5px; font-weight: bold;">{{ $p['email'] }}</span>@endif
+                @if(!empty($p['phone']))<span style="display: inline-block; background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 10px; padding: 2px 8px; margin-right: 5px;">{{ $p['phone'] }}</span>@endif
+                @if(!empty($p['location']))<span style="display: inline-block; background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 10px; padding: 2px 8px; margin-right: 5px;">{{ $p['location'] }}</span>@endif
+                @if(!empty($p['website']))<span style="display: inline-block; background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 10px; padding: 2px 8px; color: {{ $accent }}; font-weight: bold;">{{ $p['website'] }}</span>@endif
+            </div>
+        </div>
+        @if(!empty($vis['summary']) && !empty($c['summary']))
+            <p style="margin: 0 0 14px 0; color: #334155;">{{ $c['summary'] }}</p>
+        @endif
+        <table>
+            <tr>
+                <td valign="top" style="width: 65%; padding-right: 16px;">
+                    @if(!empty($vis['experience']) && !empty($exps))
+                        <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; color: {{ $accent }}; margin-bottom: 10px;">Work Experience</div>
+                        @foreach($exps as $exp)
+                            @continue(empty($exp['role']) && empty($exp['company']))
+                            <div style="border-left: 2px solid {{ $accent }}; padding-left: 10px; margin-bottom: 11px;">
+                                <table><tr><td style="font-weight: bold; font-size: 10pt;">{{ $exp['role'] ?: ($exp['company'] ?? '') }}</td><td align="right"><span style="background-color: {{ $accentLight }}; color: {{ $accent }}; padding: 1px 7px; border-radius: 10px; font-size: 8pt; font-weight: bold;">{{ implode(' – ', array_filter([$exp['start_date'] ?? '', $exp['end_date'] ?? ''])) }}</span></td></tr></table>
+                                <div style="font-size: 8.8pt; font-weight: bold; color: #475569; margin-bottom: 3px;">{{ implode(' • ', array_filter([$exp['company'] ?? '', $exp['location'] ?? ''])) }}</div>
+                                <ul>@foreach($parseBullets($exp['bullets_text'] ?? '') as $line)<li>{{ $line }}</li>@endforeach</ul>
+                            </div>
+                        @endforeach
+                    @endif
+                    @if(!empty($vis['projects']) && !empty($projects))
+                        <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; color: {{ $accent }}; margin: 12px 0 8px 0;">Key Projects</div>
+                        @foreach($projects as $proj)@continue(empty($proj['name']))<div style="border: 1px solid #E2E8F0; background-color: #F8FAFC; border-radius: 6px; padding: 8px 10px; margin-bottom: 6px;"><strong>{{ $proj['name'] }}</strong> <span style="font-size: 8pt; color: {{ $accent }};">{{ $proj['link'] ?? '' }}</span>@if(!empty($proj['description']))<div style="font-size: 8.5pt; color: #475569; margin-top: 2px;">{{ $proj['description'] }}</div>@endif</div>@endforeach
+                    @endif
+                </td>
+                <td valign="top" style="width: 35%;">
+                    @if(!empty($vis['skills']) && !empty($skills))
+                        <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 11px 13px; margin-bottom: 12px;">
+                            <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; color: {{ $accent }}; margin-bottom: 7px;">Skills &amp; Craft</div>
+                            <div style="line-height: 1.9;">@foreach($skills as $sk)<span style="display: inline-block; background-color: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 10px; padding: 1px 7px; font-size: 8pt; font-weight: bold; margin: 0 3px 4px 0;">{{ $sk }}</span>@endforeach</div>
+                        </div>
+                    @endif
+                    @if(!empty($vis['education']) && !empty($edus))
+                        <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; color: {{ $accent }}; margin-bottom: 7px;">Education</div>
+                        @foreach($edus as $edu)@continue(empty($edu['degree']) && empty($edu['school']))<div style="margin-bottom: 7px; font-size: 8.8pt;"><strong>{{ $edu['degree'] ?? '' }}</strong><div style="color: #475569;">{{ $edu['school'] ?? '' }}</div><div style="font-size: 7.8pt; color: #64748B;">{{ implode(' – ', array_filter([$edu['start_date'] ?? '', $edu['end_date'] ?? ''])) }}</div></div>@endforeach
+                    @endif
+                </td>
+            </tr>
+        </table>
+    </div>
+
+{{-- =======================================================================
+     D. OBSIDIAN HEADER (Full-Bleed Dark Masthead)
+     ======================================================================= --}}
+@elseif($tStyle === 'obsidian_header')
+    <div>
+        <div style="background-color: #0F172A; color: #FFFFFF; border-top: 4px solid {{ $accent }}; padding: 22px 28px;">
+            <table>
+                <tr>
+                    <td valign="middle" style="width: 62%;">
+                        <table>
+                            <tr>
+                                @if($showPhoto)
+                                    <td valign="middle" style="width: 56px; padding-right: 12px;">
+                                        @if($photo)<img src="{{ $photo }}" style="width: 48px; height: 48px; border-radius: 8px; border: 2px solid {{ $accent }};" alt="Portrait">@else<div style="width: 48px; height: 48px; border-radius: 8px; background-color: {{ $accent }}; color: #FFFFFF; line-height: 48px; text-align: center; font-weight: bold; font-size: 13pt;">{{ $initials }}</div>@endif
+                                    </td>
+                                @endif
+                                <td valign="middle">
+                                    <div class="{{ $font === 'serif' ? 'serif' : '' }}" style="font-size: 19pt; font-weight: bold; color: #FFFFFF; line-height: 1.1;">{{ $fullName }}</div>
+                                    @if(!empty($p['job_title']))<span style="display: inline-block; background-color: {{ $accent }}; color: #FFFFFF; padding: 2px 8px; border-radius: 4px; font-size: 8.5pt; font-weight: bold; margin-top: 5px;">{{ $p['job_title'] }}</span>@endif
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td align="right" valign="middle" style="width: 38%; font-size: 8.2pt; color: #CBD5E1;">
+                        @if(!empty($p['email']))<div style="font-weight: bold; color: #FFFFFF;">{{ $p['email'] }}</div>@endif
+                        @if(!empty($p['phone']))<div>{{ $p['phone'] }}</div>@endif
+                        @if(!empty($p['location']))<div>{{ $p['location'] }}</div>@endif
+                        @if(!empty($p['website']))<div style="color: #94A3B8;">{{ $p['website'] }}</div>@endif
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="padding: 22px 28px;">
+            @if(!empty($vis['summary']) && !empty($c['summary']))
+                <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 10px 13px; margin-bottom: 14px; font-weight: bold; color: #334155;">{{ $c['summary'] }}</div>
+            @endif
+            <table>
+                <tr>
+                    <td valign="top" style="width: 65%; padding-right: 16px;">
+                        @if(!empty($vis['experience']) && !empty($exps))
+                            <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; color: #0F172A; border-bottom: 1px solid #CBD5E1; padding-bottom: 3px; margin-bottom: 10px;">Professional Experience</div>
+                            @foreach($exps as $exp)
+                                @continue(empty($exp['role']) && empty($exp['company']))
+                                <div style="margin-bottom: 11px;">
+                                    <table><tr><td style="font-weight: bold; font-size: 10pt; color: #0F172A;">{{ $exp['role'] ?: ($exp['company'] ?? '') }}</td><td align="right" style="font-size: 8.2pt; color: #64748B; font-weight: bold;">{{ implode(' – ', array_filter([$exp['start_date'] ?? '', $exp['end_date'] ?? ''])) }}</td></tr></table>
+                                    <div style="font-size: 8.8pt; font-weight: bold; color: {{ $accent }}; margin-bottom: 3px;">{{ implode(' • ', array_filter([$exp['company'] ?? '', $exp['location'] ?? ''])) }}</div>
+                                    <ul>@foreach($parseBullets($exp['bullets_text'] ?? '') as $line)<li>{{ $line }}</li>@endforeach</ul>
+                                </div>
+                            @endforeach
+                        @endif
+                        @if(!empty($vis['projects']) && !empty($projects))
+                            <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; color: #0F172A; border-bottom: 1px solid #CBD5E1; padding-bottom: 3px; margin: 12px 0 8px 0;">Key Initiatives &amp; Systems</div>
+                            @foreach($projects as $proj)@continue(empty($proj['name']))<div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 5px; padding: 8px 10px; margin-bottom: 6px;"><strong>{{ $proj['name'] }}</strong> <span style="font-size: 8pt; color: {{ $accent }};">{{ $proj['link'] ?? '' }}</span>@if(!empty($proj['description']))<div style="font-size: 8.5pt; color: #475569; margin-top: 2px;">{{ $proj['description'] }}</div>@endif</div>@endforeach
+                        @endif
+                    </td>
+                    <td valign="top" style="width: 35%; padding-left: 8px;">
+                        @if(!empty($vis['skills']) && !empty($skills))
+                            <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; color: #0F172A; border-bottom: 1px solid #CBD5E1; padding-bottom: 3px; margin-bottom: 8px;">Core Stack</div>
+                            <div style="line-height: 1.9; margin-bottom: 14px;">@foreach($skills as $sk)<span style="display: inline-block; background-color: #0F172A; color: #FFFFFF; padding: 2px 6px; border-radius: 4px; font-size: 8pt; font-weight: bold; margin: 0 3px 4px 0;">{{ $sk }}</span>@endforeach</div>
+                        @endif
+                        @if(!empty($vis['education']) && !empty($edus))
+                            <div style="font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; color: #0F172A; border-bottom: 1px solid #CBD5E1; padding-bottom: 3px; margin-bottom: 8px;">Education</div>
+                            @foreach($edus as $edu)@continue(empty($edu['degree']) && empty($edu['school']))<div style="margin-bottom: 8px; font-size: 8.8pt;"><strong>{{ $edu['degree'] ?? '' }}</strong><div style="color: #475569;">{{ $edu['school'] ?? '' }}</div><div style="font-size: 7.8pt; color: #64748B;">{{ implode(' – ', array_filter([$edu['start_date'] ?? '', $edu['end_date'] ?? ''])) }}</div></div>@endforeach
+                        @endif
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+{{-- =======================================================================
      1. FLOW SIDEBAR
      ======================================================================= --}}
-@if($tStyle === 'flow_sidebar')
+@elseif($tStyle === 'flow_sidebar')
     <table style="width: 100%; height: 296mm; border-collapse: collapse;">
         <tr>
             <td valign="top" style="width: 34%; background-color: {{ $accent }}; color: #FFFFFF; padding: 26px 20px;">
