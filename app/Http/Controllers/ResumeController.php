@@ -43,7 +43,7 @@ class ResumeController extends Controller
     /**
      * Live Interactive Resume Builder Studio (No Login Required).
      */
-    public function builder(Request $request): View
+    public function builder(Request $request): View|RedirectResponse
     {
         $loadedResume = null;
         if ($request->has('load')) {
@@ -55,7 +55,11 @@ class ResumeController extends Controller
 
         $loadedTemplate = null;
         if ($request->has('template')) {
-            $loadedTemplate = ResumeCatalog::find((string) $request->query('template'));
+            $templateSlug = trim((string) $request->query('template'));
+            $loadedTemplate = $templateSlug !== '' ? ResumeCatalog::find($templateSlug) : null;
+            if (!$loadedTemplate) {
+                return redirect()->route('resume.builder', [], 301);
+            }
         }
 
         $styles = ResumeCatalog::styles();

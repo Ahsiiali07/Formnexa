@@ -295,7 +295,7 @@
                         </div>
 
                         <div class="flex items-center gap-2 pt-2 border-t border-slate-100">
-                            <a href="{{ route('invoice.studio') }}" :href="'{{ route('invoice.studio') }}?template=' + tpl.slug" class="flex-1 text-center px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-[#184f3a] text-white text-xs font-bold transition shadow-sm">
+                            <a href="{{ route('invoice.studio') }}" :href="'{{ route('invoice.studio') }}?template=' + encodeURIComponent(tpl.slug)" rel="nofollow" class="flex-1 text-center px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-[#184f3a] text-white text-xs font-bold transition shadow-sm">
                                 Use Template
                             </a>
                             <button type="button" @click="openPreview(tpl)" class="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">
@@ -470,7 +470,9 @@
                 <div class="text-xs text-slate-500">
                     Customization tip: You can edit every line, logo, and currency inside the studio.
                 </div>
-                <a href="{{ route('invoice.studio') }}" :href="'{{ route('invoice.studio') }}?template=' + previewTemplate?.slug + '&style=' + previewStyle + '&color=' + encodeURIComponent(previewColor)"
+                <a href="{{ route('invoice.studio') }}"
+                   :href="previewTemplate?.slug ? ('{{ route('invoice.studio') }}?template=' + encodeURIComponent(previewTemplate.slug) + '&style=' + encodeURIComponent(previewStyle) + '&color=' + encodeURIComponent(previewColor)) : '{{ route('invoice.studio') }}'"
+                   rel="nofollow"
                    class="w-full sm:w-auto text-center px-5 py-2.5 rounded-xl bg-[#184f3a] hover:bg-[#123e2d] text-white text-xs font-bold shadow-md transition whitespace-nowrap">
                     Customize This Template &rarr;
                 </a>

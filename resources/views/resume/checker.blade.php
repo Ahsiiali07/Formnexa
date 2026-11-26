@@ -681,7 +681,8 @@ Tools & Cloud: Docker, AWS, Git, CI/CD, Redis, PostgreSQL`;
             }
 
             try {
-                const response = await fetch('/api/resume/check', {
+                const checkEndpoint = [window.location.origin, 'api', 'resume', 'check'].join('/');
+                const response = await fetch(checkEndpoint, {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',

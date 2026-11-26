@@ -1430,7 +1430,8 @@ document.addEventListener('alpine:init', () => {
         async saveInvoice(callback = null) {
             this.saving = true;
             try {
-                const response = await fetch('/api/invoices', {
+                const saveEndpoint = [window.location.origin, 'api', 'invoices'].join('/');
+                const response = await fetch(saveEndpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1494,7 +1495,7 @@ document.addEventListener('alpine:init', () => {
                     return;
                 }
 
-                const emailUrl = data.email_url || ("{{ url('/invoice') }}/" + data.uuid + "/email");
+                const emailUrl = data.email_url || [window.location.origin, 'invoice', data.uuid, 'email'].join('/');
                 const response = await fetch(emailUrl, {
                     method: 'POST',
                     headers: {

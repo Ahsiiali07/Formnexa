@@ -24,11 +24,11 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 shrink-0">
-                    <a href="{{ route('resume.builder', ['import' => 1]) }}"
+                    <a href="{{ route('resume.builder', ['import' => 1]) }}" rel="nofollow"
                        class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-primary-container hover:bg-electric-blue-hover text-white text-sm font-bold shadow-sm transition">
                         <span>Convert CV to ATS Format Free &rarr;</span>
                     </a>
-                    <a href="{{ route('resume.builder', ['blank' => 1]) }}"
+                    <a href="{{ route('resume.builder', ['blank' => 1]) }}" rel="nofollow"
                        class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white border border-border-strong text-[#17211b] text-sm font-bold hover:border-[#17211b] transition">
                         <span>+ Start Blank ATS CV</span>
                     </a>
@@ -392,11 +392,13 @@
                 <div class="space-y-2 pt-3 border-t border-slate-200">
                     <a href="{{ route('resume.builder') }}"
                        :href="buildLaunchUrl(false)"
+                       rel="nofollow"
                        class="block w-full text-center py-3 rounded-xl bg-[#184f3a] text-white text-sm font-extrabold shadow-sm hover:bg-[#123e2d] transition">
                         Use This Design &rarr;
                     </a>
                     <a href="{{ route('resume.builder', ['import' => 1]) }}"
                        :href="buildLaunchUrl(true)"
+                       rel="nofollow"
                        class="block w-full text-center py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
                         &#128196; Use + Import My Existing CV
                     </a>

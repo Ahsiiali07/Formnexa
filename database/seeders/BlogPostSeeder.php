@@ -1032,6 +1032,14 @@ Lead Organizer | NUST ACM Student Chapter | 2024 – 2025
 
 ---
 
+## ATS Fresher CV Checklist Before Applying
+
+Even the strongest academic projects get filtered out if Applicant Tracking Systems cannot parse your file. Verify these five checks before submitting:
+
+1. **Test ATS Readability:** Run your exported file through Formnexa's free [ATS Resume Checker](/ats-resume-checker) to confirm section headers, contact details, and job keywords parse cleanly.
+2. **Stick to Standard Fonts & Linear Columns:** Browse verified single-column layouts in our [ATS CV Templates Gallery](/resume-templates) rather than graphic-heavy Canva layouts.
+3. **Export Clean Vector PDF or Word DOCX:** Always submit PDF unless an employer explicitly requests Word, or use the [PDF to ATS Resume Converter](/convert/pdf-to-ats) to modernize an older draft.
+
 ## Build Your Fresher CV with Formnexa in 5 Minutes
 
 1. Open Formnexa's [Free Online CV Maker](/resume-builder).

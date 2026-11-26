@@ -336,4 +336,37 @@ class BlogAndSeoTest extends TestCase
 
         $this->assertDatabaseMissing('blog_posts', ['id' => $post->id]);
     }
+
+    public function test_gsc_invalid_template_redirects_and_no_raw_js_api_links(): void
+    {
+        $this->get('/invoice-generator?template=undefined&style=modern')
+            ->assertStatus(301)
+            ->assertRedirect(route('invoice.studio'));
+
+        $this->get('/resume-builder?template=undefined')
+            ->assertStatus(301)
+            ->assertRedirect(route('resume.builder'));
+
+        $this->get('/invoice')
+            ->assertStatus(301)
+            ->assertRedirect('/invoice-generator');
+
+        $this->get('/email')
+            ->assertStatus(301)
+            ->assertRedirect('/invoice-generator');
+
+        $invoiceStudio = $this->get('/invoice-generator')->assertOk()->getContent();
+        $this->assertStringNotContainsString("fetch('/api/invoices'", $invoiceStudio);
+        $this->assertStringNotContainsString('"/email"', $invoiceStudio);
+
+        $resumeBuilder = $this->get('/resume-builder')->assertOk()->getContent();
+        $this->assertStringNotContainsString("fetch('/api/resumes'", $resumeBuilder);
+        $this->assertStringNotContainsString("fetch('/api/resumes/import'", $resumeBuilder);
+
+        $templates = $this->get('/templates')->assertOk()->getContent();
+        $this->assertStringContainsString('rel="nofollow"', $templates);
+
+        $resumeTemplates = $this->get('/resume-templates')->assertOk()->getContent();
+        $this->assertStringContainsString('rel="nofollow"', $resumeTemplates);
+    }
 }

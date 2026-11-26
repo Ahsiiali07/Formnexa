@@ -158,7 +158,7 @@ class InvoiceController extends Controller
     /**
      * Display the Invoice Generator Studio.
      */
-    public function index(Request $request): View
+    public function index(Request $request): View|RedirectResponse
     {
         return $this->generator('invoice-generator', $request);
     }
@@ -166,7 +166,7 @@ class InvoiceController extends Controller
     /**
      * Display a specific Generator (e.g. Receipt, Quote, Estimate, etc.).
      */
-    public function generator(string $type, Request $request = null): View
+    public function generator(string $type, Request $request = null): View|RedirectResponse
     {
         $request = $request ?: request();
         $config = self::$generators[$type] ?? self::$generators['invoice-generator'];
@@ -182,7 +182,15 @@ class InvoiceController extends Controller
 
         $loadedTemplate = null;
         if ($request->has('template')) {
-            $loadedTemplate = TemplateCatalog::find((string) $request->query('template'));
+            $templateSlug = trim((string) $request->query('template'));
+            $loadedTemplate = $templateSlug !== '' ? TemplateCatalog::find($templateSlug) : null;
+            if (!$loadedTemplate) {
+                return redirect()->route(
+                    $type === 'invoice-generator' ? 'invoice.studio' : 'invoice.generator',
+                    $type === 'invoice-generator' ? [] : ['type' => $type],
+                    301
+                );
+            }
         }
 
         $templateStyles = TemplateCatalog::styles();

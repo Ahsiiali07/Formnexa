@@ -420,16 +420,17 @@ Certified Scrum Product Owner (CSPO) - 2021`;
                 const csrf = csrfMeta ? csrfMeta.getAttribute('content') : '';
 
                 let importResponse;
+                const importEndpoint = [window.location.origin, 'api', 'resumes', 'import'].join('/');
                 if (this.mode === 'file') {
                     const fd = new FormData();
                     fd.append('cv_file', this.file);
-                    importResponse = await fetch('/api/resumes/import', {
+                    importResponse = await fetch(importEndpoint, {
                         method: 'POST',
                         headers: { 'Accept': 'application/json', 'X-CSRF-TOKEN': csrf },
                         body: fd,
                     });
                 } else {
-                    importResponse = await fetch('/api/resumes/import', {
+                    importResponse = await fetch(importEndpoint, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': csrf },
                         body: JSON.stringify({ cv_text: this.rawText }),
@@ -456,7 +457,8 @@ Certified Scrum Product Owner (CSPO) - 2021`;
                 // Save via POST /api/resumes to register session/guest UUID
                 let redirectUrl = '{{ route("resume.builder") }}?converted=1';
                 try {
-                    const saveResponse = await fetch('/api/resumes', {
+                    const saveEndpoint = [window.location.origin, 'api', 'resumes'].join('/');
+                    const saveResponse = await fetch(saveEndpoint, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': csrf },
                         body: JSON.stringify({
