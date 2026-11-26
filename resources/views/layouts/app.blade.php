@@ -116,6 +116,13 @@
                                         <div class="text-[11px] text-[#68736d] mt-0.5">ATS-ready &amp; modern layouts</div>
                                     </div>
                                 </a>
+                                <a href="{{ route('resume.checker') }}" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#e8f7ed]/70 transition group">
+                                    <span class="w-8 h-8 rounded-lg bg-[#e8f7ed] text-[#184f3a] border border-[#c8f3dc] flex items-center justify-center shrink-0 font-bold text-xs">🎯</span>
+                                    <div>
+                                        <div class="text-xs font-bold text-[#17211b] group-hover:text-[#184f3a]">ATS Resume Checker</div>
+                                        <div class="text-[11px] text-[#68736d] mt-0.5">Instant score (0-100) &amp; keyword check</div>
+                                    </div>
+                                </a>
                                 <a href="{{ route('resume.ats_converter') }}" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#e8f7ed]/70 transition group">
                                     <span class="w-8 h-8 rounded-lg bg-[#e8f7ed] text-[#184f3a] border border-[#c8f3dc] flex items-center justify-center shrink-0">
                                         <x-icon name="upload" class="w-[17px] h-[17px]" />
@@ -126,10 +133,17 @@
                                     </div>
                                 </a>
                                 <a href="{{ route('resume.templates') }}" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#f8f8f3] transition group border-t border-[#dfe4df] pt-2.5">
-                                    <span class="w-8 h-8 rounded-lg bg-[#fff0e8] text-[#b45309] border border-[#fed7c3] flex items-center justify-center shrink-0 font-mono font-bold text-[11px]">17</span>
+                                    <span class="w-8 h-8 rounded-lg bg-[#fff0e8] text-[#b45309] border border-[#fed7c3] flex items-center justify-center shrink-0 font-mono font-bold text-[11px]">29</span>
                                     <div>
                                         <div class="text-xs font-bold text-[#17211b] group-hover:text-[#184f3a]">Resume Templates Gallery</div>
-                                        <div class="text-[11px] text-[#68736d] mt-0.5">Editorial serif &amp; ATS themes</div>
+                                        <div class="text-[11px] text-[#68736d] mt-0.5">29 editorial serif &amp; ATS themes</div>
+                                    </div>
+                                </a>
+                                <a href="{{ route('letter.resignation') }}" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#f8f8f3] transition group border-t border-[#dfe4df] pt-2.5">
+                                    <span class="w-8 h-8 rounded-lg bg-[#f0ebff] text-[#6142be] border border-[#ddd2fb] flex items-center justify-center shrink-0 font-bold text-xs">✍️</span>
+                                    <div>
+                                        <div class="text-xs font-bold text-[#17211b] group-hover:text-[#6142be]">Resignation Letter Maker</div>
+                                        <div class="text-[11px] text-[#68736d] mt-0.5">Two weeks notice in 60 seconds</div>
                                     </div>
                                 </a>
                             </div>
@@ -230,6 +244,7 @@
                                     <div class="grid grid-cols-2 gap-1">
                                         @foreach([
                                             ['invoice-generator', 'Invoice Generator'],
+                                            ['paystub-generator', 'Paystub Maker (New)'],
                                             ['receipt-generator', 'Receipt Generator'],
                                             ['quote-generator', 'Quote Generator'],
                                             ['estimate-generator', 'Estimate Generator'],
@@ -242,7 +257,7 @@
                                             ['account-statement-generator', 'Account Statement'],
                                             ['packing-slip-generator', 'Packing Slip'],
                                         ] as [$slug, $label])
-                                            <a href="{{ $slug === 'invoice-generator' ? route('invoice.studio') : route('invoice.generator', $slug) }}"
+                                            <a href="{{ $slug === 'invoice-generator' ? route('invoice.studio') : ($slug === 'paystub-generator' ? route('paystub.studio') : route('invoice.generator', $slug)) }}"
                                                class="px-2.5 py-1.5 rounded-lg hover:bg-[#e8f7ed]/70 transition flex items-center justify-between group">
                                                 <span class="font-semibold text-[#17211b] group-hover:text-[#184f3a] truncate">{{ $label }}</span>
                                                 <span class="text-[11px] text-[#68736d] group-hover:text-[#184f3a]">&rarr;</span>
@@ -421,6 +436,7 @@
                     <div x-show="mobileSection === 'generators'" class="p-2.5 grid grid-cols-2 gap-1.5 bg-white">
                         @foreach([
                             ['invoice-generator', 'Invoice'],
+                            ['paystub-generator', 'Paystub (New)'],
                             ['receipt-generator', 'Receipt'],
                             ['quote-generator', 'Quote'],
                             ['estimate-generator', 'Estimate'],
@@ -433,7 +449,7 @@
                             ['account-statement-generator', 'Statement'],
                             ['packing-slip-generator', 'Packing Slip'],
                         ] as [$slug, $label])
-                            <a href="{{ $slug === 'invoice-generator' ? route('invoice.studio') : route('invoice.generator', $slug) }}" @click="mobileMenu = false"
+                            <a href="{{ $slug === 'invoice-generator' ? route('invoice.studio') : ($slug === 'paystub-generator' ? route('paystub.studio') : route('invoice.generator', $slug)) }}" @click="mobileMenu = false"
                                class="px-3 py-2 rounded-lg bg-[#f8f8f3] hover:bg-[#e8f7ed] text-[#17211b] font-semibold text-xs truncate">
                                 {{ $label }}
                             </a>

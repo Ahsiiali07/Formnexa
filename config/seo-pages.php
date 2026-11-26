@@ -109,6 +109,24 @@ return [
         'keywords' => 'free ats cv template word, best ats resume templates, ats resume template pdf, free resume templates, clean cv format, cv to ats format',
         'updated' => $d,
     ],
+    'ats-resume-checker' => [
+        'title' => 'Free ATS Resume Checker & Score Calculator | Formnexa',
+        'description' => 'Scan your resume against Applicant Tracking System filters for free. Get an instant score (0-100), identify missing keywords, and fix formatting errors before applying.',
+        'keywords' => 'ats resume checker, free ats score checker, ats resume scanner, test resume for ats, free resume reviewer, job keyword match, ats resume test free',
+        'updated' => $d,
+    ],
+    'resignation-letter-generator' => [
+        'title' => 'Free Resignation Letter & Two Weeks Notice Generator | Formnexa',
+        'description' => 'Generate a formal, polite resignation letter in under 60 seconds. Choose your tone, set notice dates, and download instant PDF or Word documents with zero watermark.',
+        'keywords' => 'resignation letter generator, two weeks notice generator, free resignation letter maker, simple resignation letter, formal resignation letter pdf, two weeks notice letter template',
+        'updated' => $d,
+    ],
+    'paystub-generator' => [
+        'title' => 'Free Paystub Generator & Salary Slip Maker – PDF | Formnexa',
+        'description' => 'Create professional employee paystubs and salary slips online in seconds. Automatic tax calculations, Year-to-Date (YTD) tracking, and watermark-free PDF download.',
+        'keywords' => 'free paystub generator, paystub maker online free, salary slip maker, payslip generator without watermark, employee pay stub pdf, check stub maker',
+        'updated' => $d,
+    ],
 
     // ---------- PDF converters ----------
     'convert' => [

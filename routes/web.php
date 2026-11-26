@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AtsCheckerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ConverterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\LetterController;
+use App\Http\Controllers\PaystubController;
 use App\Http\Controllers\ResumeController;
 use App\Support\ConverterCatalog;
 use Illuminate\Support\Facades\Artisan;
@@ -72,8 +75,21 @@ Route::get('/templates', [InvoiceController::class, 'templates'])->name('templat
 Route::get('/resume-builder', [ResumeController::class, 'builder'])->name('resume.builder');
 Route::get('/resume-templates', [ResumeController::class, 'templates'])->name('resume.templates');
 Route::get('/ats-resume-converter', [ResumeController::class, 'atsConverter'])->name('resume.ats_converter');
+Route::get('/ats-resume-checker', [AtsCheckerController::class, 'index'])->name('resume.checker');
+Route::post('/api/resume/check', [AtsCheckerController::class, 'check'])->name('resume.checker.process');
 Route::post('/api/resumes/import', [ResumeController::class, 'import'])->name('resume.import');
 Route::post('/api/resumes', [ResumeController::class, 'store'])->name('resume.store');
+
+// Resignation Letter & Two Weeks Notice Maker
+Route::get('/resignation-letter-generator', [LetterController::class, 'resignation'])->name('letter.resignation');
+Route::redirect('/resignation-letter', '/resignation-letter-generator', 301);
+Route::post('/resignation-letter/pdf', [LetterController::class, 'downloadPdf'])->name('letter.resignation.pdf');
+Route::post('/resignation-letter/doc', [LetterController::class, 'downloadDocx'])->name('letter.resignation.doc');
+
+// Paystub & Salary Slip Maker
+Route::get('/paystub-generator', [PaystubController::class, 'index'])->name('paystub.studio');
+Route::redirect('/salary-slip-generator', '/paystub-generator', 301);
+Route::post('/paystub-generator/pdf', [PaystubController::class, 'downloadPdf'])->name('paystub.pdf');
 
 // Private / Shareable Resume Links & PDF (Kept out of search engines with noindex)
 Route::middleware('noindex')->group(function () {

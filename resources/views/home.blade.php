@@ -520,7 +520,12 @@
                     <button type="button" @click="dirTab = 'docs'"
                             :class="dirTab === 'docs' ? 'bg-[#17211b] text-white' : 'text-[#536058] hover:text-[#17211b]'"
                             class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">
-                        12 Business Docs
+                        Business &amp; Pay Docs
+                    </button>
+                    <button type="button" @click="dirTab = 'career'"
+                            :class="dirTab === 'career' ? 'bg-[#184f3a] text-white' : 'text-[#536058] hover:text-[#17211b]'"
+                            class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">
+                        Career &amp; ATS Tools (New)
                     </button>
                     <button type="button" @click="dirTab = 'conv'"
                             :class="dirTab === 'conv' ? 'bg-[#17211b] text-white' : 'text-[#536058] hover:text-[#17211b]'"
@@ -535,8 +540,15 @@
                 </div>
             </div>
 
-            {{-- Directory Tab: 12 Business Document Generators --}}
+            {{-- Directory Tab: Business & Pay Document Generators --}}
             <div x-show="dirTab === 'docs'" class="pt-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+                <a href="{{ route('paystub.studio') }}"
+                   class="group flex items-center justify-between gap-2 px-3.5 py-3 rounded-xl bg-[#e8f7ed] border border-[#c8f3dc] hover:border-[#184f3a] hover:shadow-sm transition">
+                    <span class="text-xs sm:text-[13px] font-bold text-[#184f3a] truncate">
+                        Paystub &amp; Salary Slip (New)
+                    </span>
+                    <span class="text-xs text-[#184f3a] shrink-0 font-bold">&rarr;</span>
+                </a>
                 @foreach($generators as $slug => $meta)
                     <a href="{{ $slug === 'invoice-generator' ? route('invoice.studio') : route('invoice.generator', $slug) }}"
                        class="group flex items-center justify-between gap-2 px-3.5 py-3 rounded-xl bg-white border border-[#dfe4df] hover:border-[#184f3a] hover:shadow-sm transition">
@@ -546,6 +558,48 @@
                         <span class="text-xs text-[#68736d] group-hover:text-[#184f3a] shrink-0">&rarr;</span>
                     </a>
                 @endforeach
+            </div>
+
+            {{-- Directory Tab: Career & ATS Tools (New) --}}
+            <div x-show="dirTab === 'career'" x-cloak class="pt-5 grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                <a href="{{ route('resume.checker') }}"
+                   class="group flex flex-col justify-between p-4 rounded-2xl bg-white border border-[#c8f3dc] hover:border-[#184f3a] shadow-sm hover:shadow transition">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="w-10 h-10 rounded-xl bg-[#e8f7ed] text-[#184f3a] flex items-center justify-center font-bold text-lg">🎯</span>
+                        <div>
+                            <div class="text-sm font-bold text-[#17211b] group-hover:text-[#184f3a]">ATS Resume Checker</div>
+                            <div class="text-[11px] text-[#68736d]">Instant 0-100 score &amp; keyword match</div>
+                        </div>
+                    </div>
+                    <div class="text-xs text-[#55635a]">Test your resume against applicant filters before applying. 100% free with zero paywall.</div>
+                    <div class="mt-3 text-xs font-bold text-[#184f3a] group-hover:underline flex items-center gap-1">Scan Resume Now &rarr;</div>
+                </a>
+
+                <a href="{{ route('letter.resignation') }}"
+                   class="group flex flex-col justify-between p-4 rounded-2xl bg-white border border-[#fed7c3] hover:border-[#b45309] shadow-sm hover:shadow transition">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="w-10 h-10 rounded-xl bg-[#fff0e8] text-[#b45309] flex items-center justify-center font-bold text-lg">✍️</span>
+                        <div>
+                            <div class="text-sm font-bold text-[#17211b] group-hover:text-[#b45309]">Resignation Letter Maker</div>
+                            <div class="text-[11px] text-[#68736d]">Two weeks notice in 60 seconds</div>
+                        </div>
+                    </div>
+                    <div class="text-xs text-[#55635a]">Pick your tone, calculate notice dates, and download executive letterhead in PDF or Word.</div>
+                    <div class="mt-3 text-xs font-bold text-[#b45309] group-hover:underline flex items-center gap-1">Generate Letter &rarr;</div>
+                </a>
+
+                <a href="{{ route('paystub.studio') }}"
+                   class="group flex flex-col justify-between p-4 rounded-2xl bg-white border border-[#ddd2fb] hover:border-[#6142be] shadow-sm hover:shadow transition">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="w-10 h-10 rounded-xl bg-[#f0ebff] text-[#6142be] flex items-center justify-center font-bold text-lg">💰</span>
+                        <div>
+                            <div class="text-sm font-bold text-[#17211b] group-hover:text-[#6142be]">Paystub / Salary Slip Maker</div>
+                            <div class="text-[11px] text-[#68736d]">Earnings, deductions &amp; YTD</div>
+                        </div>
+                    </div>
+                    <div class="text-xs text-[#55635a]">Create authentic corporate paystubs and employee salary statements with zero watermarks.</div>
+                    <div class="mt-3 text-xs font-bold text-[#6142be] group-hover:underline flex items-center gap-1">Create Paystub &rarr;</div>
+                </a>
             </div>
 
             {{-- Directory Tab: PDF Converters --}}
