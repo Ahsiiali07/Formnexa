@@ -13,8 +13,18 @@ class NewToolsTest extends TestCase
     {
         $response = $this->get('/ats-resume-checker');
         $response->assertStatus(200);
+        $response->assertSee('<title>Free ATS Resume Checker: Instant Score, No Sign-up</title>', false);
         $response->assertSee('Free ATS Resume Checker');
-        $response->assertSee('Score Calculator');
+        $response->assertSee('How the Formnexa ATS Score Works');
+        $response->assertSee('images/og/ats-resume-checker.jpg', false);
+        $response->assertSee('"@type":"WebApplication"', false);
+        $response->assertSee('"applicationCategory":"BusinessApplication"', false);
+        $response->assertSee('"@type":"FAQPage"', false);
+        $response->assertSee('"@type":"BreadcrumbList"', false);
+        $response->assertDontSee('ATS-certified');
+        $response->assertDontSee('Jobscan');
+        $response->assertDontSee('Resume Worded');
+        $this->assertSame(1, preg_match_all('/<h1\b/i', $response->getContent()));
     }
 
     /**
@@ -71,8 +81,30 @@ class NewToolsTest extends TestCase
 
         $response = $this->get('/resignation-letter-generator');
         $response->assertStatus(200);
-        $response->assertSee('Free Resignation Letter');
-        $response->assertSee('Two Weeks Notice Maker');
+        $response->assertSee('<title>Free Resignation Letter Generator (Two Weeks Notice)</title>', false);
+        $response->assertSee('Free Resignation Letter &amp; Two Weeks Notice Generator', false);
+        $response->assertSee('images/og/resignation-letter-generator.jpg', false);
+        $response->assertSee('"@type":"WebApplication"', false);
+        $response->assertSee('"@type":"FAQPage"', false);
+        $response->assertSee('"@type":"BreadcrumbList"', false);
+        $this->assertSame(1, preg_match_all('/<h1\b/i', $response->getContent()));
+
+        foreach ([
+            '/resignation-letter/new-job' => 'Resignation Letter Generator for a New Job',
+            '/resignation-letter/two-weeks-notice' => 'Two Weeks Notice Letter Generator',
+            '/resignation-letter/relocation' => 'Resignation Letter Generator for Relocation',
+            '/resignation-letter/personal-reasons' => 'Resignation Letter for Personal Reasons',
+            '/resignation-letter/short-notice' => 'Short Notice Resignation Letter Generator',
+        ] as $url => $expectedH1) {
+            $landing = $this->get($url);
+            $landing->assertStatus(200)
+                ->assertSee($expectedH1)
+                ->assertSee('<link rel="canonical" href="http://localhost' . $url . '">', false)
+                ->assertSee('"@type":"WebApplication"', false)
+                ->assertSee('"@type":"FAQPage"', false)
+                ->assertSee('"@type":"BreadcrumbList"', false);
+            $this->assertSame(1, preg_match_all('/<h1\b/i', $landing->getContent()));
+        }
     }
 
     /**
@@ -104,17 +136,54 @@ class NewToolsTest extends TestCase
     }
 
     /**
-     * Test Paystub Generator loads with HTTP 200 and handles alias redirect.
+     * Test Paystub Generator and regional Salary Slip Generator load with HTTP 200 and clean SEO/trust signals.
      */
     public function test_paystub_generator_loads_and_redirects(): void
     {
-        $redirect = $this->get('/salary-slip-generator');
-        $redirect->assertRedirect('/paystub-generator');
-
         $response = $this->get('/paystub-generator');
-        $response->assertStatus(200);
-        $response->assertSee('Free Paystub');
-        $response->assertSee('Salary Slip Generator');
+        $response->assertStatus(200)
+            ->assertSee('<title>Free Paystub &amp; Salary Slip Generator (PDF)</title>', false)
+            ->assertSee('Free Paystub &amp; Salary Slip Generator', false)
+            ->assertSee('For employers, small businesses and freelancers creating payroll records. Do not use generated documents to misrepresent income.')
+            ->assertSee('images/og/paystub-generator.jpg', false)
+            ->assertSee('"@type":"WebApplication"', false)
+            ->assertSee('"@type":"FAQPage"', false)
+            ->assertSee('"@type":"BreadcrumbList"', false)
+            ->assertDontSee('FX-AUTHENTIC')
+            ->assertDontSee('authentic');
+        $this->assertSame(1, preg_match_all('/<h1\b/i', $response->getContent()));
+
+        $regional = $this->get('/salary-slip-generator');
+        $regional->assertStatus(200)
+            ->assertSee('<title>Free Salary Slip Generator for Pakistan, India and UAE</title>', false)
+            ->assertSee('Free Salary Slip Generator for Pakistan, India &amp; UAE', false)
+            ->assertSee('<link rel="canonical" href="http://localhost/salary-slip-generator">', false)
+            ->assertSee('"@type":"WebApplication"', false)
+            ->assertSee('"@type":"FAQPage"', false)
+            ->assertSee('"@type":"BreadcrumbList"', false)
+            ->assertDontSee('FX-AUTHENTIC')
+            ->assertDontSee('authentic');
+        $this->assertSame(1, preg_match_all('/<h1\b/i', $regional->getContent()));
+    }
+
+    /**
+     * Verify Phase 6 internal linking matrix paths appear cleanly across site views.
+     */
+    public function test_internal_linking_matrix_across_pages(): void
+    {
+        $this->get('/')->assertStatus(200)
+            ->assertSee('/ats-resume-checker')
+            ->assertSee('/resignation-letter-generator')
+            ->assertSee('/paystub-generator')
+            ->assertSee('/salary-slip-generator');
+
+        $this->get('/resume-builder')->assertStatus(200)->assertSee('/ats-resume-checker');
+        $this->get('/resume-templates')->assertStatus(200)->assertSee('/ats-resume-checker');
+        $this->get('/ats-resume-converter')->assertStatus(200)->assertSee('/ats-resume-checker');
+        $this->get('/convert/pdf-to-ats')->assertStatus(200)->assertSee('/ats-resume-checker');
+
+        $this->get('/invoice-generator')->assertStatus(200)->assertSee('/paystub-generator');
+        $this->get('/timesheet-generator')->assertStatus(200)->assertSee('/paystub-generator');
     }
 
     /**

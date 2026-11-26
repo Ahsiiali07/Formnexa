@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+<x-schema.tool
+    name="Free ATS Resume Checker"
+    description="Check your resume for ATS compatibility in seconds. Get a 0-100 score, missing keywords and formatting fixes. Free, no sign-up."
+    category="BusinessApplication"
+/>
+
 @section('content')
 <div class="min-h-screen bg-[#fafbfa] text-[#17211b] py-8 sm:py-12"
      x-data="atsCheckerStudio()"
@@ -7,21 +13,30 @@
 
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
 
-        {{-- Top Breadcrumb / Category Badge --}}
+        {{-- Visible Breadcrumbs + BreadcrumbList JSON-LD --}}
+        <div class="mb-5 flex justify-center">
+            <x-schema.breadcrumbs :items="[
+                ['Home', url('/')],
+                ['Resume Builder', route('resume.builder')],
+                ['ATS Resume Checker', route('resume.checker')],
+            ]" />
+        </div>
+
+        {{-- Top Category Badge --}}
         <div class="flex items-center justify-center gap-2 mb-4">
             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#e8f7ed] text-[#184f3a] border border-[#c8f3dc]">
                 <span class="w-2 h-2 rounded-full bg-[#184f3a] animate-pulse"></span>
-                Free ATS Resume Checker &bull; 100% Free &bull; No Sign-up Required
+                100% Free &bull; Unlimited Scans &bull; No Sign-up Required
             </span>
         </div>
 
         {{-- Headline & Hero Copy --}}
         <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-[#17211b] mb-3">
-                Free ATS Resume Checker &amp; <span class="text-[#184f3a]">Score Calculator</span>
+                Free ATS Resume Checker
             </h1>
             <p class="text-base sm:text-lg text-[#55635a] leading-relaxed">
-                Scan your resume against modern Applicant Tracking System (ATS) recruiting filters. Get an instant score (0&ndash;100%), identify missing keywords, and fix formatting errors before applying.
+                Check how cleanly automated hiring software reads your resume. Get an instant 0&ndash;100 score, spot missing job keywords, and fix parsing issues before applying.
             </p>
         </div>
 
@@ -82,7 +97,7 @@
                     <span class="text-xs font-semibold text-[#55635a]" x-text="openJd ? 'Collapse' : '+ Add Job Description'"></span>
                 </button>
 
-                <div x-show="openJd" x-collapse class="mt-3">
+                <div x-show="openJd" x-transition class="mt-3">
                     <textarea x-model="jobDescription" rows="4"
                               placeholder="Paste the job description or role requirements here to check missing keywords..."
                               class="w-full p-3.5 rounded-xl border border-[#d6ded8] focus:border-[#184f3a] focus:ring-2 focus:ring-[#184f3a]/20 text-xs sm:text-sm text-[#17211b]"></textarea>
@@ -165,7 +180,7 @@
                         <div class="bg-white/10 rounded-2xl p-3 border border-white/10">
                             <div class="text-white/70 font-semibold">Reading Time</div>
                             <div class="text-base font-black text-white mt-0.5" x-text="`${results?.reading_time_seconds || 30}s`"></div>
-                            <div class="text-[10px] text-white/60">Avg. scan: 6 seconds</div>
+                            <div class="text-[10px] text-white/60">Estimated read @ 200 wpm</div>
                         </div>
                     </div>
 
@@ -356,7 +371,7 @@
             <div class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm">
                 <h3 class="font-extrabold text-base text-[#17211b] mb-4 flex items-center gap-2">
                     <span class="w-8 h-8 rounded-xl bg-[#e8f7ed] text-[#184f3a] flex items-center justify-center font-bold text-sm">💡</span>
-                    <span>Actionable Recommendations to Reach 95%+ ATS Score</span>
+                    <span>Actionable Recommendations to Improve Your Score</span>
                 </h3>
 
                 <div class="space-y-3">
@@ -378,7 +393,7 @@
                 <div class="mt-8 p-6 rounded-2xl bg-[#e8f7ed] border border-[#c8f3dc] text-center">
                     <h4 class="text-lg font-black font-display text-[#184f3a] mb-2">Ready to fix these issues automatically?</h4>
                     <p class="text-xs sm:text-sm text-[#3f4a43] max-w-xl mx-auto mb-4">
-                        Formnexa has 29 ATS-certified templates designed to pass recruiters and applicant software on the first try. Export cleanly in vector PDF and editable Word with zero fees.
+                        Formnexa has {{ count(\App\Support\ResumeCatalog::templates()) }} ATS-friendly templates designed to help your resume parse cleanly in applicant tracking software. Export cleanly in vector PDF and editable Word with zero fees.
                     </p>
                     <a href="{{ route('resume.builder', ['import' => 1]) }}"
                        class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-display font-extrabold text-sm text-white bg-[#184f3a] hover:bg-[#123e2d] shadow-md hover:shadow-lg transition">
@@ -390,43 +405,207 @@
 
         </div>
 
-        {{-- EDUCATIONAL & FAQ SECTION --}}
-        <div class="mt-16 pt-12 border-t border-[#e2e8e3] max-w-4xl mx-auto">
-            <h2 class="text-2xl font-black font-display text-[#17211b] text-center mb-8">
-                Frequently Asked Questions About ATS Resume Scanners
-            </h2>
+        {{-- EDUCATIONAL GUIDE SECTIONS 1-7 --}}
+        <div class="mt-16 pt-12 border-t border-[#e2e8e3] space-y-12">
 
-            <div class="space-y-4" x-data="{ openFaq: null }">
-                <div class="bg-white rounded-2xl border border-[#e2e8e3] p-5">
-                    <button type="button" @click="openFaq = openFaq === 1 ? null : 1" class="flex items-center justify-between w-full text-left font-bold text-sm text-[#17211b]">
-                        <span>What is an ATS Resume Score?</span>
-                        <span x-text="openFaq === 1 ? '−' : '+'" class="text-base font-extrabold text-[#184f3a]"></span>
-                    </button>
-                    <div x-show="openFaq === 1" x-collapse class="mt-3 text-xs sm:text-sm text-[#55635a] leading-relaxed">
-                        An ATS (Applicant Tracking System) score measures how accurately automated hiring software (like Workday, Taleo, Greenhouse, and Lever) can parse, read, and rank your resume. High scores mean your headings, work experience, bullet points, and skills are organized in a standard structure that machines can read without errors.
+            {{-- 1. How the Score Works --}}
+            <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm">
+                <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-[#184f3a] block mb-1.5">Scoring Breakdown</span>
+                <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-[#17211b] tracking-tight mb-3">
+                    How the Formnexa ATS Score Works
+                </h2>
+                <p class="text-sm sm:text-[15px] text-[#536058] leading-relaxed mb-6">
+                    This tool calculates <strong>Formnexa&rsquo;s own diagnostic score (10&ndash;100)</strong> based on structured parsing checks&mdash;it is not the proprietary ranking score used by any specific employer&rsquo;s ATS software. When you include a target job description, your score combines all five weighted categories below; when you run a general audit without a job description, the 20% keyword weight is redistributed across structure (30%), impact (30%), contact info (20%), and formatting (20%).
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <div class="rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] p-4">
+                        <div class="text-xs font-mono font-bold text-[#184f3a] mb-1">15% Weight (20% General)</div>
+                        <h3 class="font-bold text-sm text-[#17211b] mb-1.5">Contact Info</h3>
+                        <p class="text-xs text-[#536058] leading-relaxed">Checks for full name, valid email address, phone number, city/country location, and LinkedIn or portfolio links.</p>
+                    </div>
+                    <div class="rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] p-4">
+                        <div class="text-xs font-mono font-bold text-[#184f3a] mb-1">25% Weight (30% General)</div>
+                        <h3 class="font-bold text-sm text-[#17211b] mb-1.5">Section Structure</h3>
+                        <p class="text-xs text-[#536058] leading-relaxed">Verifies standard sections: Work Experience, Education, Core Skills (at least 3&ndash;6 items), and a Professional Summary.</p>
+                    </div>
+                    <div class="rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] p-4">
+                        <div class="text-xs font-mono font-bold text-[#184f3a] mb-1">25% Weight (30% General)</div>
+                        <h3 class="font-bold text-sm text-[#17211b] mb-1.5">Action Verbs &amp; Impact</h3>
+                        <p class="text-xs text-[#536058] leading-relaxed">Scans for strong action verbs (target 6+) and measurable results like percentages, dollar amounts, or metrics (target 3+).</p>
+                    </div>
+                    <div class="rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] p-4">
+                        <div class="text-xs font-mono font-bold text-[#184f3a] mb-1">15% Weight (20% General)</div>
+                        <h3 class="font-bold text-sm text-[#17211b] mb-1.5">Formatting Safety</h3>
+                        <p class="text-xs text-[#536058] leading-relaxed">Checks resume word count (penalizes under 200 or over 1,300 words), bullet point structure, and clean character encoding.</p>
+                    </div>
+                    <div class="rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] p-4">
+                        <div class="text-xs font-mono font-bold text-[#184f3a] mb-1">20% Weight (With JD)</div>
+                        <h3 class="font-bold text-sm text-[#17211b] mb-1.5">Keyword Match</h3>
+                        <p class="text-xs text-[#536058] leading-relaxed">Extracts up to 24 key terms from your pasted job description and shows exact matched and missing terms.</p>
                     </div>
                 </div>
+            </section>
 
-                <div class="bg-white rounded-2xl border border-[#e2e8e3] p-5">
-                    <button type="button" @click="openFaq = openFaq === 2 ? null : 2" class="flex items-center justify-between w-full text-left font-bold text-sm text-[#17211b]">
-                        <span>Can ATS software read PDF resumes?</span>
-                        <span x-text="openFaq === 2 ? '−' : '+'" class="text-base font-extrabold text-[#184f3a]"></span>
-                    </button>
-                    <div x-show="openFaq === 2" x-collapse class="mt-3 text-xs sm:text-sm text-[#55635a] leading-relaxed">
-                        Yes! Modern ATS platforms read vector PDF documents easily, provided they are exported with selectable text (not scanned images) and avoid floating text boxes or multi-layered tables. All PDFs generated on Formnexa are 100% vector text and ATS-safe.
-                    </div>
-                </div>
+            {{-- 2. What is an ATS? & 3. Common Failure Reasons --}}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-4">
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        What Is an Applicant Tracking System (ATS)?
+                    </h2>
+                    <p class="text-sm text-[#536058] leading-relaxed">
+                        An Applicant Tracking System (ATS) is software used by employers and recruiting teams to collect, store, and organize incoming job applications. Platforms such as Workday, Greenhouse, Lever, and iCIMS act as a central database where hiring teams review candidates.
+                    </p>
+                    <p class="text-sm text-[#536058] leading-relaxed">
+                        When you upload a resume, the ATS usually runs an automated parser that extracts plain text into structured profile fields&mdash;your name, contact details, job titles, employment dates, degrees, and skills. Recruiters then search and filter those parsed profiles by job title, experience, and keywords.
+                    </p>
+                    <p class="text-sm text-[#536058] leading-relaxed">
+                        If visual formatting blocks the parser from reading your text in order, important details can be skipped or scrambled before a human reviewer ever opens the file.
+                    </p>
+                </section>
 
-                <div class="bg-white rounded-2xl border border-[#e2e8e3] p-5">
-                    <button type="button" @click="openFaq = openFaq === 3 ? null : 3" class="flex items-center justify-between w-full text-left font-bold text-sm text-[#17211b]">
-                        <span>Is Formnexa's ATS Resume Checker really free?</span>
-                        <span x-text="openFaq === 3 ? '−' : '+'" class="text-base font-extrabold text-[#184f3a]"></span>
-                    </button>
-                    <div x-show="openFaq === 3" x-collapse class="mt-3 text-xs sm:text-sm text-[#55635a] leading-relaxed">
-                        Yes, 100% free with unlimited scans. Unlike Jobscan or Resume Worded, Formnexa does not limit you to 2 scans or demand a \$20/month subscription. You get full category breakdowns and keyword matching with zero hidden paywalls.
-                    </div>
-                </div>
+                <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-4">
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        Common Reasons Resumes Fail ATS Parsing
+                    </h2>
+                    <ul class="space-y-2.5 text-sm text-[#536058] leading-relaxed">
+                        <li><strong class="text-[#17211b]">Complex tables and multi-column grids:</strong> Older parsers sometimes read straight across columns, mixing skills or dates into the wrong job entry.</li>
+                        <li><strong class="text-[#17211b]">Floating text boxes:</strong> Content placed inside Word or design-tool text boxes is often skipped entirely during extraction.</li>
+                        <li><strong class="text-[#17211b]">Images of text &amp; skill bars:</strong> Graphic charts, star ratings, or exported canvas elements cannot be read as text keywords.</li>
+                        <li><strong class="text-[#17211b]">Unusual section headings:</strong> Creative labels like &ldquo;My Journey&rdquo; instead of <em>Work Experience</em> or <em>Education</em> confuse automated section mapping.</li>
+                        <li><strong class="text-[#17211b]">Headers and footers:</strong> Critical contact info tucked inside document headers or footers is frequently missed by parsers.</li>
+                        <li><strong class="text-[#17211b]">Scanned PDFs:</strong> A PDF saved as a flat image has zero selectable characters. Use vector text or our <a href="{{ route('resume.ats_converter') }}" class="text-[#184f3a] font-semibold hover:underline">ATS Resume Converter</a>.</li>
+                    </ul>
+                </section>
             </div>
+
+            {{-- 4. How to Use Keyword Match & 5. What a Good Score Means --}}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-3">
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        How to Use the Job Description Keyword Match
+                    </h2>
+                    <p class="text-sm text-[#536058] leading-relaxed">
+                        Open the <strong>&ldquo;Compare with Target Job Description&rdquo;</strong> toggle inside the checker above and paste the requirements section of the role you are applying for.
+                    </p>
+                    <p class="text-sm text-[#536058] leading-relaxed">
+                        Review the green matched terms and red missing terms in your report. Add missing tools, certifications, or phrasing into your Skills section and work-history bullets <strong>only where they honestly reflect work you have actually done</strong>. Never copy hidden text or fabricate skills you do not hold.
+                    </p>
+                </section>
+
+                <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-3">
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        What a Good ATS Score Actually Means
+                    </h2>
+                    <p class="text-sm text-[#536058] leading-relaxed">
+                        On Formnexa&rsquo;s 10&ndash;100 scale, an <strong>80+ score (Grade A or A+)</strong> means your resume contains clear contact details, standard section headings, measurable action-driven bullets, clean text encoding, and strong keyword alignment with your pasted job description.
+                    </p>
+                    <p class="text-sm text-[#536058] leading-relaxed">
+                        Keep expectations realistic: this score is a practical guide to help you catch missing elements and formatting traps before submitting. No third-party score can guarantee interviews or replicate every employer&rsquo;s internal hiring criteria.
+                    </p>
+                </section>
+            </div>
+
+            {{-- 6. FAQ Component (Single Source of Truth: Visible HTML + FAQPage JSON-LD) --}}
+            @php
+                $faqItems = [
+                    [
+                        'q' => 'What is a good ATS score?',
+                        'a' => 'On Formnexa’s 10 to 100 scale, aiming for 80 or higher (Grade A or A+) indicates clean section structure, strong action verbs, measurable results, and solid keyword alignment. Treat the score as a checklist to fix parsing gaps rather than a universal pass or fail cutoff across different employers.',
+                    ],
+                    [
+                        'q' => 'Can ATS read PDF resumes?',
+                        'a' => 'Yes, modern Applicant Tracking Systems read PDF resumes well as long as the file contains real selectable text rather than scanned page images. Our checker tests whether text can be extracted cleanly from your PDF and notifies you if it appears to be an image-only scan.',
+                    ],
+                    [
+                        'q' => 'Is a PDF or Word file better?',
+                        'a' => 'Both clean vector PDFs and standard .docx files parse reliably in modern recruiting software. Always follow the employer’s application instructions: upload a .docx file when specifically requested, or choose a clean vector PDF when either format is accepted so your visual layout stays intact.',
+                    ],
+                    [
+                        'q' => 'Do I need a different resume for each job?',
+                        'a' => 'You do not need to rewrite your resume from scratch for every role, but tailoring your professional summary, core skills, and key bullet points to mirror each job description helps. Small targeted adjustments improve keyword coverage for roles you genuinely qualify for.',
+                    ],
+                    [
+                        'q' => 'How do I add keywords without keyword stuffing?',
+                        'a' => 'Place relevant technical tools, frameworks, and job terms naturally inside your dedicated Skills list and within real accomplishment bullets that show how you used them. Avoid repeating the same word unnaturally or hiding invisible white text, which human recruiters easily spot and reject.',
+                    ],
+                    [
+                        'q' => 'Is my resume stored or shared?',
+                        'a' => 'No file is saved to disk or stored in a database by the ATS checker, and your resume is never shared with third parties or recruiters. Parsed fields are temporarily placed into your browser session only so the Fix in Resume Builder button can pre-fill our editor if you choose to edit your layout.',
+                    ],
+                    [
+                        'q' => 'Why did my resume score low?',
+                        'a' => 'Low scores usually happen when standard headings like Work Experience or Education are missing, contact details sit inside unreadable headers, bullet points lack measurable numbers or action verbs, or the text falls below 200 words. Adding a target job description with missing key terms can also lower the keyword score until addressed.',
+                    ],
+                    [
+                        'q' => 'What is the difference between the checker and the converter?',
+                        'a' => 'The ATS Resume Checker audits your existing file or pasted text and gives you a diagnostic score, category feedback, and missing keyword list. The ATS Resume Converter extracts your text and loads it straight into a clean, single-column template inside our builder so you can edit and download a fresh PDF.',
+                    ],
+                    [
+                        'q' => 'Does every company use ATS?',
+                        'a' => 'No. Small businesses, startups, and direct email referrals often review resumes manually without automated parsing software. However, mid-sized and large organizations commonly rely on an ATS, and writing a clearly structured resume makes reading easier for both software and people.',
+                    ],
+                ];
+            @endphp
+            <div class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm">
+                <x-faq :items="$faqItems" heading="Frequently Asked Questions About ATS Resume Scanning" eyebrow="ATS Help" />
+            </div>
+
+            {{-- 7. Next-Step CTAs & Related Tools --}}
+            @php
+                $relatedTools = [
+                    [
+                        'title' => 'Open in Resume Builder',
+                        'description' => 'Fix formatting warnings right away in our free editor across ' . count(\App\Support\ResumeCatalog::templates()) . ' clean layouts.',
+                        'url' => route('resume.builder', ['import' => 1]),
+                        'badge' => 'Free Studio',
+                        'cta' => 'Open Resume Builder',
+                    ],
+                    [
+                        'title' => 'ATS Resume Converter',
+                        'description' => 'Upload an older PDF or Word CV and convert it into a linear, machine-readable layout.',
+                        'url' => route('resume.ats_converter'),
+                        'badge' => 'PDF & DOCX',
+                        'cta' => 'Convert Resume',
+                    ],
+                    [
+                        'title' => 'ATS Resume Templates',
+                        'description' => 'Browse ' . count(\App\Support\ResumeCatalog::templates()) . ' free ATS-friendly single-column and modern resume designs.',
+                        'url' => route('resume.templates'),
+                        'badge' => count(\App\Support\ResumeCatalog::templates()) . ' Designs',
+                        'cta' => 'Browse Templates',
+                    ],
+                    [
+                        'title' => 'What Is an ATS Resume?',
+                        'description' => 'Plain-English guide explaining how applicant tracking software parses and filters resumes.',
+                        'url' => route('blog.show', 'what-is-an-ats-based-resume-guide'),
+                        'badge' => 'Guide',
+                        'cta' => 'Read Guide',
+                    ],
+                    [
+                        'title' => 'How to Write an ATS-Friendly Resume',
+                        'description' => 'Step-by-step formatting rules, standard headings, and bullet examples.',
+                        'url' => route('blog.show', 'how-to-write-ats-friendly-resume-guide'),
+                        'badge' => 'Guide',
+                        'cta' => 'Read Guide',
+                    ],
+                ];
+                foreach (\App\Models\BlogPost::publishedBySlugs([
+                    'ats-resume-score-explained',
+                    'how-to-check-if-your-resume-is-ats-friendly',
+                    'ats-resume-keywords-how-to-match-a-job-description',
+                ]) as $clusterPost) {
+                    $relatedTools[] = [
+                        'title' => $clusterPost->title,
+                        'description' => \Illuminate\Support\Str::limit($clusterPost->excerpt, 110),
+                        'url' => route('blog.show', $clusterPost->slug),
+                        'badge' => 'ATS Guide',
+                        'cta' => 'Read Guide',
+                    ];
+                }
+            @endphp
+            <x-related-tools :tools="$relatedTools" heading="Next Steps After Checking Your Score" eyebrow="Continue Your Application" />
+
         </div>
 
     </div>

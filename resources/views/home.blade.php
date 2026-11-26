@@ -509,6 +509,62 @@
             </article>
         </div>
 
+        {{-- Featured Career & Payroll Tools Showcase (Visible in HTML) --}}
+        <div class="mt-14 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+                <div>
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Featured Career &amp; Payroll Tools</span>
+                    <h2 class="text-xl sm:text-2xl font-bold text-[#17211b] mt-0.5 tracking-tight">Check your resume score, draft notice letters &amp; build paystubs</h2>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a href="{{ route('resume.checker') }}"
+                   class="group flex flex-col justify-between p-5 rounded-2xl bg-white border border-[#c8f3dc] hover:border-[#184f3a] shadow-sm hover:shadow transition">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2.5">
+                            <span class="w-10 h-10 rounded-xl bg-[#e8f7ed] text-[#184f3a] flex items-center justify-center font-bold text-lg">🎯</span>
+                            <div>
+                                <div class="text-sm font-bold text-[#17211b] group-hover:text-[#184f3a]">Free ATS Resume Checker</div>
+                                <div class="text-[11px] text-[#68736d]">0&ndash;100 score &amp; keyword audit</div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-[#55635a] leading-relaxed">Scan your PDF, Word, or pasted resume for ATS compatibility, missing keywords, and formatting traps in seconds.</p>
+                    </div>
+                    <div class="mt-4 text-xs font-bold text-[#184f3a] group-hover:underline">Check ATS Resume Score &rarr;</div>
+                </a>
+
+                <a href="{{ route('letter.resignation') }}"
+                   class="group flex flex-col justify-between p-5 rounded-2xl bg-white border border-[#fed7c3] hover:border-[#b45309] shadow-sm hover:shadow transition">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2.5">
+                            <span class="w-10 h-10 rounded-xl bg-[#fff0e8] text-[#b45309] flex items-center justify-center font-bold text-lg">✍️</span>
+                            <div>
+                                <div class="text-sm font-bold text-[#17211b] group-hover:text-[#b45309]">Resignation Letter Generator</div>
+                                <div class="text-[11px] text-[#68736d]">Two weeks notice in PDF &amp; Word</div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-[#55635a] leading-relaxed">Choose your reason and tone, calculate your last working day automatically, and download clean Word or PDF letterhead.</p>
+                    </div>
+                    <div class="mt-4 text-xs font-bold text-[#b45309] group-hover:underline">Create Resignation Letter &rarr;</div>
+                </a>
+
+                <a href="{{ route('paystub.studio') }}"
+                   class="group flex flex-col justify-between p-5 rounded-2xl bg-white border border-[#ddd2fb] hover:border-[#6142be] shadow-sm hover:shadow transition">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2.5">
+                            <span class="w-10 h-10 rounded-xl bg-[#f0ebff] text-[#6142be] flex items-center justify-center font-bold text-lg">💰</span>
+                            <div>
+                                <div class="text-sm font-bold text-[#17211b] group-hover:text-[#6142be]">Paystub &amp; Salary Slip Generator</div>
+                                <div class="text-[11px] text-[#68736d]">Earnings, deductions &amp; YTD PDF</div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-[#55635a] leading-relaxed">Create itemized payroll records for staff with gross pay, manual deductions, and Year-to-Date totals in USD, PKR, INR, or AED.</p>
+                    </div>
+                    <div class="mt-4 text-xs font-bold text-[#6142be] group-hover:underline">Create Paystub PDF &rarr;</div>
+                </a>
+            </div>
+        </div>
+
         {{-- Compact Quick Directory for All 12 Generators, 10 Converters & Galleries --}}
         <div class="mt-14 bg-[#f8f8f3] border border-[#dfe4df] rounded-[26px] p-5 sm:p-7">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#dfe4df]">
@@ -597,7 +653,7 @@
                             <div class="text-[11px] text-[#68736d]">Earnings, deductions &amp; YTD</div>
                         </div>
                     </div>
-                    <div class="text-xs text-[#55635a]">Create authentic corporate paystubs and employee salary statements with zero watermarks.</div>
+                    <div class="text-xs text-[#55635a]">Create formatted corporate paystubs and employee salary statements with zero watermarks.</div>
                     <div class="mt-3 text-xs font-bold text-[#6142be] group-hover:underline flex items-center gap-1">Create Paystub &rarr;</div>
                 </a>
             </div>

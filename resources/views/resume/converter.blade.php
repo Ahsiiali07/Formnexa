@@ -295,6 +295,9 @@
                 <p class="text-xs text-[#536058]">Explore our full gallery of CV templates, document converters, or read our in-depth guides.</p>
             </div>
             <div class="flex flex-wrap items-center justify-center gap-2.5 shrink-0">
+                <a href="{{ route('resume.checker') }}" class="px-4 py-2 rounded-xl bg-[#e8f7ed] border border-[#c8f3dc] hover:border-[#184f3a] text-xs font-bold text-[#184f3a] transition">
+                    Free ATS Resume Checker &rarr;
+                </a>
                 <a href="{{ route('resume.templates') }}" class="px-4 py-2 rounded-xl bg-white border border-[#dfe4df] hover:border-[#184f3a] text-xs font-bold text-[#17211b] transition">
                     Browse {{ count($templates) }} CV Templates &rarr;
                 </a>

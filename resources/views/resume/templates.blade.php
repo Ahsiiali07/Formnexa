@@ -289,6 +289,30 @@
                 ]" heading="Free ATS CV Templates — Frequently Asked Questions" eyebrow="ATS CV Guide &amp; FAQ" />
             </div>
 
+            <x-related-tools :tools="[
+                [
+                    'title' => 'Free ATS Resume Checker',
+                    'description' => 'Upload your resume and check your 0-100 compatibility score and keyword coverage before applying.',
+                    'url' => route('resume.checker'),
+                    'badge' => 'Free Scan',
+                    'cta' => 'Check ATS Score',
+                ],
+                [
+                    'title' => 'ATS Resume Builder',
+                    'description' => 'Customize any template live in your browser and export watermark-free PDF or Word files.',
+                    'url' => route('resume.builder'),
+                    'badge' => 'Free Studio',
+                    'cta' => 'Open Resume Builder',
+                ],
+                [
+                    'title' => 'ATS Resume Converter',
+                    'description' => 'Already have a PDF or DOCX resume? Parse and rebuild it into any single-column layout.',
+                    'url' => route('resume.ats_converter'),
+                    'badge' => 'PDF & Word',
+                    'cta' => 'Convert Existing CV',
+                ],
+            ]" heading="Next Steps for Your Resume" eyebrow="Career Tools" />
+
         </div>
     </section>
 

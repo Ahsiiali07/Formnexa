@@ -36,9 +36,9 @@ class SeoComposer
             }
         }
 
-        if (str_starts_with($view->name(), 'errors.') || str_starts_with($path, 'api/')) {
+        if (str_starts_with($view->name(), 'errors.') || str_starts_with($path, 'api/') || $path === 'api') {
             $seo['title'] = $seo['title'] ?: 'Page Not Found | Formnexa';
-            $seo['robots'] = 'noindex,follow';
+            $seo['robots'] = (str_starts_with($path, 'api/') || $path === 'api') ? 'noindex,nofollow' : 'noindex,follow';
         }
 
         if (str_starts_with($view->name(), 'resume.show') || str_starts_with($view->name(), 'invoice.show')) {

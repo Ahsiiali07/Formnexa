@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class BlogPost extends Model
@@ -59,6 +61,25 @@ class BlogPost extends Model
             ->where(function (Builder $q) {
                 $q->whereNull('published_at')->orWhere('published_at', '<=', now());
             });
+    }
+
+    /**
+     * Safely fetch published posts matching a list of slugs.
+     *
+     * @param  array<int, string>  $slugs
+     * @return Collection<int, self>
+     */
+    public static function publishedBySlugs(array $slugs): Collection
+    {
+        try {
+            if (!Schema::hasTable('blog_posts')) {
+                return collect();
+            }
+
+            return static::published()->whereIn('slug', $slugs)->get();
+        } catch (\Throwable) {
+            return collect();
+        }
     }
 
     public function getRouteKeyName(): string

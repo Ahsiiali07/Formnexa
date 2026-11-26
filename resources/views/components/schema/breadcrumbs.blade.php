@@ -16,18 +16,17 @@
 @endif
 
 @if(count($items) > 0)
-@push('schema')
-<script type="application/ld+json">
-{!! json_encode([
-    '@@context' => 'https://schema.org',
-    '@type' => 'BreadcrumbList',
-    'itemListElement' => collect($items)->values()->map(fn ($item, $index) => [
-        '@type' => 'ListItem',
-        'position' => $index + 1,
-        'name' => $item[2] ?? $item[0],
-        'item' => $item[1],
-    ])->all(),
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}
-</script>
-@endpush
+@php
+    $breadcrumbSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => collect($items)->values()->map(fn ($item, $index) => [
+            '@type' => 'ListItem',
+            'position' => $index + 1,
+            'name' => $item[2] ?? $item[0],
+            'item' => str_starts_with($item[1], 'http') ? $item[1] : url($item[1]),
+        ])->all(),
+    ];
+@endphp
+<x-schema.jsonld :data="$breadcrumbSchema" />
 @endif

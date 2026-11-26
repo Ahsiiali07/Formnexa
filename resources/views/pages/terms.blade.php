@@ -130,6 +130,7 @@
                     <p class="text-slate-600 mb-3">Customer agrees not to:</p>
                     <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-slate-600 pl-2">
                         <li>Use the Service for any unlawful purpose, fraud, identity theft, or deceptive billing practices.</li>
+                        <li>For employers, small businesses and freelancers creating payroll records. Do not use generated documents to misrepresent income.</li>
                         <li>Interfere with, overload, or disrupt the integrity or security of Formnexa servers or networks.</li>
                         <li>Reverse engineer, decompile, or scrape the application's underlying source code or document engines.</li>
                         <li>Upload malicious payloads, executable scripts, or harmful files through image or logo upload inputs.</li>

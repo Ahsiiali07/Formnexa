@@ -231,10 +231,10 @@
                                         </div>
                                     </a>
                                     <a href="{{ route('resume.templates') }}" class="flex items-center gap-3 p-2.5 rounded-xl bg-[#f8f8f3] hover:bg-[#f0ebff] transition group">
-                                        <span class="w-9 h-9 rounded-lg bg-[#f0ebff] text-[#6142be] border border-[#ddd2fb] flex items-center justify-center shrink-0 font-mono text-xs font-extrabold">17</span>
+                                        <span class="w-9 h-9 rounded-lg bg-[#f0ebff] text-[#6142be] border border-[#ddd2fb] flex items-center justify-center shrink-0 font-mono text-xs font-extrabold">{{ count(\App\Support\ResumeCatalog::templates()) }}</span>
                                         <div>
                                             <div class="font-bold text-[#17211b] group-hover:text-[#6142be]">Resume Templates</div>
-                                            <div class="text-[11px] text-[#68736d]">10 layouts &amp; 17 designs</div>
+                                            <div class="text-[11px] text-[#68736d]">{{ count(\App\Support\ResumeCatalog::styles()) }} layouts &amp; {{ count(\App\Support\ResumeCatalog::templates()) }} designs</div>
                                         </div>
                                     </a>
                                 </div>
@@ -245,6 +245,7 @@
                                         @foreach([
                                             ['invoice-generator', 'Invoice Generator'],
                                             ['paystub-generator', 'Paystub Maker (New)'],
+                                            ['salary-slip-generator', 'Salary Slip (PKR/INR/AED)'],
                                             ['receipt-generator', 'Receipt Generator'],
                                             ['quote-generator', 'Quote Generator'],
                                             ['estimate-generator', 'Estimate Generator'],
@@ -257,7 +258,7 @@
                                             ['account-statement-generator', 'Account Statement'],
                                             ['packing-slip-generator', 'Packing Slip'],
                                         ] as [$slug, $label])
-                                            <a href="{{ $slug === 'invoice-generator' ? route('invoice.studio') : ($slug === 'paystub-generator' ? route('paystub.studio') : route('invoice.generator', $slug)) }}"
+                                            <a href="{{ $slug === 'invoice-generator' ? route('invoice.studio') : ($slug === 'paystub-generator' ? route('paystub.studio') : ($slug === 'salary-slip-generator' ? route('paystub.salary_slip') : route('invoice.generator', $slug))) }}"
                                                class="px-2.5 py-1.5 rounded-lg hover:bg-[#e8f7ed]/70 transition flex items-center justify-between group">
                                                 <span class="font-semibold text-[#17211b] group-hover:text-[#184f3a] truncate">{{ $label }}</span>
                                                 <span class="text-[11px] text-[#68736d] group-hover:text-[#184f3a]">&rarr;</span>
@@ -400,7 +401,7 @@
                     <a href="{{ route('resume.templates') }}" @click="mobileMenu = false"
                        class="flex items-center justify-between gap-1 px-3 py-2.5 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-[#17211b] font-bold text-xs">
                         <span>CVs</span>
-                        <span class="font-mono text-[10px] font-bold text-[#6142be]">17</span>
+                        <span class="font-mono text-[10px] font-bold text-[#6142be]">{{ count(\App\Support\ResumeCatalog::templates()) }}</span>
                     </a>
                     <a href="{{ route('blog.index') }}" @click="mobileMenu = false"
                        class="flex items-center justify-center gap-1 px-3 py-2.5 rounded-xl bg-[#e8f7ed] border border-[#c8f3dc] text-[#184f3a] font-bold text-xs">
@@ -437,6 +438,7 @@
                         @foreach([
                             ['invoice-generator', 'Invoice'],
                             ['paystub-generator', 'Paystub (New)'],
+                            ['salary-slip-generator', 'Salary Slip'],
                             ['receipt-generator', 'Receipt'],
                             ['quote-generator', 'Quote'],
                             ['estimate-generator', 'Estimate'],
@@ -449,7 +451,7 @@
                             ['account-statement-generator', 'Statement'],
                             ['packing-slip-generator', 'Packing Slip'],
                         ] as [$slug, $label])
-                            <a href="{{ $slug === 'invoice-generator' ? route('invoice.studio') : ($slug === 'paystub-generator' ? route('paystub.studio') : route('invoice.generator', $slug)) }}" @click="mobileMenu = false"
+                            <a href="{{ $slug === 'invoice-generator' ? route('invoice.studio') : ($slug === 'paystub-generator' ? route('paystub.studio') : ($slug === 'salary-slip-generator' ? route('paystub.salary_slip') : route('invoice.generator', $slug))) }}" @click="mobileMenu = false"
                                class="px-3 py-2 rounded-lg bg-[#f8f8f3] hover:bg-[#e8f7ed] text-[#17211b] font-semibold text-xs truncate">
                                 {{ $label }}
                             </a>
@@ -533,6 +535,10 @@
                     <h3 class="text-[14px] font-semibold text-white mb-4">Products</h3>
                     <ul class="space-y-2.5 text-[14px]">
                         <li><a href="{{ route('resume.builder') }}" class="hover:text-white transition-colors">Resume Builder</a></li>
+                        <li><a href="{{ route('resume.checker') }}" class="hover:text-white transition-colors">ATS Resume Checker</a></li>
+                        <li><a href="{{ route('letter.resignation') }}" class="hover:text-white transition-colors">Resignation Letter Maker</a></li>
+                        <li><a href="{{ route('paystub.studio') }}" class="hover:text-white transition-colors">Paystub Generator</a></li>
+                        <li><a href="{{ route('paystub.salary_slip') }}" class="hover:text-white transition-colors">Salary Slip Generator</a></li>
                         <li><a href="{{ route('resume.ats_converter') }}" class="hover:text-white transition-colors">ATS Resume Converter</a></li>
                         <li><a href="{{ route('invoice.studio') }}" class="hover:text-white transition-colors">Invoice Maker</a></li>
                         <li><a href="{{ route('convert.hub') }}" class="hover:text-white transition-colors">PDF Converter</a></li>

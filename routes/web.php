@@ -83,12 +83,15 @@ Route::post('/api/resumes', [ResumeController::class, 'store'])->name('resume.st
 // Resignation Letter & Two Weeks Notice Maker
 Route::get('/resignation-letter-generator', [LetterController::class, 'resignation'])->name('letter.resignation');
 Route::redirect('/resignation-letter', '/resignation-letter-generator', 301);
+Route::get('/resignation-letter/{slug}', [LetterController::class, 'landing'])
+    ->whereIn('slug', array_keys(\App\Support\ResignationCatalog::landingPages()))
+    ->name('letter.resignation.landing');
 Route::post('/resignation-letter/pdf', [LetterController::class, 'downloadPdf'])->name('letter.resignation.pdf');
 Route::post('/resignation-letter/doc', [LetterController::class, 'downloadDocx'])->name('letter.resignation.doc');
 
 // Paystub & Salary Slip Maker
 Route::get('/paystub-generator', [PaystubController::class, 'index'])->name('paystub.studio');
-Route::redirect('/salary-slip-generator', '/paystub-generator', 301);
+Route::get('/salary-slip-generator', [PaystubController::class, 'salarySlip'])->name('paystub.salary_slip');
 Route::post('/paystub-generator/pdf', [PaystubController::class, 'downloadPdf'])->name('paystub.pdf');
 
 // Private / Shareable Resume Links & PDF (Kept out of search engines with noindex)

@@ -43,7 +43,7 @@
             </div>
             @if(!empty($tpl['show_photo']))
                 <div class="w-[3.8em] h-[3.8em] rounded-full border border-white/80 bg-white/15 shrink-0 overflow-hidden flex items-center justify-center font-black text-[1em] text-white">
-                    @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Profile' }}" class="w-full h-full object-cover">@else{{ $init }}@endif
+                    @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Profile' }}" width="64" height="64" class="w-full h-full object-cover">@else{{ $init }}@endif
                 </div>
             @endif
         </div>
@@ -182,7 +182,7 @@
             <div class="flex items-center gap-[0.6em] min-w-0 flex-1">
                 @if(!empty($tpl['show_photo']))
                     <div class="w-[3.2em] h-[3.2em] rounded-[0.6em] shrink-0 flex items-center justify-center text-white font-black text-[0.95em] overflow-hidden" style="background-color: {{ $accent }};">
-                        @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Profile' }}" class="w-full h-full object-cover">@else{{ $init }}@endif
+                        @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Profile' }}" width="64" height="64" class="w-full h-full object-cover">@else{{ $init }}@endif
                     </div>
                 @endif
                 <div class="min-w-0 flex-1">
@@ -356,7 +356,7 @@
             <div class="flex items-center gap-[0.6em]">
                 @if(!empty($tpl['show_photo']))
                     <div class="w-[3.2em] h-[3.2em] rounded-full border border-white shrink-0 overflow-hidden flex items-center justify-center font-black text-white text-[0.95em]" style="background-color: {{ $accent }};">
-                        @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Profile' }}" class="w-full h-full object-cover">@else{{ $init }}@endif
+                        @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Profile' }}" width="64" height="64" class="w-full h-full object-cover">@else{{ $init }}@endif
                     </div>
                 @endif
                 <div class="min-w-0 flex-1">
@@ -446,7 +446,7 @@
             <div class="flex items-center gap-[0.65em] min-w-0 flex-1">
                 @if(!empty($tpl['show_photo']))
                     <div class="w-[3.2em] h-[3.2em] rounded-[0.55em] border shrink-0 overflow-hidden flex items-center justify-center font-black text-[0.95em]" style="border-color: {{ $accent }}; background: {{ $accent }}30;">
-                        @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Profile' }}" class="w-full h-full object-cover">@else{{ $init }}@endif
+                        @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Profile' }}" width="64" height="64" class="w-full h-full object-cover">@else{{ $init }}@endif
                     </div>
                 @endif
                 <div class="min-w-0 flex-1">
@@ -537,7 +537,7 @@
                     @if(!empty($tpl['show_photo']))
                         <div class="w-[4em] h-[4em] rounded-full mx-auto mt-[0.5em] border-[0.16em] border-white/35 bg-white/15 flex items-center justify-center font-black text-[1em] text-white overflow-hidden shadow-sm">
                             @if(!empty($p['preset_avatar']))
-                                <img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Resume Profile' }} Portrait" class="w-full h-full object-cover">
+                                <img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Resume Profile' }} Portrait" width="64" height="64" class="w-full h-full object-cover">
                             @else
                                 {{ $init }}
                             @endif
@@ -639,7 +639,7 @@
                     @if(!empty($tpl['show_photo']))
                         <div class="w-[3.4em] h-[3.4em] rounded-full border flex items-center justify-center font-bold text-[0.95em] shrink-0 overflow-hidden" style="border-color: {{ $accent }}; color: {{ $accent }}; background: #EFECE5;">
                             @if(!empty($p['preset_avatar']))
-                                <img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Resume Profile' }} Portrait" class="w-full h-full object-cover">
+                                <img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Resume Profile' }} Portrait" width="64" height="64" class="w-full h-full object-cover">
                             @else
                                 {{ $init }}
                             @endif
@@ -741,7 +741,7 @@
                 <div class="w-[0.3em] h-[2.6em] rounded-full shrink-0" style="background-color: {{ $accent }};"></div>
                 @if(!empty($tpl['show_photo']))
                     <div class="w-[3em] h-[3em] rounded-[0.5em] shrink-0 overflow-hidden flex items-center justify-center text-white font-black text-[0.9em]" style="background-color: {{ $accent }};">
-                        @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Resume Profile' }} Portrait" class="w-full h-full object-cover">@else{{ $init }}@endif
+                        @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Resume Profile' }} Portrait" width="64" height="64" class="w-full h-full object-cover">@else{{ $init }}@endif
                     </div>
                 @endif
                 <div class="min-w-0">
@@ -926,7 +926,7 @@
                 </div>
                 @if(!empty($tpl['show_photo']))
                     <div class="w-[3em] h-[3em] rounded-full border border-white/40 overflow-hidden shrink-0">
-                        @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Profile' }}" class="w-full h-full object-cover">@endif
+                        @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Profile' }}" width="64" height="64" class="w-full h-full object-cover">@endif
                     </div>
                 @endif
             </div>
@@ -1009,7 +1009,7 @@
             <div class="space-y-[0.55em]">
                 <div class="p-[0.65em] rounded-[0.55em] bg-white border shadow-sm" style="border-color: {{ $accent }}24;">
                     <div class="w-[3.4em] h-[3.4em] rounded-[0.5em] flex items-center justify-center text-white font-black text-[0.95em] mb-[0.35em] overflow-hidden" style="background: {{ $accent }};">
-                        @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Resume Profile' }} Portrait" class="w-full h-full object-cover">@else{{ $init }}@endif
+                        @if(!empty($p['preset_avatar']))<img src="{{ asset($p['preset_avatar']) }}" alt="{{ $p['full_name'] ?? 'Resume Profile' }} Portrait" width="64" height="64" class="w-full h-full object-cover">@else{{ $init }}@endif
                     </div>
                     <div class="font-black text-[1.05em] text-slate-900 leading-tight">{{ $p['full_name'] ?? '' }}</div>
                     <div class="text-[0.74em] font-bold mt-[0.12em]" style="color: {{ $accent }}">{{ $p['job_title'] ?? '' }}</div>

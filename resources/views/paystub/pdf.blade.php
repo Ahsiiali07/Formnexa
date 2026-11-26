@@ -180,7 +180,7 @@
                 </div>
             </td>
             <td style="vertical-align: top; width: 40%; text-align: right;">
-                <div class="statement-title">Earnings Statement</div>
+                <div class="statement-title">{{ $stub['statement_title'] ?? 'Earnings Statement' }}</div>
                 <div class="statement-sub">Pay Frequency: {{ $stub['pay_period']['frequency'] }}</div>
                 <div style="font-size: 8pt; color: #64748b; margin-top: 3px;">
                     Pay Date: <strong>{{ $stub['pay_period']['pay_date'] }}</strong>
@@ -319,7 +319,7 @@
     </div>
 
     <div class="security-badge">
-        This document serves as an authentic earnings and tax statement. Retain for personal tax records. Generated via Formnexa.
+        Payroll summary generated via Formnexa for internal employer bookkeeping and employee reference. Do not use to misrepresent income.
     </div>
 </body>
 </html>

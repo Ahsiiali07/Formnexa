@@ -79,15 +79,15 @@ MD,
                 'category' => 'resumes',
                 'category_label' => 'Resumes & ATS',
                 'focus_keyword' => 'ATS-friendly resume',
-                'meta_title' => 'How to Write an ATS-Friendly Resume (Checklist) | Formnexa',
-                'meta_description' => 'A practical checklist for writing an ATS-friendly resume: formatting, headings, keywords and file type. Free template included.',
-                'featured_tool_route' => 'resume.builder',
-                'featured_tool_label' => 'Launch ATS Resume Builder',
+                'meta_title' => 'How to Write an ATS-Friendly Resume (Checklist)',
+                'meta_description' => 'Learn how to write an ATS-friendly resume with standard headings, clean formatting, and keyword matching. Test your score free.',
+                'featured_tool_route' => 'resume.checker',
+                'featured_tool_label' => 'Check Your Resume With Our Free ATS Resume Checker',
                 'reading_time_minutes' => 6,
-                'excerpt' => 'Understand how Applicant Tracking Systems parse your CV, avoid layout traps that scramble experience, and export a clean ATS-safe PDF.',
-                'published_at' => now()->subDays(2),
+                'excerpt' => 'Understand how Applicant Tracking Systems parse your CV, avoid layout traps that scramble experience, and test your resume score for free.',
+                'published_at' => now(),
                 'content' => <<<'MD'
-Most mid-to-large employers screen job applications using an **Applicant Tracking System (ATS)** before a recruiter ever reads your CV. Even qualified candidates get filtered out when complex graphics, skill meters, or unreadable tables confuse the parser.
+Most mid-to-large employers screen job applications using an **Applicant Tracking System (ATS)** before a recruiter ever reads your CV. Before submitting your next application, run your draft through our [free ATS resume checker](/ats-resume-checker) to catch parsing errors and missing job keywords in seconds.
 
 ## What Makes a Resume ATS-Friendly?
 
@@ -112,7 +112,7 @@ Already have an outdated PDF or DOCX resume sitting on your laptop? You do not n
 
 - Open the [Free ATS Resume Builder](/resume-builder) and click **Import CV / Paste Text**.
 - Upload your existing PDF, DOCX, or TXT resume or paste raw LinkedIn profile text.
-- Review the parsed sections, switch instantly across **17 curated CV templates**, and export a watermark-free A4 PDF.
+- Review the parsed sections, switch instantly across **29 curated CV templates**, and export a watermark-free A4 PDF.
 
 If a job application specifically asks for a `.docx` version alongside your PDF, you can pair the builder with our [PDF to Word Converter](/convert/pdf-to-word).
 MD,
@@ -532,7 +532,7 @@ By contrast, an ATS-friendly CV uses a clean linear structure that maps seamless
 Formnexa makes it easy to modernize your CV with zero manual retyping:
 
 1. **Upload or Paste Your Old Resume:** Go to the [Free ATS Resume Builder](/resume-builder) and click **Convert CV to ATS / Import**. Upload your existing Word (.docx) or PDF file, or paste raw text from your LinkedIn profile.
-2. **Select an ATS Template:** Choose from 17 curated layouts in our [Resume Templates Gallery](/resume-templates). Formnexa's parsing engine automatically maps your experience, education, skills, and contact information into standard ATS sections.
+2. **Select an ATS Template:** Choose from 29 curated layouts in our [Resume Templates Gallery](/resume-templates). Formnexa's parsing engine automatically maps your experience, education, skills, and contact information into standard ATS sections.
 3. **Download or Export:** Download your verified ATS CV as a crisp, watermark-free vector PDF. If the employer requests Word format, convert it to DOCX in one click with our built-in [PDF to Word Converter](/convert/pdf-to-word).
 
 ---
@@ -579,7 +579,7 @@ Formnexa includes an active **ATS CV checker** directly inside the builder. As y
 - &check; **Standard Section Ordering:** Keeps contact info, summary, experience, and education in the exact sequence expected by recruiters.
 - &check; **Zero Watermarks or Hidden Fees:** Unlimited free downloads with no sign-up required.
 
-Ready to improve your interview callback rate? [Browse 17 Free ATS CV Templates](/resume-templates) and convert your CV to ATS format today.
+Ready to improve your interview callback rate? [Browse 29 Free ATS CV Templates](/resume-templates) and convert your CV to ATS format today.
 MD,
             ],
             [
@@ -588,17 +588,17 @@ MD,
                 'category' => 'resumes',
                 'category_label' => 'Resumes & ATS',
                 'focus_keyword' => 'what is ats based resume',
-                'meta_title' => 'What Is an ATS Resume? Plain-English Guide + Examples | Formnexa',
-                'meta_description' => 'An ATS resume is one that applicant tracking software can parse. Learn what it is, how it works, and how to make yours pass.',
-                'featured_tool_route' => 'resume.builder',
-                'featured_tool_label' => 'Build Your Free ATS Resume Now',
+                'meta_title' => 'What Is an ATS Resume? Guide & Examples | Formnexa',
+                'meta_description' => 'An ATS resume is formatted so applicant tracking software can parse it cleanly. Learn how ATS parsing works and check your score free.',
+                'featured_tool_route' => 'resume.checker',
+                'featured_tool_label' => 'Scan Your Resume With the Free ATS Checker',
                 'reading_time_minutes' => 6,
-                'excerpt' => 'Learn what an ATS-based resume is, how the ATS CV scale ranks applicants, and how to get free Word & PDF templates with clean formatting.',
+                'excerpt' => 'Learn what an ATS-based resume is, how automated parsers extract your career details, and check your resume compatibility for free.',
                 'published_at' => now(),
                 'content' => <<<'MD'
-When applying for jobs online at modern companies, many submissions are screened, parsed, and scored by an **Applicant Tracking System (ATS)** like Workday, Taleo, Greenhouse, or Lever before reaching human recruiters.
+When applying for jobs online at modern companies, many submissions are screened, parsed, and organized by an **Applicant Tracking System (ATS)** like Workday, Taleo, Greenhouse, or Lever before reaching human recruiters. You can verify how cleanly software reads your own CV right now using Formnexa's [free ATS resume checker](/ats-resume-checker).
 
-To pass this digital gatekeeper, you need to understand **what an ATS-based resume is** and how to optimize your qualifications against the **ATS CV scale**.
+To pass this digital gatekeeper, you need to understand **what an ATS-based resume is** and how to keep formatting machine-readable.
 
 ---
 
@@ -642,9 +642,9 @@ Formnexa’s free ATS CV templates are pre-configured to score high on the ATS C
 
 You can build or convert your CV right now in Formnexa without paywalls or subscriptions:
 
-1. **Start From Scratch or Convert:** Open the [Free ATS Resume Builder](/resume-builder). If you already have an existing CV, click **Convert CV to ATS / Import** to parse your current Word or PDF file in 60 seconds.
-2. **Choose Your Template:** Browse 17 curated designs in our [Resume Templates Gallery](/resume-templates).
-3. **Real-Time Validation:** Our built-in ATS CV checker monitors formatting and bullet readability as you type.
+1. **Start From Scratch or Convert:** Open the [Free ATS Resume Builder](/resume-builder) or test an existing draft in our [Free ATS Resume Checker](/ats-resume-checker).
+2. **Choose Your Template:** Browse 29 curated designs in our [Resume Templates Gallery](/resume-templates).
+3. **Real-Time Validation:** Review category scores, missing job keywords, and section structure before downloading.
 4. **Instant Download:** Export your print-ready, watermark-free vector PDF or convert it to an editable Word DOCX file in one click.
 MD,
             ],
@@ -716,7 +716,7 @@ Tap the green **Download PDF** button in the mobile header:
 - **Review Before Submitting:** Open the downloaded PDF in your phone's PDF viewer to confirm spacing and verify that there are no accidental autocorrect typos.
 - **No Watermarks, No Paywall:** Formnexa exports clean, vector-rendered PDFs with selectable text. You do not need to enter credit card details or sign up for a trial.
 
-Need to customize an existing resume layout? You can also explore our [17 ATS CV Templates](/resume-templates) or learn [how to edit a PDF CV online for free](/blog/how-to-edit-pdf-cv-online-free-guide).
+Need to customize an existing resume layout? You can also explore our [29 ATS CV Templates](/resume-templates) or learn [how to edit a PDF CV online for free](/blog/how-to-edit-pdf-cv-online-free-guide).
 MD,
             ],
             [
@@ -852,7 +852,7 @@ You don't have to choose exclusively between visual aesthetics and automated com
 1. **Your Primary ATS CV:** Build a clean, single-column resume on Formnexa's [Free CV Maker](/resume-builder) using templates like *Wall Street ATS Classic* or *Atlantic Flow*. Use this document for all corporate website applications, job boards, and automated portals.
 2. **Your Visual Showcase CV:** Create a styled visual resume or portfolio on Canva to attach when emailing a hiring manager directly, or to bring physically to an in-person interview.
 
-To start building your compliant ATS resume right now, browse our [17 Free Resume Templates](/resume-templates). If you already have a visual resume you want to test and rebuild, try our [ATS Resume Converter](/ats-resume-converter).
+To start building your compliant ATS resume right now, browse our [29 Free Resume Templates](/resume-templates). If you already have a visual resume you want to test and rebuild, try our [ATS Resume Converter](/ats-resume-converter).
 MD,
             ],
             [
@@ -1849,6 +1849,270 @@ Enterprise finance departments prioritize payments based on **aging schedules**.
 6. Click **Download PDF** to export a clean, watermark-free vector statement.
 MD,
             ],
+            [
+                'title' => 'How to Check If Your Resume Will Pass ATS in 2026 (Free Step-by-Step Guide)',
+                'slug' => 'how-to-check-if-resume-passes-ats-free-guide',
+                'category' => 'resumes',
+                'category_label' => 'Resumes & ATS',
+                'focus_keyword' => 'how to check if resume is ats friendly',
+                'meta_title' => 'How to Check If Your Resume Will Pass ATS | Formnexa Guide',
+                'meta_description' => 'Learn how Applicant Tracking Systems (ATS) scan your resume. Discover keyword matching rules, formatting pitfalls, and how to test your ATS score online for free.',
+                'featured_tool_route' => 'resume.checker',
+                'featured_tool_label' => 'Open Free ATS Resume Checker & Score Calculator',
+                'reading_time_minutes' => 6,
+                'excerpt' => 'Over 75% of job applications are filtered out by Applicant Tracking Systems before a human recruiter sees them. Here is how to test, score, and optimize your resume for ATS for free.',
+                'published_at' => now()->subDays(10),
+                'content' => <<<'MD'
+Did you know that over **75% of resumes are automatically filtered out by Applicant Tracking Systems (ATS)** before reaching a hiring manager? Top enterprise companies receive hundreds of applications for every open position and rely on recruiting platforms like **Workday, Taleo, Greenhouse, and Lever** to scan, parse, and rank candidates based on keyword matching and document readability.
+
+If your resume uses non-standard headings, graphics, nested tables, or lacks targeted skills from the job description, it risks getting an immediate low score or failing to parse altogether.
+
+In this guide, you will learn exactly how modern ATS software evaluates resumes, the 5 key factors that determine your ATS score, and how to test your CV online for free.
+
+---
+
+## What is an Applicant Tracking System (ATS)?
+
+An **Applicant Tracking System** is software that employers use to collect, sort, scan, and rank job applications. When you submit a resume online, the ATS converts your file into plain text, extracts your contact details, work history, skills, and education, and calculates a match percentage against the employer's job description.
+
+If your resume fails to score above a certain threshold (typically **70% to 80%**), your application is archived automatically, and no human recruiter ever reads it.
+
+---
+
+## The 5 Critical ATS Compatibility Factors
+
+To ensure your resume passes automated scanning with flying colors, optimize for these five core dimensions:
+
+### 1. Standard Section Headings
+ATS parsers look for recognized, industry-standard section titles. Avoid creative or unconventional headers that confuse parsing engines:
+
+- **Use:** `Work Experience`, `Professional Experience`, `Education`, `Skills`, `Summary`, `Certifications`.
+- **Avoid:** `Where I've Been`, `My Story`, `What I Do`, `Knowledge Base`.
+
+### 2. Clean Text Encoding & File Formats (Vector PDF vs DOCX)
+Always export your resume as a **selectable vector PDF** or clean Microsoft Word (`.docx`) file. Never upload a scanned image saved as a PDF (e.g. from a mobile camera or Photoshop), as OCR algorithms often misread text or scramble dates.
+
+> Tip: On Formnexa, all exported PDFs are 100% vector text with clean character encoding that ATS parsers extract flawlessly.
+
+### 3. Power Action Verbs & Quantifiable Results
+Recruiting algorithms and hiring managers favor action-oriented bullet points that demonstrate tangible business impact:
+
+- Start bullet points with strong verbs: *Architected, Spearheaded, Engineered, Optimized, Streamlined, Reduced, Accelerated, Delivered*.
+- Quantify your achievements with numbers, percentages, and metrics:
+  - *"Cut API latency by 180ms across 4.2 million daily users."*
+  - *"Managed a cross-functional team of 8 engineers delivering features across 12 sprint cycles."*
+  - *"Automated billing workflows saving the accounting team 15 hours per week."*
+
+### 4. Job Description Keyword Matching
+When employers create a job posting, they program the ATS with required hard skills, certifications, and technical tools. 
+
+To maximize your match rate:
+1. Copy the target job posting into our [Free ATS Resume Checker](/ats-resume-checker).
+2. Review the **Matched Keywords** vs **Missing Keywords** report.
+3. Incorporate missing keywords naturally into your Skills list or Work Experience bullet points.
+4. Avoid "white-fonting" or spamming keywords; modern semantic ATS parsers detect and penalize artificial repetition.
+
+### 5. Formatting Safety (No Tables, Text Boxes, or Multi-Layer Graphics)
+Legacy ATS software often reads multi-column tables from left-to-right straight across, scrambling job titles with company dates. Use single-column or clean, semantic two-column layouts specifically engineered for ATS compliance.
+
+---
+
+## How to Test Your Resume for ATS Compatibility on Formnexa
+
+You don't need to pay $80/quarter for services like Jobscan. Formnexa provides a **100% free, unlimited ATS resume audit**:
+
+1. Open Formnexa's [Free ATS Resume Checker](/ats-resume-checker).
+2. Upload your existing resume (PDF, DOCX, or TXT) or paste your text.
+3. *(Optional)* Paste the target job description to run an automated keyword gap analysis.
+4. Click **Check My ATS Score**.
+5. Instantly review your overall **ATS Pass Rating (0–100%)**, category scores, power verb counts, and missing skills.
+6. Click **"Fix in Resume Builder"** to load your content directly into any of Formnexa's 29 ATS-friendly templates with zero watermarks!
+MD,
+            ],
+            [
+                'title' => 'How to Write a Professional Two Weeks Notice Resignation Letter (Examples & Free Templates)',
+                'slug' => 'how-to-write-two-weeks-notice-resignation-letter-guide',
+                'category' => 'business-docs',
+                'category_label' => 'Business Operations',
+                'focus_keyword' => 'how to write a two weeks notice resignation letter',
+                'meta_title' => 'How to Write a Two Weeks Notice Letter (Examples) | Formnexa',
+                'meta_description' => 'Step-by-step guide to writing a polite, formal two weeks notice resignation letter. Includes examples, what to include, notice period etiquette, and a free letter generator.',
+                'featured_tool_route' => 'letter.resignation',
+                'featured_tool_label' => 'Generate Your Two Weeks Notice Letter for Free',
+                'reading_time_minutes' => 5,
+                'excerpt' => 'Resigning from a job can feel daunting. Here is the standard professional format for a two weeks notice letter, sample templates for every situation, and a free letter generator.',
+                'published_at' => now(),
+                'content' => <<<'MD'
+Resigning from your job can feel stressful, but handling your departure professionally protects your industry reputation, ensures positive future references, and leaves the door open for professional connections.
+
+The cornerstone of a graceful departure is a formal **two weeks notice resignation letter**. Whether you are moving to an exciting new job, changing careers, or taking personal time off, having a clear, polite written record of your resignation is essential for HR and payroll.
+
+In this guide, you will learn standard resignation etiquette, what every formal letter must include, and how to generate an executive letterhead PDF in under 60 seconds.
+
+---
+
+## What Must a Professional Two Weeks Notice Letter Include?
+
+A formal resignation letter does not need to be long or overly detailed. In fact, standard corporate etiquette calls for a brief, professional letter containing 6 key elements:
+
+1. **Header & Contact Details:** Your full name, job title, personal email, phone number, and mailing address.
+2. **Date of Submission:** The official date you are delivering the notice to management.
+3. **Recipient / Employer Information:** Your manager's name, title, company name, and office address.
+4. **Clear Statement of Intent & Last Working Day:** State unequivocally that you are resigning and specify your exact final day (usually 14 calendar days from the notice date).
+5. **Statement of Gratitude:** A brief, polite sentence thanking your manager and team for the opportunities and mentorship during your tenure.
+6. **Handover & Transition Offer:** A clear commitment to assist in training replacements, finishing open deliverables, or documenting active workflows.
+7. **Sign-off & Personal Contact:** A warm closing (*"Sincerely"*), your signature, and personal contact info for staying in touch.
+
+---
+
+## Sample Resignation Letter Templates
+
+### Example 1: Standard & Grateful (Accepting a New Position)
+> **Dear Sarah,**  
+> 
+> Please accept this letter as formal notification that I am resigning from my position as Senior Software Engineer at Acme Technologies Inc. My last working day will be December 10, 2026.  
+> 
+> I have accepted a new position that aligns closely with my long-term career aspirations. I am genuinely grateful for the opportunities I have had during my time with Acme Technologies, and I appreciate the support, mentorship, and camaraderie our team has shared.  
+> 
+> During my remaining two weeks, I am fully committed to ensuring a seamless transition of my responsibilities. I am glad to assist in documenting current workflows, completing ongoing sprints, or training team members.  
+> 
+> I wish you and the entire company continued growth and success. Please feel free to stay in touch at alex.morgan@gmail.com.  
+> 
+> **Sincerely,**  
+> Alex Morgan  
+
+---
+
+### Example 2: Personal or Family Reasons
+> **Dear David,**  
+> 
+> Please accept this letter as notification that I am stepping down from my role as Product Specialist at Horizon Media. In accordance with my notice period, my final working day will be October 15, 2026.  
+> 
+> Due to personal and family circumstances, I have determined it is best for me to step back from my professional duties at this time. I want to thank you for your understanding and for the positive, collaborative culture at Horizon Media.  
+> 
+> I will do everything possible over the next two weeks to organize my project documentation and hand over client deliverables to ensure an uninterrupted workflow.  
+> 
+> **Sincerely,**  
+> Jordan Taylor  
+
+---
+
+## 3 Common Mistakes to Avoid When Resigning
+
+1. **Venting Frustrations:** Your resignation letter goes directly into your permanent personnel file with HR. Never criticize colleagues, complain about salary, or express grievances in writing. Keep it strictly polite and forward-looking.
+2. **Vague Last Working Day:** Never write *"I plan to leave sometime next month"*. Always state an exact calendar date so HR can calculate final paychecks, accrued PTO payouts, and health insurance transition dates accurately.
+3. **Surprising Your Boss With an Email First:** Whenever possible, schedule a brief 1-on-1 meeting or private video call with your direct manager to break the news verbally first. Immediately following the conversation, follow up by delivering your official signed letter.
+
+---
+
+## How to Create a Polished Resignation Letter PDF in 60 Seconds
+
+Instead of struggling with Word margins or copy-pasting generic text:
+
+1. Open Formnexa's [Free Resignation Letter Maker](/resignation-letter-generator).
+2. Enter your name, manager's name, and company title.
+3. Select your reason for leaving and desired tone (*Grateful & Warm, Formal, Short & Direct, or Short Notice*).
+4. Click the **"+2 Weeks"** button to automatically calculate and set your exact notice period.
+5. Review the live A4 letterhead preview and tweak any wording directly on screen.
+6. Click **Download PDF** or **Word (.doc)** for an instant, watermark-free letter ready to email or print.
+MD,
+            ],
+            [
+                'title' => 'How to Create a Paystub Online for Free: Complete Employee & Freelancer Guide',
+                'slug' => 'how-to-create-paystub-online-free-guide',
+                'category' => 'invoicing',
+                'category_label' => 'Invoicing & Billing',
+                'focus_keyword' => 'how to create a paystub online free',
+                'meta_title' => 'How to Make a Paystub Online for Free | Formnexa Guide',
+                'meta_description' => 'Complete guide on how to create an authentic employee paystub or freelance earnings statement. Covers gross pay, tax deductions, YTD calculations, and free PDF maker.',
+                'featured_tool_route' => 'paystub.studio',
+                'featured_tool_label' => 'Create Free Paystub & Salary Slip Online',
+                'reading_time_minutes' => 6,
+                'excerpt' => 'Whether you need proof of income for an apartment lease or mortgage, or run payroll for a small business, here is how to create an accurate paystub with taxes and YTD totals for free.',
+                'published_at' => now(),
+                'content' => <<<'MD'
+A **paystub** (also known as an earnings statement, pay slip, or salary slip) is one of the most critical financial documents in the modern economy. It provides an itemized summary of employee earnings, payroll taxes, insurance deductions, and net take-home pay for a specific pay period.
+
+Whether you are a small business owner issuing pay statements to staff, an independent contractor or freelancer needing **proof of income for an apartment lease or mortgage approval**, or an employee keeping personal tax records, understanding how paystubs work is essential.
+
+In this guide, you will learn the mandatory components of a compliant paystub, how taxes and Year-to-Date (YTD) totals are calculated, and how to generate professional, watermark-free PDF paystubs for free.
+
+---
+
+## When Do You Need a Paystub?
+
+Paystubs serve as authentic, verifiable documentation of earnings for numerous financial milestones:
+
+- **Apartment Rentals & Lease Agreements:** Landlords and property managers typically require your 2 to 3 most recent paystubs to verify that your gross income is at least 3x the monthly rent.
+- **Mortgage & Home Loan Applications:** Mortgage underwriters scrutinize historical paystubs to verify consistent earnings, base salary, overtime frequency, and tax withholding.
+- **Auto Loans & Bank Financing:** Auto lenders and personal credit lines require proof of steady earnings before approving financing.
+- **Tax Filing (Form 1040, W-2 & 1099 Reconciliation):** Paystubs provide an ongoing record of cumulative taxes withheld, preventing end-of-year tax season surprises.
+- **Small Business Compliance:** Employers are required in most jurisdictions to provide workers with an itemized statement of hours worked, hourly wage, and deductions on or before each scheduled pay day.
+
+---
+
+## Anatomy of a Professional Paystub: Key Components
+
+An authentic paystub must clearly break down financial figures into distinct sections:
+
+### 1. Company & Employee Identification
+- **Employer Profile:** Registered business name, corporate address, and Employer Identification Number (**EIN / Tax ID**).
+- **Employee Profile:** Full legal name, residential address, Employee ID, designation / job title, and the last 4 digits of their Social Security or National ID number (e.g. `***-**-1234`).
+
+### 2. Pay Schedule & Period Dates
+- **Pay Frequency:** Weekly (52 paychecks/year), Bi-Weekly (26 paychecks/year), Semi-Monthly (24 paychecks/year), or Monthly (12 paychecks/year).
+- **Period Dates:** Start Date, End Date, and actual Check/Deposit Date.
+
+### 3. Gross Earnings Breakdown
+Itemize all sources of compensation earned during the period:
+- **Regular Hours:** Hours worked multiplied by the base hourly rate.
+- **Overtime Pay:** Overtime hours at 1.5x the base rate (under FLSA guidelines).
+- **Bonuses, Commissions & Tips:** Additional discretionary or performance incentives.
+- **Total Gross Pay:** The total sum of all earnings before any deductions.
+
+### 4. Itemized Taxes & Deductions
+Deductions are split into statutory taxes and elective benefits:
+- **Federal Income Tax (FIT):** Based on the employee's IRS Form W-4 filing status.
+- **Social Security (FICA):** 6.2% of gross earnings up to the annual statutory wage cap.
+- **Medicare:** 1.45% of all gross earnings.
+- **State & Local Income Tax (SIT):** Applicable state, provincial, or municipal tax withholding.
+- **Pre-Tax & Post-Tax Benefits:** Health and dental insurance premiums, 401(k) / retirement contributions, or HSA savings.
+
+### 5. Year-to-Date (YTD) Cumulative Totals
+A legitimate paystub always records cumulative Year-to-Date numbers alongside the current period. This shows total gross pay earned, total taxes paid, and total net pay received from January 1st to the current pay date.
+
+### 6. Net Take-Home Pay & Check Stub
+- **Net Pay:** Calculated as `Total Gross Pay − Total Deductions`.
+- **Settlement Method:** Direct Deposit routing confirmation or bank check stub number.
+
+---
+
+## Paystub vs Invoice vs Receipt: What's the Difference?
+
+Freelancers and self-employed professionals often confuse these three essential documents:
+
+| Document | Primary Purpose | Who Issues It? | Key Focus |
+|---|---|---|---|
+| **Paystub** | Proof of periodic wages & tax deductions | Employer or Payroll | Gross pay, taxes withheld, YTD totals, Net pay |
+| **Invoice** | Billing a client for goods or completed services | Service Provider / Freelancer | Line items, hourly rate, due dates, payment terms |
+| **Receipt** | Proof of completed payment | Seller / Service Provider | Confirmation that payment was received in full |
+
+---
+
+## How to Create a Watermark-Free PDF Paystub on Formnexa
+
+Most online paystub generators charge $10 to $15 per download or slap a giant "SAMPLE" watermark across your statement. Formnexa provides a **100% free corporate paystub maker**:
+
+1. Open Formnexa's [Free Paystub & Salary Slip Maker](/paystub-generator).
+2. Choose your preferred billing currency (`USD $`, `EUR €`, `GBP £`, `CAD $`, `AUD $`, `PKR / INR Rs`, `AED`, `SAR`).
+3. Select your pay frequency (*Weekly, Bi-Weekly, Semi-Monthly, Monthly*).
+4. Enter employer details and employee information.
+5. Input regular hours, hourly rates, and any overtime or bonuses. Formnexa automatically calculates line totals and Gross Pay.
+6. Enter taxes and insurance deductions. The studio instantly computes your **Net Take-Home Pay** and **YTD totals**.
+7. Review the live bank-standard paystub preview.
+8. Click **Download PDF Paystub** to export a clean, crisp vector document with zero watermarks!
+MD,
+            ],
         ];
 
         foreach ($posts as $post) {
@@ -1857,5 +2121,7 @@ MD,
                 $post
             );
         }
+
+        $this->call(Phase5BlogClusterSeeder::class);
     }
 }

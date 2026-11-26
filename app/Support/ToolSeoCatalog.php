@@ -37,6 +37,7 @@ class ToolSeoCatalog
                     ['q' => 'Do I need an account to create and save invoices?', 'a' => 'No sign-up is required. Your work stays cached in your browser session, and optional accounts let you sync history across devices.'],
                 ],
                 'related' => [
+                    ['Paystub Generator', '/paystub-generator'],
                     ['Payment Receipt Generator', '/receipt-generator'],
                     ['Quote Generator', '/quote-generator'],
                     ['Proforma Invoice Generator', '/proforma-invoice-generator'],
@@ -300,6 +301,7 @@ class ToolSeoCatalog
                     ['q' => 'Is it free for contractors?', 'a' => '100% free with zero watermarks.'],
                 ],
                 'related' => [
+                    ['Paystub Generator', '/paystub-generator'],
                     ['Free Invoice Generator', '/invoice-generator'],
                     ['Work Order Generator', '/work-order-generator'],
                     ['Estimate Generator', '/estimate-generator'],

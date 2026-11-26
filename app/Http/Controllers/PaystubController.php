@@ -19,6 +19,15 @@ class PaystubController extends Controller
     }
 
     /**
+     * Regional Salary Slip Maker Studio for Pakistan, India, UAE & Saudi Arabia.
+     */
+    public function salarySlip(): View
+    {
+        $defaultData = $this->defaultSalarySlipData();
+        return view('paystub.salary-slip', compact('defaultData'));
+    }
+
+    /**
      * Download crisp vector PDF Paystub / Salary Slip without watermarks.
      */
     public function downloadPdf(Request $request)
@@ -131,6 +140,7 @@ class PaystubController extends Controller
         $ytdNetPay = max(0, $totalYtdGross - $totalYtdDeductions);
 
         return [
+            'statement_title' => (string) ($raw['statement_title'] ?? 'Earnings Statement'),
             'style' => (string) ($raw['style'] ?? 'corporate'),
             'currency' => $currency,
             'company' => $company,
@@ -208,6 +218,58 @@ class PaystubController extends Controller
                 'check_number' => 'CHK-10492',
             ],
             'notes' => 'Thank you for your service and dedication to the company.',
+        ];
+    }
+
+    /**
+     * Regional monthly salary slip defaults for Pakistan, India, and Gulf markets.
+     */
+    protected function defaultSalarySlipData(): array
+    {
+        return [
+            'style' => 'corporate',
+            'currency' => ['symbol' => 'PKR ', 'code' => 'PKR'],
+            'company' => [
+                'name' => 'Crescent Digital Systems (Pvt.) Ltd.',
+                'address' => "Office 402, Business Avenue\nLahore / Karachi / Dubai",
+                'ein' => 'NTN-4829103-7',
+            ],
+            'employee' => [
+                'name' => 'Saad Ahmed',
+                'address' => "House 18, Street 4\nLahore",
+                'id' => 'EMP-2041',
+                'title' => 'Senior Software Engineer',
+                'ssn_last4' => 'ID: ****-****123-1',
+            ],
+            'pay_period' => [
+                'frequency' => 'Monthly',
+                'start_date' => now()->startOfMonth()->format('Y-m-d'),
+                'end_date' => now()->endOfMonth()->format('Y-m-d'),
+                'pay_date' => now()->endOfMonth()->format('Y-m-d'),
+            ],
+            'earnings' => [
+                ['description' => 'Basic Salary', 'hours' => 0, 'rate' => 0, 'amount' => 140000.00, 'ytd' => 1400000.00],
+                ['description' => 'House Rent Allowance', 'hours' => 0, 'rate' => 0, 'amount' => 35000.00, 'ytd' => 350000.00],
+                ['description' => 'Medical & Conveyance Allowance', 'hours' => 0, 'rate' => 0, 'amount' => 15000.00, 'ytd' => 150000.00],
+            ],
+            'deductions' => [
+                ['description' => 'Income Tax Withheld', 'amount' => 12500.00, 'ytd' => 125000.00],
+                ['description' => 'Provident Fund / Social Security', 'amount' => 5000.00, 'ytd' => 50000.00],
+            ],
+            'totals' => [
+                'gross_pay' => 190000.00,
+                'ytd_gross' => 1900000.00,
+                'deductions' => 17500.00,
+                'ytd_deductions' => 175000.00,
+                'net_pay' => 172500.00,
+                'ytd_net_pay' => 1725000.00,
+            ],
+            'payment' => [
+                'method' => 'Bank Transfer',
+                'account_last4' => '**** 4820',
+                'check_number' => 'TXN-80912',
+            ],
+            'notes' => 'Monthly payroll summary for internal employer and employee records.',
         ];
     }
 }

@@ -21,6 +21,7 @@
                         {{ $post->category_label }}
                     </a>
                     <span class="text-[#68736d]">{{ $post->reading_time_minutes }} min read</span>
+                    <span class="text-[#68736d]">&bull; Published {{ ($post->published_at ?? $post->created_at)?->format('M j, Y') }}</span>
                     <span class="text-[#68736d]">&bull; Updated {{ ($post->updated_at ?? $post->published_at ?? $post->created_at)?->format('M j, Y') }}</span>
                     @if(!$post->is_published)
                         <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800">Draft Preview</span>
@@ -79,7 +80,7 @@
                             <div class="flex items-center justify-between gap-2 mb-3">
                                 <span class="text-xs font-extrabold text-[#17211b]">Curated ATS Templates (Click to open in Studio):</span>
                                 <a href="{{ route('resume.templates') }}" class="text-xs font-bold text-[#5d3ec4] hover:underline whitespace-nowrap">
-                                    Browse all 17 templates &rarr;
+                                    Browse all {{ count(\App\Support\ResumeCatalog::templates()) }} templates &rarr;
                                 </a>
                             </div>
 
@@ -134,6 +135,22 @@
                                 Open Blank Resume Studio &rarr;
                             </a>
                         </div>
+                    </div>
+                @endif
+
+                @if($post->resolveToolUrl())
+                    <div class="mb-8 rounded-2xl bg-[#f2f8f4] border border-[#c8f3dc] p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="space-y-0.5">
+                            <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Free Formnexa Tool</span>
+                            <div class="font-display text-base sm:text-lg font-extrabold text-[#17211b]">
+                                {{ $post->featured_tool_label ?: 'Open the Matching Formnexa Tool' }}
+                            </div>
+                        </div>
+                        <a href="{{ $post->resolveToolUrl() }}"
+                           class="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#184f3a] hover:bg-[#123e2d] text-white text-xs font-bold transition shrink-0 whitespace-nowrap">
+                            <span>Open Tool</span>
+                            <span aria-hidden="true">&rarr;</span>
+                        </a>
                     </div>
                 @endif
 
@@ -195,7 +212,7 @@
                                 <span aria-hidden="true">&rarr;</span>
                             </a>
                             <a href="{{ route('resume.templates') }}" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition">
-                                <span>Browse 17 Templates</span>
+                                <span>Browse {{ count(\App\Support\ResumeCatalog::templates()) }} Templates</span>
                                 <span aria-hidden="true">&rarr;</span>
                             </a>
                         </div>
@@ -277,7 +294,7 @@
                 </div>
                 <div class="min-w-0">
                     <div class="text-xs font-bold text-white truncate">Convert Your CV to ATS Format Free</div>
-                    <div class="text-[11px] text-[#a7bab0] truncate">Upload PDF/DOCX or pick from 17 ATS templates</div>
+                    <div class="text-[11px] text-[#a7bab0] truncate">Upload PDF/DOCX or pick from {{ count(\App\Support\ResumeCatalog::templates()) }} ATS templates</div>
                 </div>
             </div>
             <div class="flex items-center gap-2 shrink-0">

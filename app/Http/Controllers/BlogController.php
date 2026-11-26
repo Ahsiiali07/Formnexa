@@ -50,6 +50,15 @@ class BlogController extends Controller
             ->pluck('total', 'category')
             ->all();
 
+        $topicGroups = [];
+        if ($search === '' && $posts->currentPage() === 1) {
+            $topicGroups = [
+                'Resume and ATS' => BlogPost::published()->where('category', 'resumes')->orderByDesc('published_at')->take(4)->get(),
+                'Careers' => BlogPost::published()->where('category', 'business-docs')->where('slug', 'like', '%resign%')->orderByDesc('published_at')->take(4)->get(),
+                'Invoicing and Payroll' => BlogPost::published()->whereIn('category', ['invoicing', 'global-billing'])->orderByDesc('published_at')->take(4)->get(),
+            ];
+        }
+
         $seo = [
             'canonical' => route('blog.index'),
         ];
@@ -69,6 +78,7 @@ class BlogController extends Controller
             'featuredPost' => $featuredPost,
             'categories' => $categories,
             'categoryCounts' => $categoryCounts,
+            'topicGroups' => $topicGroups,
             'activeCategory' => null,
             'search' => $search,
             'seo' => $seo,

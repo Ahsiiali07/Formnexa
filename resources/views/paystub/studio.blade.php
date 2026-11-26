@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+<x-schema.tool
+    name="Free Paystub & Salary Slip Generator"
+    description="Create paystubs and salary slips for your employees online. Add earnings, deductions and YTD totals, then download a PDF."
+    category="BusinessApplication"
+/>
+
 @section('content')
 <div class="min-h-screen bg-[#fafbfa] text-[#17211b] py-8 sm:py-12"
      x-data="paystubStudio(@js($defaultData))"
@@ -7,501 +13,228 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
+        {{-- Visible Breadcrumbs + BreadcrumbList JSON-LD --}}
+        <div class="mb-5 flex justify-center">
+            <x-schema.breadcrumbs :items="[
+                ['Home', url('/')],
+                ['Documents', route('templates.index')],
+                ['Paystub Generator', route('paystub.studio')],
+            ]" />
+        </div>
+
         {{-- Top Badge --}}
         <div class="flex items-center justify-center gap-2 mb-4">
             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#e8f7ed] text-[#184f3a] border border-[#c8f3dc]">
                 <span class="w-2 h-2 rounded-full bg-[#184f3a]"></span>
-                Free Paystub &amp; Salary Slip Maker &bull; Instant PDF &bull; No Watermark
+                100% Free &bull; Instant PDF Download &bull; Zero Watermark
             </span>
         </div>
 
         {{-- Headline & Hero Copy --}}
         <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-[#17211b] mb-3">
-                Free Paystub &amp; <span class="text-[#184f3a]">Salary Slip Generator</span>
+                Free Paystub &amp; Salary Slip Generator
             </h1>
-            <p class="text-base sm:text-lg text-[#55635a] leading-relaxed">
-                Create authentic earnings statements, employee payslips, and salary receipts online. Accurate tax and deduction calculations, Year-to-Date (YTD) tracking, and instant watermark-free PDF downloads.
+            <p class="text-base sm:text-lg text-[#55635a] leading-relaxed mb-3">
+                Create formatted employee paystubs and salary slips online. Enter earnings and manual deductions, preview Year-to-Date (YTD) totals, and download a watermark-free PDF.
             </p>
+            <a href="{{ route('paystub.salary_slip') }}"
+               class="inline-flex items-center gap-1 text-xs font-bold text-[#184f3a] hover:underline">
+                <span>Need a PKR, INR, AED, or SAR preset? Try our Regional Salary Slip Generator &rarr;</span>
+            </a>
         </div>
 
-        {{-- TWO-COLUMN STUDIO --}}
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {{-- Shared Paystub Studio Widget --}}
+        @include('paystub._studio-widget', ['defaultData' => $defaultData])
 
-            {{-- LEFT COLUMN: EDITING FORMS --}}
-            <div class="lg:col-span-6 space-y-6">
+        {{-- EDUCATIONAL CONTENT SECTIONS 1-8 --}}
+        <div class="mt-16 pt-12 border-t border-[#e2e8e3] space-y-12">
 
-                {{-- Currency & Pay Frequency Bar --}}
-                <div class="bg-white rounded-3xl border border-[#e2e8e3] p-4 sm:p-5 shadow-sm flex items-center justify-between gap-3 flex-wrap">
-                    <div class="flex items-center gap-2">
-                        <label class="text-xs font-bold text-[#3f4a43]">Currency:</label>
-                        <select x-model="currency.symbol" class="p-1.5 rounded-xl border border-[#d6ded8] text-xs font-bold bg-[#fbfdfc]">
-                            <option value="$">USD / CAD / AUD ($)</option>
-                            <option value="€">EUR (€)</option>
-                            <option value="£">GBP (£)</option>
-                            <option value="Rs ">PKR / INR (Rs)</option>
-                            <option value="AED ">AED</option>
-                            <option value="SAR ">SAR</option>
-                        </select>
-                    </div>
+            {{-- 1. What is a paystub? & 2. What a pay stub includes --}}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-3">
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        What Is a Paystub?
+                    </h2>
+                    <p class="text-sm text-[#536058] leading-relaxed">
+                        A paystub (also called a pay stub, check stub, or earnings statement) is a written payroll summary given by an employer to an employee or contractor alongside each paycheck or direct deposit.
+                    </p>
+                    <p class="text-sm text-[#536058] leading-relaxed">
+                        It itemizes how net take-home pay was reached for a specific pay period: hours worked or fixed salary, bonuses or overtime, withheld taxes and benefit deductions, and cumulative year-to-date (YTD) running totals.
+                    </p>
+                </section>
 
-                    <div class="flex items-center gap-2">
-                        <label class="text-xs font-bold text-[#3f4a43]">Frequency:</label>
-                        <select x-model="pay_period.frequency" class="p-1.5 rounded-xl border border-[#d6ded8] text-xs font-bold bg-[#fbfdfc]">
-                            <option value="Weekly">Weekly (52/yr)</option>
-                            <option value="Bi-Weekly">Bi-Weekly (26/yr)</option>
-                            <option value="Semi-Monthly">Semi-Monthly (24/yr)</option>
-                            <option value="Monthly">Monthly (12/yr)</option>
-                        </select>
-                    </div>
-
-                    <button type="button" @click="resetToDefaults()"
-                            class="text-xs font-bold text-[#184f3a] hover:underline">
-                        Reset Defaults
-                    </button>
-                </div>
-
-                {{-- Company & Employee Cards --}}
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {{-- Company Info --}}
-                    <div class="bg-white rounded-3xl border border-[#e2e8e3] p-5 shadow-sm space-y-3">
-                        <div class="flex items-center gap-2 mb-2 font-extrabold text-xs text-[#17211b]">
-                            <span class="w-6 h-6 rounded-lg bg-[#e8f7ed] text-[#184f3a] flex items-center justify-center">🏢</span>
-                            <span>Employer / Company</span>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-[#3f4a43] mb-1">Company Name</label>
-                            <input type="text" x-model="company.name" class="w-full p-2 rounded-xl border border-[#d6ded8] text-xs">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-[#3f4a43] mb-1">Company Address</label>
-                            <textarea x-model="company.address" rows="2" class="w-full p-2 rounded-xl border border-[#d6ded8] text-xs resize-none"></textarea>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-[#3f4a43] mb-1">EIN / Tax Registration #</label>
-                            <input type="text" x-model="company.ein" placeholder="12-3456789" class="w-full p-2 rounded-xl border border-[#d6ded8] text-xs">
-                        </div>
-                    </div>
-
-                    {{-- Employee Info --}}
-                    <div class="bg-white rounded-3xl border border-[#e2e8e3] p-5 shadow-sm space-y-3">
-                        <div class="flex items-center gap-2 mb-2 font-extrabold text-xs text-[#17211b]">
-                            <span class="w-6 h-6 rounded-lg bg-[#f0ebff] text-[#6142be] flex items-center justify-center">👤</span>
-                            <span>Employee Details</span>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-[#3f4a43] mb-1">Employee Name</label>
-                            <input type="text" x-model="employee.name" class="w-full p-2 rounded-xl border border-[#d6ded8] text-xs">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-[#3f4a43] mb-1">Job Title</label>
-                            <input type="text" x-model="employee.title" class="w-full p-2 rounded-xl border border-[#d6ded8] text-xs">
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div>
-                                <label class="block text-[11px] font-bold text-[#3f4a43] mb-1">Employee ID</label>
-                                <input type="text" x-model="employee.id" placeholder="EMP-102" class="w-full p-2 rounded-xl border border-[#d6ded8] text-xs">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-bold text-[#3f4a43] mb-1">SSN Last 4</label>
-                                <input type="text" x-model="employee.ssn_last4" placeholder="***-**-1234" class="w-full p-2 rounded-xl border border-[#d6ded8] text-xs">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Pay Dates Card --}}
-                <div class="bg-white rounded-3xl border border-[#e2e8e3] p-5 shadow-sm">
-                    <div class="flex items-center gap-2 mb-3 font-extrabold text-xs text-[#17211b]">
-                        <span class="w-6 h-6 rounded-lg bg-[#fff0e8] text-[#b45309] flex items-center justify-center">📅</span>
-                        <span>Pay Period &amp; Dates</span>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                        <div>
-                            <label class="block font-bold text-[#3f4a43] mb-1">Period Start</label>
-                            <input type="date" x-model="pay_period.start_date" class="w-full p-2 rounded-xl border border-[#d6ded8] text-xs">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-[#3f4a43] mb-1">Period End</label>
-                            <input type="date" x-model="pay_period.end_date" class="w-full p-2 rounded-xl border border-[#d6ded8] text-xs">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-[#3f4a43] mb-1">Payment Date</label>
-                            <input type="date" x-model="pay_period.pay_date" class="w-full p-2 rounded-xl border border-[#d6ded8] text-xs">
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Earnings Breakdown Section --}}
-                <div class="bg-white rounded-3xl border border-[#e2e8e3] p-5 shadow-sm space-y-3">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-2 font-extrabold text-xs text-[#17211b]">
-                            <span class="w-6 h-6 rounded-lg bg-[#e8f7ed] text-[#184f3a] flex items-center justify-center">💰</span>
-                            <span>Earnings Breakdown</span>
-                        </div>
-                        <button type="button" @click="addEarningLine()" class="text-xs font-bold text-[#184f3a] hover:underline">+ Add Line</button>
-                    </div>
-
-                    <div class="space-y-2 text-xs">
-                        <template x-for="(earn, idx) in earnings" :key="idx">
-                            <div class="grid grid-cols-12 gap-2 items-center bg-[#f9faf9] p-2.5 rounded-xl border border-[#e8ece9]">
-                                <div class="col-span-4">
-                                    <input type="text" x-model="earn.description" placeholder="Description" class="w-full p-1.5 rounded-lg border border-[#d6ded8] text-xs">
-                                </div>
-                                <div class="col-span-2">
-                                    <input type="number" step="0.5" x-model.number="earn.hours" @input="calculateLineAmount(earn)" placeholder="Hours" class="w-full p-1.5 rounded-lg border border-[#d6ded8] text-xs">
-                                </div>
-                                <div class="col-span-2">
-                                    <input type="number" step="0.01" x-model.number="earn.rate" @input="calculateLineAmount(earn)" placeholder="Rate" class="w-full p-1.5 rounded-lg border border-[#d6ded8] text-xs">
-                                </div>
-                                <div class="col-span-3">
-                                    <input type="number" step="0.01" x-model.number="earn.amount" @input="recalculateTotals()" placeholder="Total" class="w-full p-1.5 rounded-lg border border-[#d6ded8] text-xs font-bold text-right">
-                                </div>
-                                <div class="col-span-1 text-center">
-                                    <button type="button" @click="removeEarningLine(idx)" class="text-rose-500 hover:text-rose-700 font-bold">&times;</button>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-
-                {{-- Deductions Breakdown Section --}}
-                <div class="bg-white rounded-3xl border border-[#e2e8e3] p-5 shadow-sm space-y-3">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-2 font-extrabold text-xs text-[#17211b]">
-                            <span class="w-6 h-6 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center">🧾</span>
-                            <span>Taxes &amp; Deductions</span>
-                        </div>
-                        <button type="button" @click="addDeductionLine()" class="text-xs font-bold text-[#184f3a] hover:underline">+ Add Deduction</button>
-                    </div>
-
-                    <div class="space-y-2 text-xs">
-                        <template x-for="(ded, idx) in deductions" :key="idx">
-                            <div class="grid grid-cols-12 gap-2 items-center bg-[#f9faf9] p-2.5 rounded-xl border border-[#e8ece9]">
-                                <div class="col-span-7">
-                                    <input type="text" x-model="ded.description" placeholder="Deduction Name" class="w-full p-1.5 rounded-lg border border-[#d6ded8] text-xs">
-                                </div>
-                                <div class="col-span-4">
-                                    <input type="number" step="0.01" x-model.number="ded.amount" @input="recalculateTotals()" placeholder="Amount" class="w-full p-1.5 rounded-lg border border-[#d6ded8] text-xs font-bold text-right">
-                                </div>
-                                <div class="col-span-1 text-center">
-                                    <button type="button" @click="removeDeductionLine(idx)" class="text-rose-500 hover:text-rose-700 font-bold">&times;</button>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-
+                <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-3">
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        What a Pay Stub Includes
+                    </h2>
+                    <ul class="space-y-2 text-sm text-[#536058] leading-relaxed">
+                        <li><strong class="text-[#17211b]">Employer &amp; employee details:</strong> Company name, address, tax/employer ID, employee name, title, and optional masked ID or last 4 digits.</li>
+                        <li><strong class="text-[#17211b]">Pay period &amp; frequency:</strong> Start date, end date, payment date, and cycle (weekly, bi-weekly, semi-monthly, or monthly).</li>
+                        <li><strong class="text-[#17211b]">Gross pay:</strong> Regular wages, hourly pay (hours &times; rate), overtime, and bonuses before deductions.</li>
+                        <li><strong class="text-[#17211b]">Deductions &amp; withholdings:</strong> Entered income taxes, social contributions, health insurance, or retirement deductions.</li>
+                        <li><strong class="text-[#17211b]">Net pay:</strong> Final take-home amount after total deductions are subtracted from gross pay.</li>
+                        <li><strong class="text-[#17211b]">Year-to-date (YTD) totals:</strong> Cumulative earnings, deductions, and net pay across the calendar year so far.</li>
+                    </ul>
+                </section>
             </div>
 
-            {{-- RIGHT COLUMN: REAL-TIME PREVIEW & EXPORT ACTIONS --}}
-            <div class="lg:col-span-6 lg:sticky lg:top-24 space-y-4">
-
-                {{-- Action Bar --}}
-                <div class="bg-white rounded-2xl border border-[#e2e8e3] p-3 shadow-sm flex items-center justify-between gap-2 flex-wrap">
-                    <div class="flex items-center gap-1.5">
-                        <span class="w-3 h-3 rounded-full bg-[#184f3a]"></span>
-                        <span class="text-xs font-bold text-[#17211b]">Live Paystub Preview</span>
+            {{-- 3. How YTD totals work & 4. Paystub vs Payslip vs Salary Slip --}}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-4">
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        How Year-to-Date (YTD) Totals Work
+                    </h2>
+                    <p class="text-sm text-[#536058] leading-relaxed">
+                        <strong>YTD (Year-to-Date)</strong> tracks the total amount earned and deducted from January 1 through the current pay date.
+                    </p>
+                    <div class="rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] p-4 text-xs text-[#536058] space-y-1.5">
+                        <div class="font-bold text-[#17211b]">Simple Worked Example:</div>
+                        <p>Suppose an employee earns <strong>$2,500.00</strong> gross per bi-weekly paycheck with <strong>$450.00</strong> in total deductions (net pay: <strong>$2,050.00</strong>).</p>
+                        <p>After <strong>4 paychecks</strong> in the calendar year: <strong>YTD Gross</strong> = $10,000.00, <strong>YTD Deductions</strong> = $1,800.00, and <strong>YTD Net Pay</strong> = $8,200.00.</p>
                     </div>
+                    <p class="text-xs text-[#68736d] leading-relaxed">
+                        Note: In this studio preview, each line&rsquo;s YTD column defaults to 10&times; the current line amount as a convenient placeholder preview and totals gross/deductions automatically.
+                    </p>
+                </section>
 
-                    <div class="flex items-center gap-2">
-                        <button type="button" @click="window.print()"
-                                class="px-3.5 py-1.5 rounded-xl border border-[#d6ded8] hover:bg-[#f8fbf9] text-xs font-bold text-[#17211b] transition inline-flex items-center gap-1">
-                            <span>Print</span>
-                        </button>
-
-                        <button type="button" @click="downloadPdf()"
-                                class="px-5 py-1.5 rounded-xl bg-[#184f3a] text-white hover:bg-[#123e2d] text-xs font-bold shadow-sm transition inline-flex items-center gap-1">
-                            <span>Download PDF Paystub</span>
-                        </button>
-                    </div>
-                </div>
-
-                {{-- Hidden Export Form for PDF --}}
-                <form id="paystubExportForm" method="POST" action="/paystub-generator/pdf" class="hidden">
-                    @csrf
-                    <input type="hidden" name="payload_json" id="paystubJsonInput">
-                </form>
-
-                {{-- Live Real-Time A4 Paystub Canvas --}}
-                <div class="bg-white rounded-3xl border border-[#dfe4df] p-6 sm:p-8 shadow-lg text-xs text-[#1e293b] leading-tight font-sans selection:bg-[#184f3a] selection:text-white">
-                    
-                    {{-- Header Row --}}
-                    <div class="flex justify-between items-start border-b-2 border-[#0f172a] pb-4 mb-4">
-                        <div>
-                            <div class="text-base font-black text-[#0f172a] uppercase tracking-tight" x-text="company.name || 'Company Name'"></div>
-                            <div class="text-[11px] text-[#475569] mt-1 whitespace-pre-line" x-text="company.address"></div>
-                            <div class="text-[10px] text-[#64748b] mt-0.5" x-show="company.ein" x-text="`EIN: ${company.ein}`"></div>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-lg font-black text-[#184f3a] uppercase tracking-wider">Earnings Statement</div>
-                            <div class="text-[11px] font-bold text-[#64748b]" x-text="`Pay Frequency: ${pay_period.frequency}`"></div>
-                            <div class="text-[11px] text-[#334155] mt-1">Pay Date: <strong x-text="pay_period.pay_date"></strong></div>
-                        </div>
-                    </div>
-
-                    {{-- Meta Information Grid --}}
-                    <div class="grid grid-cols-4 gap-2 p-3 bg-[#f8fafc] border border-[#cbd5e1] rounded-xl mb-4 text-[11px]">
-                        <div>
-                            <div class="text-[9px] font-extrabold uppercase text-[#64748b]">Employee</div>
-                            <div class="font-extrabold text-[#0f172a]" x-text="employee.name"></div>
-                            <div class="text-[10px] text-[#475569]" x-text="employee.title"></div>
-                        </div>
-                        <div>
-                            <div class="text-[9px] font-extrabold uppercase text-[#64748b]">ID / SSN</div>
-                            <div class="font-bold text-[#0f172a]" x-text="employee.id || 'N/A'"></div>
-                            <div class="text-[10px] text-[#475569]" x-text="employee.ssn_last4"></div>
-                        </div>
-                        <div>
-                            <div class="text-[9px] font-extrabold uppercase text-[#64748b]">Period</div>
-                            <div class="font-bold text-[#0f172a]" x-text="pay_period.start_date"></div>
-                            <div class="text-[10px] text-[#475569]" x-text="`to ${pay_period.end_date}`"></div>
-                        </div>
-                        <div>
-                            <div class="text-[9px] font-extrabold uppercase text-[#64748b]">Payment</div>
-                            <div class="font-bold text-[#0f172a]" x-text="payment.method"></div>
-                            <div class="text-[10px] text-[#475569]" x-text="payment.account_last4"></div>
-                        </div>
-                    </div>
-
-                    {{-- Side by Side Earnings & Deductions Tables --}}
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                        
-                        {{-- Earnings --}}
-                        <div>
-                            <div class="text-[11px] font-extrabold uppercase text-[#0f172a] mb-1.5">Earnings</div>
-                            <table class="w-full text-left text-[11px] border border-[#cbd5e1] rounded-lg overflow-hidden">
-                                <thead class="bg-[#0f172a] text-white text-[9px] uppercase font-bold">
-                                    <tr>
-                                        <th class="p-1.5">Item</th>
-                                        <th class="p-1.5 text-right">Hrs</th>
-                                        <th class="p-1.5 text-right">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <template x-for="earn in earnings" :key="earn.description">
-                                        <tr class="border-b border-[#e2e8f0]">
-                                            <td class="p-1.5 font-bold" x-text="earn.description"></td>
-                                            <td class="p-1.5 text-right text-[#64748b]" x-text="earn.hours > 0 ? earn.hours : '-'"></td>
-                                            <td class="p-1.5 text-right font-extrabold" x-text="formatCurrency(earn.amount)"></td>
-                                        </tr>
-                                    </template>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        {{-- Deductions --}}
-                        <div>
-                            <div class="text-[11px] font-extrabold uppercase text-[#0f172a] mb-1.5">Taxes &amp; Deductions</div>
-                            <table class="w-full text-left text-[11px] border border-[#cbd5e1] rounded-lg overflow-hidden">
-                                <thead class="bg-[#0f172a] text-white text-[9px] uppercase font-bold">
-                                    <tr>
-                                        <th class="p-1.5">Deduction</th>
-                                        <th class="p-1.5 text-right">Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <template x-for="ded in deductions" :key="ded.description">
-                                        <tr class="border-b border-[#e2e8f0]">
-                                            <td class="p-1.5" x-text="ded.description"></td>
-                                            <td class="p-1.5 text-right font-extrabold text-rose-700" x-text="`-${formatCurrency(ded.amount)}`"></td>
-                                        </tr>
-                                    </template>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-
-                    {{-- Totals Summary Box --}}
-                    <div class="grid grid-cols-3 border-2 border-[#0f172a] rounded-xl overflow-hidden text-center mb-4">
-                        <div class="p-3 bg-[#f1f5f9] border-r border-[#cbd5e1]">
-                            <div class="text-[9px] font-extrabold uppercase text-[#475569]">Total Gross Pay</div>
-                            <div class="text-sm font-black text-[#0f172a]" x-text="formatCurrency(totals.gross_pay)"></div>
-                            <div class="text-[9px] text-[#64748b]" x-text="`YTD: ${formatCurrency(totals.ytd_gross)}`"></div>
-                        </div>
-
-                        <div class="p-3 bg-[#f1f5f9] border-r border-[#cbd5e1]">
-                            <div class="text-[9px] font-extrabold uppercase text-[#475569]">Total Deductions</div>
-                            <div class="text-sm font-black text-rose-700" x-text="`-${formatCurrency(totals.deductions)}`"></div>
-                            <div class="text-[9px] text-[#64748b]" x-text="`YTD: -${formatCurrency(totals.ytd_deductions)}`"></div>
-                        </div>
-
-                        <div class="p-3 bg-[#e8f7ed]">
-                            <div class="text-[9px] font-black uppercase text-[#184f3a]">Net Take-Home Pay</div>
-                            <div class="text-base font-black text-[#184f3a]" x-text="formatCurrency(totals.net_pay)"></div>
-                            <div class="text-[9px] text-[#184f3a] font-bold" x-text="`YTD: ${formatCurrency(totals.ytd_net_pay)}`"></div>
-                        </div>
-                    </div>
-
-                    {{-- Check Stub Callout --}}
-                    <div class="border-t border-dashed border-[#cbd5e1] pt-3 mt-4 text-[11px] flex justify-between items-center text-[#64748b]">
-                        <div>Pay To: <strong class="text-[#0f172a]" x-text="employee.name"></strong></div>
-                        <div>Amount: <strong class="text-[#184f3a]" x-text="formatCurrency(totals.net_pay)"></strong></div>
-                        <div>Security Code: <strong>FX-AUTHENTIC</strong></div>
-                    </div>
-
-                </div>
-
+                <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-4">
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        Paystub vs. Payslip vs. Salary Slip
+                    </h2>
+                    <p class="text-sm text-[#536058] leading-relaxed">
+                        All three terms describe the exact same payroll document&mdash;only regional business terminology differs:
+                    </p>
+                    <ul class="space-y-2 text-sm text-[#536058] leading-relaxed">
+                        <li><strong class="text-[#17211b]">Paystub (or Pay Stub):</strong> Standard term in the United States and Canada.</li>
+                        <li><strong class="text-[#17211b]">Payslip:</strong> Common across the United Kingdom, Europe, Australia, and New Zealand.</li>
+                        <li><strong class="text-[#17211b]">Salary Slip:</strong> Widely used across Pakistan, India, the UAE, Saudi Arabia, and neighboring markets.</li>
+                    </ul>
+                    <a href="{{ route('paystub.salary_slip') }}" class="inline-flex items-center gap-1 text-xs font-bold text-[#184f3a] hover:underline">
+                        <span>Open the Regional Salary Slip Generator (PKR, INR, AED, SAR) &rarr;</span>
+                    </a>
+                </section>
             </div>
+
+            {{-- 5. Who Should Use This Tool & 6. How to Use the Generator --}}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-3">
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        Who Should Use This Paystub Maker
+                    </h2>
+                    <p class="text-sm text-[#536058] leading-relaxed">
+                        This tool is designed for <strong>small business owners</strong>, <strong>freelancers paying subcontractors or assistants</strong>, and <strong>household employers</strong> who want a clean PDF record of wages paid and deductions withheld.
+                    </p>
+                    <p class="text-sm text-[#536058] leading-relaxed">
+                        <strong>Important notice:</strong> Legal requirements for issuing pay stubs, required statutory line items, and tax withholdings vary by state, province, and country. This generator is a formatting utility&mdash;it does not replace full payroll software, accounting systems, or qualified tax advice.
+                    </p>
+                </section>
+
+                <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-3">
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        How to Generate a Paystub PDF
+                    </h2>
+                    <ol class="list-decimal list-inside space-y-2 text-sm text-[#536058] leading-relaxed">
+                        <li>Select your currency (`$`, `€`, `£`, `PKR`, `INR`, `AED`, `SAR`) and pay frequency.</li>
+                        <li>Fill in your company details, employee information, and optional masked ID.</li>
+                        <li>Set your pay period start, period end, and payment date.</li>
+                        <li>Add earnings lines (hours &times; rate multiplies automatically, or enter fixed amounts).</li>
+                        <li>Use <strong>+ Add Deduction</strong> to enter any taxes or benefit deductions manually.</li>
+                        <li>Verify the live preview totals and click <strong>Download PDF Paystub</strong>.</li>
+                    </ol>
+                </section>
+            </div>
+
+            {{-- 7. FAQ Component (Single Source of Truth: Visible HTML + FAQPage JSON-LD) --}}
+            @php
+                $faqItems = [
+                    [
+                        'q' => 'Are employers required to give pay stubs?',
+                        'a' => 'Rules vary significantly by state, province, and country. Some jurisdictions require written or electronic itemized pay statements on every payday, while others have different rules or do not mandate them uniformly—check your local labor authority or accountant for your location.',
+                    ],
+                    [
+                        'q' => 'What is the difference between gross pay and net pay?',
+                        'a' => 'Gross pay is total compensation earned before anything is subtracted, including base salary, hourly wages, overtime, and bonuses. Net pay (take-home pay) is the final amount remaining after income taxes and other deductions are subtracted.',
+                    ],
+                    [
+                        'q' => 'What does YTD mean?',
+                        'a' => 'YTD stands for Year-to-Date and represents cumulative gross pay, deductions, and net wages from January 1 up through the current pay date. Our live studio calculates a 10x placeholder YTD estimate for quick previews.',
+                    ],
+                    [
+                        'q' => 'Does this calculate taxes?',
+                        'a' => 'No. This generator does not automatically compute federal, state, or local tax brackets. You enter taxes and deductions manually using the + Add Deduction button, and Formnexa sums those deductions and subtracts them from gross pay.',
+                    ],
+                    [
+                        'q' => 'Can I make a salary slip in PKR, INR or AED?',
+                        'a' => 'Yes. Choose PKR, INR, Rs, AED, or SAR directly in the Currency dropdown above, or use our dedicated Salary Slip Generator page preset specifically for Pakistan, India, and Gulf currencies.',
+                    ],
+                    [
+                        'q' => 'Is my data stored?',
+                        'a' => 'No. All company, employee, SSN last-4, and pay fields stay in your browser memory while editing. When you click Download PDF Paystub, the form posts once to generate the PDF in memory and sends it straight back without storing records in a database.',
+                    ],
+                    [
+                        'q' => 'Can I use this for payroll compliance?',
+                        'a' => 'No, this is a document formatting tool rather than certified payroll or tax-filing software. It does not remit taxes, track statutory brackets, or file government payroll reports.',
+                    ],
+                ];
+            @endphp
+            <div class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm">
+                <x-faq :items="$faqItems" heading="Frequently Asked Questions About Paystubs" eyebrow="Paystub FAQ" />
+            </div>
+
+            {{-- 8. CTAs & Related Tools --}}
+            @php
+                $relatedTools = [
+                    [
+                        'title' => 'Salary Slip Generator (PKR, INR, AED)',
+                        'description' => 'Preset monthly salary slip layout with regional labels for Pakistan, India, UAE, and Saudi Arabia.',
+                        'url' => route('paystub.salary_slip'),
+                        'badge' => 'Regional Preset',
+                        'cta' => 'Open Salary Slip Maker',
+                    ],
+                    [
+                        'title' => 'Free Invoice Generator',
+                        'description' => 'Create professional client invoices with taxes, logo, and instant PDF download.',
+                        'url' => route('invoice.studio'),
+                        'badge' => 'Billing',
+                        'cta' => 'Open Invoice Generator',
+                    ],
+                    [
+                        'title' => 'Free Timesheet Generator',
+                        'description' => 'Track weekly hours, overtime rates, and contractor time logs before running payroll.',
+                        'url' => route('invoice.generator', 'timesheet-generator'),
+                        'badge' => 'Time Tracking',
+                        'cta' => 'Open Timesheet Maker',
+                    ],
+                    [
+                        'title' => 'Free Receipt Generator',
+                        'description' => 'Issue clean payment receipts for completed contractor or client payments.',
+                        'url' => route('invoice.generator', 'receipt-generator'),
+                        'badge' => 'Receipts',
+                        'cta' => 'Open Receipt Generator',
+                    ],
+                ];
+                foreach (\App\Models\BlogPost::publishedBySlugs([
+                    'how-to-create-paystub-online-free-guide',
+                    'what-is-on-a-pay-stub',
+                    'paystub-vs-payslip-vs-salary-slip',
+                    'gross-pay-vs-net-pay-explained',
+                    'how-to-create-pay-stubs-for-employees',
+                    'salary-slip-format-pakistan-india-uae',
+                ]) as $clusterPost) {
+                    $relatedTools[] = [
+                        'title' => $clusterPost->title,
+                        'description' => \Illuminate\Support\Str::limit($clusterPost->excerpt, 110),
+                        'url' => route('blog.show', $clusterPost->slug),
+                        'badge' => 'Payroll Guide',
+                        'cta' => 'Read Guide',
+                    ];
+                }
+            @endphp
+            <x-related-tools :tools="$relatedTools" heading="Related Payroll & Billing Tools" eyebrow="Business Suite" />
 
         </div>
 
     </div>
 </div>
-
-<script>
-function paystubStudio(defaultData) {
-    return {
-        company: defaultData.company,
-        employee: defaultData.employee,
-        pay_period: defaultData.pay_period,
-        currency: defaultData.currency,
-        earnings: defaultData.earnings,
-        deductions: defaultData.deductions,
-        totals: defaultData.totals,
-        payment: defaultData.payment,
-
-        init() {
-            this.recalculateTotals();
-        },
-
-        calculateLineAmount(earn) {
-            if (earn.hours > 0 && earn.rate > 0) {
-                earn.amount = Math.round((earn.hours * earn.rate) * 100) / 100;
-            }
-            this.recalculateTotals();
-        },
-
-        addEarningLine() {
-            this.earnings.push({
-                description: 'Bonus / Additional Pay',
-                hours: 0,
-                rate: 0,
-                amount: 150.00,
-                ytd: 1500.00
-            });
-            this.recalculateTotals();
-        },
-
-        removeEarningLine(idx) {
-            if (this.earnings.length <= 1) return;
-            this.earnings.splice(idx, 1);
-            this.recalculateTotals();
-        },
-
-        addDeductionLine() {
-            this.deductions.push({
-                description: 'Other Deduction',
-                amount: 50.00,
-                ytd: 500.00
-            });
-            this.recalculateTotals();
-        },
-
-        removeDeductionLine(idx) {
-            if (this.deductions.length <= 1) return;
-            this.deductions.splice(idx, 1);
-            this.recalculateTotals();
-        },
-
-        recalculateTotals() {
-            let gross = 0;
-            let ytdGross = 0;
-            this.earnings.forEach(e => {
-                const amt = parseFloat(e.amount) || 0;
-                gross += amt;
-                e.ytd = amt * 10;
-                ytdGross += e.ytd;
-            });
-
-            let dedTotal = 0;
-            let ytdDed = 0;
-            this.deductions.forEach(d => {
-                const amt = parseFloat(d.amount) || 0;
-                dedTotal += amt;
-                d.ytd = amt * 10;
-                ytdDed += d.ytd;
-            });
-
-            this.totals.gross_pay = Math.round(gross * 100) / 100;
-            this.totals.ytd_gross = Math.round(ytdGross * 100) / 100;
-            this.totals.deductions = Math.round(dedTotal * 100) / 100;
-            this.totals.ytd_deductions = Math.round(ytdDed * 100) / 100;
-
-            this.totals.net_pay = Math.max(0, Math.round((gross - dedTotal) * 100) / 100);
-            this.totals.ytd_net_pay = Math.max(0, Math.round((ytdGross - ytdDed) * 100) / 100);
-        },
-
-        formatCurrency(num) {
-            const val = parseFloat(num) || 0;
-            return (this.currency.symbol || '$') + val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        },
-
-        downloadPdf() {
-            const form = document.getElementById('paystubExportForm');
-            
-            // Post payload directly
-            const payload = {
-                company: this.company,
-                employee: this.employee,
-                pay_period: this.pay_period,
-                currency: this.currency,
-                earnings: this.earnings,
-                deductions: this.deductions,
-                totals: this.totals,
-                payment: this.payment,
-            };
-
-            // Set as fields in form
-            form.innerHTML = `@csrf`;
-            const appendField = (name, val) => {
-                const inp = document.createElement('input');
-                inp.type = 'hidden';
-                inp.name = name;
-                inp.value = val;
-                form.appendChild(inp);
-            };
-
-            appendField('company[name]', this.company.name);
-            appendField('company[address]', this.company.address);
-            appendField('company[ein]', this.company.ein);
-
-            appendField('employee[name]', this.employee.name);
-            appendField('employee[title]', this.employee.title);
-            appendField('employee[id]', this.employee.id);
-            appendField('employee[ssn_last4]', this.employee.ssn_last4);
-            appendField('employee[address]', this.employee.address);
-
-            appendField('pay_period[frequency]', this.pay_period.frequency);
-            appendField('pay_period[start_date]', this.pay_period.start_date);
-            appendField('pay_period[end_date]', this.pay_period.end_date);
-            appendField('pay_period[pay_date]', this.pay_period.pay_date);
-
-            appendField('currency[symbol]', this.currency.symbol);
-
-            this.earnings.forEach((e, i) => {
-                appendField(`earnings[${i}][description]`, e.description);
-                appendField(`earnings[${i}][hours]`, e.hours);
-                appendField(`earnings[${i}][rate]`, e.rate);
-                appendField(`earnings[${i}][amount]`, e.amount);
-                appendField(`earnings[${i}][ytd]`, e.ytd);
-            });
-
-            this.deductions.forEach((d, i) => {
-                appendField(`deductions[${i}][description]`, d.description);
-                appendField(`deductions[${i}][amount]`, d.amount);
-                appendField(`deductions[${i}][ytd]`, d.ytd);
-            });
-
-            form.submit();
-        },
-
-        resetToDefaults() {
-            Object.assign(this, JSON.parse(JSON.stringify(defaultData)));
-            this.recalculateTotals();
-        }
-    };
-}
-</script>
 @endsection

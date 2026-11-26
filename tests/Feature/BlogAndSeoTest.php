@@ -34,6 +34,7 @@ class BlogAndSeoTest extends TestCase
             ->assertSee('"@type":"FAQPage"', false)
             ->assertSee('Free Invoice Maker, <span>Resume Builder &amp; PDF Converter</span>', false)
             ->assertSee('Practical guides to help you get paid &amp; hired.', false)
+            ->assertDontSee('<meta name="keywords"', false)
             ->assertDontSee('<b></b>', false);
 
         $this->assertSame(1, preg_match_all('/<h1\b/i', $home->getContent()));
@@ -84,6 +85,18 @@ class BlogAndSeoTest extends TestCase
         $htmlToPdf = $this->get('/convert/html-to-pdf');
         $htmlToPdf->assertStatus(200);
         $this->assertSame(1, preg_match_all('/<h1\b/i', $htmlToPdf->getContent()));
+
+        // Verify trailing-slash and www canonical 301 redirects
+        $kernel = app(\Illuminate\Contracts\Http\Kernel::class);
+        $slashReq = \Illuminate\Http\Request::create('http://localhost/ats-resume-checker/', 'GET');
+        $slashRes = $kernel->handle($slashReq);
+        $this->assertSame(301, $slashRes->getStatusCode());
+        $this->assertSame('http://localhost/ats-resume-checker', $slashRes->headers->get('Location'));
+
+        $wwwReq = \Illuminate\Http\Request::create('https://www.formnexa.dcpakpattan.gov.pk/paystub-generator/', 'GET');
+        $wwwRes = $kernel->handle($wwwReq);
+        $this->assertSame(301, $wwwRes->getStatusCode());
+        $this->assertSame('https://formnexa.dcpakpattan.gov.pk/paystub-generator', $wwwRes->headers->get('Location'));
     }
 
     public function test_private_and_auth_routes_emit_noindex_headers_and_meta(): void
@@ -123,6 +136,15 @@ class BlogAndSeoTest extends TestCase
             ->assertStatus(200)
             ->assertHeader('X-Robots-Tag', 'noindex, nofollow')
             ->assertSee('<meta name="robots" content="noindex,nofollow">', false);
+
+        // Ensure /api/* endpoints return X-Robots-Tag: noindex, nofollow (including 405 MethodNotAllowed)
+        $this->get('/api/v1/bootstrap')
+            ->assertStatus(200)
+            ->assertHeader('X-Robots-Tag', 'noindex, nofollow');
+
+        $this->get('/api/resumes')
+            ->assertStatus(405)
+            ->assertHeader('X-Robots-Tag', 'noindex, nofollow');
     }
 
     public function test_public_blog_index_category_search_and_article_rendering(): void
@@ -133,6 +155,10 @@ class BlogAndSeoTest extends TestCase
             ->assertStatus(200)
             ->assertSee('Document, Resume &amp; PDF Guides Blog | Formnexa', false)
             ->assertSee('Asia, USA &amp; Europe', false)
+            ->assertSee('Browse Guides by Category')
+            ->assertSee('Resume and ATS')
+            ->assertSee('Careers')
+            ->assertSee('Invoicing and Payroll')
             ->assertSee('"@type":"BreadcrumbList"', false);
 
         $this->get('/blog/category/resumes')
@@ -163,6 +189,47 @@ class BlogAndSeoTest extends TestCase
             ->assertSee('<h2 id="essential-elements-of-a-cross-border-business-invoice"', false);
 
         $this->get('/blog/non-existent-slug-999')->assertStatus(404);
+    }
+
+    public function test_phase5_cluster_blog_posts_are_drafts_meet_seo_criteria_and_render_for_admin(): void
+    {
+        $this->seed(BlogPostSeeder::class);
+        $admin = User::factory()->create(['is_admin' => true]);
+
+        $slugs = [
+            'ats-resume-score-explained',
+            'how-to-check-if-your-resume-is-ats-friendly',
+            'ats-resume-keywords-how-to-match-a-job-description',
+            'how-to-write-a-resignation-letter',
+            'two-weeks-notice-letter-examples',
+            'how-to-resign-professionally-checklist',
+            'resignation-letter-for-new-job',
+            'what-is-on-a-pay-stub',
+            'paystub-vs-payslip-vs-salary-slip',
+            'gross-pay-vs-net-pay-explained',
+            'how-to-create-pay-stubs-for-employees',
+            'salary-slip-format-pakistan-india-uae',
+        ];
+
+        foreach ($slugs as $slug) {
+            $post = BlogPost::where('slug', $slug)->firstOrFail();
+            $this->assertFalse($post->is_published, "Post {$slug} should start as draft");
+            $this->assertGreaterThanOrEqual(900, str_word_count(strip_tags($post->content)), "Post {$slug} word count check");
+            $this->assertLessThanOrEqual(60, strlen((string) $post->meta_title), "Post {$slug} meta_title <= 60");
+            $this->assertLessThanOrEqual(155, strlen((string) $post->meta_description), "Post {$slug} meta_description <= 155");
+
+            // Guests see 404 for unpublished drafts; admin sees draft preview with full SEO schema
+            $this->get('/blog/' . $slug)->assertStatus(404);
+            $this->actingAs($admin)
+                ->get('/blog/' . $slug)
+                ->assertStatus(200)
+                ->assertSee('Draft Preview')
+                ->assertSee('Published ')
+                ->assertSee('Updated ')
+                ->assertSee('{"@context":"https://schema.org","@type":"BlogPosting"', false)
+                ->assertSee('{"@context":"https://schema.org","@type":"BreadcrumbList"', false);
+            auth()->logout();
+        }
     }
 
     public function test_admin_dashboard_blogs_crud_active_toggle_and_modules_data(): void

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\ResignationCatalog;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -15,6 +16,24 @@ class LetterController extends Controller
     public function resignation(): View
     {
         return view('letters.resignation');
+    }
+
+    /**
+     * Dedicated landing page for a specific resignation reason/situation.
+     */
+    public function landing(string $slug): View
+    {
+        $page = ResignationCatalog::find($slug);
+        abort_if($page === null, 404);
+
+        return view('letters.resignation-landing', [
+            'page' => $page,
+            'seo' => [
+                'title' => $page['title'],
+                'description' => $page['description'],
+                'image' => 'images/og/resignation-letter-generator.jpg',
+            ],
+        ]);
     }
 
     /**

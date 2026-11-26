@@ -1014,6 +1014,30 @@
                 ['q' => 'What is an ATS-friendly CV?', 'a' => 'An ATS-friendly CV is formatted with machine-readable typography, linear reading hierarchy, and recognized section headers (such as Professional Summary, Work Experience, Education, and Skills). It avoids multi-layer tables and graphical rating meters so Applicant Tracking Systems (like Workday, Taleo, Greenhouse, and Lever) parse your qualifications accurately without dropped text.'],
             ]" heading="Free CV Maker & Resume Builder — Frequently Asked Questions" />
         </div>
+
+        <x-related-tools :tools="[
+            [
+                'title' => 'Free ATS Resume Checker',
+                'description' => 'Test your finished CV against ATS formatting rules and compare missing keywords against your target job description.',
+                'url' => route('resume.checker'),
+                'badge' => '0-100 Score',
+                'cta' => 'Check My ATS Score',
+            ],
+            [
+                'title' => 'ATS Resume Converter',
+                'description' => 'Upload an older PDF or Word CV and rebuild it automatically into clean, editable resume sections.',
+                'url' => route('resume.ats_converter'),
+                'badge' => 'PDF / DOCX',
+                'cta' => 'Convert Existing CV',
+            ],
+            [
+                'title' => 'ATS Resume Templates Gallery',
+                'description' => 'Browse all ' . count($allTemplates) . ' single-column and modern resume designs ready for one-click editing.',
+                'url' => route('resume.templates'),
+                'badge' => count($allTemplates) . ' Designs',
+                'cta' => 'Browse Templates',
+            ],
+        ]" heading="Test &amp; Enhance Your Resume" eyebrow="Career Tools" />
     </section>
 
 </div>

@@ -195,6 +195,36 @@
             </div>
         @endif
 
+        {{-- Grouped Guides by Topic (Resume and ATS, Careers, Invoicing and Payroll) --}}
+        @if(!empty($topicGroups) && empty($activeCategory) && $search === '')
+            <section class="pt-6 border-t border-[#dfe4df] space-y-6">
+                <div>
+                    <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#184f3a]">Explore by Topic</span>
+                    <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-[#17211b] tracking-tight mt-1">Browse Guides by Category</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    @foreach($topicGroups as $groupTitle => $groupPosts)
+                        <div class="rounded-3xl bg-[#f8f8f3] border border-[#dfe4df] p-6 space-y-4">
+                            <h3 class="font-display text-lg font-extrabold text-[#17211b]">{{ $groupTitle }}</h3>
+                            @if($groupPosts->isNotEmpty())
+                                <ul class="space-y-2.5 text-xs sm:text-sm">
+                                    @foreach($groupPosts as $gPost)
+                                        <li>
+                                            <a href="{{ route('blog.show', $gPost->slug) }}" class="font-semibold text-[#184f3a] hover:underline leading-snug block">
+                                                {{ $gPost->title }} &rarr;
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p class="text-xs text-[#536058]">Guides in this topic are currently in editorial review.</p>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            </section>
+        @endif
+
         {{-- Bottom Soft-Mint Workspace CTA --}}
         <section class="rounded-[28px] bg-[#f8f8f3] border border-[#dfe4df] p-7 sm:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div class="space-y-2 max-w-xl">

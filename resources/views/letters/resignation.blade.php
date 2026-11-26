@@ -1,387 +1,284 @@
 @extends('layouts.app')
 
+<x-schema.tool
+    name="Free Resignation Letter & Two Weeks Notice Generator"
+    description="Write a polite resignation letter in under a minute. Pick your tone and last day, then download PDF or Word. Free, no watermark."
+    category="BusinessApplication"
+/>
+
 @section('content')
 <div class="min-h-screen bg-[#fafbfa] text-[#17211b] py-8 sm:py-12"
-     x-data="resignationStudio()"
+     x-data="resignationStudio('new_job', 'grateful', 14)"
      x-cloak>
 
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+        {{-- Visible Breadcrumbs + BreadcrumbList JSON-LD --}}
+        <div class="mb-5 flex justify-center">
+            <x-schema.breadcrumbs :items="[
+                ['Home', url('/')],
+                ['Career Tools', route('resume.builder')],
+                ['Resignation Letter Generator', route('letter.resignation')],
+            ]" />
+        </div>
 
         {{-- Top Badge --}}
         <div class="flex items-center justify-center gap-2 mb-4">
             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#e8f7ed] text-[#184f3a] border border-[#c8f3dc]">
                 <span class="w-2 h-2 rounded-full bg-[#184f3a]"></span>
-                Free Resignation Letter Generator &bull; Instant PDF &amp; Word Download
+                100% Free &bull; Instant PDF &amp; Word Download &bull; Zero Watermark
             </span>
         </div>
 
         {{-- Header Copy --}}
         <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-[#17211b] mb-3">
-                Free Resignation Letter &amp; <span class="text-[#184f3a]">Two Weeks Notice Maker</span>
+                Free Resignation Letter &amp; Two Weeks Notice Generator
             </h1>
             <p class="text-base sm:text-lg text-[#55635a] leading-relaxed">
-                Generate a formal, polite resignation letter in under 60 seconds. Choose your tone, set your last working day, and download ready-to-sign PDF or Word documents with zero watermarks.
+                Write a polite resignation letter in under a minute. Pick your reason, tone, and last working day, edit any line in the live preview, and download a PDF or Word document with zero watermarks.
             </p>
         </div>
 
-        {{-- MAIN TWO-COLUMN SPLIT STUDIO --}}
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {{-- Reusable Interactive Two-Column Studio --}}
+        @include('letters._studio-widget', [
+            'presetReason' => 'new_job',
+            'presetTone' => 'grateful',
+            'presetDays' => 14,
+        ])
 
-            {{-- LEFT COLUMN: FORM CONTROLS & OPTIONS --}}
-            <div class="lg:col-span-6 space-y-6">
+        {{-- EDUCATIONAL CONTENT SECTIONS 1-7 --}}
+        <div class="mt-16 pt-12 border-t border-[#e2e8e3] space-y-12">
 
-                {{-- Card 1: Your Details --}}
-                <div class="bg-white rounded-3xl border border-[#e2e8e3] p-5 sm:p-6 shadow-sm">
-                    <h3 class="text-sm font-extrabold text-[#17211b] mb-4 flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-lg bg-[#e8f7ed] text-[#184f3a] flex items-center justify-center font-bold text-xs">👤</span>
-                        <span>Your Information (Employee)</span>
-                    </h3>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
-                        <div>
-                            <label class="block font-bold text-[#3f4a43] mb-1">Your Full Name *</label>
-                            <input type="text" x-model="employee_name" @input="regenerateLetter()" placeholder="Alex Morgan"
-                                   class="w-full p-2.5 rounded-xl border border-[#d6ded8] focus:border-[#184f3a] focus:ring-1 focus:ring-[#184f3a] text-xs">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-[#3f4a43] mb-1">Your Job Title *</label>
-                            <input type="text" x-model="employee_title" @input="regenerateLetter()" placeholder="Software Engineer"
-                                   class="w-full p-2.5 rounded-xl border border-[#d6ded8] focus:border-[#184f3a] focus:ring-1 focus:ring-[#184f3a] text-xs">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-[#3f4a43] mb-1">Personal Email</label>
-                            <input type="email" x-model="employee_email" @input="regenerateLetter()" placeholder="alex.morgan@gmail.com"
-                                   class="w-full p-2.5 rounded-xl border border-[#d6ded8] focus:border-[#184f3a] focus:ring-1 focus:ring-[#184f3a] text-xs">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-[#3f4a43] mb-1">Personal Phone</label>
-                            <input type="text" x-model="employee_phone" @input="regenerateLetter()" placeholder="(555) 345-6789"
-                                   class="w-full p-2.5 rounded-xl border border-[#d6ded8] focus:border-[#184f3a] focus:ring-1 focus:ring-[#184f3a] text-xs">
-                        </div>
-                        <div class="sm:col-span-2">
-                            <label class="block font-bold text-[#3f4a43] mb-1">Your Address (City, State / Country)</label>
-                            <input type="text" x-model="employee_address" @input="regenerateLetter()" placeholder="San Francisco, CA"
-                                   class="w-full p-2.5 rounded-xl border border-[#d6ded8] focus:border-[#184f3a] focus:ring-1 focus:ring-[#184f3a] text-xs">
-                        </div>
+            {{-- 1. How to Use the Generator (4 Short Steps Matching the Form) --}}
+            <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm">
+                <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-[#184f3a] block mb-1.5">How It Works</span>
+                <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-[#17211b] tracking-tight mb-6">
+                    How to Write Your Resignation Letter in 4 Steps
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] p-4">
+                        <div class="text-xs font-mono font-bold text-[#184f3a] mb-1">Step 1</div>
+                        <h3 class="font-bold text-sm text-[#17211b] mb-1.5">Enter Your Information</h3>
+                        <p class="text-xs text-[#536058] leading-relaxed">Fill in your full name, current job title, and optional personal email, phone, and city.</p>
+                    </div>
+                    <div class="rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] p-4">
+                        <div class="text-xs font-mono font-bold text-[#184f3a] mb-1">Step 2</div>
+                        <h3 class="font-bold text-sm text-[#17211b] mb-1.5">Add Employer Details</h3>
+                        <p class="text-xs text-[#536058] leading-relaxed">Enter your manager&rsquo;s name, recipient title, and your company name for the formal salutation block.</p>
+                    </div>
+                    <div class="rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] p-4">
+                        <div class="text-xs font-mono font-bold text-[#184f3a] mb-1">Step 3</div>
+                        <h3 class="font-bold text-sm text-[#17211b] mb-1.5">Pick Reason, Tone &amp; Last Day</h3>
+                        <p class="text-xs text-[#536058] leading-relaxed">Select from 8 reasons and 4 tones, click +2 Weeks or type your final day, and toggle handover options.</p>
+                    </div>
+                    <div class="rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] p-4">
+                        <div class="text-xs font-mono font-bold text-[#184f3a] mb-1">Step 4</div>
+                        <h3 class="font-bold text-sm text-[#17211b] mb-1.5">Edit &amp; Download</h3>
+                        <p class="text-xs text-[#536058] leading-relaxed">Tweak any sentence in the live preview, then click Copy Text, Word (.doc), or Download PDF.</p>
                     </div>
                 </div>
+            </section>
 
-                {{-- Card 2: Employer / Company Details --}}
-                <div class="bg-white rounded-3xl border border-[#e2e8e3] p-5 sm:p-6 shadow-sm">
-                    <h3 class="text-sm font-extrabold text-[#17211b] mb-4 flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-lg bg-[#f0ebff] text-[#6142be] flex items-center justify-center font-bold text-xs">🏢</span>
-                        <span>Employer Details</span>
-                    </h3>
+            {{-- 2. What to Include & 3. How Much Notice to Give --}}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-4">
+                    <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                        What to Include in a Resignation Letter
+                    </h2>
+                    <ul class="space-y-2 text-sm text-[#536058] leading-relaxed">
+                        <li><strong class="text-[#17211b]">Date:</strong> The calendar date you are submitting your written notice.</li>
+                        <li><strong class="text-[#17211b]">Recipient details:</strong> Your manager&rsquo;s name, title, and the organization name.</li>
+                        <li><strong class="text-[#17211b]">Clear statement of resignation:</strong> Direct confirmation that you are stepping down from your role.</li>
+                        <li><strong class="text-[#17211b]">Last working day:</strong> Your exact final date of employment so payroll and HR records match.</li>
+                        <li><strong class="text-[#17211b]">Optional thanks:</strong> A brief thank-you for mentorship, growth, or working with the team.</li>
+                        <li><strong class="text-[#17211b]">Handover offer:</strong> Willingness to document workflows or train colleagues during your notice period.</li>
+                        <li><strong class="text-[#17211b]">Signature block:</strong> A polite closing (&ldquo;Sincerely,&rdquo;) followed by your full name and title.</li>
+                    </ul>
+                </section>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
-                        <div>
-                            <label class="block font-bold text-[#3f4a43] mb-1">Manager / Recipient Name *</label>
-                            <input type="text" x-model="manager_name" @input="regenerateLetter()" placeholder="Sarah Jenkins"
-                                   class="w-full p-2.5 rounded-xl border border-[#d6ded8] focus:border-[#184f3a] focus:ring-1 focus:ring-[#184f3a] text-xs">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-[#3f4a43] mb-1">Manager Title</label>
-                            <input type="text" x-model="manager_title" @input="regenerateLetter()" placeholder="VP of Engineering"
-                                   class="w-full p-2.5 rounded-xl border border-[#d6ded8] focus:border-[#184f3a] focus:ring-1 focus:ring-[#184f3a] text-xs">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-[#3f4a43] mb-1">Company Name *</label>
-                            <input type="text" x-model="company_name" @input="regenerateLetter()" placeholder="Acme Technologies Inc."
-                                   class="w-full p-2.5 rounded-xl border border-[#d6ded8] focus:border-[#184f3a] focus:ring-1 focus:ring-[#184f3a] text-xs">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-[#3f4a43] mb-1">Company Office Address</label>
-                            <input type="text" x-model="company_address" @input="regenerateLetter()" placeholder="100 Market St, Suite 400"
-                                   class="w-full p-2.5 rounded-xl border border-[#d6ded8] focus:border-[#184f3a] focus:ring-1 focus:ring-[#184f3a] text-xs">
-                        </div>
-                    </div>
+                <div class="space-y-6">
+                    <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-3">
+                        <h2 class="font-display text-xl sm:text-2xl font-extrabold text-[#17211b] tracking-tight">
+                            How Much Notice Should You Give?
+                        </h2>
+                        <p class="text-sm text-[#536058] leading-relaxed">
+                            Giving <strong>two weeks notice</strong> is the standard custom in the United States, but the exact period you owe depends on your written employment contract, your company&rsquo;s employee handbook, and local labor law.
+                        </p>
+                        <p class="text-sm text-[#536058] leading-relaxed">
+                            Always <strong>check your signed contract</strong> before choosing your final date. Many countries (such as the UK, Europe, UAE, Pakistan, and India) and many senior or specialized roles commonly require <strong>one month (30 days) or longer</strong>.
+                        </p>
+                    </section>
+
+                    {{-- 5. Practical Tips --}}
+                    <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-3">
+                        <h2 class="font-display text-xl font-extrabold text-[#17211b] tracking-tight">
+                            Resignation Etiquette Tips
+                        </h2>
+                        <ul class="space-y-2 text-sm text-[#536058] leading-relaxed">
+                            <li>&check; <strong>Keep it short:</strong> Three brief paragraphs are easier for HR files than a long explanation.</li>
+                            <li>&check; <strong>Do not criticize your employer:</strong> Remember your letter becomes a permanent HR record.</li>
+                            <li>&check; <strong>Deliver thoughtfully:</strong> Speak with your manager first when possible, then provide the letter in person or by email as well.</li>
+                            <li>&check; <strong>Keep a copy:</strong> Save the PDF and any email confirmation for your personal records.</li>
+                        </ul>
+                    </section>
                 </div>
-
-                {{-- Card 3: Resignation Options, Tone & Reason --}}
-                <div class="bg-white rounded-3xl border border-[#e2e8e3] p-5 sm:p-6 shadow-sm">
-                    <h3 class="text-sm font-extrabold text-[#17211b] mb-4 flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-lg bg-[#fff0e8] text-[#b45309] flex items-center justify-center font-bold text-xs">✍️</span>
-                        <span>Resignation Reason &amp; Dates</span>
-                    </h3>
-
-                    <div class="space-y-4 text-xs">
-                        {{-- Reason Selector --}}
-                        <div>
-                            <label class="block font-bold text-[#3f4a43] mb-1.5">Reason for Leaving</label>
-                            <select x-model="reason" @change="regenerateLetter()"
-                                    class="w-full p-2.5 rounded-xl border border-[#d6ded8] bg-white font-semibold text-[#17211b] focus:border-[#184f3a] text-xs">
-                                <option value="new_job">Accepting a New Position / Better Opportunity</option>
-                                <option value="career_growth">Career Growth &amp; Professional Development</option>
-                                <option value="personal">Personal / Family Reasons</option>
-                                <option value="relocation">Relocation / Moving to a New Area</option>
-                                <option value="education">Returning to School / Further Education</option>
-                                <option value="health">Health &amp; Well-being</option>
-                                <option value="retirement">Retirement</option>
-                                <option value="no_reason">Standard / No Specific Reason Given</option>
-                            </select>
-                        </div>
-
-                        {{-- Tone Selector --}}
-                        <div>
-                            <label class="block font-bold text-[#3f4a43] mb-1.5">Letter Tone &amp; Style</label>
-                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                                <button type="button" @click="tone = 'grateful'; regenerateLetter()"
-                                        class="p-2.5 rounded-xl border text-center transition font-bold"
-                                        :class="tone === 'grateful' ? 'bg-[#e8f7ed] border-[#184f3a] text-[#184f3a]' : 'border-[#d6ded8] text-[#55635a] hover:bg-[#f8fbf9]'">
-                                    Grateful &amp; Warm
-                                </button>
-                                <button type="button" @click="tone = 'formal'; regenerateLetter()"
-                                        class="p-2.5 rounded-xl border text-center transition font-bold"
-                                        :class="tone === 'formal' ? 'bg-[#e8f7ed] border-[#184f3a] text-[#184f3a]' : 'border-[#d6ded8] text-[#55635a] hover:bg-[#f8fbf9]'">
-                                    Formal
-                                </button>
-                                <button type="button" @click="tone = 'short'; regenerateLetter()"
-                                        class="p-2.5 rounded-xl border text-center transition font-bold"
-                                        :class="tone === 'short' ? 'bg-[#e8f7ed] border-[#184f3a] text-[#184f3a]' : 'border-[#d6ded8] text-[#55635a] hover:bg-[#f8fbf9]'">
-                                    Short &amp; Direct
-                                </button>
-                                <button type="button" @click="tone = 'urgent'; regenerateLetter()"
-                                        class="p-2.5 rounded-xl border text-center transition font-bold"
-                                        :class="tone === 'urgent' ? 'bg-[#e8f7ed] border-[#184f3a] text-[#184f3a]' : 'border-[#d6ded8] text-[#55635a] hover:bg-[#f8fbf9]'">
-                                    Short Notice
-                                </button>
-                            </div>
-                        </div>
-
-                        {{-- Dates --}}
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                            <div>
-                                <label class="block font-bold text-[#3f4a43] mb-1">Letter Date</label>
-                                <input type="text" x-model="letter_date" @input="regenerateLetter()"
-                                       class="w-full p-2.5 rounded-xl border border-[#d6ded8] text-xs">
-                            </div>
-                            <div>
-                                <div class="flex items-center justify-between mb-1">
-                                    <label class="block font-bold text-[#3f4a43]">Last Working Day *</label>
-                                    <button type="button" @click="setTwoWeeksNotice()" class="text-[10px] text-[#184f3a] font-bold hover:underline">+2 Weeks</button>
-                                </div>
-                                <input type="text" x-model="last_day" @input="regenerateLetter()"
-                                       class="w-full p-2.5 rounded-xl border border-[#d6ded8] text-xs">
-                            </div>
-                        </div>
-
-                        {{-- Helper Toggles --}}
-                        <div class="pt-3 border-t border-[#eef2ef] space-y-2.5">
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" x-model="include_transition" @change="regenerateLetter()"
-                                       class="w-4 h-4 rounded text-[#184f3a] focus:ring-[#184f3a] border-gray-300">
-                                <span class="text-xs text-[#3f4a43] font-semibold">Offer transition assistance &amp; handover documentation</span>
-                            </label>
-
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" x-model="include_contact" @change="regenerateLetter()"
-                                       class="w-4 h-4 rounded text-[#184f3a] focus:ring-[#184f3a] border-gray-300">
-                                <span class="text-xs text-[#3f4a43] font-semibold">Include personal email/phone to keep in touch</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
-            {{-- RIGHT COLUMN: LIVE A4 PREVIEW & EXPORT ACTIONS --}}
-            <div class="lg:col-span-6 lg:sticky lg:top-24 space-y-4">
-
-                {{-- Action Bar --}}
-                <div class="bg-white rounded-2xl border border-[#e2e8e3] p-3 shadow-sm flex items-center justify-between gap-2 flex-wrap">
-                    <div class="flex items-center gap-1.5">
-                        <span class="w-3 h-3 rounded-full bg-[#184f3a]"></span>
-                        <span class="text-xs font-bold text-[#17211b]">Live A4 Letter Preview</span>
+            {{-- 4. Three Sample Letters in Visible Text (DRAFT Copy, 100-150 words each) --}}
+            <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm space-y-6">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                        <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-[#184f3a] block mb-1">Examples</span>
+                        <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-[#17211b] tracking-tight">
+                            Three Resignation Letter Samples (Copy &amp; Customize)
+                        </h2>
                     </div>
-
-                    <div class="flex items-center gap-2">
-                        <button type="button" @click="copyLetterText()"
-                                class="px-3.5 py-1.5 rounded-xl border border-[#d6ded8] hover:bg-[#f8fbf9] text-xs font-bold text-[#17211b] transition inline-flex items-center gap-1.5">
-                            <span x-text="copied ? 'Copied!' : 'Copy Text'"></span>
-                        </button>
-
-                        <button type="button" @click="downloadWord()"
-                                class="px-3.5 py-1.5 rounded-xl border border-[#c8f3dc] bg-[#e8f7ed] text-[#184f3a] hover:bg-[#d8f2e3] text-xs font-bold transition inline-flex items-center gap-1">
-                            <span>Word (.doc)</span>
-                        </button>
-
-                        <button type="button" @click="downloadPdf()"
-                                class="px-4 py-1.5 rounded-xl bg-[#184f3a] text-white hover:bg-[#123e2d] text-xs font-bold shadow-sm transition inline-flex items-center gap-1">
-                            <span>Download PDF</span>
-                        </button>
-                    </div>
+                    <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-mono font-bold uppercase tracking-wider">DRAFT SAMPLES</span>
                 </div>
 
-                {{-- Hidden Export Form for PDF & Word --}}
-                <form id="letterExportForm" method="POST" action="" class="hidden">
-                    @csrf
-                    <input type="hidden" name="employee_name" :value="employee_name">
-                    <input type="hidden" name="employee_title" :value="employee_title">
-                    <input type="hidden" name="employee_email" :value="employee_email">
-                    <input type="hidden" name="employee_phone" :value="employee_phone">
-                    <input type="hidden" name="employee_address" :value="employee_address">
-                    <input type="hidden" name="manager_name" :value="manager_name">
-                    <input type="hidden" name="manager_title" :value="manager_title">
-                    <input type="hidden" name="company_name" :value="company_name">
-                    <input type="hidden" name="company_address" :value="company_address">
-                    <input type="hidden" name="date" :value="letter_date">
-                    <input type="hidden" name="last_day" :value="last_day">
-                    <input type="hidden" name="reason" :value="reason">
-                    <input type="hidden" name="tone" :value="tone">
-                    <input type="hidden" name="letter_body" :value="letter_body">
-                </form>
-
-                {{-- Real-Time A4 Letter Sheet --}}
-                <div class="bg-white rounded-3xl border border-[#dfe4df] p-8 sm:p-10 shadow-lg min-h-[600px] text-xs sm:text-sm text-[#17211b] font-sans leading-relaxed relative selection:bg-[#184f3a] selection:text-white">
-                    
-                    {{-- Sender Info --}}
-                    <div class="mb-6">
-                        <div class="text-xl font-bold font-display text-[#0f172a]" x-text="employee_name || 'Your Name'"></div>
-                        <div class="text-xs font-bold text-[#184f3a]" x-text="employee_title || 'Your Job Title'"></div>
-                        <div class="w-10 h-0.5 bg-[#184f3a] my-2"></div>
-                        <div class="text-xs text-[#55635a] space-y-0.5">
-                            <div x-show="employee_address" x-text="employee_address"></div>
-                            <div x-show="employee_email" x-text="`Email: ${employee_email}`"></div>
-                            <div x-show="employee_phone" x-text="`Phone: ${employee_phone}`"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                    <div class="rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] p-5 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-sm text-[#17211b]">1. Two Weeks Notice / New Job</h3>
+                            <a href="{{ route('letter.resignation.landing', 'new-job') }}" class="text-[11px] font-bold text-[#184f3a] hover:underline">Open preset &rarr;</a>
                         </div>
+                        <p class="text-xs text-[#536058] leading-relaxed whitespace-pre-line">Dear [Manager Name],
+
+Please accept this letter as formal notice that I am resigning from my position as [Job Title] at [Company Name] to take on a new opportunity. My last working day will be [Date].
+
+Thank you for the opportunities and support I have received during my time here. Working alongside you and the team has been a great experience, and I truly appreciate your mentorship. I will do everything I can over the next two weeks to wrap up active work, organize documentation, and ensure a smooth transition for everyone taking over my duties.
+
+Sincerely,
+[Your Name]</p>
                     </div>
 
-                    {{-- Date --}}
-                    <div class="mb-5 font-bold text-[#334155]" x-text="letter_date"></div>
+                    <div class="rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] p-5 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-sm text-[#17211b]">2. Personal Reasons (Private)</h3>
+                            <a href="{{ route('letter.resignation.landing', 'personal-reasons') }}" class="text-[11px] font-bold text-[#184f3a] hover:underline">Open preset &rarr;</a>
+                        </div>
+                        <p class="text-xs text-[#536058] leading-relaxed whitespace-pre-line">Dear [Manager Name],
 
-                    {{-- Recipient Info --}}
-                    <div class="mb-5 text-xs text-[#1e293b] leading-tight space-y-1">
-                        <div class="font-bold text-sm" x-text="manager_name || 'Manager Name'"></div>
-                        <div x-show="manager_title" class="text-[#55635a]" x-text="manager_title"></div>
-                        <div class="font-semibold" x-text="company_name || 'Company Name'"></div>
-                        <div x-show="company_address" class="text-[#55635a]" x-text="company_address"></div>
+Please accept this letter as formal notification that I am resigning from my role as [Job Title] at [Company Name] due to personal and family reasons. My final working day will be [Date].
+
+This was not an easy decision, and I want to thank you and the entire team for the support, flexibility, and kindness shown to me throughout my tenure. During my remaining time here, I am happy to prepare clear handover notes and assist with transferring my ongoing projects so there is minimal disruption to the team.
+
+Sincerely,
+[Your Name]</p>
                     </div>
 
-                    {{-- Salutation --}}
-                    <div class="font-bold mb-4">
-                        Dear <span x-text="manager_name || 'Hiring Manager'"></span>,
-                    </div>
+                    <div class="rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] p-5 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-sm text-[#17211b]">3. Short Notice Resignation</h3>
+                            <a href="{{ route('letter.resignation.landing', 'short-notice') }}" class="text-[11px] font-bold text-[#184f3a] hover:underline">Open preset &rarr;</a>
+                        </div>
+                        <p class="text-xs text-[#536058] leading-relaxed whitespace-pre-line">Dear [Manager Name],
 
-                    {{-- Editable Letter Body Preview --}}
-                    <div class="space-y-3 mb-6">
-                        <textarea x-model="letter_body" rows="9"
-                                  class="w-full p-2.5 rounded-xl border border-transparent hover:border-[#c8f3dc] focus:border-[#184f3a] focus:bg-[#fbfdfc] text-xs sm:text-sm leading-relaxed text-[#17211b] font-sans resize-y transition"></textarea>
-                        <p class="text-[10px] text-[#68736d] italic">&bull; You can edit any sentence directly in the box above before exporting.</p>
-                    </div>
+Please accept this letter as formal notice that I must resign from my position as [Job Title] at [Company Name]. Because of unexpected personal circumstances, I cannot provide a full two-week notice window, and my last working day will be [Date].
 
-                    {{-- Closing & Signature --}}
-                    <div class="mt-6 text-xs sm:text-sm">
-                        <div>Sincerely,</div>
-                        <div class="h-8"></div>
-                        <div class="font-bold text-sm text-[#0f172a]" x-text="employee_name || 'Your Name'"></div>
-                        <div class="text-xs text-[#55635a]" x-text="employee_title"></div>
-                    </div>
+I sincerely apologize for any inconvenience this shorter timeline creates. To support the team right away, I have compiled concise handover notes summarizing my open files, key deadlines, and login locations so work can continue without delay. Thank you for your understanding and support.
 
+Sincerely,
+[Your Name]</p>
+                    </div>
                 </div>
+            </section>
 
+            {{-- Dedicated Scenario & Reason Pages --}}
+            <section class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm">
+                <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-[#184f3a] block mb-1.5">By Situation</span>
+                <h2 class="font-display text-2xl font-extrabold text-[#17211b] tracking-tight mb-4">
+                    Pre-Filled Generators by Resignation Scenario
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                    @foreach(\App\Support\ResignationCatalog::landingPages() as $landing)
+                        <a href="{{ route('letter.resignation.landing', $landing['slug']) }}"
+                           class="p-4 rounded-2xl bg-[#f8f8f3] border border-[#dfe4df] hover:border-[#184f3a] hover:bg-white transition block">
+                            <div class="text-xs font-extrabold text-[#17211b] mb-1">{{ $landing['h1'] }}</div>
+                            <span class="text-[11px] font-bold text-[#184f3a]">Use preset &rarr;</span>
+                        </a>
+                    @endforeach
+                </div>
+            </section>
+
+            {{-- 6. FAQ Component (Single Source of Truth: Visible HTML + FAQPage JSON-LD) --}}
+            @php
+                $faqItems = [
+                    [
+                        'q' => 'Do I have to give a reason for resigning?',
+                        'a' => 'No. You are not legally required to state why you are leaving in most roles. Keeping your letter brief—such as stating your position and final working day—is completely professional.',
+                    ],
+                    [
+                        'q' => 'Can I resign by email?',
+                        'a' => 'Yes, resigning by email is widely accepted, especially for remote workers or when submitting your letter as an attached PDF after a quick conversation with your manager.',
+                    ],
+                    [
+                        'q' => 'What if I cannot give two weeks notice?',
+                        'a' => 'Be honest, apologize briefly for the short timeline, state your final date clearly, and leave thorough written handover notes. Check your employment contract first to confirm any contractual notice clauses.',
+                    ],
+                    [
+                        'q' => 'Should I mention my new job?',
+                        'a' => 'You do not need to name your next employer or title in a resignation letter. Simply noting that you accepted a new opportunity—or omitting a reason altogether—keeps things tidy for HR files.',
+                    ],
+                    [
+                        'q' => 'Can I withdraw my resignation?',
+                        'a' => 'You can ask your manager and HR in writing as soon as possible, though employers are generally not obligated to accept a retraction once a resignation has been formally accepted.',
+                    ],
+                    [
+                        'q' => 'What happens to my final pay and leave?',
+                        'a' => 'Final paycheck timing and payout for unused vacation or leave days depend on your signed employment contract, company policy, and local labor law. Ask HR to confirm payout dates before your last day.',
+                    ],
+                ];
+            @endphp
+            <div class="bg-white rounded-3xl border border-[#e2e8e3] p-6 sm:p-8 shadow-sm">
+                <x-faq :items="$faqItems" heading="Frequently Asked Questions About Resignation Letters" eyebrow="Resignation FAQ" />
             </div>
+
+            {{-- 7. CTAs & Related Tools --}}
+            @php
+                $relatedTools = [
+                    [
+                        'title' => 'Free ATS Resume Builder',
+                        'description' => 'Update your resume with your latest achievements across ' . count(\App\Support\ResumeCatalog::templates()) . ' clean layouts.',
+                        'url' => route('resume.builder'),
+                        'badge' => count(\App\Support\ResumeCatalog::templates()) . ' Templates',
+                        'cta' => 'Update Your Resume',
+                    ],
+                    [
+                        'title' => 'Free ATS Resume Checker',
+                        'description' => 'Scan your updated CV for ATS formatting issues and missing job keywords (0–100 score).',
+                        'url' => route('resume.checker'),
+                        'badge' => 'Free Scan',
+                        'cta' => 'Check Your Resume',
+                    ],
+                    [
+                        'title' => 'Two Weeks Notice Guide',
+                        'description' => 'Step-by-step guide with examples and notice etiquette before handing in your notice.',
+                        'url' => route('blog.show', 'how-to-write-two-weeks-notice-resignation-letter-guide'),
+                        'badge' => 'Guide',
+                        'cta' => 'Read Guide',
+                    ],
+                ];
+                foreach (\App\Models\BlogPost::publishedBySlugs([
+                    'how-to-write-a-resignation-letter',
+                    'two-weeks-notice-letter-examples',
+                    'how-to-resign-professionally-checklist',
+                    'resignation-letter-for-new-job',
+                ]) as $clusterPost) {
+                    $relatedTools[] = [
+                        'title' => $clusterPost->title,
+                        'description' => \Illuminate\Support\Str::limit($clusterPost->excerpt, 110),
+                        'url' => route('blog.show', $clusterPost->slug),
+                        'badge' => 'Career Guide',
+                        'cta' => 'Read Guide',
+                    ];
+                }
+            @endphp
+            <x-related-tools :tools="$relatedTools" heading="Next Steps for Your Career Move" eyebrow="Career Suite" />
 
         </div>
 
     </div>
 </div>
-
-<script>
-function resignationStudio() {
-    return {
-        employee_name: 'Alex Morgan',
-        employee_title: 'Senior Software Engineer',
-        employee_email: 'alex.morgan@example.com',
-        employee_phone: '(555) 234-5678',
-        employee_address: 'San Francisco, CA',
-
-        manager_name: 'Sarah Jenkins',
-        manager_title: 'VP of Engineering',
-        company_name: 'Acme Technologies Inc.',
-        company_address: '100 Market St, Suite 400',
-
-        letter_date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-        last_day: '',
-        reason: 'new_job',
-        tone: 'grateful',
-        include_transition: true,
-        include_contact: true,
-        letter_body: '',
-        copied: false,
-
-        init() {
-            this.setTwoWeeksNotice();
-            this.regenerateLetter();
-        },
-
-        setTwoWeeksNotice() {
-            const d = new Date();
-            d.setDate(d.getDate() + 14);
-            this.last_day = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-            this.regenerateLetter();
-        },
-
-        regenerateLetter() {
-            const role = this.employee_title || 'my position';
-            const company = this.company_name || 'the company';
-            const date = this.last_day || 'two weeks from today';
-
-            let p1 = `Please accept this letter as formal notification that I am resigning from my position as ${role} at ${company}. My last working day will be ${date}.`;
-
-            let p2 = '';
-            if (this.reason === 'new_job') {
-                p2 = `I have accepted a new position that aligns closely with my long-term career aspirations. I am grateful for the opportunities I have had during my time with ${company}, and I appreciate the support and mentorship you and the team have provided.`;
-            } else if (this.reason === 'career_growth') {
-                p2 = `After careful consideration, I have decided to pursue a new step in my professional journey that allows me to expand into new technical domains. Working alongside such talented colleagues has been a highlight of my career.`;
-            } else if (this.reason === 'personal') {
-                p2 = `Due to personal and family circumstances, I have made the difficult decision to step down from my role. I want to express my deepest gratitude for your understanding and for the positive environment at ${company}.`;
-            } else if (this.reason === 'relocation') {
-                p2 = `I am relocating to a new area and will therefore be unable to continue in my role. Thank you for the wonderful experiences and collaborative projects we have shared together.`;
-            } else if (this.reason === 'education') {
-                p2 = `I have decided to return to school full-time to pursue further academic studies. I am deeply thankful for the practical knowledge and leadership skills I acquired while working with your team.`;
-            } else if (this.reason === 'health') {
-                p2 = `For health and personal well-being reasons, I have determined it is best for me to take time away from my professional duties. Thank you for your kindness, flexibility, and support throughout my tenure.`;
-            } else if (this.reason === 'retirement') {
-                p2 = `After much thought, I have decided to retire. It has been a true privilege serving this organization, and I look back on our achievements and camaraderie with great pride.`;
-            } else {
-                p2 = `I want to express my sincere thanks for the opportunity to work with ${company}. I have learned a great deal and have genuinely enjoyed collaborating with you and the rest of the team.`;
-            }
-
-            let p3 = '';
-            if (this.include_transition) {
-                p3 = `During my remaining time, I am fully committed to ensuring a smooth and seamless handover of my responsibilities. I am glad to assist in documenting current workflows, training team members, or completing priority deliverables.`;
-            }
-
-            let p4 = '';
-            if (this.include_contact && (this.employee_email || this.employee_phone)) {
-                p4 = `I wish you and ${company} continued success in all future endeavors. Please feel free to stay in touch with me at ${this.employee_email || this.employee_phone}.`;
-            } else {
-                p4 = `I wish you and the entire team at ${company} continued growth and success in the future.`;
-            }
-
-            this.letter_body = [p1, p2, p3, p4].filter(Boolean).join("\n\n");
-        },
-
-        copyLetterText() {
-            const fullText = `${this.employee_name}\n${this.employee_title}\n${this.employee_address}\n${this.employee_email} | ${this.employee_phone}\n\n${this.letter_date}\n\n${this.manager_name}\n${this.manager_title}\n${this.company_name}\n${this.company_address}\n\nDear ${this.manager_name},\n\n${this.letter_body}\n\nSincerely,\n\n${this.employee_name}\n${this.employee_title}`;
-            navigator.clipboard.writeText(fullText);
-            this.copied = true;
-            setTimeout(() => this.copied = false, 2500);
-        },
-
-        downloadPdf() {
-            const form = document.getElementById('letterExportForm');
-            form.action = '/resignation-letter/pdf';
-            form.submit();
-        },
-
-        downloadWord() {
-            const form = document.getElementById('letterExportForm');
-            form.action = '/resignation-letter/doc';
-            form.submit();
-        }
-    };
-}
-</script>
 @endsection

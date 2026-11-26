@@ -183,7 +183,7 @@ class AtsCheckerService
             'title' => 'LinkedIn or Portfolio Link',
             'passed' => (bool) $hasLinkedin,
             'value' => $hasLinkedin ? 'Profile link detected' : 'Not detected',
-            'tip' => '90%+ of recruiters check your LinkedIn profile. Adding a custom URL is strongly recommended.',
+            'tip' => 'Recruiters frequently review LinkedIn or portfolio links alongside your resume. Adding a direct profile URL is recommended.',
         ];
         if ($hasLinkedin) $score += 15;
 
