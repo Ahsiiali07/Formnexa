@@ -686,6 +686,16 @@
                 </div>
                 <div class="flex flex-wrap gap-2 shrink-0">
                     <a href="/sitemap.xml" target="_blank" class="px-4 py-2.5 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-xs font-bold text-[#17211b]">Open sitemap.xml</a>
+                    @if(!empty($indexNowMeta['configured']))
+                        <a href="/{{ $indexNowMeta['key'] }}.txt" target="_blank" class="px-4 py-2.5 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-xs font-bold text-[#17211b]">IndexNow Key</a>
+                        <form method="POST" action="{{ route('admin.seo.indexnow') }}">
+                            @csrf
+                            <input type="hidden" name="sitemap_url" :value="window.location.origin" value="https://formnexa.dcpakpattan.gov.pk">
+                            <button type="submit" class="px-4 py-2.5 rounded-xl bg-[#17211b] hover:bg-[#184f3a] text-white text-xs font-bold cursor-pointer transition">
+                                Ping IndexNow
+                            </button>
+                        </form>
+                    @endif
                     <form method="POST" action="{{ route('admin.seo.sitemap') }}">
                         @csrf
                         <input type="hidden" name="sitemap_url" :value="window.location.origin" value="https://formnexa.dcpakpattan.gov.pk">

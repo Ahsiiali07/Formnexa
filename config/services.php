@@ -39,4 +39,11 @@ return [
         'id' => env('GTM_ID', 'GTM-53575H77'),
     ],
 
+    'indexnow' => [
+        'enabled' => env('INDEXNOW_ENABLED', true),
+        'key' => env('INDEXNOW_KEY', '4e9a6c2f8d1b4e7390a5c8f12d6b3e94'),
+        'endpoint' => env('INDEXNOW_ENDPOINT', 'https://api.indexnow.org/indexnow'),
+        'host' => env('INDEXNOW_HOST', 'formnexa.dcpakpattan.gov.pk'),
+    ],
+
 ];

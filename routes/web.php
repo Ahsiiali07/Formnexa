@@ -11,6 +11,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LetterController;
 use App\Http\Controllers\PaystubController;
 use App\Http\Controllers\ResumeController;
+use App\Services\IndexNowService;
 use App\Support\ConverterCatalog;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,19 @@ Route::get('/sitemap.xml', function () {
         'Expires' => '0',
     ]);
 })->name('sitemap');
+
+// IndexNow Ownership Verification Key File
+Route::get('/{key}.txt', function (string $key, IndexNowService $indexNow) {
+    if (!$indexNow->isConfigured() || !hash_equals($indexNow->key(), $key)) {
+        abort(404);
+    }
+
+    return response($key, 200, [
+        'Content-Type' => 'text/plain; charset=UTF-8',
+        'X-Robots-Tag' => 'noindex, nofollow',
+        'Cache-Control' => 'public, max-age=3600',
+    ]);
+})->where('key', '[A-Za-z0-9\-]{8,128}')->name('indexnow.key');
 
 // Public SEO Blog & Guides Module
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
@@ -149,6 +163,7 @@ Route::middleware(['auth', 'admin', 'noindex'])->group(function () {
     Route::patch('/admin/contacts/{contact:id}/toggle-read', [AdminController::class, 'toggleContactRead'])->name('admin.contacts.toggle-read');
     Route::delete('/admin/contacts/{contact:id}', [AdminController::class, 'destroyContact'])->name('admin.contacts.destroy');
     Route::post('/admin/seo/sitemap', [AdminController::class, 'regenerateSitemap'])->name('admin.seo.sitemap');
+    Route::post('/admin/seo/indexnow', [AdminController::class, 'submitIndexNow'])->name('admin.seo.indexnow');
 
     // Blog Studio shortcuts
     Route::get('/blog-studio', [BlogController::class, 'manage'])->name('blog.manage');

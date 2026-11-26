@@ -7,6 +7,7 @@ use App\Models\ContactMessage;
 use App\Models\Invoice;
 use App\Models\Resume;
 use App\Models\User;
+use App\Services\IndexNowService;
 use App\Support\ConverterCatalog;
 use App\Support\ResumeCatalog;
 use App\Support\TemplateCatalog;
@@ -131,6 +132,8 @@ class AdminController extends Controller
                 : 0,
         ];
 
+        $indexNow = app(IndexNowService::class);
+
         return view('admin.dashboard', [
             'activeTab' => $activeTab,
             'blogStatus' => $blogStatus,
@@ -151,6 +154,11 @@ class AdminController extends Controller
             'generators' => InvoiceController::$generators,
             'converterTools' => ConverterCatalog::all(),
             'sitemapMeta' => $sitemapMeta,
+            'indexNowMeta' => [
+                'configured' => $indexNow->isConfigured(),
+                'key' => $indexNow->key(),
+                'key_url' => $indexNow->keyLocation(),
+            ],
             'seo' => ['robots' => 'noindex,nofollow', 'title' => 'Admin Dashboard | Formnexa'],
         ]);
     }
@@ -185,7 +193,8 @@ class AdminController extends Controller
         $data['user_id'] = Auth::id();
 
         $post = BlogPost::create($data);
-        $this->refreshSitemapSafely();
+        $this->refreshSitemapSafely($request);
+        $this->pingBlogIndexNowIfPublished($post, $request);
 
         return redirect(route('admin.dashboard', ['tab' => 'blogs'], false))
             ->with('success', 'Blog "' . $post->title . '" created (' . ($post->is_published ? 'Active' : 'Inactive') . ') and sitemap refreshed.');
@@ -215,7 +224,8 @@ class AdminController extends Controller
     {
         $data = $this->validatedBlogPayload($request, $post);
         $post->update($data);
-        $this->refreshSitemapSafely();
+        $this->refreshSitemapSafely($request);
+        $this->pingBlogIndexNowIfPublished($post, $request);
 
         return redirect(route('admin.dashboard', ['tab' => 'blogs'], false))
             ->with('success', 'Blog "' . $post->title . '" updated and sitemap refreshed.');
@@ -224,14 +234,15 @@ class AdminController extends Controller
     /**
      * Quick Active / Inactive Toggle for Blog Post.
      */
-    public function toggleBlogStatus(BlogPost $post): RedirectResponse
+    public function toggleBlogStatus(Request $request, BlogPost $post): RedirectResponse
     {
         $nextState = !$post->is_published;
         $post->update([
             'is_published' => $nextState,
             'published_at' => $nextState ? ($post->published_at ?? now()) : $post->published_at,
         ]);
-        $this->refreshSitemapSafely();
+        $this->refreshSitemapSafely($request);
+        $this->pingBlogIndexNowIfPublished($post, $request);
 
         $label = $nextState ? 'Active (Published)' : 'Inactive (Hidden from public)';
 
@@ -318,6 +329,19 @@ class AdminController extends Controller
 
         return redirect(route('admin.dashboard', ['tab' => 'seo'], false))
             ->with('success', trim(Artisan::output()) ?: 'Sitemap regenerated successfully.');
+    }
+
+    /**
+     * Submit all canonical sitemap URLs to Bing / IndexNow from Admin SEO panel.
+     */
+    public function submitIndexNow(Request $request, IndexNowService $indexNow): RedirectResponse
+    {
+        $domain = $this->resolveTargetDomain($request);
+        $urls = $indexNow->collectSitemapUrls($domain);
+        $result = $indexNow->submitUrls($urls, $domain);
+
+        return redirect(route('admin.dashboard', ['tab' => 'seo'], false))
+            ->with($result['success'] ? 'success' : 'error', $result['message']);
     }
 
     /**
@@ -424,6 +448,20 @@ class AdminController extends Controller
         } catch (\Throwable) {
             // Non-blocking
         }
+    }
+
+    protected function pingBlogIndexNowIfPublished(BlogPost $post, ?Request $request = null): void
+    {
+        if (!$post->is_published) {
+            return;
+        }
+
+        $domain = $this->resolveTargetDomain($request);
+        app(IndexNowService::class)->autoPingUrls([
+            $domain . '/blog/' . ltrim($post->slug, '/'),
+            $domain . '/blog',
+            $domain . '/',
+        ], $domain);
     }
 
     /**

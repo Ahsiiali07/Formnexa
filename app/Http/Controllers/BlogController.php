@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
+use App\Services\IndexNowService;
 use App\Support\ConverterCatalog;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -265,6 +266,7 @@ class BlogController extends Controller
 
         $post = BlogPost::create($data);
         $this->refreshSitemapSafely();
+        $this->pingIndexNowIfPublished($post);
 
         return redirect(route('blog.manage', [], false))
             ->with('success', 'Article "' . $post->title . '" saved and sitemap updated.');
@@ -292,6 +294,7 @@ class BlogController extends Controller
         $data = $this->validatedPayload($request, $post);
         $post->update($data);
         $this->refreshSitemapSafely();
+        $this->pingIndexNowIfPublished($post);
 
         return redirect(route('blog.manage', [], false))
             ->with('success', 'Article "' . $post->title . '" updated and sitemap refreshed.');
@@ -396,5 +399,19 @@ class BlogController extends Controller
         } catch (\Throwable) {
             // Non-blocking if filesystem is read-only
         }
+    }
+
+    protected function pingIndexNowIfPublished(BlogPost $post): void
+    {
+        if (!$post->is_published) {
+            return;
+        }
+
+        $domain = 'https://formnexa.dcpakpattan.gov.pk';
+        app(IndexNowService::class)->autoPingUrls([
+            $domain . '/blog/' . ltrim($post->slug, '/'),
+            $domain . '/blog',
+            $domain . '/',
+        ], $domain);
     }
 }
