@@ -3,87 +3,65 @@
 @section('title', 'Create Free Account — Formnexa')
 
 @section('content')
-<div class="min-h-[calc(100vh-140px)] bg-[#f8f8f3] flex items-center justify-center py-10 sm:py-14 px-4 sm:px-6">
-    <div class="w-full max-w-md space-y-5 sm:space-y-6">
+<x-auth-shell
+    badge="Free Forever"
+    title="Create your free account"
+    subtitle="Sign up in seconds and verify your inbox with a 6-digit OTP code to unlock synced document history."
+    panelTitle="Build, save &amp; track every document."
+    panelSubtitle="Create invoices, receipts, resignation letters, paystubs, and ATS-ready resumes—backed by verified account security."
+    :steps="['Create Account', 'Verify Email OTP', 'Enter Workspace']"
+    :activeStep="1"
+    footerBackRoute="invoice.studio"
+    footerBackLabel="Continue as Guest without Signing Up">
 
-        <!-- Brand & Context Header -->
-        <div class="text-center space-y-2">
-            <a href="{{ route('home') }}" class="inline-flex items-center justify-center gap-2.5 mb-1">
-                <span class="fn-brand-mark" style="width: 44px; height: 44px; border-radius: 13px; gap: 3.5px;" aria-hidden="true">
-                    <i class="b1" style="width: 4.5px; height: 21px;"></i>
-                    <i class="b2" style="width: 4.5px; height: 15px;"></i>
-                    <i class="b3" style="width: 4.5px; height: 22px;"></i>
-                </span>
-            </a>
-            <h1 class="font-display text-2xl sm:text-3xl font-extrabold text-[#17211b] tracking-[-0.03em]">
-                Create a free account
-            </h1>
-            <p class="text-xs sm:text-sm text-[#536058]">
-                Save your billing history, track payment status, and reload invoices anytime.
-            </p>
+    <form method="POST" action="{{ route('register.submit') }}" class="space-y-4">
+        @csrf
+
+        <div>
+            <label for="name" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#536058] mb-1.5">
+                Full Name or Business Name
+            </label>
+            <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name" placeholder="John Doe / Acme Studio"
+                   class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#dfe4df] text-sm text-[#17211b] placeholder:text-[#68736d]/70 focus:border-[#184f3a] focus:ring-2 focus:ring-[#184f3a]/15 focus:outline-none transition">
         </div>
 
-        <!-- Optional Note Banner -->
-        <div class="p-3.5 rounded-xl bg-[#e8f7ed] border border-[#c8f3dc] text-xs text-[#17211b] flex items-start gap-2.5">
-            <x-icon name="shield-check" class="w-[18px] h-[18px] text-[#184f3a] mt-0.5" />
-            <div>
-                <strong>Optional &amp; Free Forever:</strong> Creating an account unlocks cloud invoice history without restricting any document generator tools.
-            </div>
+        <div>
+            <label for="email" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#536058] mb-1.5">
+                Email Address
+            </label>
+            <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="you@company.com"
+                   class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#dfe4df] text-sm text-[#17211b] placeholder:text-[#68736d]/70 focus:border-[#184f3a] focus:ring-2 focus:ring-[#184f3a]/15 focus:outline-none transition">
         </div>
 
-        <!-- Signup Form Card -->
-        <div class="bg-white rounded-2xl shadow-lg shadow-[#17211b]/5 border border-[#dfe4df] p-6 sm:p-8">
-            @if ($errors->any())
-                <div class="mb-5 p-3.5 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium space-y-1">
-                    @foreach ($errors->all() as $err)
-                        <div>{{ $err }}</div>
-                    @endforeach
-                </div>
-            @endif
+        <x-auth-password-field
+            id="password"
+            name="password"
+            label="Password"
+            hint="Min. 8 characters"
+            placeholder="Create a strong password"
+            autocomplete="new-password"
+            :showStrength="true" />
 
-            <form method="POST" action="{{ route('register.submit') }}" class="space-y-4">
-                @csrf
+        <x-auth-password-field
+            id="password_confirmation"
+            name="password_confirmation"
+            label="Confirm Password"
+            placeholder="Re-enter your password"
+            autocomplete="new-password" />
 
-                <div>
-                    <label for="name" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#536058] mb-1.5">Full Name or Business Name</label>
-                    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus placeholder="John Doe / Acme Studio"
-                           class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#dfe4df] text-sm text-[#17211b] placeholder:text-[#68736d]/70 focus:border-[#184f3a] focus:ring-2 focus:ring-[#184f3a]/15 focus:outline-none transition">
-                </div>
-
-                <div>
-                    <label for="email" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#536058] mb-1.5">Email Address</label>
-                    <input id="email" type="email" name="email" value="{{ old('email') }}" required placeholder="you@company.com"
-                           class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#dfe4df] text-sm text-[#17211b] placeholder:text-[#68736d]/70 focus:border-[#184f3a] focus:ring-2 focus:ring-[#184f3a]/15 focus:outline-none transition">
-                </div>
-
-                <div>
-                    <label for="password" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#536058] mb-1.5">Password (Min. 6 chars)</label>
-                    <input id="password" type="password" name="password" required placeholder="Create a password"
-                           class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#dfe4df] text-sm text-[#17211b] placeholder:text-[#68736d]/70 focus:border-[#184f3a] focus:ring-2 focus:ring-[#184f3a]/15 focus:outline-none transition">
-                </div>
-
-                <div>
-                    <label for="password_confirmation" class="block font-mono text-[11px] font-semibold uppercase tracking-wider text-[#536058] mb-1.5">Confirm Password</label>
-                    <input id="password_confirmation" type="password" name="password_confirmation" required placeholder="Re-enter password"
-                           class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#dfe4df] text-sm text-[#17211b] placeholder:text-[#68736d]/70 focus:border-[#184f3a] focus:ring-2 focus:ring-[#184f3a]/15 focus:outline-none transition">
-                </div>
-
-                <button type="submit" class="w-full py-3 px-6 rounded-xl bg-[#184f3a] hover:bg-[#123e2d] text-white text-sm font-bold shadow-md shadow-[#184f3a]/20 transition mt-2">
-                    Create Free Account
-                </button>
-            </form>
-
-            <div class="mt-6 pt-5 border-t border-[#dfe4df] text-center text-xs text-[#536058]">
-                Already have an account?
-                <a href="{{ route('login') }}" class="font-bold text-[#184f3a] hover:underline ml-1">Sign In &rarr;</a>
-            </div>
+        <div class="p-3 rounded-xl bg-[#f8f8f3] border border-[#dfe4df] text-[11px] text-[#536058] flex items-center gap-2">
+            <x-icon name="shield-check" class="w-4 h-4 text-[#184f3a]" />
+            <span>We will email a 6-digit verification code to confirm your inbox.</span>
         </div>
 
-        <div class="text-center">
-            <a href="{{ route('invoice.studio') }}" class="text-xs font-semibold text-[#536058] hover:text-[#17211b] transition">
-                &larr; Continue as Guest without Signing Up
-            </a>
-        </div>
+        <button type="submit" class="w-full py-3 px-6 rounded-xl bg-[#184f3a] hover:bg-[#123e2d] text-white text-sm font-bold shadow-md shadow-[#184f3a]/20 transition cursor-pointer">
+            Create Account &amp; Send OTP &rarr;
+        </button>
+    </form>
+
+    <div class="mt-6 pt-5 border-t border-[#dfe4df] text-center text-xs text-[#536058]">
+        Already have an account?
+        <a href="{{ route('login') }}" class="font-bold text-[#184f3a] hover:underline ml-1">Sign In &rarr;</a>
     </div>
-</div>
+</x-auth-shell>
 @endsection

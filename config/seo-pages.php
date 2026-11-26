@@ -244,6 +244,30 @@ return [
         'robots' => 'noindex,follow',
         'updated' => $d,
     ],
+    'verify-otp' => [
+        'title' => 'Verify Email Code | Formnexa',
+        'description' => 'Enter your 6-digit email verification code to activate your Formnexa account.',
+        'robots' => 'noindex,nofollow',
+        'updated' => $d,
+    ],
+    'forgot-password' => [
+        'title' => 'Forgot Password | Formnexa',
+        'description' => 'Request a 6-digit verification code to reset your Formnexa password.',
+        'robots' => 'noindex,nofollow',
+        'updated' => $d,
+    ],
+    'reset-password' => [
+        'title' => 'Reset Password | Formnexa',
+        'description' => 'Verify your email code and set a new password for your Formnexa account.',
+        'robots' => 'noindex,nofollow',
+        'updated' => $d,
+    ],
+    'account/password' => [
+        'title' => 'Account Security & Password | Formnexa',
+        'description' => 'Update your Formnexa account password and security settings.',
+        'robots' => 'noindex,nofollow',
+        'updated' => $d,
+    ],
     'history' => [
         'title' => 'Document History | Formnexa',
         'description' => 'Manage your saved invoices, quotes, and resumes in Formnexa.',

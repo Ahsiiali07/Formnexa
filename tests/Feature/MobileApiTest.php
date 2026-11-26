@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Mail\OtpVerificationMail;
 use App\Mail\SendInvoiceMail;
 use App\Models\Invoice;
 use App\Models\Resume;
@@ -567,12 +568,28 @@ class MobileApiTest extends TestCase
         ])->assertOk()->assertJsonPath('success', true);
         $resUuid = $webRes->json('uuid');
 
-        // Signing up via web claims guest session documents and redirects to /history
+        // Signing up via web sends verification OTP, then claims guest session documents on verify
+        Mail::fake();
         $this->post('/signup', [
             'name' => 'Sam Web',
             'email' => 'sam@example.com',
             'password' => 'secret123',
             'password_confirmation' => 'secret123',
+        ])->assertRedirect(route('verification.notice'));
+
+        $otpCode = null;
+        Mail::assertSent(OtpVerificationMail::class, function (OtpVerificationMail $mail) use (&$otpCode) {
+            if ($mail->hasTo('sam@example.com')) {
+                $otpCode = $mail->code;
+                return true;
+            }
+            return false;
+        });
+        $this->assertNotNull($otpCode);
+
+        $this->post('/verify-otp', [
+            'email' => 'sam@example.com',
+            'code' => $otpCode,
         ])->assertRedirect(route('invoice.history.page'));
 
         $this->get('/history')->assertOk();

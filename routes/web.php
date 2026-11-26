@@ -100,19 +100,33 @@ Route::middleware('noindex')->group(function () {
     Route::get('/resume/{uuid}/pdf', [ResumeController::class, 'downloadPdf'])->name('resume.pdf');
 });
 
-// Optional Authentication (Login & Sign Up — Keep out of search engines)
+// Optional Authentication (Login, Sign Up, OTP Verification, Password Reset — Keep out of search engines)
 Route::middleware('noindex')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
     Route::get('/signup', [AuthController::class, 'showRegister'])->name('register');
     Route::get('/register', fn () => redirect()->route('register'));
     Route::post('/signup', [AuthController::class, 'register'])->name('register.submit');
+
+    // Signup Email OTP Verification & Resend
+    Route::get('/verify-otp', [AuthController::class, 'showVerifyOtp'])->name('verification.notice');
+    Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('verification.verify');
+    Route::post('/verify-otp/resend', [AuthController::class, 'resendOtp'])->name('verification.resend');
+
+    // Forgot Password & OTP-Based Password Reset
+    Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request');
+    Route::post('/forgot-password', [AuthController::class, 'sendResetOtp'])->name('password.email');
+    Route::get('/reset-password', [AuthController::class, 'showResetPassword'])->name('password.reset.form');
+    Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+    Route::post('/reset-password/resend', [AuthController::class, 'resendResetOtp'])->name('password.reset.resend');
 });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Authenticated Personal Workspace
 Route::middleware(['auth', 'noindex'])->group(function () {
     Route::get('/history', [InvoiceController::class, 'historyPage'])->name('invoice.history.page');
+    Route::get('/account/password', [AuthController::class, 'showChangePassword'])->name('account.password');
+    Route::put('/account/password', [AuthController::class, 'updatePassword'])->name('account.password.update');
     Route::patch('/invoice/{uuid}/status', [InvoiceController::class, 'updateStatus'])->name('invoice.status');
     Route::delete('/invoice/{uuid}', [InvoiceController::class, 'destroy'])->name('invoice.destroy');
     Route::delete('/resume/{uuid}', [ResumeController::class, 'destroy'])->name('resume.destroy');

@@ -320,6 +320,9 @@
                             <a href="{{ route('invoice.history.page') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#e8f7ed] text-[#17211b] hover:text-[#184f3a] font-semibold transition">
                                 My Document History
                             </a>
+                            <a href="{{ route('account.password') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#e8f7ed] text-[#17211b] hover:text-[#184f3a] font-semibold transition">
+                                Security &amp; Password
+                            </a>
                             <a href="{{ route('invoice.studio') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#e8f7ed] text-[#17211b] hover:text-[#184f3a] font-semibold transition">
                                 Invoice Maker
                             </a>
@@ -487,13 +490,17 @@
                                    class="flex items-center justify-center py-2.5 rounded-[10px] bg-[#e8f7ed] text-[#184f3a] font-bold text-xs">
                                     Document History
                                 </a>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="w-full py-2.5 rounded-[10px] bg-rose-50 text-rose-600 font-bold text-xs">
-                                        Sign Out
-                                    </button>
-                                </form>
+                                <a href="{{ route('account.password') }}" @click="mobileMenu = false"
+                                   class="flex items-center justify-center py-2.5 rounded-[10px] bg-[#f8f8f3] border border-[#dfe4df] text-[#17211b] font-bold text-xs">
+                                    Password
+                                </a>
                             </div>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="w-full py-2.5 rounded-[10px] bg-rose-50 text-rose-600 font-bold text-xs">
+                                    Sign Out
+                                </button>
+                            </form>
                         </div>
                     @endauth
                 </div>

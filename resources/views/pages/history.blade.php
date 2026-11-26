@@ -26,6 +26,9 @@
                 </p>
             </div>
             <div class="flex flex-wrap items-center gap-2.5">
+                <a href="{{ route('account.password') }}" class="px-4 py-2.5 rounded-xl bg-white border border-slate-200 hover:border-[#184f3a] text-xs font-bold text-slate-700 transition">
+                    Security &amp; Password
+                </a>
                 <a href="{{ route('resume.builder') }}" class="px-4 py-2.5 rounded-xl bg-white border border-slate-200 hover:border-[#184f3a] text-xs font-bold text-slate-700 transition">
                     + New Resume
                 </a>
