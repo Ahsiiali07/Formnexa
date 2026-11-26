@@ -2124,6 +2124,8 @@ MD,
         ];
 
         foreach ($posts as $post) {
+            $post['is_published'] = true;
+
             BlogPost::updateOrCreate(
                 ['slug' => $post['slug']],
                 $post

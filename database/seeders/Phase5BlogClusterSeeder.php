@@ -9,7 +9,7 @@ class Phase5BlogClusterSeeder extends Seeder
 {
     /**
      * Seed the 12 Phase 5 cluster posts across ATS, Resignation, and Paystub/Salary Slip topics.
-     * Created as unpublished drafts by default (is_published = false) for review prior to publishing.
+     * Seeded as published (is_published = true).
      */
     public function run(): void
     {

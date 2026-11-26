@@ -13,7 +13,7 @@ return [
         'featured_tool_label' => 'Check Your ATS Score Free (No Sign-Up)',
         'reading_time_minutes' => 6,
         'excerpt' => 'Understand what an ATS score actually measures, why different resume scanners produce different numbers, and how to aim for an 80+ score honestly.',
-        'is_published' => false,
+        'is_published' => true,
         'published_at' => now()->subHours(1),
         'content' => <<<'MD'
 A strong **ATS resume score** is typically **80 or above out of 100**, which indicates that your contact details, standard section headings, action-oriented bullet points, and target job keywords can be read cleanly by automated hiring software. You can check where your current draft stands right now with Formnexa's [free ATS resume checker](/ats-resume-checker) without creating an account.
@@ -96,7 +96,7 @@ MD,
         'featured_tool_label' => 'Test Your Resume Free With Our ATS Checker',
         'reading_time_minutes' => 6,
         'excerpt' => 'Step-by-step manual tests and an instant automated scan to verify whether Applicant Tracking Systems can read your resume cleanly without skipping text.',
-        'is_published' => false,
+        'is_published' => true,
         'published_at' => now()->subHours(2),
         'content' => <<<'MD'
 The fastest way to verify whether your resume is **ATS-friendly** is to run a two-minute plain-text copy test on your file and then scan it using a structured [free ATS resume checker](/ats-resume-checker). When an automated parser reads your contact details, section headings, job titles, dates, and skills in chronological order without jumbled lines, your document is ready for online applications.
@@ -177,7 +177,7 @@ MD,
         'featured_tool_label' => 'Match Your Resume to Any Job Description Free',
         'reading_time_minutes' => 6,
         'excerpt' => 'A practical step-by-step system for spotting high-priority skills in a job posting, weaving them into real bullet points, and verifying match rates safely.',
-        'is_published' => false,
+        'is_published' => true,
         'published_at' => now()->subHours(3),
         'content' => <<<'MD'
 Matching **ATS resume keywords** to a job description means spotting the essential tools, technical competencies, credentials, and domain terms a hiring team asks for and incorporating those exact accurate phrases naturally into your resume. You can run an instant keyword comparison in seconds using Formnexa's [free ATS resume checker](/ats-resume-checker) by pasting both your resume and the job listing.

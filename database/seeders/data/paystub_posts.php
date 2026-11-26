@@ -13,7 +13,7 @@ return [
         'featured_tool_label' => 'Create a Clean Employee Paystub PDF Free',
         'reading_time_minutes' => 6,
         'excerpt' => 'A plain-English line-by-line walkthrough of an employee paystub, covering pay period dates, gross earnings, deductions, net pay, and year-to-date totals.',
-        'is_published' => false,
+        'is_published' => true,
         'published_at' => now()->subHours(8),
         'content' => <<<'MD'
 A **pay stub** breaks down each paycheck into four clear parts: who paid whom for a specific date range, total **gross earnings** before anything is taken out, itemized **taxes and deductions**, and final **net take-home pay** alongside Year-to-Date (YTD) running totals. Small businesses and employers creating payroll records can generate clean, formatted PDFs anytime with Formnexa's [free paystub generator](/paystub-generator).
@@ -99,7 +99,7 @@ MD,
         'featured_tool_label' => 'Open Free Paystub & Salary Slip Generator',
         'reading_time_minutes' => 5,
         'excerpt' => 'Understand the regional differences in terminology, pay frequency, and line items behind paystubs, payslips, and salary slips worldwide.',
-        'is_published' => false,
+        'is_published' => true,
         'published_at' => now()->subHours(9),
         'content' => <<<'MD'
 A **paystub**, **payslip**, and **salary slip** are all names for the same payroll document: a statement given to an employee showing gross pay, itemized deductions, and net take-home wages for a pay period. What changes across regions is the local vocabulary, standard pay frequency, tax labels, and how allowances appear. You can create North American statements with our [free paystub generator](/paystub-generator) or monthly South Asian and Gulf slips with our [free salary slip generator](/salary-slip-generator).
@@ -185,7 +185,7 @@ MD,
         'featured_tool_label' => 'Calculate & Download a Paystub PDF Free',
         'reading_time_minutes' => 5,
         'excerpt' => 'Learn how gross pay and net pay differ, see a step-by-step worked paycheck calculation, and organize deductions cleanly on employee paystubs.',
-        'is_published' => false,
+        'is_published' => true,
         'published_at' => now()->subHours(10),
         'content' => <<<'MD'
 **Gross pay** is the total compensation an employee earns during a pay period before any taxes or benefit deductions are removed, whereas **net pay** (often called take-home pay) is the exact amount deposited to the employee after all withholdings and deductions are subtracted. Employers can present both numbers side by side on a clean PDF statement using Formnexa's [free paystub generator](/paystub-generator).
@@ -278,7 +278,7 @@ MD,
         'featured_tool_label' => 'Create Employee Pay Stubs Online Free',
         'reading_time_minutes' => 6,
         'excerpt' => 'A practical small-business workflow for gathering payroll records, formatting itemized employee pay stubs cleanly, and knowing when dedicated payroll software is required.',
-        'is_published' => false,
+        'is_published' => true,
         'published_at' => now()->subHours(11),
         'content' => <<<'MD'
 To **create pay stubs for employees**, collect verified hours or monthly salary figures, calculate exact gross pay and tax withholdings using official payroll tables or your accountant, enter each earnings and deduction line into a clean template with Year-to-Date totals, and archive every payroll statement securely. Small employers and freelancers paying staff can format single-period PDF statements anytime using Formnexa's [free paystub generator](/paystub-generator).
@@ -358,7 +358,7 @@ MD,
         'featured_tool_label' => 'Create a Monthly Salary Slip PDF Free (PKR, INR, AED)',
         'reading_time_minutes' => 6,
         'excerpt' => 'A region-by-region breakdown of typical salary slip fields across Pakistan, India, and the UAE—covering allowances, deductions, IDs, and free PDF presets.',
-        'is_published' => false,
+        'is_published' => true,
         'published_at' => now()->subHours(12),
         'content' => <<<'MD'
 A standard **salary slip format for Pakistan, India, and the UAE** is issued monthly and splits gross pay into **Basic Salary** plus structured monthly allowances (such as House Rent, Medical, and Conveyance), followed by region-specific deductions and net bank transfer totals. You can build and download a clean monthly PDF in PKR, INR, AED, or SAR right away with Formnexa's [free salary slip generator](/salary-slip-generator).

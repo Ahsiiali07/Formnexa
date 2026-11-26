@@ -13,7 +13,7 @@ return [
         'featured_tool_label' => 'Create Your Resignation Letter Free (PDF & Word)',
         'reading_time_minutes' => 6,
         'excerpt' => 'A straightforward guide to writing a formal resignation letter—covering exact structure, notice periods, dos and don’ts, and a clean template you can customize.',
-        'is_published' => false,
+        'is_published' => true,
         'published_at' => now()->subHours(4),
         'content' => <<<'MD'
 A well-written **resignation letter** is short, polite, and clear: it confirms your intention to leave your role, states your exact final working day, offers reasonable handover help, and includes a brief thank-you where appropriate. If you want clean formatting without fighting Word margins, you can generate and download one in under a minute using Formnexa's [free resignation letter generator](/resignation-letter-generator) in PDF or Word format.
@@ -107,7 +107,7 @@ MD,
         'featured_tool_label' => 'Customize & Download Your Two Weeks Notice Letter',
         'reading_time_minutes' => 6,
         'excerpt' => 'Five clean, ready-to-use two weeks notice resignation letters tailored to different workplace situations, plus quick tips before submitting.',
-        'is_published' => false,
+        'is_published' => true,
         'published_at' => now()->subHours(5),
         'content' => <<<'MD'
 A **two weeks notice letter** formally alerts your employer that you are resigning and sets your final working day 14 calendar days ahead. Below are five copy-ready templates designed for distinct situations—or you can pre-fill dates automatically and export PDF or Word right inside Formnexa's [free two weeks notice generator](/resignation-letter/two-weeks-notice).
@@ -216,7 +216,7 @@ MD,
         'featured_tool_label' => 'Generate Your Formal Resignation Letter Free',
         'reading_time_minutes' => 6,
         'excerpt' => 'From timing your manager conversation to securing references and final paystubs, follow this clear checklist to leave your role on great terms.',
-        'is_published' => false,
+        'is_published' => true,
         'published_at' => now()->subHours(6),
         'content' => <<<'MD'
 To **resign professionally**, confirm your next steps are locked in, speak privately with your direct manager before telling teammates, submit a concise written resignation letter, build organized handover notes, and gather your final pay records and references cleanly. You can draft and download your official written letter in under a minute with Formnexa's [free resignation letter generator](/resignation-letter-generator).
@@ -299,7 +299,7 @@ MD,
         'featured_tool_label' => 'Generate a New Job Resignation Letter Free',
         'reading_time_minutes' => 5,
         'excerpt' => 'Practical wording samples and etiquette tips when handing in notice for a new job—including what to share verbally versus what to leave out of HR records.',
-        'is_published' => false,
+        'is_published' => true,
         'published_at' => now()->subHours(7),
         'content' => <<<'MD'
 When writing a **resignation letter for a new job**, keep the message warm, concise, and professional: state your position, confirm your exact final working day, thank your manager briefly, and commit to an orderly handover—without naming your next employer or discussing compensation. You can draft and export a clean PDF or Word copy in seconds with Formnexa's [free resignation letter generator](/resignation-letter-generator) or jump straight to our pre-selected [resignation letter for a new job preset](/resignation-letter/new-job).
